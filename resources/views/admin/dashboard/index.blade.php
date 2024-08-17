@@ -20,7 +20,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-xl-3 col-lg-6">
+                        {{-- <div class="col-sm-6 col-xl-3 col-lg-6">
                             <div class="card o-hidden border-0">
                                 <div class="bg-success b-r-4 card-body">
                                     <div class="media static-top-widget">
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@
                         <div class="col-9">
                             <div class="row">
                                 {{-- Todays present --}}
-                                <div class="col-md-6 col-lg-6 col-xl-6 box-col-6">
+                                {{-- <div class="col-md-6 col-lg-6 col-xl-6 box-col-6">
                                     <div class="card custom-card rounded">
                                         <h6 class="card-header rounded bg-primary py-2 px-3 text-center">Today's Present</h6>
                                         <div class="card-body px-3">
@@ -102,10 +102,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{-- Todays absent --}}
-                                <div class="col-md-6 col-lg-6 col-xl-6 box-col-6">
+                                {{-- <div class="col-md-6 col-lg-6 col-xl-6 box-col-6">
                                     <div class="card custom-card rounded">
                                         <h6 class="card-header rounded bg-primary py-2 px-3 text-center">Today's Absent</h6>
                                         <div class="card-body px-3">
@@ -136,10 +136,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{-- Leave bifurcation --}}
-                                <div class="col-md-12 col-lg-12 col-xl-12 box-col-12">
+                                {{-- <div class="col-md-12 col-lg-12 col-xl-12 box-col-12">
                                     <div class="card custom-card rounded">
                                         <h6 class="card-header rounded bg-primary py-2 px-3 text-center">Leave Bifurcation</h6>
                                         <div class="card-footer row">
@@ -165,11 +165,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                             {{-- Repeatedly latemark / absent --}}
-                            <div class="row">
+                            {{-- <div class="row">
                                 @php
                                     $repeatedlyLateMark = $punchData->groupBy('emp_code')->countBy( fn($item) => $item->where('is_latemark', '>', '0')->count() > 1 );
                                     $repeatedlyLateMark = array_key_exists('1', $repeatedlyLateMark->toArray()) ? $repeatedlyLateMark['1'] : 0;
@@ -219,13 +219,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
 
 
                         {{-- Side recent 6 attendance list --}}
-                        <div class="col-3">
+                        {{-- <div class="col-3">
 
                             <h6 class="mb-4">Today's Latest 6 Records</h6>
                             @php
@@ -249,7 +249,7 @@
                                 <a href="{{ route('dashboard.device-log-report') }}" class="btn btn-primary w-100 py-1">View more </a>
                             </div>
 
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -257,7 +257,7 @@
 
 
                 {{-- Shift wise details --}}
-                <div class="col-12 px-0 mt-4">
+                {{-- <div class="col-12 px-0 mt-4">
                     <div class="row">
                         <div class="card rounded">
                             <div class="card-header px-2 py-3">
@@ -266,7 +266,7 @@
                             <div class="row">
                                 @foreach ($shiftWiseData as $shift)
                                 @php
-                                    // $currentShiftData = $todayPunchData->where('check_in', '>=', $todaysDate.' '.$shift->from_time)->where('check_in', '<=', $todaysDate.' '.$shift->to_time)
+                                    $currentShiftData = $todayPunchData->where('check_in', '>=', $todaysDate.' '.$shift->from_time)->where('check_in', '<=', $todaysDate.' '.$shift->to_time)
                                     $currentShiftData = $todayPunchData->where( fn($item) => $item->user->shift_id == $shift->id )
                                 @endphp
 
@@ -332,12 +332,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
 
 
                 {{-- Office/Ward wise details --}}
-                <div class="col-12 px-0">
+                {{-- <div class="col-12 px-0">
                     @if ( $is_admin && !request()->ward )
                         <div class="row">
                             <div class="card rounded">
@@ -380,7 +380,7 @@
                             </div>
                         </div>
                     @endif
-                </div>
+                </div> --}}
 
 
 

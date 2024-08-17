@@ -17,8 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- ico-font-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/icofont.css') }}">
     <!-- Themify icon-->
@@ -210,5 +209,68 @@
 
     }, false);
 </script>
+
+{{-- Add / Update Form validation --}}
+<script>
+    function resetErrors() {
+        var form = document.getElementById('addForm');
+        if (form) {
+            var data = new FormData(form);
+            for (var [key, value] of data) {
+                var field = key.replace('[]', '');
+
+                $('.' + field + '_err').text('');
+                $("[name='" + field + "']").removeClass('is-invalid');
+                $("[name='" + field + "']").addClass('is-valid');
+                $("[id='" + field + "']").removeClass('is-invalid');
+                $("[id='" + field + "']").addClass('is-valid');
+            }
+        }
+
+        var form = document.getElementById('editForm');
+        if (form) {
+            var data = new FormData(form);
+            for (var [key, value] of data) {
+                var field = key.replace('[]', '');
+                $('.' + field + '_err').text('');
+                $("[name='" + field + "']").removeClass('is-invalid');
+                $("[name='" + field + "']").addClass('is-valid');
+            }
+        }
+    }
+
+    function printErrMsg(msg) {
+        $.each(msg, function(key, value) {
+            var field = key.replace('[]', '');
+            field = field.replace('.', '\\.');
+
+            $('.' + field + '_err').text(value);
+            $("[name='" + field + "']").addClass('is-invalid');
+            $("[name='" + field + "']").removeClass('is-valid');
+            $("[id='" + field + "']").addClass('is-invalid');
+            $("[id='" + field + "']").removeClass('is-valid');
+        });
+    }
+
+    function editFormBehaviour() {
+        $("#addContainer").slideUp();
+        $("#btnCancel").show();
+        $("#addToTable").hide();
+        $("#editContainer").slideDown();
+        $("html, body").animate({
+            scrollTop: 0
+        }, "slow");
+    }
+</script>
+
+@if (request()->routeIs('categories.index') || request()->routeIs('subcategories.index'))
+    <!-- CK Editor -->
+    <script src="{{ asset('admin/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('admin/ckeditor/adapters/jquery.js') }}"></script>
+    <script src="{{ asset('admin/ckeditor/styles.js') }}"></script>
+    {{-- <script src="{{ asset('admin/assets/js/editor/ckeditor/ckeditor.custom.js') }}"></script> --}}
+@endif
+
+
 
 </html>
