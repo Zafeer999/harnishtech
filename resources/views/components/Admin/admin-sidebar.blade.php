@@ -19,45 +19,30 @@
                         </li>
                     @endcan
 
-                    @can('departments.view')
+                    @canany(['categories.view', 'subcategories.view', 'coupons.view', 'timeslots.view', 'cities.view'])
                         <li class="dropdown">
                             <a class="nav-link menu-title" href="javascript:void(0)">
                                 <i data-feather="list"></i><span>Masters</span>
                             </a>
                             <ul class="nav-submenu menu-content">
-                                @can('classes.view')
-                                    <li><a href="{{ route('clas.index') }}">Class </a></li>
+                                @can('categories.view')
+                                    <li><a href="{{ route('categories.index') }}">Categories </a></li>
                                 @endcan
-                                @can('departments.view')
-                                    <li><a href="{{ route('departments.index') }}">Main Departments </a></li>
+                                @can('subcategories.view')
+                                    <li><a href="{{ route('subcategories.index') }}">SubCategories </a></li>
                                 @endcan
-                                @can('sub-departments.view')
-                                    <li><a href="{{ route('sub-departments.index') }}">Sub Departments </a></li>
+                                @can('coupons.view')
+                                    <li><a href="{{ route('coupons.index') }}">Coupons </a></li>
                                 @endcan
-                                @can('designations.view')
-                                    <li><a href="{{ route('designations.index') }}">Designations </a></li>
+                                @can('timeslots.view')
+                                    <li><a href="{{ route('timeslots.index') }}">Time Slots </a></li>
                                 @endcan
-                                @can('devices.view')
-                                    <li><a href="{{ route('devices.index') }}">Devices </a></li>
-                                @endcan
-                                @can('holidays.view')
-                                    <li><a href="{{ route('holidays.index') }}">Holidays </a></li>
-                                @endcan
-                                @can('leave_types.view')
-                                    <li><a href="{{ route('leave_types.index') }}">Leave Types </a></li>
-                                @endcan
-                                @can('leaves.view')
-                                    <li><a href="{{ route('leaves.index') }}">Leaves </a></li>
-                                @endcan
-                                @can('shifts.view')
-                                    <li><a href="{{ route('shifts.index') }}">Shifts </a></li>
-                                @endcan
-                                @can('wards.view')
-                                    <li><a href="{{ route('wards.index') }}">Office </a></li>
+                                @can('cities.view')
+                                    <li><a href="{{ route('cities.index') }}">Cities </a></li>
                                 @endcan
                             </ul>
                         </li>
-                    @endcan
+                    @endcanany
 
                     @can(['users.view'])
                         <li class="dropdown">
@@ -108,9 +93,9 @@
                                 <i data-feather="file-text"></i><span>Apply Leaves</span>
                             </a>
                             <ul class="nav-submenu menu-content">
-                                <li><a href="{{ route('leave-requests.index', ['page_type'=> 'full_day']) }}">Full Day </a></li>
-                                <li><a href="{{ route('leave-requests.index', ['page_type'=> 'half_day']) }}">Half Day </a></li>
-                                <li><a href="{{ route('leave-requests.index', ['page_type'=> 'outpost']) }}">Outpost </a></li>
+                                <li><a href="{{ route('leave-requests.index', ['page_type' => 'full_day']) }}">Full Day </a></li>
+                                <li><a href="{{ route('leave-requests.index', ['page_type' => 'half_day']) }}">Half Day </a></li>
+                                <li><a href="{{ route('leave-requests.index', ['page_type' => 'outpost']) }}">Outpost </a></li>
                             </ul>
                         </li>
                     @endcan
@@ -136,13 +121,13 @@
                             </a>
                             <ul class="nav-submenu menu-content">
                                 @can('leave-application.pending')
-                                    <li><a href="{{ route('leave-requests.application', ['page_type'=> 'pending']) }}">Pending </a></li>
+                                    <li><a href="{{ route('leave-requests.application', ['page_type' => 'pending']) }}">Pending </a></li>
                                 @endcan
                                 @can('leave-application.approve')
-                                    <li><a href="{{ route('leave-requests.application', ['page_type'=> 'approved']) }}">Approved </a></li>
+                                    <li><a href="{{ route('leave-requests.application', ['page_type' => 'approved']) }}">Approved </a></li>
                                 @endcan
                                 @can('leave-application.reject')
-                                    <li><a href="{{ route('leave-requests.application', ['page_type'=> 'rejected']) }}">Rejected </a></li>
+                                    <li><a href="{{ route('leave-requests.application', ['page_type' => 'rejected']) }}">Rejected </a></li>
                                 @endcan
                             </ul>
                         </li>

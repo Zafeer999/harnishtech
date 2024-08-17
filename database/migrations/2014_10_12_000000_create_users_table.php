@@ -15,14 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->unsignedInteger('mobile')->nullable();
+            $table->string('mobile', 20)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedTinyInteger('is_service_boy');
-            $table->string('otp', 10);
+            $table->unsignedTinyInteger('is_service_boy')->default(0);
+            $table->string('otp', 10)->nullable();
             $table->unsignedTinyInteger('active_status')->default(1)->comment('1 = active, 0 = inactive');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

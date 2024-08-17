@@ -5,25 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="viho admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords"
-        content="admin template, viho admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="description" content="viho admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, viho admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <title>Core Ocean - Admin Panel Login</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/fontawesome.css') }}">
     <!-- ico-font-->
@@ -44,8 +36,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
 
     <style>
-        .login-card{
-            background: url('{{asset("assets/images/bg_login.jpg")}}');
+        .login-card {
+            background: url('{{ asset('assets/images/bg_login.jpg') }}');
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -70,7 +62,7 @@
                             <div class="col-12 mb-4 text-center">
                                 <img src="{{ asset('assets/images/logo/logo.png') }}" alt="" style="height: 100px; width: auto" class="img-fluid">
                                 {{-- <h4>Kalyan Dombivali Municipal Corporation</h4> --}}
-                                <h4 class="mt-3">कल्याण डोंबिवली महानगरपालिका</h4>
+                                <h2 class="mt-3">Harnish Technical Service</h2>
                             </div>
                             @csrf
 
@@ -80,8 +72,7 @@
                             <div class="form-group">
                                 <label>Username</label>
                                 <div class="input-group"><span class="input-group-text"><i class="icon-user"></i></span>
-                                    <input class="form-control" type="text" name="username" id="username"
-                                        placeholder="">
+                                    <input class="form-control" type="text" name="username" id="username" placeholder="">
                                 </div>
                                 <span class="text-danger error-text username_err"></span>
                             </div>
@@ -143,12 +134,10 @@
                 success: function(data) {
                     if (!data.error && !data.error2) {
                         // swal("Successful!", data.success, "success")
-                            // .then((action) => {
-                                if( data.user_type == 'maker' )
-                                    window.location.href = "{{ route('leave-requests.index') }}";
-                                else
-                                    window.location.href = '{{ route('dashboard') }}';
-                            // });
+                        // .then((action) => {
+
+                        window.location.href = '{{ route('dashboard') }}';
+                        // });
                     } else {
                         if (data.error2) {
                             swal("Error!", data.error2, "error");
@@ -191,7 +180,6 @@
 </body>
 
 <script>
-
     showHidePassword1 = () => {
         var password = document.getElementById('password');
         var toggler = document.getElementById('password_eye');
@@ -201,15 +189,12 @@
 
             toggler.querySelector('i').classList.remove('fa-eye-slash');
             toggler.querySelector('i').classList.add('fa-eye');
-        }
-        else
-        {
+        } else {
             password.setAttribute('type', 'password');
             toggler.querySelector('i').classList.remove('fa-eye');
             toggler.querySelector('i').classList.add('fa-eye-slash');
         }
     };
-
 </script>
 
 </html>
