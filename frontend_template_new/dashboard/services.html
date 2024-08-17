@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+  
+<!-- Mirrored from servibe-html.vercel.app/dashboard/services.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Aug 2024 15:53:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/fav.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Services</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../assets/css/swiper.min.css" />
+  <script defer src="../index.js"></script><link href="../style.css" rel="stylesheet"></head>
+  <body class="bg-n20 pb-10">
+    <!-- Dashborad Header Area Start -->
+    <header class="header headerAbsolute left-0 right-0 top-0 z-50 bg-white">
+  <div class="4xl:large-container max-4xl:container">
+    <div class="text-s1 flex items-center justify-between py-6">
+      <div class="flex items-center justify-start gap-3 pb-1">
+        <button class="mobileMenuOpenButton text-3xl lg:hidden">
+          <i class="ph ph-list"></i>
+        </button>
+        <a href="index.html">
+          <img
+            src="../assets/images/logo.png"
+            alt="Servibe logo"
+            class="max-w-[110px] min-[400px]:max-sm:max-w-[150px] sm:max-w-[170px]"
+          />
+        </a>
+      </div>
+      <!-- Desktop dashboardMenu Start -->
+      <nav class="max-lg:hidden">
+        <ul
+          class="flex items-center justify-center gap-2 font-medium xxl:gap-6"
+        >
+          <li class="">
+            <a
+              href="index.html"
+              class="dashboardMenu rounded-full px-4 py-3 duration-500 hover:bg-b300 hover:text-white"
+              >Dashboard</a
+            >
+          </li>
+
+          <li class="">
+            <a
+              href="services.html"
+              class="dashboardMenu rounded-full px-4 py-3 duration-700 hover:bg-b300 hover:text-white"
+              >Services</a
+            >
+          </li>
+          <li class="">
+            <a
+              href="payment-details.html"
+              class="dashboardMenu rounded-full px-4 py-3 duration-700 hover:bg-b300 hover:text-white"
+              >Payout History</a
+            >
+          </li>
+          <li class="">
+            <a
+              href="wishlist.html"
+              class="dashboardMenu rounded-full px-4 py-3 duration-700 hover:bg-b300 hover:text-white"
+              >Wishlist</a
+            >
+          </li>
+          <li class="">
+            <a
+              href="reviews.html"
+              class="dashboardMenu rounded-full px-4 py-3 duration-700 hover:bg-b300 hover:text-white"
+              >Review</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <!-- Desktop dashboardMenu End -->
+
+      <div class="flex items-center justify-end gap-2 sm:gap-6">
+        <div
+          class="relative flex cursor-pointer items-center justify-center rounded-full bg-n30 p-3 text-n300"
+          id="notification"
+        >
+          <i class="ph ph-bell text-2xl !leading-none"></i>
+          <span class="absolute right-3 top-3 rounded-full bg-n50 p-px"
+            ><span class="block size-2.5 rounded-full bg-r300"></span
+          ></span>
+
+          <div
+            class="modalClose absolute right-0 top-12 w-[230px] origin-top-right rounded-2xl border border-n30 bg-white py-4 duration-500"
+            id="notificationModal"
+          >
+            <p class="px-4 pb-3 text-lg font-semibold">Notification</p>
+            <div
+              class="flex w-full flex-col items-start justify-start gap-4 border-y border-n30 p-3"
+            >
+              <div class="flex items-start justify-start gap-2">
+                <i
+                  class="ph ph-bell flex items-center justify-center rounded-full bg-b300 p-2 text-white"
+                ></i>
+                <div class="">
+                  <p class="text-n900">Notification one</p>
+                  <p class="text-sm text-n300">7 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-start justify-start gap-2">
+                <i
+                  class="ph ph-bell flex items-center justify-center rounded-full bg-b300 p-2 text-white"
+                ></i>
+                <div class="">
+                  <p class="text-n900">Notification one</p>
+                  <p class="text-sm text-n300">7 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-start justify-start gap-2">
+                <i
+                  class="ph ph-bell flex items-center justify-center rounded-full bg-b300 p-2 text-white"
+                ></i>
+                <div class="">
+                  <p class="text-n900">Notification one</p>
+                  <p class="text-sm text-n300">7 hours ago</p>
+                </div>
+              </div>
+              <div class="flex items-start justify-start gap-2">
+                <i
+                  class="ph ph-bell flex items-center justify-center rounded-full bg-b300 p-2 text-white"
+                ></i>
+                <div class="">
+                  <p class="text-n900">Notification one</p>
+                  <p class="text-sm text-n300">7 hours ago</p>
+                </div>
+              </div>
+            </div>
+            <p class="px-4 pt-3 text-lg font-semibold">See All Notification</p>
+          </div>
+        </div>
+
+        <div
+          class="relative cursor-pointer rounded-full bg-n30 p-px"
+          id="profileIcon"
+        >
+          <img
+            src="../assets/images/review_people_1.png"
+            class="size-11 rounded-full"
+            alt=""
+          />
+          <div
+            class="modalClose absolute right-0 top-12 w-[200px] origin-top-right rounded-2xl border border-n30 bg-white py-4 duration-500"
+            id="profileModal"
+          >
+            <ul class="flex flex-col gap-3 pl-4">
+              <li class="font-medium duration-500 hover:text-r300">
+                <a href="profile.html">Profile</a>
+              </li>
+              <li class="font-medium duration-500 hover:text-r300">
+                <a href="edit-profile.html">Edit Profile</a>
+              </li>
+              <li class="font-medium duration-500 hover:text-r300">
+                <a href="settings.html">Settings</a>
+              </li>
+              <li class="font-medium duration-500 hover:text-r300">
+                <a href="../sign-in.html">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Mobile dashboardMenu Start -->
+  <nav class="">
+    <div
+      class="mobileMenuBg mobileMenuBgClose fixed left-0 top-0 z-[998] h-full w-full bg-r50 duration-700 lg:hidden"
+    ></div>
+
+    <div
+      class="mobileMenu mobileMenuClose fixed left-0 top-0 z-[999] flex h-full w-3/4 flex-col items-start justify-start gap-8 bg-r300 text-white/80 duration-700 min-[500px]:w-1/2 lg:hidden lg:gap-20"
+    >
+      <div
+        class="fixed top-0 flex w-full items-center justify-between bg-r300 p-4 sm:p-8"
+      >
+        <a href="index.html">
+          <img
+            src="../assets/images/logo_white.png"
+            alt="logo"
+            class="w-[150px]"
+          />
+        </a>
+        <i class="ri-close-line mobileMenuCloseButton cursor-pointer !text-3xl">
+          <i class="ph ph-x"></i>
+        </i>
+      </div>
+
+      <ul
+        class="flex w-full flex-col items-start gap-6 overflow-y-auto pb-10 pl-8 pt-24 text-lg sm:text-xl lg:gap-10"
+      >
+        <li>
+          <a href="index.html" class="dashboardMobileMenu"> Dashboard </a>
+        </li>
+        <li>
+          <a href="services.html" class="dashboardMobileMenu"> Services </a>
+        </li>
+        <li>
+          <a href="payment-details.html" class="dashboardMobileMenu">
+            Payout History
+          </a>
+        </li>
+        <li>
+          <a href="wishlist.html" class="dashboardMobileMenu"> Wishlist </a>
+        </li>
+        <li>
+          <a href="reviews.html" class="dashboardMobileMenu"> Reviews </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--  Mobile dashboardMenu End -->
+</header>
+
+    <!-- Dashborad Header Area End -->
+
+    <!-- services section start -->
+    <section class="mt-[160px]">
+      <div class="4xl:large-container grid grid-cols-12 gap-6 max-4xl:px-4">
+        <div
+          class="col-span-12 flex flex-col gap-6 xl:col-span-8 3xl:col-span-9"
+        >
+          <div
+            class="flex w-full items-center justify-between gap-6 rounded-2xl bg-white p-3 max-lg:flex-col"
+          >
+            <div
+              class="flex items-center justify-start gap-6 max-md:flex-col xl:max-3xl:flex-col"
+            >
+              <div class="">
+                <img
+                  src="../assets/images/dashboard-services-img1.png"
+                  class="rounded-xl"
+                  alt=""
+                />
+              </div>
+              <div class="flex flex-col gap-6">
+                <div class="flex items-center justify-start gap-8">
+                  <div class="flex items-center justify-start gap-2">
+                    <i class="ph-fill ph-star text-2xl text-y300"></i>
+                    <p class="font-medium text-n300">4.7 (475)</p>
+                  </div>
+                  <div class="flex items-center justify-start gap-2">
+                    <i class="ph-fill ph-eye text-2xl text-b300"></i>
+                    <p class="font-medium text-n300">75030</p>
+                  </div>
+                </div>
+                <h4 class="heading-4">
+                  On-Demand Services for Busy Lifestyles
+                </h4>
+                <div
+                  class="flex items-center justify-start gap-4 max-sm:flex-wrap"
+                >
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-b50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-b300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-arrows-counter-clockwise"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">17</p>
+                      <p class="font-medium">Queue</p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-y50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-y300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-check"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">1,554</p>
+                      <p class="font-medium">Completed</p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-r50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-r300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-x"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">105</p>
+                      <p class="font-medium">Cancelled</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-between gap-6 max-md:flex-wrap 3xl:gap-16"
+            >
+              <div
+                class="flex items-center text-center max-lg:gap-4 max-sm:flex-wrap lg:flex-col"
+              >
+                <p class="text-lg font-semibold">Starting From:</p>
+                <p class="text-2xl font-bold text-r300 lg:pb-5 lg:pt-3">
+                  $70.00
+                </p>
+                <p class="text-lg font-semibold lg:pb-3">On/Off Service: </p>
+
+                <label class="flex cursor-pointer items-center justify-center">
+                  <input
+                    type="checkbox"
+                    value=""
+                    class="peer sr-only"
+                    checked
+                  />
+                  <span
+                    class="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white"
+                  ></span>
+                </label>
+              </div>
+              <div class="flex gap-4 lg:flex-col lg:gap-8">
+                <a href="edit-services.html">
+                  <i
+                    class="ph ph-pencil-simple rounded-full bg-b50 p-3 text-2xl !leading-none text-b300"
+                  ></i>
+                </a>
+                <button>
+                  <i
+                    class="ph ph-trash rounded-full bg-r50 p-3 text-2xl !leading-none text-r300"
+                  ></i>
+                </button>
+                <button>
+                  <i
+                    class="ph ph-note-pencil rounded-full bg-y50 p-3 text-2xl !leading-none text-y300"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex w-full items-center justify-between gap-6 rounded-2xl bg-white p-3 max-lg:flex-col"
+          >
+            <div
+              class="flex items-center justify-start gap-6 max-md:flex-col xl:max-3xl:flex-col"
+            >
+              <div class="">
+                <img
+                  src="../assets/images/dashboard-services-img2.png"
+                  class="rounded-xl"
+                  alt=""
+                />
+              </div>
+              <div class="flex flex-col gap-6">
+                <div class="flex items-center justify-start gap-8">
+                  <div class="flex items-center justify-start gap-2">
+                    <i class="ph-fill ph-star text-2xl text-y300"></i>
+                    <p class="font-medium text-n300">4.7 (475)</p>
+                  </div>
+                  <div class="flex items-center justify-start gap-2">
+                    <i class="ph-fill ph-eye text-2xl text-b300"></i>
+                    <p class="font-medium text-n300">75030</p>
+                  </div>
+                </div>
+                <h4 class="heading-4">
+                  On-Demand Services for Busy Lifestyles
+                </h4>
+                <div
+                  class="flex items-center justify-start gap-4 max-sm:flex-wrap"
+                >
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-b50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-b300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-arrows-counter-clockwise"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">17</p>
+                      <p class="font-medium">Queue</p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-y50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-y300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-check"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">1,554</p>
+                      <p class="font-medium">Completed</p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-r50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-r300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-x"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">105</p>
+                      <p class="font-medium">Cancelled</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-between gap-6 max-md:flex-wrap 3xl:gap-16"
+            >
+              <div
+                class="flex items-center text-center max-lg:gap-4 max-sm:flex-wrap lg:flex-col"
+              >
+                <p class="text-lg font-semibold">Starting From:</p>
+                <p class="text-2xl font-bold text-r300 lg:pb-5 lg:pt-3">
+                  $70.00
+                </p>
+                <p class="text-lg font-semibold lg:pb-3">On/Off Service: </p>
+
+                <label class="flex cursor-pointer items-center justify-center">
+                  <input
+                    type="checkbox"
+                    value=""
+                    class="peer sr-only"
+                    checked
+                  />
+                  <span
+                    class="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white"
+                  ></span>
+                </label>
+              </div>
+              <div class="flex gap-4 lg:flex-col lg:gap-8">
+                <a href="edit-services.html">
+                  <i
+                    class="ph ph-pencil-simple rounded-full bg-b50 p-3 text-2xl !leading-none text-b300"
+                  ></i>
+                </a>
+                <button>
+                  <i
+                    class="ph ph-trash rounded-full bg-r50 p-3 text-2xl !leading-none text-r300"
+                  ></i>
+                </button>
+                <button>
+                  <i
+                    class="ph ph-note-pencil rounded-full bg-y50 p-3 text-2xl !leading-none text-y300"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex w-full items-center justify-between gap-6 rounded-2xl bg-white p-3 max-lg:flex-col"
+          >
+            <div
+              class="flex items-center justify-start gap-6 max-md:flex-col xl:max-3xl:flex-col"
+            >
+              <div class="">
+                <img
+                  src="../assets/images/dashboard-services-img3.png"
+                  class="rounded-xl"
+                  alt=""
+                />
+              </div>
+              <div class="flex flex-col gap-6">
+                <div class="flex items-center justify-start gap-8">
+                  <div class="flex items-center justify-start gap-2">
+                    <i class="ph-fill ph-star text-2xl text-y300"></i>
+                    <p class="font-medium text-n300">4.7 (475)</p>
+                  </div>
+                  <div class="flex items-center justify-start gap-2">
+                    <i class="ph-fill ph-eye text-2xl text-b300"></i>
+                    <p class="font-medium text-n300">75030</p>
+                  </div>
+                </div>
+                <h4 class="heading-4">
+                  On-Demand Services for Busy Lifestyles
+                </h4>
+                <div
+                  class="flex items-center justify-start gap-4 max-sm:flex-wrap"
+                >
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-b50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-b300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-arrows-counter-clockwise"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">17</p>
+                      <p class="font-medium">Queue</p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-y50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-y300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-check"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">1,554</p>
+                      <p class="font-medium">Completed</p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-r50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-r300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-x"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">105</p>
+                      <p class="font-medium">Cancelled</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-between gap-6 max-md:flex-wrap 3xl:gap-16"
+            >
+              <div
+                class="flex items-center text-center max-lg:gap-4 max-sm:flex-wrap lg:flex-col"
+              >
+                <p class="text-lg font-semibold">Starting From:</p>
+                <p class="text-2xl font-bold text-r300 lg:pb-5 lg:pt-3">
+                  $70.00
+                </p>
+                <p class="text-lg font-semibold lg:pb-3">On/Off Service: </p>
+
+                <label class="flex cursor-pointer items-center justify-center">
+                  <input
+                    type="checkbox"
+                    value=""
+                    class="peer sr-only"
+                    checked
+                  />
+                  <span
+                    class="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white"
+                  ></span>
+                </label>
+              </div>
+              <div class="flex gap-4 lg:flex-col lg:gap-8">
+                <a href="edit-services.html">
+                  <i
+                    class="ph ph-pencil-simple rounded-full bg-b50 p-3 text-2xl !leading-none text-b300"
+                  ></i>
+                </a>
+                <button>
+                  <i
+                    class="ph ph-trash rounded-full bg-r50 p-3 text-2xl !leading-none text-r300"
+                  ></i>
+                </button>
+                <button>
+                  <i
+                    class="ph ph-note-pencil rounded-full bg-y50 p-3 text-2xl !leading-none text-y300"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex w-full items-center justify-between gap-6 rounded-2xl bg-white p-3 max-lg:flex-col"
+          >
+            <div
+              class="flex items-center justify-start gap-6 max-md:flex-col xl:max-3xl:flex-col"
+            >
+              <div class="">
+                <img
+                  src="../assets/images/dashboard-services-img4.png"
+                  class="rounded-xl"
+                  alt=""
+                />
+              </div>
+              <div class="flex flex-col gap-6">
+                <div class="flex items-center justify-start gap-8">
+                  <div class="flex items-center justify-start gap-2">
+                    <i class="ph-fill ph-star text-2xl text-y300"></i>
+                    <p class="font-medium text-n300">4.7 (475)</p>
+                  </div>
+                  <div class="flex items-center justify-start gap-2">
+                    <i class="ph-fill ph-eye text-2xl text-b300"></i>
+                    <p class="font-medium text-n300">75030</p>
+                  </div>
+                </div>
+                <h4 class="heading-4">
+                  On-Demand Services for Busy Lifestyles
+                </h4>
+                <div
+                  class="flex items-center justify-start gap-4 max-sm:flex-wrap"
+                >
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-b50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-b300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-arrows-counter-clockwise"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">17</p>
+                      <p class="font-medium">Queue</p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-y50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-y300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-check"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">1,554</p>
+                      <p class="font-medium">Completed</p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-center gap-3 rounded-lg bg-r50 px-3 py-3 xl:px-6"
+                  >
+                    <div
+                      class="flex items-center justify-center rounded-full bg-r300 p-3 !leading-none text-white"
+                    >
+                      <i class="ph ph-x"></i>
+                    </div>
+                    <div class="">
+                      <p class="text-xl font-semibold">105</p>
+                      <p class="font-medium">Cancelled</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-between gap-6 max-md:flex-wrap 3xl:gap-16"
+            >
+              <div
+                class="flex items-center text-center max-lg:gap-4 max-sm:flex-wrap lg:flex-col"
+              >
+                <p class="text-lg font-semibold">Starting From:</p>
+                <p class="text-2xl font-bold text-r300 lg:pb-5 lg:pt-3">
+                  $70.00
+                </p>
+                <p class="text-lg font-semibold lg:pb-3">On/Off Service: </p>
+
+                <label class="flex cursor-pointer items-center justify-center">
+                  <input
+                    type="checkbox"
+                    value=""
+                    class="peer sr-only"
+                    checked
+                  />
+                  <span
+                    class="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white"
+                  ></span>
+                </label>
+              </div>
+              <div class="flex gap-4 lg:flex-col lg:gap-8">
+                <a href="edit-services.html">
+                  <i
+                    class="ph ph-pencil-simple rounded-full bg-b50 p-3 text-2xl !leading-none text-b300"
+                  ></i>
+                </a>
+                <button>
+                  <i
+                    class="ph ph-trash rounded-full bg-r50 p-3 text-2xl !leading-none text-r300"
+                  ></i>
+                </button>
+                <button>
+                  <i
+                    class="ph ph-note-pencil rounded-full bg-y50 p-3 text-2xl !leading-none text-y300"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 md:col-span-6 xl:col-span-4 3xl:col-span-3">
+          <div class="rounded-xl bg-white">
+            <header class="flex items-center justify-between px-4 py-6">
+              <p class="current-date"></p>
+              <div class="icons flex gap-2">
+                <span
+                  id="prev"
+                  class="flex size-9 cursor-pointer items-center justify-center rounded-full text-2xl !leading-none text-n300 duration-500 hover:bg-r300 hover:text-white"
+                >
+                  <i class="ph ph-caret-left"></i>
+                </span>
+
+                <span
+                  id="next"
+                  class="flex size-9 cursor-pointer items-center justify-center rounded-full text-2xl !leading-none text-n300 duration-500 hover:bg-r300 hover:text-white"
+                >
+                  <i class="ph ph-caret-right"></i>
+                </span>
+              </div>
+            </header>
+
+            <div class="calendar p-2 sm:p-5">
+              <ul class="weeks flex text-center">
+                <li>Sun</li>
+                <li>Mon</li>
+                <li>Tue</li>
+                <li>Wed</li>
+                <li>Thu</li>
+                <li>Fri</li>
+                <li>Sat</li>
+              </ul>
+              <ul class="days mb-5 flex flex-wrap text-center"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- services section end -->
+
+    <!-- Scroll To top Button Start -->
+    <button
+  class="jumping1 scrollButton scrollButtonHide fixed right-6 z-40 rounded-full border bg-b300 p-2 text-xl !leading-[0] text-white duration-700 hover:bg-y300 hover:text-n900 sm:p-3 sm:text-2xl md:right-10"
+  aria-label="bottom to top button"
+>
+  <span class="block">
+    <i class="ph ph-arrow-up"></i>
+  </span>
+</button>
+
+    <!-- Scroll To top Button End -->
+
+    <!-- ==== js dependencies start ==== -->
+    <script src="../index.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/plugins/plugins.js"></script>
+    <script src="../assets/js/plugins/plugin-custom.js"></script>
+  </body>
+
+<!-- Mirrored from servibe-html.vercel.app/dashboard/services.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Aug 2024 15:53:52 GMT -->
+</html>
