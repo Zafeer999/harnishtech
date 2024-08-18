@@ -1,126 +1,154 @@
 <div>
-    <!-- Footer section start -->
-    <section class="stp-15 overflow-hidden bg-n900">
-        <div class="4xl:large-container text-white max-4xl:mx-4">
-            <div class="sbp-15 flex items-center justify-between border-b border-n500 max-xl:flex-col max-xl:gap-6">
-                <div class="flex w-full items-center justify-start gap-4 max-xl:justify-center">
-                    <img src="assets/images/big_arrow.png" alt="" class="max-xxl:w-[80px] max-md:w-[60px]" />
-                    <p class="text-xl font-medium sm:text-3xl md:text-5xl 3xl:text-[72px]">
-                        Let’s work together
-                    </p>
-                </div>
-
-                <div class="flex items-center justify-between gap-6 max-sm:flex-col">
-                    <div class="rounded-[32px] border px-6 py-10 xxl:px-12 xxl:py-20">
-                        <p class="heading-3 pb-6 text-center font-bold md:w-[285px] xxl:pb-10">
-                            Looking to hire an Service?
-                        </p>
-                        <div class="flex items-center justify-center font-bold text-n900">
-                            <a href="contact.html" class="group relative flex items-center justify-start pr-12"><span class="rounded-full bg-y300 px-6 py-3 duration-500 group-hover:translate-x-12">LETS'S TALK</span>
-                                <i class="ph-bold ph-arrow-up-right absolute right-0 top-0 translate-x-0 rounded-full bg-y300 p-[14px] text-xl !leading-none duration-500 group-hover:right-[148px] group-hover:rotate-45"></i></a>
+    <footer class="main">
+        <section class="newsletter p-30 text-white wow fadeIn animated">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 mb-md-3 mb-lg-0">
+                        <div class="row align-items-center">
+                            <div class="col flex-horizontal-center">
+                                <img class="icon-email" src="assets/imgs/theme/icons/icon-email.svg" alt="">
+                                <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
+                            </div>
+                            <div class="col my-4 my-md-0 des">
+                                <h5 class="font-size-15 ml-4 mb-0">...and receive <strong>$25 coupon for first shopping.</strong></h5>
+                            </div>
                         </div>
                     </div>
-                    <div class="rounded-[32px] border px-6 py-10 xxl:px-12 xxl:py-20">
-                        <p class="heading-3 pb-6 text-center font-bold md:w-[285px] xxl:pb-10">
-                            Looking to hire an Service?
-                        </p>
-                        <div class="flex items-center justify-center font-bold text-n900">
-                            <a href="sign-up-step-1.html" class="group relative flex items-center justify-start pr-12"><span class="rounded-full bg-y300 px-6 py-3 duration-500 group-hover:translate-x-12">JOIN US</span>
-                                <i class="ph-bold ph-arrow-up-right absolute right-0 top-0 translate-x-0 rounded-full bg-y300 p-[14px] text-xl !leading-none duration-500 group-hover:right-[115px] group-hover:rotate-45"></i></a>
+                    <div class="col-lg-5">
+                        <!-- Subscribe Form -->
+                        <form class="form-subcriber d-flex wow fadeIn animated">
+                            <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
+                            <button class="btn bg-dark text-white" type="submit">Subscribe</button>
+                        </form>
+                        <!-- End Subscribe Form -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-padding footer-mid">
+            <div class="container pt-15 pb-20">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget-about font-md mb-md-5 mb-lg-0">
+                            <div class="logo logo-width-1 wow fadeIn animated">
+                                <a href="index.html"><img src="assets/imgs/theme/logo.svg" alt="logo"></a>
+                            </div>
+                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
+                            <p class="wow fadeIn animated">
+                                <strong>Address: </strong>562 Wellington Road, Street 32, San Francisco
+                            </p>
+                            <p class="wow fadeIn animated">
+                                <strong>Phone: </strong>+01 2222 365 /(+91) 01 2345 6789
+                            </p>
+                            <p class="wow fadeIn animated">
+                                <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
+                            </p>
+                            <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
+                            <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
+                                <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                                <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                                <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                                <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                                <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                        <h5 class="widget-title wow fadeIn animated">About</h5>
+                        <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Delivery Information</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms &amp; Conditions</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Support Center</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2  col-md-3">
+                        <h5 class="widget-title wow fadeIn animated">My Account</h5>
+                        <ul class="footer-list wow fadeIn animated">
+                            <li><a href="#">Sign In</a></li>
+                            <li><a href="#">View Cart</a></li>
+                            <li><a href="#">My Wishlist</a></li>
+                            <li><a href="#">Track My Order</a></li>
+                            <li><a href="#">Help</a></li>
+                            <li><a href="#">Order</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5 class="widget-title wow fadeIn animated">Install App</h5>
+                        <div class="row">
+                            <div class="col-md-8 col-lg-12">
+                                <p class="wow fadeIn animated">From App Store or Google Play</p>
+                                <div class="download-app wow fadeIn animated">
+                                    <a href="#" class="hover-up mb-sm-4 mb-lg-0"><img class="active" src="assets/imgs/theme/app-store.jpg" alt=""></a>
+                                    <a href="#" class="hover-up"><img src="assets/imgs/theme/google-play.jpg" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
+                                <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
+                                <img class="wow fadeIn animated" src="assets/imgs/theme/payment-method.png" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="stp-15 flex items-center justify-between gap-6 max-md:flex-col max-[450px]:items-start">
-                <div class="flex items-center justify-start gap-6 font-medium max-sm:items-start max-[450px]:flex-col">
-                    <p class="max-w-[200px] text-start lg:max-w-[250px]">
-                        Valentin, Street Road 27, New York. USA - 752252
+        </section>
+        <div class="container pb-20 wow fadeIn animated">
+            <div class="row">
+                <div class="col-12 mb-20">
+                    <div class="footer-bottom"></div>
+                </div>
+                <div class="col-lg-6">
+                    <p class="float-md-left font-sm text-muted mb-0">&copy; 2022, <strong class="text-brand">Evara</strong> - HTML Ecommerce Template </p>
+                </div>
+                <div class="col-lg-6">
+                    <p class="text-lg-end text-start font-sm text-muted mb-0">
+                        Designed by <a href="http://alithemes.com" target="_blank">Alithemes.com</a>. All rights reserved
                     </p>
-                    <div class="lg:pl-15">
-                        <p class="font-semibold">(629) 555-0129</p>
-                        <p>example@mail.com</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-center gap-3 text-2xl">
-                    <a class="group relative" href="javascript:void(0)">
-                        <i class="ph ph-facebook-logo flex items-center justify-center rounded-full border border-n500 p-4 duration-500 hover:border-v200 hover:text-v200"></i>
-
-                        <div class="absolute right-1/2 top-1 h-0 w-px bg-v200 duration-500 group-hover:h-2"></div>
-                        <div class="absolute right-1 top-1/2 h-px w-0 bg-v200 duration-500 group-hover:w-2"></div>
-
-                        <div class="absolute bottom-1 right-1/2 h-0 w-px bg-v200 duration-500 group-hover:h-2"></div>
-
-                        <div class="absolute left-1 top-1/2 h-px w-0 bg-v200 duration-500 group-hover:w-2"></div>
-                    </a>
-                    <a class="group relative" href="javascript:void(0)">
-                        <i class="ph ph-twitch-logo flex items-center justify-center rounded-full border border-n500 p-4 duration-500 hover:border-v200 hover:text-v200"></i>
-
-                        <div class="absolute right-1/2 top-1 h-0 w-px bg-v200 duration-500 group-hover:h-2"></div>
-                        <div class="absolute right-1 top-1/2 h-px w-0 bg-v200 duration-500 group-hover:w-2"></div>
-
-                        <div class="absolute bottom-1 right-1/2 h-0 w-px bg-v200 duration-500 group-hover:h-2"></div>
-
-                        <div class="absolute left-1 top-1/2 h-px w-0 bg-v200 duration-500 group-hover:w-2"></div>
-                    </a>
-                    <a class="group relative" href="javascript:void(0)">
-                        <i class="ph ph-instagram-logo flex items-center justify-center rounded-full border border-n500 p-4 duration-500 hover:border-v200 hover:text-v200"></i>
-
-                        <div class="absolute right-1/2 top-1 h-0 w-px bg-v200 duration-500 group-hover:h-2"></div>
-                        <div class="absolute right-1 top-1/2 h-px w-0 bg-v200 duration-500 group-hover:w-2"></div>
-
-                        <div class="absolute bottom-1 right-1/2 h-0 w-px bg-v200 duration-500 group-hover:h-2"></div>
-
-                        <div class="absolute left-1 top-1/2 h-px w-0 bg-v200 duration-500 group-hover:w-2"></div>
-                    </a>
-                    <a class="group relative" href="javascript:void(0)">
-                        <i class="ph ph-linkedin-logo flex items-center justify-center rounded-full border border-n500 p-4 duration-500 hover:border-v200 hover:text-v200"></i>
-
-                        <div class="absolute right-1/2 top-1 h-0 w-px bg-v200 duration-500 group-hover:h-2"></div>
-                        <div class="absolute right-1 top-1/2 h-px w-0 bg-v200 duration-500 group-hover:w-2"></div>
-
-                        <div class="absolute bottom-1 right-1/2 h-0 w-px bg-v200 duration-500 group-hover:h-2"></div>
-
-                        <div class="absolute left-1 top-1/2 h-px w-0 bg-v200 duration-500 group-hover:w-2"></div>
-                    </a>
-                </div>
-            </div>
-
-            <h1 class="text-center text-[430px] font-bold leading-none max-4xl:text-[400px] max-3xl:text-[350px] max-xxl:text-[300px] max-xl:text-[230px] max-lg:text-[180px] max-md:text-[130px] max-sm:text-[70px]" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="0">
-                Servibe
-            </h1>
-
-            <div class="border-t border-n500">
-                <div class="container flex items-center justify-between gap-6 py-8 font-medium max-md:flex-col">
-                    <div class="flex items-center justify-start gap-1">
-                        <p>Designed By</p>
-                        <a href="#" class="text-g200 underline">Pixelaxis</a>
-                    </div>
-
-                    <p>Copyright @ 2024 Servibe</p>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Footer section end -->
+    </footer>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center">
+                    <h5 class="mb-10">Now Loading</h5>
+                    <div class="loader">
+                        <div class="bar bar1"></div>
+                        <div class="bar bar2"></div>
+                        <div class="bar bar3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Scroll To top Button Start -->
-    <button class="jumping1 scrollButton scrollButtonHide fixed right-6 z-40 rounded-full border bg-b300 p-2 text-xl !leading-[0] text-white duration-700 hover:bg-y300 hover:text-n900 sm:p-3 sm:text-2xl md:right-10" aria-label="bottom to top button">
-        <span class="block">
-            <i class="ph ph-arrow-up"></i>
-        </span>
-    </button>
-    <!-- Scroll To top Button End -->
+    <!-- Vendor JS-->
 
-
-
-    <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('customer/index.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/main.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/plugins.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/plugin-custom.js') }}"></script>
-
-    <script src="{{ asset('customer/assets/js/plugins/matter.min.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/matterjs-custom.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('customer/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/slick.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/jquery.syotimer.min.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/wow.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/jquery-ui.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/magnific-popup.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/select2.min.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/waypoints.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/counterup.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/images-loaded.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/isotope.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/scrollup.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/jquery.vticker-min.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/jquery.theia.sticky.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/plugins/jquery.elevatezoom.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/main.js?v=3.4') }}"></script>
+    <script src="{{ asset('customer/assets/js/shop.js?v=3.4') }}"></script>
 </div>

@@ -1,28 +1,30 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="assets/images/fav.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ $title ?? 'Home |'.strtoupper(env('APP_NAME')) }}</title>
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="{{ asset('customer/assets/css/swiper.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('customer/assets/css/odometer.css') }}" />
-    <script defer src="{{ asset('customer/index.js') }}"></script>
-    <link href="{{ asset('customer/style.css') }}" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Evara - eCommerce HTML Template</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('customer/assets/imgs/theme/favicon.svg') }}">
+    <link rel="stylesheet" href="{{ asset('customer/assets/css/main.css?v=3.4') }}">
 </head>
-@stack('styles')
 
 <body>
 
     <x-customer.header />
 
-
-    {{ $slot }}
-
+        <main class="main">
+            {{ $slot }}
+        </main>
 
     <x-customer.footer />
 </body>
 
-@stack('scripts')
 </html>

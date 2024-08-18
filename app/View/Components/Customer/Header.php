@@ -2,8 +2,10 @@
 
 namespace App\View\Components\Customer;
 
+use App\Models\Category;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class Header extends Component
@@ -21,6 +23,11 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.customer.header');
+        $categories = Category::get();
+        $authUser = Auth::user();
+        $userRole = $authUser?->roles()->first();
+
+
+        return view('components.customer.header')->with(['categories'=> $categories, 'authUser' => $authUser, 'userRole' => $userRole]);
     }
 }

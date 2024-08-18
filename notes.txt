@@ -1,0 +1,4 @@
+FRONTEND COLORS:.
+background => #ddf1ff
+main => #0776c7
+border => #86b2d3
