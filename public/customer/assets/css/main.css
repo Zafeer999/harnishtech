@@ -3586,9 +3586,9 @@ table .product-thumbnail img {
 .product-cart-wrap .product-action-1.show {
     visibility: visible;
     opacity: 1;
-    bottom: 26px;
+    bottom: 12px;
     left: unset;
-    right: 20px;
+    right: 12px;
     top: unset;
     -webkit-transform: none;
     transform: none;
@@ -6444,7 +6444,7 @@ h6.post-title {
 }
 
 .mobile-header-wrapper-style .mobile-header-wrapper-inner .mobile-header-content-area .mobile-header-info-wrap {
-    padding: 25px 0 30px;
+    /* padding: 25px 0 30px; */
     margin-bottom: 30px;
 }
 

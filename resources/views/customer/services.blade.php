@@ -9,7 +9,7 @@
                 <div class="row">
                     @foreach ($categories as $category)
                         <div class="col-4 col-md-2 mb-md-3 mb-lg-0 d-flex">
-                            <div class="banner-features wow fadeIn animated hover-up" style="background-color: {{ isset($selectedCategory) && $selectedCategory->id == $category->id ? '#' }}">
+                            <div class="banner-features wow fadeIn animated hover-up" style="background-color: {{ isset($selectedCategory) && $selectedCategory->id == $category->id ? '#0776c7' : '#f0f7fc' }}">
                                 <a href="{{ route('services-by-category', $category->id) }}">
                                     <img src="{{ asset($category->image) }}" alt="" class="img-fluid w-50 m-auto d-block">
                                     <h4 style="background-color: {{$colorsArray[$loop->iteration]}}">{{ ucwords($category->name) }}</h4>
@@ -24,12 +24,14 @@
 
 
         <section class="product-tabs section-padding position-relative wow fadeIn animated">
-            <div class="bg-square"></div>
+            @if ($services->isNotEmpty())
+                <div class="bg-square"></div>
+            @endif
             <div class="container">
                 <div class="tab-header">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">{{ iisset($selectedCategory) ? ucwords($selectedCategory->name) : 'All' }} Services</button>
+                            <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">{{ isset($selectedCategory) ? ucwords($selectedCategory->name) : 'All' }} Services</button>
                         </li>
                     </ul>
                 </div>
@@ -37,41 +39,47 @@
                 <div class="tab-content wow fadeIn animated" id="myTabContent">
                     <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                         <div class="row product-grid-4">
-                            @foreach ($featuredServices as $featuredService)
+                            @forelse ($services as $service)
                                 <div class="col-6 col-md-3 d-flex align-items-stretch">
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
                                                 <a href="shop-product-right.html">
-                                                    <img class="default-img" src="{{ asset($featuredService->image) }}" alt="">
-                                                    <img class="hover-img" src="{{ asset($featuredService->image) }}" alt="">
+                                                    <img class="default-img" src="{{ asset($service->image) }}" alt="">
+                                                    <img class="hover-img" src="{{ asset($service->image) }}" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
                                                 <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                                {{-- <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a> --}}
                                             </div>
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href="shop-grid-right.html">{{ $featuredService->category?->name }}</a>
+                                                <a href="shop-grid-right.html">{{ $service->category?->name }}</a>
                                             </div>
-                                            <h2><a href="shop-product-right.html">{{ $featuredService->name }}</a></h2>
+                                            <h2><a href="shop-product-right.html">{{ $service->name }}</a></h2>
                                             <div class="rating-result" title="90%">
                                                 <span>
                                                     <span>4.5</span>
                                                 </span>
                                             </div>
                                             <div class="product-price">
-                                                <span>₹{{ $featuredService->min_price }} </span>
+                                                <span>₹{{ $service->min_price }} </span>
                                             </div>
                                             <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                <a aria-label="Add To Cart" data-cart-id="{{ $service->id }}" class="addToCart action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <div class="col-12 col-md-12 d-flex align-items-stretch">
+                                    <div class="product-cart-wrap mb-30">
+                                        <h3 class="card-text p-5">New services are on the way! we will add services for this category very soon. Stay tuned and visit soon. </h3>
+                                    </div>
+                                </div>
+                            @endforelse
                         </div>
                         <!--End product-grid-4-->
                     </div>
@@ -79,50 +87,6 @@
                 <!--End tab-content-->
             </div>
         </section>
-
-
-
-
-        {{-- <section class="banner-2 section-padding pb-0"> --}}
-        <section class="bg-grey-9 section-padding pb-0">
-            <div class="container">
-                <div class="banner-img banner-big wow fadeIn animated f-none">
-                    <div class="banner-text d-md-block d-none">
-                        <h4 class="mb-15 mt-40 text-brand">Repair Services</h4>
-                        <h1 class="fw-600 mb-20">Your Trust In Us <br>Is Our Foundation</h1>
-                        <a href="shop-grid-right.html" class="btn">See How <i class="fi-rs-arrow-right"></i></a>
-                    </div>
-                    <img src="{{ asset('customer/assets/imgs/banner/service-banner-1.webp') }}" class="img-fluid w-100" alt="">
-                </div>
-            </div>
-        </section>
-
-
-
-
-
-
-        <section class="popular-categories section-padding mt-15 mb-25">
-            <div class="container wow fadeIn animated">
-                <h3 class="section-title mb-20"><span>Popular</span> Categories</h3>
-                <div class="carausel-6-columns-cover position-relative">
-                    <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows"></div>
-                    <div class="carausel-6-columns" id="carausel-6-columns">
-
-                        @foreach ($categories as $category)
-                            <div class="card-1">
-                                <figure class="img-hover-scale overflow-hidden">
-                                    <a href="{{ route('services-by-category', $category->id) }}"><img src="{{ asset($category->image) }}" alt="" class="img-fluid w-75 m-auto"></a>
-                                </figure>
-                                <h5><a href="{{ route('services-by-category', $category->id) }}">{{ $category->name }}</a></h5>
-                            </div>
-                        @endforeach
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
 
 
     </main>

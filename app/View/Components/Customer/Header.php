@@ -23,7 +23,7 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        $categories = Category::get();
+        $categories = Category::where('category_id', null)->get();
         $authUser = Auth::user();
         $userRole = $authUser?->roles()->first();
 

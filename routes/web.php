@@ -16,9 +16,17 @@ use Illuminate\Support\Facades\Route;
 // ####  FRONTEND ROUTES  ####
 Route::get('/', [App\Http\Controllers\Customer\HomeController::class, 'index'])->name('/');
 Route::get('/home', [App\Http\Controllers\Customer\HomeController::class, 'index'])->name('home');
+
+
+// Services
 Route::get('/services', [App\Http\Controllers\Customer\ServiceController::class, 'index'])->name('services');
 Route::get('/services/category/{category}', [App\Http\Controllers\Customer\ServiceController::class, 'serviceByCategory'])->name('services-by-category');
 
+
+
+// Cart
+Route::get('carts', [App\Http\Controllers\Customer\CartController::class, 'index'])->name('carts');
+Route::post('carts', [App\Http\Controllers\Customer\CartController::class, 'store'])->name('carts.store');
 
 
 
