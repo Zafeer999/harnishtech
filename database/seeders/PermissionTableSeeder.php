@@ -157,23 +157,23 @@ class PermissionTableSeeder extends Seeder
             ],
             [
                 'id' => 29,
-                'name' => 'documents.create',
-                'group' => 'documents',
+                'name' => 'banner_sliders.create',
+                'group' => 'banner_sliders',
             ],
             [
                 'id' => 30,
-                'name' => 'documents.view',
-                'group' => 'documents',
+                'name' => 'banner_sliders.view',
+                'group' => 'banner_sliders',
             ],
             [
                 'id' => 31,
-                'name' => 'documents.edit',
-                'group' => 'documents',
+                'name' => 'banner_sliders.edit',
+                'group' => 'banner_sliders',
             ],
             [
                 'id' => 32,
-                'name' => 'documents.delete',
-                'group' => 'documents',
+                'name' => 'banner_sliders.delete',
+                'group' => 'banner_sliders',
             ],
         ];
 
