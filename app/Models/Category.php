@@ -23,6 +23,10 @@ class Category extends BaseModel
     {
         return $this->hasMany(Category::class, 'category_id', 'id');
     }
+    public function services()
+    {
+        return $this->hasMany(Category::class, 'category_id', 'id');
+    }
 
     public function category()
     {
