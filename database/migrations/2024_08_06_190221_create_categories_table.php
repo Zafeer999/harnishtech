@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedInteger('min_price');
             $table->unsignedInteger('level');
+            $table->unsignedInteger('is_featured')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

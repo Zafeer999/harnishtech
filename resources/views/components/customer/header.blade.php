@@ -39,46 +39,46 @@
                                 <!-- MAIN SLIDES -->
                                 <div class="product-image-slider">
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-2.jpg" alt="product image">
+                                        <img src="{{ asset('customer/assets/imgs/shop/product-16-2.jpg') }}" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-1.jpg" alt="product image">
+                                        <img src="{{ asset('customer/assets/imgs/shop/product-16-1.jpg') }}" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-3.jpg" alt="product image">
+                                        <img src="{{ asset('customer/assets/imgs/shop/product-16-3.jpg') }}" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-4.jpg" alt="product image">
+                                        <img src="{{ asset('customer/assets/imgs/shop/product-16-4.jpg') }}" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-5.jpg" alt="product image">
+                                        <img src="{{ asset('customer/assets/imgs/shop/product-16-5.jpg') }}" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-6.jpg" alt="product image">
+                                        <img src="{{ asset('customer/assets/imgs/shop/product-16-6.jpg') }}" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-7.jpg" alt="product image">
+                                        <img src="{{ asset('customer/assets/imgs/shop/product-16-7.jpg') }}" alt="product image">
                                     </figure>
                                 </div>
                                 <!-- THUMBNAILS -->
                                 <div class="slider-nav-thumbnails pl-15 pr-15">
-                                    <div><img src="assets/imgs/shop/thumbnail-3.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-4.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-5.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-6.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-8.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div>
+                                    <div><img src="{{ asset('customer/assets/imgs/shop/thumbnail-3.jpg') }}" alt="product image"></div>
+                                    <div><img src="{{ asset('customer/assets/imgs/shop/thumbnail-4.jpg') }}" alt="product image"></div>
+                                    <div><img src="{{ asset('customer/assets/imgs/shop/thumbnail-5.jpg') }}" alt="product image"></div>
+                                    <div><img src="{{ asset('customer/assets/imgs/shop/thumbnail-6.jpg') }}" alt="product image"></div>
+                                    <div><img src="{{ asset('customer/assets/imgs/shop/thumbnail-7.jpg') }}" alt="product image"></div>
+                                    <div><img src="{{ asset('customer/assets/imgs/shop/thumbnail-8.jpg') }}" alt="product image"></div>
+                                    <div><img src="{{ asset('customer/assets/imgs/shop/thumbnail-9.jpg') }}" alt="product image"></div>
                                 </div>
                             </div>
                             <!-- End Gallery -->
                             <div class="social-icons single-share">
                                 <ul class="text-grey-5 d-inline-block">
                                     <li><strong class="mr-10">Share this:</strong></li>
-                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                    <li class="social-facebook"><a href="#"><img src="{{ asset('customer/assets/imgs/theme/icons/icon-facebook.svg') }}" alt=""></a></li>
+                                    <li class="social-twitter"> <a href="#"><img src="{{ asset('customer/assets/imgs/theme/icons/icon-twitter.svg') }}" alt=""></a></li>
+                                    <li class="social-instagram"><a href="#"><img src="{{ asset('customer/assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a></li>
+                                    <li class="social-linkedin"><a href="#"><img src="{{ asset('customer/assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -207,7 +207,7 @@
                         <a href="index.html"><img src="{{ asset('customer/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
                     </div>
                     <div class="header-right">
-                        {{-- <div class="search-style-2">
+                        <div class="search-style-2">
                             <form action="#">
                                 <select class="select-active">
                                     @foreach ($categories as $category)
@@ -216,7 +216,7 @@
                                 </select>
                                 <input type="text" placeholder="Search for items...">
                             </form>
-                        </div> --}}
+                        </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
@@ -234,7 +234,7 @@
                                         <ul>
                                             <li>
                                                 <div class="shopping-cart-img">
-                                                    <a href="shop-product-right.html"><img alt="Evara" src="assets/imgs/shop/thumbnail-3.jpg"></a>
+                                                    <a href="shop-product-right.html"><img alt="Evara" src="{{ asset('customer/assets/imgs/shop/thumbnail-3.jpg') }}"></a>
                                                 </div>
                                                 <div class="shopping-cart-title">
                                                     <h4><a href="shop-product-right.html">Daisy Casual Bag</a></h4>
@@ -246,7 +246,7 @@
                                             </li>
                                             <li>
                                                 <div class="shopping-cart-img">
-                                                    <a href="shop-product-right.html"><img alt="Evara" src="assets/imgs/shop/thumbnail-2.jpg"></a>
+                                                    <a href="shop-product-right.html"><img alt="Evara" src="{{ asset('customer/assets/imgs/shop/thumbnail-2.jpg') }}"></a>
                                                 </div>
                                                 <div class="shopping-cart-title">
                                                     <h4><a href="shop-product-right.html">Corduroy Shirts</a></h4>
@@ -278,7 +278,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="assets/imgs/theme/logo.svg" alt="logo"></a>
+                        <a href="index.html"><img src="{{ asset('customer/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         {{-- <div class="main-categori-wrap d-none d-lg-block">
@@ -493,20 +493,20 @@
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
                                 <a href="shop-wishlist.html">
-                                    <img alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
+                                    <img alt="Evara" src="{{ asset('customer/assets/imgs/theme/icons/icon-heart.svg') }}">
                                     <span class="pro-count white">4</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="shop-cart.html">
-                                    <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
+                                    <img alt="Evara" src="{{ asset('customer/assets/imgs/theme/icons/icon-cart.svg') }}">
                                     <span class="pro-count white">2</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Evara" src="assets/imgs/shop/thumbnail-3.jpg"></a>
+                                                <a href="shop-product-right.html"><img alt="Evara" src="{{ asset('customer/assets/imgs/shop/thumbnail-3.jpg') }}"></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
@@ -518,7 +518,7 @@
                                         </li>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Evara" src="assets/imgs/shop/thumbnail-4.jpg"></a>
+                                                <a href="shop-product-right.html"><img alt="Evara" src="{{ asset('customer/assets/imgs/shop/thumbnail-4.jpg') }}"></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
