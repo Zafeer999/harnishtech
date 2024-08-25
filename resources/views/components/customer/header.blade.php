@@ -176,14 +176,6 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                {{-- <li>
-                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
-                                    <ul class="language-dropdown">
-                                        <li><a href="#"><img src="assets/imgs/theme/flag-fr.png" alt="">Français</a></li>
-                                        <li><a href="#"><img src="assets/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
-                                        <li><a href="#"><img src="assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
-                                    </ul>
-                                </li> --}}
                                 @if ($authUser)
                                     <li>
                                         <a class="language-dropdown-active" href="#"> <i class="fa-regular fa-circle-user"></i> {{ ucwords($authUser->name) }} <i class="fi-rs-angle-small-down"></i></a>
@@ -219,12 +211,12 @@
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                <div class="header-action-icon-2">
+                                {{-- <div class="header-action-icon-2">
                                     <a href="shop-wishlist.html">
                                         <img class="svgInject" alt="Evara" src="{{ asset('customer/assets/imgs/theme/icons/icon-heart.svg') }}">
                                         <span class="pro-count blue">4</span>
                                     </a>
-                                </div>
+                                </div> --}}
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
                                         <img alt="Evara" src="{{ asset('customer/assets/imgs/theme/icons/icon-cart.svg') }}">
@@ -491,12 +483,12 @@
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
-                            <div class="header-action-icon-2">
+                            {{-- <div class="header-action-icon-2">
                                 <a href="shop-wishlist.html">
                                     <img alt="Evara" src="{{ asset('customer/assets/imgs/theme/icons/icon-heart.svg') }}">
                                     <span class="pro-count white">4</span>
                                 </a>
-                            </div>
+                            </div> --}}
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="shop-cart.html">
                                     <img alt="Evara" src="{{ asset('customer/assets/imgs/theme/icons/icon-cart.svg') }}">
