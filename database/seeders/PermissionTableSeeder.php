@@ -155,6 +155,26 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'cities.delete',
                 'group' => 'cities',
             ],
+            [
+                'id' => 29,
+                'name' => 'documents.create',
+                'group' => 'documents',
+            ],
+            [
+                'id' => 30,
+                'name' => 'documents.view',
+                'group' => 'documents',
+            ],
+            [
+                'id' => 31,
+                'name' => 'documents.edit',
+                'group' => 'documents',
+            ],
+            [
+                'id' => 32,
+                'name' => 'documents.delete',
+                'group' => 'documents',
+            ],
         ];
 
         foreach ($permissions as $permission) {

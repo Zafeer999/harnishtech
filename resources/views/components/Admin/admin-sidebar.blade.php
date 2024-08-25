@@ -19,7 +19,7 @@
                         </li>
                     @endcan
 
-                    @canany(['categories.view', 'subcategories.view', 'coupons.view', 'timeslots.view', 'cities.view'])
+                    @canany(['categories.view', 'subcategories.view', 'coupons.view', 'timeslots.view', 'cities.view', 'documents.view'])
                         <li class="dropdown">
                             <a class="nav-link menu-title" href="javascript:void(0)">
                                 <i data-feather="list"></i><span>Masters</span>
@@ -39,6 +39,9 @@
                                 @endcan
                                 @can('cities.view')
                                     <li><a href="{{ route('cities.index') }}">Cities </a></li>
+                                @endcan
+                                @can('documents.view')
+                                    <li><a href="{{ route('documents.index') }}">Documents </a></li>
                                 @endcan
                             </ul>
                         </li>

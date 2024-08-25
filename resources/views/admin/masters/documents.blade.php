@@ -1,11 +1,11 @@
 <x-admin.admin-layout>
-    <x-slot name="title">{{ auth()->user()->tenant_name }} - Cities</x-slot>
+    <x-slot name="title">{{ auth()->user()->tenant_name }} - Documents</x-slot>
 
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-header">
 
-                `
+
                 <!-- Add Form -->
                 <div class="row" id="addContainer" style="display:none;">
                     <div class="col-sm-12">
@@ -16,20 +16,28 @@
                                 <div class="card-body">
                                     <div class="mb-3 row">
                                         <div class="col-md-4">
-                                            <label class="col-form-label" for="name">City Name <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="name" name="name" type="text" placeholder="Enter City Name">
+                                            <label class="col-form-label" for="name">Document Name <span class="text-danger">*</span></label>
+                                            <input class="form-control" id="name" name="name" type="text" placeholder="Enter Document Name">
                                             <span class="text-danger error-text name_err"></span>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="col-form-label" for="pincode">Pincode <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="pincode" name="pincode" type="text" pattern="\d{6}" minlength="6" maxlength="6" placeholder="Enter 6 Digit Pincode">
-                                            <span class="text-danger error-text pincode_err"></span>
+                                            <label class="col-form-label" for="is_required">Is Required <span class="text-danger">*</span></label>
+                                            <select class="form-select" name="is_required" id="is_required">
+                                                <option value="">Select a option</option>
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                            <span class="text-danger error-text is_required_err"></span>
                                         </div>
-                                        {{-- <div class="col-md-4">
-                                            <label class="col-form-label" for="pincode">Status <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="pincode" name="pincode" type="text" pattern="\d{6}" minlength="6" maxlength="6" placeholder="Enter 6 Digit Pincode">
-                                            <span class="text-danger error-text pincode_err"></span>
-                                        </div> --}}
+                                        <div class="col-md-4">
+                                            <label for="status">Status <span class="text-danger">*</span></label>
+                                            <select class="form-select" name="status" id="status">
+                                                <option value="">Select a Status</option>
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                            <span class="text-danger error-text status_err"></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -50,7 +58,7 @@
                             @csrf
                             <section class="card">
                                 <header class="card-header">
-                                    <h4 class="card-title">Edit Cities</h4>
+                                    <h4 class="card-title">Edit Document</h4>
                                 </header>
 
                                 <div class="card-body py-2">
@@ -60,20 +68,28 @@
                                     <div class="mb-3 row">
                                         <div class="mb-3 row">
                                             <div class="col-md-4">
-                                                <label class="col-form-label" for="name">City Name <span class="text-danger">*</span></label>
-                                                <input class="form-control" id="name" name="name" type="text" placeholder="Enter City Name">
+                                                <label class="col-form-label" for="name">Document Name <span class="text-danger">*</span></label>
+                                                <input class="form-control" id="name" name="name" type="text" placeholder="Enter Document Name">
                                                 <span class="text-danger error-text name_err"></span>
                                             </div>
                                             <div class="col-md-4">
-                                                <label class="col-form-label" for="pincode">Pincode <span class="text-danger">*</span></label>
-                                                <input class="form-control" id="pincode" name="pincode" type="text" pattern="\d{6}" minlength="6" maxlength="6" placeholder="Enter 6 Digit Pincode">
-                                                <span class="text-danger error-text pincode_err"></span>
+                                                <label class="col-form-label" for="is_required">Is Required <span class="text-danger">*</span></label>
+                                                <select class="form-select" name="is_required" id="is_required">
+                                                    <option value="">Select an option</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                                <span class="text-danger error-text is_required_err"></span>
                                             </div>
-                                            {{-- <div class="col-md-4">
-                                                <label class="col-form-label" for="to_time">From Time <span class="text-danger"></span></label>
-                                                <input class="form-control" id="to_time" name="to_time" type="time" placeholder="Select To Time">
-                                                <span class="text-danger error-text to_time_err"></span>
-                                            </div> --}}
+                                            <div class="col-md-4">
+                                                <label class="col-form-label" for="status">Status <span class="text-danger">*</span></label>
+                                                <select class="form-select" name="status" id="status">
+                                                    <option value="">Select a status</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                                <span class="text-danger error-text status_err"></span>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -91,7 +107,7 @@
                 <div class="row">
                     <div class="col-sm-12">
 
-                        <h3>Cities</h3>
+                        <h3>Documents</h3>
 
                     </div>
                     <div class="col-sm-6">
@@ -107,7 +123,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            @can('cities.create')
+                            @can('documents.create')
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="">
@@ -122,27 +138,31 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No</th>
-                                            <th>City Name</th>
-                                            <th>Pincode</th>
+                                            <th>Document Name</th>
+                                            <th>Is Required</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($cities as $city)
+                                        @foreach ($documents as $document)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <strong> {{ $city->name }} </strong>
+                                                    <strong> {{ $document->name }} </strong>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $city->pincode }} </strong>
+                                                    <strong> {{ $document->is_required }} </strong>
                                                 </td>
                                                 <td>
-                                                    @can('cities.edit')
-                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit city" data-id="{{ $city->id }}"><i data-feather="edit"></i></button>
+                                                    <strong> {{ $document->status }} </strong>
+                                                </td>
+                                                <td>
+                                                    @can('documents.edit')
+                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit document" data-id="{{ $document->id }}"><i data-feather="edit"></i></button>
                                                     @endcan
-                                                    @can('cities.delete')
-                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete city" data-id="{{ $city->id }}"><i data-feather="trash-2"></i> </button>
+                                                    @can('documents.delete')
+                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete document" data-id="{{ $document->id }}"><i data-feather="trash-2"></i> </button>
                                                     @endcan
                                                 </td>
                                             </tr>
@@ -171,7 +191,7 @@
 
         var formdata = new FormData(this);
         $.ajax({
-            url: '{{ route('cities.store') }}',
+            url: '{{ route('documents.store') }}',
             type: 'POST',
             data: formdata,
             contentType: false,
@@ -181,7 +201,7 @@
                 if (!data.error2)
                     swal("Successful!", data.success, "success")
                     .then((action) => {
-                        window.location.href = '{{ route('cities.index') }}';
+                        window.location.href = '{{ route('documents.index') }}';
                     });
                 else
                     swal("Error!", data.error2, "error");
@@ -217,7 +237,7 @@
             .then((justTransfer) => {
                 if (justTransfer) {
                     var model_id = $(this).attr("data-id");
-                    var url = "{{ route('cities.destroy', ':model_id') }}";
+                    var url = "{{ route('documents.destroy', ':model_id') }}";
 
                     $.ajax({
                         url: url.replace(':model_id', model_id),
@@ -256,7 +276,7 @@
         e.preventDefault();
         $(".edit-element").show();
         var model_id = $(this).attr("data-id");
-        var url = "{{ route('cities.edit', ':model_id') }}";
+        var url = "{{ route('documents.edit', ':model_id') }}";
 
         $.ajax({
             url: url.replace(':model_id', model_id),
@@ -269,9 +289,10 @@
 
                 if (!data.error) {
                     $("#editForm input[name='edit_model_id']").val(model_id);
-                    $("#editForm input[name='city_id']").val(data.city.id);
-                    $("#editForm input[name='name']").val(data.city.name);
-                    $("#editForm input[name='pincode']").val(data.city.pincode);
+                    $("#editForm input[name='timeslot_id']").val(data.document.id);
+                    $("#editForm input[name='name']").val(data.document.name);
+                    $("#editForm select[name='is_required']").html(data.isRequiredHTML);
+                    $("#editForm select[name='status']").html(data.statusHTML);
                 } else {
                     alert(data.error);
                 }
@@ -293,7 +314,7 @@
             var formdata = new FormData(this);
             formdata.append('_method', 'PUT');
             var model_id = $('#edit_model_id').val();
-            var url = "{{ route('cities.update', ':model_id') }}";
+            var url = "{{ route('documents.update', ':model_id') }}";
             //
             $.ajax({
                 url: url.replace(':model_id', model_id),
@@ -306,7 +327,7 @@
                     if (!data.error2)
                         swal("Successful!", data.success, "success")
                         .then((action) => {
-                            window.location.href = '{{ route('cities.index') }}';
+                            window.location.href = '{{ route('documents.index') }}';
                         });
                     else
                         swal("Error!", data.error2, "error");

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Masters;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\Masters\StoreCityRequest;
+use App\Http\Requests\Admin\Masters\UpdateCityRequest;
 use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -58,24 +59,43 @@ class CityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(City $city)
     {
-        //
+        return [
+            'result' => 1,
+            'city' => $city,
+        ];
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCityRequest $request, City $city)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $input = $request->validated();
+            $city->update(Arr::only($input, City::getFillables()));
+            DB::commit();
+
+            return response()->json(['success' => 'City updated successfully!']);
+        } catch (\Exception $e) {
+            return $this->respondWithAjax($e, 'updating', 'City');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(City $city)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $city->delete();
+            DB::commit();
+            return response()->json(['success' => 'City deleted successfully!']);
+        } catch (\Exception $e) {
+            return $this->respondWithAjax($e, 'deleting', 'City');
+        }
     }
 }
