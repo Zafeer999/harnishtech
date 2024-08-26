@@ -64,6 +64,44 @@
                     @endcan
 
 
+                    @canany(['banner_sliders.view'], ['cta_sections.view'])
+                        <li class="dropdown">
+                            <a class="nav-link menu-title" href="javascript:void(0)">
+                                <i data-feather="settings"></i><span>Website Configuration</span>
+                            </a>
+                            <ul class="nav-submenu menu-content">
+                                @can('banner_sliders.view')
+                                    <li><a href="{{ route('banner_sliders.index') }}">Banner Sliders </a></li>
+                                @endcan
+                                @can('cta_sections.view')
+                                    <li><a href="{{ route('cta_sections.index') }}">CTA Section </a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcanany
+
+                    @canany(['service_boys.view'])
+                        <li class="dropdown">
+                            <a class="nav-link menu-title" href="javascript:void(0)">
+                                <i data-feather="briefcase"></i><span>Manage Service Boy</span>
+                            </a>
+                            <ul class="nav-submenu menu-content">
+                                @can('service_boys.view')
+                                    <li><a href="{{ route('service_boys.index') }}">Service Boy </a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcanany
+
+                    @can(['visitors.view'])
+                        <li class="dropdown">
+                            <a class="nav-link menu-title link-nav {{ request()->routeIs('visitors.index') ? 'active-bg' : '' }}" href="{{ route('visitors.index') }}">
+                                <i data-feather="user-plus"></i><span>Visitors</span>
+                            </a>
+                        </li>
+                    @endcan
+
+
                     @can('employees.view')
                         <li class="dropdown">
                             <a class="nav-link menu-title" href="javascript:void(0)">

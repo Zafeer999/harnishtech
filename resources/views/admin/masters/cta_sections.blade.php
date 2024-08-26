@@ -1,5 +1,5 @@
 <x-admin.admin-layout>
-    <x-slot name="title">{{ auth()->user()->tenant_name }} - Main Categories</x-slot>
+    <x-slot name="title">{{ auth()->user()->tenant_name }} - CTA Section</x-slot>
 
     <div class="page-body">
         <div class="container-fluid">
@@ -16,43 +16,57 @@
                                 <div class="card-body">
                                     <div class="mb-3 row">
                                         <div class="col-md-4">
-                                            <label class="col-form-label" for="category_id">Select Category <span class="text-danger">*</span></label>
-                                            <select class="form-select" name="category_id" id="category_id">
-                                                <option value="">Select a category</option>
-                                                @foreach ($categories as $category)
-                                                    <option class="dropdown-item" value="{{ $category->id }}">{{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <span class="text-danger error-text category_id_err"></span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="col-form-label" for="name">SubCategory Name <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="name" name="name" type="text" placeholder="Enter Category Name">
-                                            <span class="text-danger error-text name_err"></span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="col-form-label" for="image">SubCategory Image <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="image" name="image" type="file" placeholder="Choose Category Image">
+                                            <label class="col-form-label" for="image">Cta Image <span class="text-danger">*</span></label>
+                                            <input class="form-control" name="image" type="file" accept="image/*">
                                             <span class="text-danger error-text image_err"></span>
                                         </div>
-                                    </div>
-
-                                    <div class="mb-3 row">
                                         <div class="col-md-4">
-                                            <label class="col-form-label" for="min_price">Min Price <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="min_price" name="min_price" type="number" placeholder="Enter Minimum Price">
-                                            <span class="text-danger error-text min_price_err"></span>
+                                            <label class="col-form-label" for="small_text">Small Text</label>
+                                            <input class="form-control" name="small_text" type="text" placeholder="Enter Small Text">
+                                            <span class="text-danger error-text small_text_err"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="main_text">Main Text <span class="text-danger">*</span></label>
+                                            <input class="form-control" name="main_text" type="text" placeholder="Enter Main Text">
+                                            <span class="text-danger error-text main_text_err"></span>
                                         </div>
                                     </div>
 
                                     <div class="mb-3 row">
-                                        <div class="col-md-12">
-                                            <label class="col-form-label" for="description">SubCategory Description <span class="text-danger">*</span></label>
-                                            <textarea class="form-control" name="description" id="description" cols="30" rows="10"></textarea>
-                                            <span class="text-danger error-text description_err"></span>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="button_text">Button Text <span class="text-danger">*</span></label>
+                                            <input class="form-control" name="button_text" type="text" placeholder="Enter Button Text">
+                                            <span class="text-danger error-text button_text_err"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="button_color">Button Color <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="button_color">
+                                                <option value="">Select button color</option>
+                                                @foreach ($colorsArray as $key => $color)
+                                                    <option value="{{ $color }}">{{ $color }}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="text-danger error-text text_color_err"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="button_link">Button Link</label>
+                                            <input class="form-control" name="button_link" type="url" placeholder="Enter Button Link">
+                                            <span class="text-danger error-text button_link_err"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="status">Status</label>
+                                            <select class="form-control" name="status">
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                            <span class="text-danger error-text status_err"></span>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary" id="addSubmit">Submit</button>
                                     <button type="reset" class="btn btn-warning">Reset</button>
@@ -71,51 +85,64 @@
                             @csrf
                             <section class="card">
                                 <header class="card-header">
-                                    <h4 class="card-title">Edit SubCategory</h4>
+                                    <h4 class="card-title">Edit Cta Section</h4>
                                 </header>
 
                                 <div class="card-body py-2">
                                     <input type="hidden" id="edit_model_id" name="edit_model_id" value="">
+
                                     <div class="mb-3 row">
-                                        <div class="col-md-4">
-                                            <label class="col-form-label" for="category_id">Select Category <span class="text-danger">*</span></label>
-                                            <select class="form-select" name="category_id" id="category_id">
-                                                <option value="">Select a category</option>
-                                                @foreach ($categories as $category)
-                                                    <option class="dropdown-item" value="{{ $category->id }}">{{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <span class="text-danger error-text category_id_err"></span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="col-form-label" for="name">SubCategory Name <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="name" name="name" type="text" placeholder="Enter Category Name">
-                                            <span class="text-danger error-text name_err"></span>
-                                        </div>
                                         <div class="col-md-3">
-                                            <label class="col-form-label" for="image">SubCategory Image <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="image" name="image" type="file" placeholder="Choose Category Image">
+                                            <label class="col-form-label" for="image">Cta Image <span class="text-danger">*</span></label>
+                                            <input class="form-control" name="image" type="file" accept="image/*">
                                             <span class="text-danger error-text image_err"></span>
                                         </div>
-                                        <div class="col-md-1" id="edit_image_section">
+                                        <div class="col-md-1" id="edit_image_section"></div>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="small_text">Small Text</label>
+                                            <input class="form-control" name="small_text" type="text" placeholder="Enter Small Text">
+                                            <span class="text-danger error-text small_text_err"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="main_text">Main Text <span class="text-danger">*</span></label>
+                                            <input class="form-control" name="main_text" type="text" placeholder="Enter Main Text">
+                                            <span class="text-danger error-text main_text_err"></span>
                                         </div>
                                     </div>
+
                                     <div class="mb-3 row">
                                         <div class="col-md-4">
-                                            <label class="col-form-label" for="min_price">Min Price <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="min_price" name="min_price" type="number" placeholder="Enter Minimum Price">
-                                            <span class="text-danger error-text min_price_err"></span>
+                                            <label class="col-form-label" for="button_text">Button Text <span class="text-danger">*</span></label>
+                                            <input class="form-control" name="button_text" type="text" placeholder="Enter Button Text">
+                                            <span class="text-danger error-text button_text_err"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="button_color">Button Color <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="button_color">
+                                                <option value="">Select button color</option>
+                                                @foreach ($colorsArray as $key => $color)
+                                                    <option value="{{ $color }}">{{ $color }}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="text-danger error-text text_color_err"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="button_link">Button Link</label>
+                                            <input class="form-control" name="button_link" type="url" placeholder="Enter Button Link">
+                                            <span class="text-danger error-text button_link_err"></span>
                                         </div>
                                     </div>
 
                                     <div class="mb-3 row">
-                                        <div class="col-md-12">
-                                            <label class="col-form-label" for="edit_description">SubCategory Description <span class="text-danger">*</span></label>
-                                            <textarea class="form-control" name="edit_description" id="edit_description" cols="30" rows="10"></textarea>
-                                            <span class="text-danger error-text edit_description_err"></span>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="status">Status</label>
+                                            <select class="form-control" name="status">
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                            <span class="text-danger error-text status_err"></span>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="card-footer">
                                     <button class="btn btn-primary" id="editSubmit">Submit</button>
@@ -129,9 +156,7 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-
-                        <h3>SubCategories</h3>
-
+                        <h3>CTA Section</h3>
                     </div>
                     <div class="col-sm-6">
                     </div>
@@ -146,7 +171,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            @can('categories.create')
+                            @can('cta_sections.create')
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="">
@@ -161,39 +186,47 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No</th>
-                                            <th>Category Name</th>
-                                            <th>SubCategory Name</th>
-                                            <th>Price</th>
                                             <th>Image</th>
-                                            <th>Description</th>
+                                            <th>Small Text</th>
+                                            <th>Main Text</th>
+                                            <th>Button Text</th>
+                                            <th>Button Color</th>
+                                            <th>Button Link</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($subcategories as $subcategory)
+                                        @foreach ($ctaSections as $ctaSection)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <strong> {{ $subcategory->category->name }} </strong>
+                                                    <img src="{{ $ctaSection->image }}" style="max-width: 100px; max-height: 100px;" alt="bannerslider_img">
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $subcategory->name }} </strong>
+                                                    <p> {{ $ctaSection->small_text }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $subcategory->min_price }} </strong>
+                                                    <p> {{ $ctaSection->main_text }} </p>
                                                 </td>
                                                 <td>
-                                                    <img src="{{ $subcategory->image }}" style="max-width: 100px; max-height: 100px;" alt="subcategory_img">
+                                                    <p> {{ $ctaSection->button_text }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ Str::limit(htmlspecialchars_decode($subcategory->description), 80) }} </strong>
+                                                    <div style="width: 30px; height: 30px; background-color: {{ $ctaSection->button_color }}; display: inline-block; border: 1px solid #ccc;"></div>
                                                 </td>
                                                 <td>
-                                                    @can('categories.edit')
-                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit category" data-id="{{ $subcategory->id }}"><i data-feather="edit"></i></button>
+                                                    <p> {{ $ctaSection->button_link ? $ctaSection->button_link : '-' }} </p>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $ctaSection->status == 1 ? 'Active' : 'Inactive' }}</p>
+                                                </td>
+                                                <td>
+                                                    @can('cta_sections.edit')
+                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit cta_sections" data-id="{{ $ctaSection->id }}"><i data-feather="edit"></i></button>
                                                     @endcan
-                                                    @can('categories.delete')
-                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete category" data-id="{{ $subcategory->id }}"><i data-feather="trash-2"></i> </button>
+                                                    @can('cta_sections.delete')
+                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete cta_sections" data-id="{{ $ctaSection->id }}"><i data-feather="trash-2"></i> </button>
                                                     @endcan
                                                 </td>
                                             </tr>
@@ -219,12 +252,10 @@
     $("#addForm").submit(function(e) {
         e.preventDefault();
         $("#addSubmit").prop('disabled', true);
-        for (instance in CKEDITOR.instances) {
-            CKEDITOR.instances[instance].updateElement();
-        }
+
         var formdata = new FormData(this);
         $.ajax({
-            url: '{{ route('subcategories.store') }}',
+            url: '{{ route('cta_sections.store') }}',
             type: 'POST',
             data: formdata,
             contentType: false,
@@ -234,7 +265,7 @@
                 if (!data.error2)
                     swal("Successful!", data.success, "success")
                     .then((action) => {
-                        window.location.href = '{{ route('subcategories.index') }}';
+                        window.location.href = '{{ route('cta_sections.index') }}';
                     });
                 else
                     swal("Error!", data.error2, "error");
@@ -270,7 +301,7 @@
             .then((justTransfer) => {
                 if (justTransfer) {
                     var model_id = $(this).attr("data-id");
-                    var url = "{{ route('subcategories.destroy', ':model_id') }}";
+                    var url = "{{ route('cta_sections.destroy', ':model_id') }}";
 
                     $.ajax({
                         url: url.replace(':model_id', model_id),
@@ -309,7 +340,7 @@
         e.preventDefault();
         $(".edit-element").show();
         var model_id = $(this).attr("data-id");
-        var url = "{{ route('subcategories.edit', ':model_id') }}";
+        var url = "{{ route('cta_sections.edit', ':model_id') }}";
 
         $.ajax({
             url: url.replace(':model_id', model_id),
@@ -321,14 +352,15 @@
                 editFormBehaviour();
 
                 if (!data.error) {
-                    $("#editForm input[name='edit_model_id']").val(model_id);
-                    $("#editForm select[name='category_id']").html(data.categoryHtml);
-                    $("#editForm input[name='subcategory_id']").val(data.subcategory.id);
-                    $("#editForm input[name='name']").val(data.subcategory.name);
-                    $("#editForm #edit_image_section").html(data.subcategoryImgHtml);
-                    CKEDITOR.instances['edit_description'].setData(data.subcategory.description);
-                    $("#editForm input[name='min_price']").val(data.subcategory.min_price);
-
+                    $("#editForm [name='edit_model_id']").val(model_id);
+                    $("#editForm [name='ctasection_id']").val(data.ctaSection.id);
+                    $("#editForm #edit_image_section").html(data.crtImgHtml);
+                    $("#editForm [name='small_text']").val(data.ctaSection.small_text);
+                    $("#editForm [name='main_text']").val(data.ctaSection.main_text);
+                    $("#editForm [name='button_text']").val(data.ctaSection.button_text);
+                    $("#editForm [name='button_color']").val(data.ctaSection.button_color);
+                    $("#editForm [name='button_link']").val(data.ctaSection.button_link);
+                    $("#editForm [name='status']").val(data.ctaSection.status);
                 } else {
                     alert(data.error);
                 }
@@ -346,14 +378,11 @@
     $(document).ready(function() {
         $("#editForm").submit(function(e) {
             e.preventDefault();
-            for (instance in CKEDITOR.instances) {
-                CKEDITOR.instances[instance].updateElement();
-            }
             $("#editSubmit").prop('disabled', true);
             var formdata = new FormData(this);
             formdata.append('_method', 'PUT');
             var model_id = $('#edit_model_id').val();
-            var url = "{{ route('subcategories.update', ':model_id') }}";
+            var url = "{{ route('cta_sections.update', ':model_id') }}";
             //
             $.ajax({
                 url: url.replace(':model_id', model_id),
@@ -366,7 +395,7 @@
                     if (!data.error2)
                         swal("Successful!", data.success, "success")
                         .then((action) => {
-                            window.location.href = '{{ route('subcategories.index') }}';
+                            window.location.href = '{{ route('cta_sections.index') }}';
                         });
                     else
                         swal("Error!", data.error2, "error");
@@ -404,25 +433,5 @@
             }
 
         });
-    });
-</script>
-
-
-<script>
-    let categoryId = $('#addForm ')
-    var editor = CKEDITOR.replace('description', {
-        extraPlugins: 'filebrowser',
-        extraPlugins: 'youtube',
-        filebrowserBrowseUrl: 'browser?type=Images',
-        filebrowserUploadMethod: "form",
-        filebrowserUploadUrl: "{{ route('upload-ck-image', ['_token' => csrf_token()]) }}"
-    });
-
-    var editor = CKEDITOR.replace('edit_description', {
-        extraPlugins: 'filebrowser',
-        extraPlugins: 'youtube',
-        filebrowserBrowseUrl: 'browser.php?type=Images',
-        filebrowserUploadMethod: "form",
-        filebrowserUploadUrl: "{{ route('upload-ck-image', ['_token' => csrf_token()]) }}"
     });
 </script>

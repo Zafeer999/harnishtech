@@ -57,6 +57,11 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
     Route::resource('timeslots', App\Http\Controllers\Admin\Masters\TimeSlotController::class);
     Route::resource('cities', App\Http\Controllers\Admin\Masters\CityController::class);
     Route::resource('documents', App\Http\Controllers\Admin\Masters\DocumentController::class);
+    Route::resource('banner_sliders', App\Http\Controllers\Admin\Masters\BannerSliderController::class);
+    Route::resource('cta_sections', App\Http\Controllers\Admin\Masters\CtaSectionController::class);
+    Route::resource('service_boys', App\Http\Controllers\Admin\Masters\ServiceBoyController::class);
+    Route::resource('visitors', App\Http\Controllers\Admin\Masters\VisitorController::class);
+
 
     Route::any('upload-ck-image', [App\Http\Controllers\Admin\MiscController::class, 'upload-ck-image'])->name('upload-ck-image');
 

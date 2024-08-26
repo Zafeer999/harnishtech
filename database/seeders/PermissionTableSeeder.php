@@ -175,6 +175,66 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'banner_sliders.delete',
                 'group' => 'banner_sliders',
             ],
+            [
+                'id' => 33,
+                'name' => 'cta_sections.create',
+                'group' => 'cta_sections',
+            ],
+            [
+                'id' => 34,
+                'name' => 'cta_sections.view',
+                'group' => 'cta_sections',
+            ],
+            [
+                'id' => 35,
+                'name' => 'cta_sections.edit',
+                'group' => 'cta_sections',
+            ],
+            [
+                'id' => 36,
+                'name' => 'cta_sections.delete',
+                'group' => 'cta_sections',
+            ],
+            [
+                'id' => 37,
+                'name' => 'service_boys.create',
+                'group' => 'service_boys',
+            ],
+            [
+                'id' => 38,
+                'name' => 'service_boys.view',
+                'group' => 'service_boys',
+            ],
+            [
+                'id' => 39,
+                'name' => 'service_boys.edit',
+                'group' => 'service_boys',
+            ],
+            [
+                'id' => 40,
+                'name' => 'service_boys.delete',
+                'group' => 'service_boys',
+            ],
+            [
+                'id' => 41,
+                'name' => 'visitors.create',
+                'group' => 'visitors',
+            ],
+            [
+                'id' => 42,
+                'name' => 'visitors.view',
+                'group' => 'visitors',
+            ],
+            [
+                'id' => 43,
+                'name' => 'visitors.edit',
+                'group' => 'visitors',
+            ],
+            [
+                'id' => 44,
+                'name' => 'visitors.delete',
+                'group' => 'visitors',
+            ],
         ];
 
         foreach ($permissions as $permission) {

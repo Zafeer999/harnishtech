@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->getRoleNames();
     }
+
+    public function serviceBoy()
+    {
+        return $this->hasOne(ServiceBoy::class);
+    }
 }

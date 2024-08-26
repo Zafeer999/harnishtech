@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('gender', 20);
             $table->date('dob');
             $table->date('doj');
-            $table->unsignedFloat('avg_rating');
+            $table->unsignedFloat('avg_rating')->nullable();
             $table->text('address');
-            $table->text('status');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
