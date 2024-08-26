@@ -165,17 +165,17 @@
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-xl-3 col-lg-4">
+                    <div class="col-xl-4 col-lg-4">
                         <div class="header-info">
                             <ul>
                                 <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                                <li><i class="fi-rs-marker"></i><a href="page-contact.html">Our location</a></li>
+                                <li><i class="fi-rs-marker"></i><a href="page-contact.html">Bhiwandi, MH, IND</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-4">
+                    <div class="col-xl-4 col-lg-4">
                     </div>
-                    <div class="col-xl-3 col-lg-4">
+                    <div class="col-xl-4 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
                                 @if ($authUser)
@@ -213,50 +213,7 @@
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="{{ route('carts') }}">
-                                        <livewire:customer.header-cart deviceType="desktop" />
-                                        {{-- <img alt="Evara" src="{{ asset('customer/assets/imgs/theme/icons/icon-cart.svg') }}">
-                                        <span class="pro-count blue">2</span> --}}
-                                    </a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                        <ul>
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="shop-product-right.html"><img alt="Evara" src="{{ asset('customer/assets/imgs/shop/thumbnail-3.jpg') }}"></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="shop-product-right.html">Daisy Casual Bag</a></h4>
-                                                    <h4><span>1 × </span>$800.00</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="shop-product-right.html"><img alt="Evara" src="{{ asset('customer/assets/imgs/shop/thumbnail-2.jpg') }}"></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="shop-product-right.html">Corduroy Shirts</a></h4>
-                                                    <h4><span>1 × </span>$3200.00</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="shopping-cart-footer">
-                                            <div class="shopping-cart-total">
-                                                <h4>Total <span>$4000.00</span></h4>
-                                            </div>
-                                            <div class="shopping-cart-button">
-                                                <a href="{{ route('carts') }}" class="outline">View cart</a>
-                                                <a href="shop-checkout.html">Checkout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <livewire:customer.header-cart deviceType="desktop" />
                             </div>
                         </div>
                     </div>
@@ -274,9 +231,9 @@
                             <nav>
                                 <ul>
                                     <li>
-                                        <a href="{{ route('home') }}">Home</a>
+                                        <a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
                                     </li>
-                                    <li><a href="#">Categories <i class="fi-rs-angle-down"></i></a>
+                                    <li><a class="{{ request()->routeIs('services-by-category') ? 'active' : '' }}" href="#">Categories <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             @foreach ($categories as $category)
                                                 <li><a href="{{ route('services-by-category', $category->id) }}">{{ ucwords($category->name) }}</a></li>
@@ -284,13 +241,13 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="{{ route('services') }}">Services</a>
+                                        <a class="{{ request()->routeIs('services') ? 'active' : '' }}" href="{{ route('services') }}">Services</a>
                                     </li>
                                     <li>
-                                        <a href="page-about.html">About</a>
+                                        <a class="{{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
                                     </li>
                                     <li>
-                                        <a href="page-contact.html">Contact</a>
+                                        <a class="{{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -302,56 +259,7 @@
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
-                            {{-- <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
-                                    <img alt="Evara" src="{{ asset('customer/assets/imgs/theme/icons/icon-heart.svg') }}">
-                                    <span class="pro-count white">4</span>
-                                </a>
-                            </div> --}}
-                            <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="{{ route('carts') }}">
-                                    <livewire:customer.header-cart deviceType="mobile" />
-                                    {{-- <img alt="Evara" src="{{ asset('customer/assets/imgs/theme/icons/icon-cart.svg') }}">
-                                    <span class="pro-count white">2</span> --}}
-                                </a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                    <ul>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Evara" src="{{ asset('customer/assets/imgs/shop/thumbnail-3.jpg') }}"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
-                                                <h3><span>1 × </span>$800.00</h3>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Evara" src="{{ asset('customer/assets/imgs/shop/thumbnail-4.jpg') }}"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
-                                                <h3><span>1 × </span>$3500.00</h3>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="shopping-cart-footer">
-                                        <div class="shopping-cart-total">
-                                            <h4>Total <span>$383.00</span></h4>
-                                        </div>
-                                        <div class="shopping-cart-button">
-                                            <a href="{{ route('carts') }}">View cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <livewire:customer.header-cart deviceType="mobile" />
                             <div class="header-action-icon-2 d-block d-lg-none">
                                 <div class="burger-icon burger-icon-white">
                                     <span class="burger-icon-top"></span>
@@ -371,7 +279,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="{{ route('home') }}"><img src="{{ asset('customer/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
+                    <a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}"><img src="{{ asset('customer/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -391,6 +299,23 @@
                     <!-- mobile menu start -->
                     <nav>
                         <ul class="mobile-menu">
+                            <li class="menu-item">
+                                <a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span>
+                                <a href="#" class="{{ request()->routeIs('home') ? 'active' : '' }}">Categories</a>
+                                <ul class="dropdown">
+                                    @foreach ($categories as $category)
+                                        <li><a href="{{ route('services-by-category', $category->id) }}">{{ $category->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a class="{{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="{{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
+                            </li>
                             @if ($authUser)
                                 <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">{{ ucwords($authUser->name) }}</a>
                                     <ul class="dropdown">
@@ -398,7 +323,7 @@
                                     </ul>
                                 </li>
                             @else
-                                <li class="menu-item"><a href="#">Log In / Sign Up </a></li>
+                                <li class="menu-item"><a href="{{ route('customer.login') }}">Log In / Sign Up </a></li>
                             @endif
                         </ul>
                     </nav>
@@ -406,7 +331,7 @@
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
                     <div class="single-mobile-header-info">
-                        <a href="page-contact.html"> Change location </a>
+                        <a href="page-contact.html"> Bhiwandi, MH, IND </a>
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="#">(+01) - 2345 - 6789 </a>

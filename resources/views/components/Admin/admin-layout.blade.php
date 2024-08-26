@@ -5,11 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Core Ocean Admin Panel is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Core Ocean admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="description" content="HarnishTech Admin Panel is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, HarnishTech admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('customer/assets/imgs/theme/logo.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('customer/assets/imgs/theme/logo.svg') }}" type="image/x-icon">
     <title>{{ $title ?? 'Admin Panel' }}</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -72,7 +72,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 footer-copyright">
-                            <p class="mb-0">Copyright 2021-22 © Core Ocean All rights reserved.</p>
+                            <p class="mb-0">Copyright 2021-22 © HarnishTech All rights reserved.</p>
                         </div>
                         <div class="col-md-6">
                             <p class="pull-right mb-0">Hand crafted & made with <i class="fa fa-heart font-secondary"></i></p>

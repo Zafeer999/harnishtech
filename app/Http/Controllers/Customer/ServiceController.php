@@ -18,6 +18,13 @@ class ServiceController extends Controller
         return view('customer.services')->with(['services' => $services, 'categories' => $categories, 'colorsArray' => $colorsArray]);
     }
 
+    public function show(Request $request, Category $service)
+    {
+        $service->load('category');
+
+        return view('customer.service')->with(['service' => $service]);
+    }
+
     public function serviceByCategory(Category $category)
     {
         $selectedCategory = $category;

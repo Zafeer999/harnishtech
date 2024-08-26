@@ -68,7 +68,7 @@
                                                 <span>₹{{ $service->min_price }} </span>
                                             </div>
                                             <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" data-cart-id="{{ $service->id }}" class="addToCart action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                <a aria-label="Add To Cart" data-cart-id="{{ $service->id }}" class="addToCart action-btn hover-up" href="#"><i class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>
                                     </div>

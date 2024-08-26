@@ -17,10 +17,11 @@ class HeaderCart extends Component
     public function render()
     {
         $cartItems = \Cart::getContent();
+        $cartTotal = \Cart::getTotal();
 
-        $this->cartCount = count($cartItems);
+        $this->cartCount = count($cartItems) ?? 0;
 
-        return view('livewire.customer.header-cart')->with(['cartItems' => $cartItems]);
+        return view('livewire.customer.header-cart')->with(['cartItems' => $cartItems, 'cartTotal' => $cartTotal]);
     }
 
 

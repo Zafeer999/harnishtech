@@ -10,7 +10,7 @@
                         <div class="table-responsive">
                             <table class="table shopping-summery text-center clean">
                                 <thead>
-                                    <tr class="main-heading">
+                                    <tr class="main-heading bg-6">
                                         <th scope="col"></th>
                                         <th scope="col">Service</th>
                                         <th scope="col">Price</th>
@@ -43,7 +43,7 @@
                                     @empty
                                         <tr>
                                             <td colspan="6">
-                                                <h3>No Items in your cart</h3>
+                                                <h3 class="p-5">No Items in your cart</h3>
                                             </td>
                                         </tr>
                                     @endforelse
@@ -59,11 +59,11 @@
                             </table>
                         </div>
                         <div class="cart-action text-end">
-                            <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
+                            <a class="btn mr-10"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
                             <a class="btn "><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
                         </div>
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
-                        <div class="row mb-50">
+                        <div class="row mb-50 px-md-0 px-3">
                             <div class="col-lg-6 col-md-12">
                                 <div class="heading_s1 mb-3">
                                     <h4>Calculate Shipping</h4>
