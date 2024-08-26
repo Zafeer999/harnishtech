@@ -17,6 +17,7 @@
     <link rel="manifest" href="https://progressier.app/cTQ3i8bfuV2Pq1pyXZWw/progressier.json"/>
     <script defer src="https://progressier.app/cTQ3i8bfuV2Pq1pyXZWw/script.js"></script>
 </head>
+@livewireStyles()
 
 <body>
 
@@ -28,5 +29,44 @@
 
     <x-customer.footer />
 </body>
+@livewireScripts()
+
+{{-- Handle Add To Cart Click --}}
+<script>
+    $('body').on('click', '.addToCart', function(e){
+        e.preventDefault();
+
+        $(".addToCart").prop('disabled', true);
+        let serviceId = $(this).attr('data-cart-id');
+        let url = "{{ route('carts.store') }}";
+        Livewire.emitTo('customer.header-cart', 'cartdata', {'service_id': serviceId});
+        $(".addToCart").prop('disabled', false);
+        // $.ajax({
+        //     url: url,
+        //     type: 'POST',
+        //     data: {
+        //         '_token': "{{ csrf_token() }}",
+        //         'service_id': serviceId,
+        //     },
+        //     success: function(data)
+        //     {
+        //         $(".addToCart").prop('disabled', false);
+        //         if (!data.error2)
+        //             Livewire.emitTo('customer.header-cart', 'cartdata', {'service_id': serviceId});
+        //         else
+        //             swal("Error!", data.error2, "error");
+        //     },
+        //     statusCode: {
+        //         422: function(responseObject, textStatus, jqXHR) {
+        //             $(".addToCart").prop('disabled', false);
+        //         },
+        //         500: function(responseObject, textStatus, errorThrown) {
+        //             $(".addToCart").prop('disabled', false);
+        //             swal("Error occured!", "Something went wrong please try again", "error");
+        //         }
+        //     }
+        // });
+    })
+</script>
 
 </html>

@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Livewire\Customer;
+
+use App\Models\Category;
+use Livewire\Component;
+
+class HeaderCart extends Component
+{
+    protected $listeners = ['cartdata'=> 'useCartData'];
+
+    // PROP VARIABLES
+    public $data = [];
+    public $deviceType = '';
+    public $cartCount = 0;
+
+    public function render()
+    {
+        $cartItems = \Cart::getContent();
+        $cartTotal = \Cart::getTotal();
+
+        $this->cartCount = count($cartItems) ?? 0;
+
+        return view('livewire.customer.header-cart')->with(['cartItems' => $cartItems, 'cartTotal' => $cartTotal]);
+    }
+
+
+    public function useCartData($data)
+    {
+        $service = Category::find($data['service_id']);
+        if($service)
+        {
+            \Cart::add(array(
+                'id' => $data['service_id'],
+                'name' => $service->name,
+                'price' => $service->min_price,
+                'quantity' => isset($data['quantity']) ? $data['quantity'] : 1,
+                'attributes' => ['image' => $service->image, 'description' => $service->description],
+            ));
+        }
+
+        $this->data['service_id'] = $data['service_id'];
+    }
+}

@@ -14,10 +14,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ####  FRONTEND ROUTES  ####
+Route::get('customer/login', [App\Http\Controllers\Customer\AuthController::class, 'showLogin'])->name('customer.login');
+Route::post('customer/signin', [App\Http\Controllers\Customer\AuthController::class, 'login'])->name('customer.signin');
+
 Route::get('/', [App\Http\Controllers\Customer\HomeController::class, 'index'])->name('/');
 Route::get('/home', [App\Http\Controllers\Customer\HomeController::class, 'index'])->name('home');
+Route::get('about', [App\Http\Controllers\Customer\HomeController::class, 'about'])->name('about');
+Route::get('contact', [App\Http\Controllers\Customer\HomeController::class, 'contact'])->name('contact');
+
+
+
+// Services
 Route::get('/services', [App\Http\Controllers\Customer\ServiceController::class, 'index'])->name('services');
+Route::get('/services/{service}', [App\Http\Controllers\Customer\ServiceController::class, 'show'])->name('services.show');
 Route::get('/services/category/{category}', [App\Http\Controllers\Customer\ServiceController::class, 'serviceByCategory'])->name('services-by-category');
+
+
+
+Route::get('carts', [App\Http\Controllers\Customer\CartController::class, 'index'])->name('carts');
+Route::post('carts', [App\Http\Controllers\Customer\CartController::class, 'store'])->name('carts.store');
+
+
+
+Route::get('checkouts', [App\Http\Controllers\Customer\CheckoutController::class, 'index'])->name('checkouts.index');
+
+
 
 
 

@@ -13,8 +13,16 @@ class ServiceController extends Controller
     {
         $categories = Category::where('category_id', null)->get();
         $services = Category::where('level', 2)->get();
+        $colorsArray = config('default_data.colors_array');
 
-        return view('customer.services')->with(['services' => $services, 'categories' => $categories]);
+        return view('customer.services')->with(['services' => $services, 'categories' => $categories, 'colorsArray' => $colorsArray]);
+    }
+
+    public function show(Request $request, Category $service)
+    {
+        $service->load('category');
+
+        return view('customer.service')->with(['service' => $service]);
     }
 
     public function serviceByCategory(Category $category)
@@ -22,8 +30,9 @@ class ServiceController extends Controller
         $selectedCategory = $category;
         $categories = Category::where('category_id', null)->get();
         $services = $category->services()->get();
+        $colorsArray = config('default_data.colors_array');
 
 
-        return view('customer.services')->with(['services' => $services, 'categories' => $categories, 'selectedCategory' => $selectedCategory]);
+        return view('customer.services')->with(['services' => $services, 'categories' => $categories, 'selectedCategory' => $selectedCategory, 'colorsArray' => $colorsArray]);
     }
 }
