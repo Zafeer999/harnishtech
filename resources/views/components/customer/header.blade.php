@@ -231,7 +231,7 @@
                             <nav>
                                 <ul>
                                     <li>
-                                        <a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                                        <a class="{{ request()->routeIs('home') || request()->routeIs('/') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
                                     </li>
                                     <li><a class="{{ request()->routeIs('services-by-category') ? 'active' : '' }}" href="#">Categories <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">

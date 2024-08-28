@@ -12,7 +12,10 @@ class CheckoutController extends Controller
     public function index(Request $request)
     {
         $authUser = Auth::user();
+        $cartItems = \Cart::getContent();
 
+        if($cartItems->isEmpty())
+            return redirect()->back();
 
         return view('customer.checkout')->with(['authUser' => $authUser]);
     }

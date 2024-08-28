@@ -13,7 +13,7 @@
                                 <a href="{{ route('services.show', $cart->id) }}"><img alt="Evara" src="{{ asset($cart->attributes->image) }}"></a>
                             </div>
                             <div class="shopping-cart-title">
-                                <h4><a href="{{ route('services.show', $cart->id) }}">{{ $cart->name }}</a></h4>
+                                <h4><a href="{{ route('services.show', $cart->id) }}">{{ Str::limit($cart->name, 15) }}</a></h4>
                                 <h3><span>{{ $cart->quantity }} × </span>₹{{ number_format($cart->price) }}</h3>
                             </div>
                             <div class="shopping-cart-delete">
@@ -31,8 +31,8 @@
                         <h4>Total <span>₹{{ number_format($cartTotal) }}</span></h4>
                     </div>
                     <div class="shopping-cart-button">
-                        <a href="{{ route('carts') }}">View cart</a>
-                        <a href="{{ route('checkouts.index') }}">Checkout</a>
+                        <button class="btn btn-md" onclick="window.location.href='{{ route('carts') }}';">View cart</button>
+                        <button class="btn btn-md" onclick="window.location.href='{{ route('checkouts.index') }}';" {{ $cartItems->isEmpty() ? 'disabled' : '' }}>Checkout</button>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                                 <a href="{{ route('services.show', $cart->id) }}"><img alt="cart-img" src="{{ asset($cart->attributes->image) }}"></a>
                             </div>
                             <div class="shopping-cart-title">
-                                <h4><a href="{{ route('services.show', $cart->id) }}">{{ $cart->name }}</a></h4>
+                                <h4><a href="{{ route('services.show', $cart->id) }}">{{ Str::limit($cart->name, 15) }}</a></h4>
                                 <h4><span>{{ $cart->quantity }} × </span>₹{{ number_format($cart->price) }}</h4>
                             </div>
                             <div class="shopping-cart-delete">
@@ -69,8 +69,8 @@
                         <h4>Total <span>₹{{ number_format($cartTotal) }}</span></h4>
                     </div>
                     <div class="shopping-cart-button">
-                        <a href="{{ route('carts') }}" class="outline">View cart</a>
-                        <a href="{{ route('checkouts.index') }}">Checkout</a>
+                        <button class="btn btn-md" onclick="window.location.href='{{ route('carts') }}';" class="outline">View cart</button>
+                        <button class="btn btn-md" onclick="window.location.href='{{ route('checkouts.index') }}';" {{ $cartItems->isEmpty() ? 'disabled' : '' }} >Checkout</button>
                     </div>
                 </div>
             </div>

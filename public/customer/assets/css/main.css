@@ -4850,9 +4850,17 @@ table .product-thumbnail img {
 }
 
 .order_review {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     border: 1px solid #e2e9e1;
     padding: 30px;
     border-radius: 10px;
+}
+
+.billing_details{
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #e2e9e1;
 }
 
 .toggle_info {

@@ -3,7 +3,7 @@
     <main class="main">
 
         {{-- SLIDER SECTION --}}
-        <section class="home-slider position-relative pt-50">
+        <section class="home-slider position-relative">
             <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
                 <div class="single-hero-slider single-animation-wrap">
                     <div class="container">
