@@ -7,7 +7,7 @@
 
 
                 <!-- Add Form Start -->
-                <div class="row" id="addContainer" style="display:none;">
+                {{-- <div class="row" id="addContainer" style="display:none;">
                     <div class="col-sm-12">
                         <div class="card">
                             <form class="theme-form" name="addForm" id="addForm">
@@ -125,11 +125,11 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
 
                 {{-- Edit Form --}}
-                <div class="row" id="editContainer" style="display:none;">
+                {{-- <div class="row" id="editContainer" style="display:none;">
                     <div class="col">
                         <form class="form-horizontal form-bordered" method="post" id="editForm">
                             @csrf
@@ -238,7 +238,7 @@
                             </section>
                         </form>
                     </div>
-                </div>
+                </div> --}}
 
 
                 <div class="row">
@@ -257,14 +257,14 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-sm-6">
                                     <div class="">
                                         <button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
                                         <button id="btnCancel" class="btn btn-danger" style="display:none;">Cancel</button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="table-responsive">
                                 <table class="display table-bordered" id="datatable-tabletools">
                                     <thead>
@@ -775,7 +775,7 @@
 
 
 <!-- Get Sub departments -->
-<script>
+{{-- <script>
     $("select[name='department_id']").change( function(e) {
         e.preventDefault();
 
@@ -802,4 +802,4 @@
             },
         });
     });
-</script>
+</script> --}}

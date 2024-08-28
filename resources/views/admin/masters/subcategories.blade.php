@@ -174,19 +174,19 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <strong> {{ $subcategory->category->name }} </strong>
+                                                    <p> {{ $subcategory->category->name }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $subcategory->name }} </strong>
+                                                    <p> {{ $subcategory->name }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $subcategory->min_price }} </strong>
+                                                    <p> {{ $subcategory->min_price }} </p>
                                                 </td>
                                                 <td>
                                                     <img src="{{ $subcategory->image }}" style="max-width: 100px; max-height: 100px;" alt="subcategory_img">
                                                 </td>
                                                 <td>
-                                                    <strong> {{ Str::limit(htmlspecialchars_decode($subcategory->description), 80) }} </strong>
+                                                    <p> {{ Str::limit(htmlspecialchars_decode($subcategory->description), 80) }} </p>
                                                 </td>
                                                 <td>
                                                     @can('categories.edit')

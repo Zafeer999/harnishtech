@@ -194,25 +194,25 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <strong> {{ $coupon->name }} </strong>
+                                                    <p> {{ $coupon->name }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $coupon->discount_type }} </strong>
+                                                    <p> {{ $coupon->discount_type }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $coupon->discount_value }} </strong>
+                                                    <p> {{ $coupon->discount_value }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $coupon->min_value }} </strong>
+                                                    <p> {{ $coupon->min_value }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $coupon->max_value }} </strong>
+                                                    <p> {{ $coupon->max_value }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $coupon->expiry_date }} </strong>
+                                                    <p> {{ $coupon->expiry_date }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $coupon->expiry_count }} </strong>
+                                                    <p> {{ $coupon->expiry_count }} </p>
                                                 </td>
                                                 <td>
                                                     @can('coupons.edit')

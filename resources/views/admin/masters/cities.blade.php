@@ -132,10 +132,10 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <strong> {{ $city->name }} </strong>
+                                                    <p> {{ $city->name }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $city->pincode }} </strong>
+                                                    <p> {{ $city->pincode }} </p>
                                                 </td>
                                                 <td>
                                                     @can('cities.edit')
