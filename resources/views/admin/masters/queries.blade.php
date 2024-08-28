@@ -1,5 +1,5 @@
 <x-admin.admin-layout>
-    <x-slot name="title">{{ auth()->user()->tenant_name }} - Visitors</x-slot>
+    <x-slot name="title">{{ auth()->user()->tenant_name }} - Queries</x-slot>
 
     <div class="page-body">
         <div class="container-fluid">
@@ -7,7 +7,7 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3>Visitors</h3>
+                        <h3>Queries</h3>
                     </div>
                     <div class="col-sm-6">
                     </div>
@@ -22,7 +22,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            {{-- @can('visitors.create')
+                            {{-- @can('queries.create')
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="">
@@ -37,27 +37,35 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No</th>
-                                            <th>Visitor IP Address</th>
-                                            <th>URL</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile No.</th>
+                                            <th>Message</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($visitors as $visitor)
+                                        @foreach ($queries as $query)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <p> {{ $visitor->ip_address }} </p>
+                                                    <p> {{ $query->name }} </p>
                                                 </td>
                                                 <td>
-                                                    <p><a href="{{ $visitor->url }}" target="_blank">{{ $visitor->url }}</a></p>
+                                                    <p> {{ $query->email }} </p>
                                                 </td>
                                                 <td>
-                                                    {{-- @can('visitors.edit')
-                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit visitors" data-id="{{ $visitor->id }}"><i data-feather="edit"></i></button>
+                                                    <p> {{ $query->mobile }} </p>
+                                                </td>
+                                                <td>
+                                                    <p> {{ Str::limit($query->message, 80) }} </p>
+                                                </td>
+                                                <td>
+                                                    {{-- @can('queries.edit')
+                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit queries" data-id="{{ $query->id }}"><i data-feather="edit"></i></button>
                                                     @endcan --}}
-                                                    @can('visitors.delete')
-                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete visitors" data-id="{{ $visitor->id }}"><i data-feather="trash-2"></i> </button>
+                                                    @can('queries.delete')
+                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete queries" data-id="{{ $query->id }}"><i data-feather="trash-2"></i> </button>
                                                     @endcan
                                                 </td>
                                             </tr>
@@ -86,7 +94,7 @@
 
         var formdata = new FormData(this);
         $.ajax({
-            url: '{{ route('visitors.store') }}',
+            url: '{{ route('queries.store') }}',
             type: 'POST',
             data: formdata,
             contentType: false,
@@ -96,7 +104,7 @@
                 if (!data.error2)
                     swal("Successful!", data.success, "success")
                     .then((action) => {
-                        window.location.href = '{{ route('visitors.index') }}';
+                        window.location.href = '{{ route('queries.index') }}';
                     });
                 else
                     swal("Error!", data.error2, "error");
@@ -132,7 +140,7 @@
             .then((justTransfer) => {
                 if (justTransfer) {
                     var model_id = $(this).attr("data-id");
-                    var url = "{{ route('visitors.destroy', ':model_id') }}";
+                    var url = "{{ route('queries.destroy', ':model_id') }}";
 
                     $.ajax({
                         url: url.replace(':model_id', model_id),
@@ -171,7 +179,7 @@
         e.preventDefault();
         $(".edit-element").show();
         var model_id = $(this).attr("data-id");
-        var url = "{{ route('visitors.edit', ':model_id') }}";
+        var url = "{{ route('queries.edit', ':model_id') }}";
 
         $.ajax({
             url: url.replace(':model_id', model_id),
@@ -184,14 +192,14 @@
 
                 if (!data.error) {
                     $("#editForm [name='edit_model_id']").val(model_id);
-                    $("#editForm [name='ctasection_id']").val(data.visitor.id);
+                    $("#editForm [name='ctasection_id']").val(data.query.id);
                     $("#editForm #edit_image_section").html(data.crtImgHtml);
-                    $("#editForm [name='small_text']").val(data.visitor.small_text);
-                    $("#editForm [name='main_text']").val(data.visitor.main_text);
-                    $("#editForm [name='button_text']").val(data.visitor.button_text);
-                    $("#editForm [name='button_color']").val(data.visitor.button_color);
-                    $("#editForm [name='button_link']").val(data.visitor.button_link);
-                    $("#editForm [name='status']").val(data.visitor.status);
+                    $("#editForm [name='small_text']").val(data.query.small_text);
+                    $("#editForm [name='main_text']").val(data.query.main_text);
+                    $("#editForm [name='button_text']").val(data.query.button_text);
+                    $("#editForm [name='button_color']").val(data.query.button_color);
+                    $("#editForm [name='button_link']").val(data.query.button_link);
+                    $("#editForm [name='status']").val(data.query.status);
                 } else {
                     alert(data.error);
                 }
@@ -213,7 +221,7 @@
             var formdata = new FormData(this);
             formdata.append('_method', 'PUT');
             var model_id = $('#edit_model_id').val();
-            var url = "{{ route('visitors.update', ':model_id') }}";
+            var url = "{{ route('queries.update', ':model_id') }}";
             //
             $.ajax({
                 url: url.replace(':model_id', model_id),
@@ -226,7 +234,7 @@
                     if (!data.error2)
                         swal("Successful!", data.success, "success")
                         .then((action) => {
-                            window.location.href = '{{ route('visitors.index') }}';
+                            window.location.href = '{{ route('queries.index') }}';
                         });
                     else
                         swal("Error!", data.error2, "error");
