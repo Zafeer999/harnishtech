@@ -8,8 +8,8 @@
     <meta name="description" content="viho admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, viho admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{ asset('customer/assets/imgs/theme/logo.svg') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('customer/assets/imgs/theme/logo.svg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('customer/assets/imgs/theme/logo.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('customer/assets/imgs/theme/logo.png') }}" type="image/x-icon">
     <title>HarnishTech - Admin Panel Login</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -60,7 +60,7 @@
                     <div class="login-card">
                         <form class="theme-form login-form" id="loginForm">
                             <div class="col-12 mb-4 text-center">
-                                {{-- <img src="{{ asset('customer/assets/imgs/theme/logo.svg') }}" alt="" style="height: 100px; width: auto" class="img-fluid"> --}}
+                                {{-- <img src="{{ asset('customer/assets/imgs/theme/logo.png') }}" alt="" style="height: 100px; width: auto" class="img-fluid"> --}}
                                 {{-- <h4>Kalyan Dombivali Municipal Corporation</h4> --}}
                                 <h2 class="mt-3">Harnish Technical Service</h2>
                             </div>

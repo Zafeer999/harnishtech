@@ -1,9 +1,9 @@
 /***
  Theme Name: Evara
- Theme URI: http://wp.alithemes.com/html/Evara
+ Theme URI: http://harnishtechnicalservice.com/html/Evara
  Description: eCommerce HTML + Admin Template
- Author: alithemes.com
- Author URI: http://alithemes.com
+ Author: harnishtechnicalservice.com
+ Author URI: http://harnishtechnicalservice.com
  Version: 1.0
  License: GNU General Public License v2 or later
  License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -1237,7 +1237,7 @@ textarea:focus {
 }
 
 .custom_select .select2-container {
-    max-width: 155px;
+    max-width: 100%;
 }
 
 .custom_select .nice-select {
@@ -1246,13 +1246,14 @@ textarea:focus {
 }
 
 .custom_select .select2-container--default .select2-selection--single {
-    border: 1px solid #e2e9e1;
-    border-radius: 4px;
-    height: 45px;
-    line-height: 45px;
+    border: 3px solid #0776c7;
+    border-radius: 4px 0px 0px 4px;
+    height: 48px;
+    line-height: 48px;
     padding-left: 20px;
     font-size: 13px;
     color: #1a1a1a;
+    border-right: none;
 }
 
 .custom_select .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -5771,7 +5772,7 @@ h6.post-title {
 }
 
 .header-middle-ptb-1 {
-    padding: 25px 0 0 0;
+    padding: 5px 0 0 0;
 }
 
 .cart-dropdown-wrap {
@@ -7205,7 +7206,7 @@ span.fi-rs-apps {
 }
 
 .main-menu.main-menu-lh-2>nav>ul>li {
-    line-height: 60px;
+    line-height: 45px;
 }
 
 .main-menu.main-menu-lh-3>nav>ul>li {
@@ -10296,6 +10297,54 @@ span.fi-rs-apps {
 
 .zoomWindow {
     z-index: 9999;
+}
+
+.banner-form .service{
+    margin-left: -5px;
+    z-index: 9;
+    border: 3px solid #0776c7;
+}
+
+.banner-form .search-btn{
+    min-width: 29%;
+    padding: 12px 10px;
+}
+
+.login-card{
+    background-color: #f0f7fc;
+}
+/* .login-card .widget-taber-content{
+    padding: 20px 20px 20px 0;
+} */
+
+.login-border-20{
+    border-radius: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .banner-form .custom_select .select2-container{
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+
+    .banner-form .service{
+        margin-left: 0px !important;
+    }
+    .banner-form .custom_select .select2-container--default .select2-selection--single{
+        border-right: 3px solid #0776c7;
+        border-radius: 4px;
+    }
+
+    .banner-form .service, .banner-form .service-select{
+        display: inline-block;
+        width: 70%;
+    }
+    .banner-form .search-btn{
+        display: inline-block;
+        width: 29%;
+        padding: 12px;
+        margin-top: -40px;
+    }
 }
 
 /*# sourceMappingURL=main.css.map */

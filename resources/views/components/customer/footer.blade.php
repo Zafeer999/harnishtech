@@ -9,9 +9,9 @@
                                 <img class="icon-email" src="{{ asset('customer/assets/imgs/theme/icons/icon-email.svg') }}" alt="">
                                 <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
                             </div>
-                            <div class="col my-4 my-md-0 des">
+                            {{-- <div class="col my-4 my-md-0 des">
                                 <h5 class="font-size-15 ml-4 mb-0">...and receive <strong>$25 coupon for first shopping.</strong></h5>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="col-lg-5">
@@ -31,7 +31,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index.html"><img src="{{ asset('customer/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
+                                <a href="index.html"><img src="{{ asset('customer/assets/imgs/theme/logo.png') }}" style="filter: invert(1);" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">
@@ -104,14 +104,14 @@
                 </div>
                 <div class="col-lg-6">
                     <p class="text-lg-end text-start font-sm text-muted mb-0">
-                        Designed by <a href="http://alithemes.com" target="_blank">Alithemes.com</a>. All rights reserved
+                        Designed by <a href="{{ env('APP_URL') }}" target="_blank">{{ env('APP_URL') }}</a>. All rights reserved
                     </p>
                 </div>
             </div>
         </div>
     </footer>
     <!-- Preloader Start -->
-    <div id="preloader-active">
+    {{-- <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
@@ -124,31 +124,35 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Vendor JS-->
 
     <script src="{{ asset('customer/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
-    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('customer/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
+    {{-- <script src="{{ asset('customer/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script> --}}
     <script src="{{ asset('customer/assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('customer/assets/js/plugins/slick.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/jquery.syotimer.min.js') }}"></script>
+    {{-- <script src="{{ asset('customer/assets/js/plugins/jquery.syotimer.min.js') }}"></script> --}}
     <script src="{{ asset('customer/assets/js/plugins/wow.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/jquery-ui.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/magnific-popup.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="{{ asset('customer/assets/js/plugins/jquery-ui.js') }}"></script> --}}
+    {{-- <script src="{{ asset('customer/assets/js/plugins/perfect-scrollbar.js') }}"></script> --}}
+    {{-- <script src="{{ asset('customer/assets/js/plugins/magnific-popup.js') }}"></script> --}}
     <script src="{{ asset('customer/assets/js/plugins/select2.min.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/waypoints.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/counterup.js') }}"></script>
+    {{-- <script src="{{ asset('customer/assets/js/plugins/waypoints.js') }}"></script> --}}
+    {{-- <script src="{{ asset('customer/assets/js/plugins/counterup.js') }}"></script> --}}
     <script src="{{ asset('customer/assets/js/plugins/jquery.countdown.min.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/images-loaded.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/isotope.js') }}"></script>
+    {{-- <script src="{{ asset('customer/assets/js/plugins/images-loaded.js') }}"></script> --}}
+    {{-- <script src="{{ asset('customer/assets/js/plugins/isotope.js') }}"></script> --}}
     <script src="{{ asset('customer/assets/js/plugins/scrollup.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/jquery.vticker-min.js') }}"></script>
+    {{-- <script src="{{ asset('customer/assets/js/plugins/jquery.vticker-min.js') }}"></script> --}}
     <script src="{{ asset('customer/assets/js/plugins/jquery.theia.sticky.js') }}"></script>
-    <script src="{{ asset('customer/assets/js/plugins/jquery.elevatezoom.js') }}"></script>
+    {{-- <script src="{{ asset('customer/assets/js/plugins/jquery.elevatezoom.js') }}"></script> --}}
     <script src="{{ asset('customer/assets/js/main.js?v=3.4') }}"></script>
     <script src="{{ asset('customer/assets/js/shop.js?v=3.4') }}"></script>
+    @if (!request()->routeIs('about') && !request()->routeIs('contact') && !request()->routeIs('customer.login') && !request()->routeIs('customer.signup'))
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsQRPtAFnaxHQqjf6lPbuqkIQPH2daBJc"></script>
+        <script src="{{ asset('customer/assets/js/geolocation.js') }}"></script>
+    @endif
 </div>

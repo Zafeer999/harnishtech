@@ -168,8 +168,10 @@
                     <div class="col-xl-4 col-lg-4">
                         <div class="header-info">
                             <ul>
-                                <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                                <li><i class="fi-rs-marker"></i><a href="page-contact.html">Bhiwandi, MH, IND</a></li>
+                                <li><i class="fi-rs-smartphone"></i> <a href="tel:9096969667">(+91) 9096969667</a></li>
+                                <li><i class="fi-rs-marker"></i><a href="#" id="geo_location">Thane, MH, IN</a></li>
+                                <input type="hidden" name="geo_city" value="">
+                                <input type="hidden" name="geo_pincode" value="">
                             </ul>
                         </div>
                     </div>
@@ -182,11 +184,12 @@
                                     <li>
                                         <a class="language-dropdown-active" href="#"> <i class="fa-regular fa-circle-user"></i> {{ ucwords($authUser->name) }} <i class="fi-rs-angle-small-down"></i></a>
                                         <ul class="language-dropdown">
-                                            <li><a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                                            <li><a href="#"><i class="fa-solid fa-chart-bar"></i> My Orders</a></li>
+                                            <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
                                         </ul>
                                     </li>
                                 @else
-                                    <li><i class="fi-rs-user"></i><a href="page-login-register.html">Log In / Sign Up</a></li>
+                                    <li><i class="fi-rs-user"></i><a href="{{ route('customer.login') }}">Log In / Sign Up</a></li>
                                 @endif
                             </ul>
                         </div>
@@ -198,7 +201,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="{{ asset('customer/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
+                        <a href="index.html"><img src="{{ asset('customer/assets/imgs/theme/logo.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
@@ -224,7 +227,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="{{ asset('customer/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
+                        <a href="index.html"><img src="{{ asset('customer/assets/imgs/theme/logo.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
@@ -254,7 +257,7 @@
                         </div>
                     </div>
                     <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-headset"></i><span>Helpline</span> 1900 - 888 </p>
+                        <p><i class="fi-rs-headset"></i><span>Helpline</span> <a href="tel:+919096969667">(+91) 9096969667</a> </p>
                     </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
@@ -279,7 +282,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}"><img src="{{ asset('customer/assets/imgs/theme/logo.svg') }}" alt="logo"></a>
+                    <a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}"><img src="{{ asset('customer/assets/imgs/theme/logo.png') }}" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -319,9 +322,13 @@
                             @if ($authUser)
                                 <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">{{ ucwords($authUser->name) }}</a>
                                     <ul class="dropdown">
-                                        <li><a href="#">Logout</a></li>
+                                        <li><a href="#">My Orders</a></li>
+                                        <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                     </ul>
                                 </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             @else
                                 <li class="menu-item"><a href="{{ route('customer.login') }}">Log In / Sign Up </a></li>
                             @endif
@@ -334,7 +341,7 @@
                         <a href="page-contact.html"> Bhiwandi, MH, IND </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="#">(+01) - 2345 - 6789 </a>
+                        <a href="tel:9096969667">(+91) 9096969667 </a>
                     </div>
                 </div>
             </div>

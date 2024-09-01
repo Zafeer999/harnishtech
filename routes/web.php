@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 // ####  FRONTEND ROUTES  ####
 Route::get('customer/login', [App\Http\Controllers\Customer\AuthController::class, 'showLogin'])->name('customer.login');
-Route::post('customer/signin', [App\Http\Controllers\Customer\AuthController::class, 'login'])->name('customer.signin');
+Route::post('customer/signin', [App\Http\Controllers\Customer\AuthController::class, 'signin'])->name('customer.signin');
+Route::get('customer/register', [App\Http\Controllers\Customer\AuthController::class, 'showRegister'])->name('customer.register');
+Route::post('customer/signup', [App\Http\Controllers\Customer\AuthController::class, 'signup'])->name('customer.signup');
+Route::get('customer/forget', [App\Http\Controllers\Customer\AuthController::class, 'showForget'])->name('customer.forget');
+// Route::post('customer/signup', [App\Http\Controllers\Customer\AuthController::class, 'signup'])->name('customer.submit');
 
 Route::get('/', [App\Http\Controllers\Customer\HomeController::class, 'index'])->name('/');
 Route::get('/home', [App\Http\Controllers\Customer\HomeController::class, 'index'])->name('home');

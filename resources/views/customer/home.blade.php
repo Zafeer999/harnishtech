@@ -10,9 +10,30 @@
                         <div class="row align-items-center slider-animated-1">
                             <div class="col-lg-5 col-md-6">
                                 <div class="hero-slider-content-2">
-                                    <h4 class="animated">Offer available </h4>
-                                    <h2 class="animated fw-900">For Fresh Bookings</h2>
-                                    <h1 class="animated fw-900 text-brand">On Every Services</h1>
+                                    <h4 class="animated">Offer Available </h4>
+                                    <h2 class="animated fw-900">For First Booking</h2>
+                                    <h2 class="animated fw-900 text-brand">On Every Services</h2>
+                                    <form class="form-subcriber banner-form d-md-flex wow fadeIn animated my-4">
+                                        <div class="custom_select">
+                                            <select class="form-control select-active" name="location_area" id="location_area">
+                                                <option value="">Change Location</option>
+                                                <option value="bhiwandi">Bhiwandi</option>
+                                                <option value="thane">Thane</option>
+                                                <option value="wada">Wada</option>
+                                                <option value="kalyan">Kalyan</option>
+                                            </select>
+                                        </div>
+                                        <div class="custom_select service-select">
+                                            <select class="form-control select-active service" name="service" id="service">
+                                                <option value="">Choose Service</option>
+                                                @foreach ($allServices as $allService)
+                                                    <option value="{{ strtolower($allService->name) }}">{{ $allService->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        {{-- <input type="text" class="service form-control bg-white font-small" placeholder="Type service name"> --}}
+                                        <button class="btn bg-dark text-white search-btn" type="submit">Book Now</button>
+                                    </form>
                                     <p class="animated">Save more with coupons & up to 70% off</p>
                                     <a class="animated btn btn-brush btn-brush-3" href="shop-product-right.html"> Book Now </a>
                                 </div>
@@ -25,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="single-hero-slider single-animation-wrap">
+                {{-- <div class="single-hero-slider single-animation-wrap">
                     <div class="container">
                         <div class="row align-items-center slider-animated-1">
                             <div class="col-lg-5 col-md-6">
@@ -44,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 {{-- <div class="single-hero-slider single-animation-wrap">
                     <div class="container">
                         <div class="row align-items-center slider-animated-1">

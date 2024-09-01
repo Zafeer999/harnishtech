@@ -342,21 +342,21 @@
     /*---------------------
         Price range
     --------------------- */
-    var sliderrange = $('#slider-range');
-    var amountprice = $('#amount');
-    $(function() {
-        sliderrange.slider({
-            range: true,
-            min: 16,
-            max: 400,
-            values: [0, 300],
-            slide: function(event, ui) {
-                amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
-        amountprice.val("$" + sliderrange.slider("values", 0) +
-            " - $" + sliderrange.slider("values", 1));
-    });
+    // var sliderrange = $('#slider-range');
+    // var amountprice = $('#amount');
+    // $(function() {
+    //     sliderrange.slider({
+    //         range: true,
+    //         min: 16,
+    //         max: 400,
+    //         values: [0, 300],
+    //         slide: function(event, ui) {
+    //             amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
+    //         }
+    //     });
+    //     amountprice.val("$" + sliderrange.slider("values", 0) +
+    //         " - $" + sliderrange.slider("values", 1));
+    // });
 
     /*-------------------------------
         Sort by active
@@ -443,12 +443,12 @@
     /*-----------------------
         Magnific Popup
     ------------------------*/
-    $('.img-popup').magnificPopup({
-        type: 'image',
-        gallery: {
-            enabled: true
-        }
-    });
+    // $('.img-popup').magnificPopup({
+    //     type: 'image',
+    //     gallery: {
+    //         enabled: true
+    //     }
+    // });
 
     $('.btn-close').on('click', function(e) {
         $('.zoomContainer').remove();
@@ -506,24 +506,24 @@
 	}
 
     /*---- CounterUp ----*/
-    $('.count').counterUp({
-        delay: 10,
-        time: 2000
-    });
+    // $('.count').counterUp({
+    //     delay: 10,
+    //     time: 2000
+    // });
 
     // Isotope active
-    $('.grid').imagesLoaded(function() {
-        // init Isotope
-        var $grid = $('.grid').isotope({
-            itemSelector: '.grid-item',
-            percentPosition: true,
-            layoutMode: 'masonry',
-            masonry: {
-                // use outer width of grid-sizer for columnWidth
-                columnWidth: '.grid-item',
-            }
-        });
-    });
+    // $('.grid').imagesLoaded(function() {
+    //     // init Isotope
+    //     var $grid = $('.grid').isotope({
+    //         itemSelector: '.grid-item',
+    //         percentPosition: true,
+    //         layoutMode: 'masonry',
+    //         masonry: {
+    //             // use outer width of grid-sizer for columnWidth
+    //             columnWidth: '.grid-item',
+    //         }
+    //     });
+    // });
 
     /*====== SidebarSearch ======*/
     function sidebarSearch() {
@@ -628,26 +628,26 @@
 
     /*-----Modal----*/
 
-    $('.modal').on('shown.bs.modal', function (e) {
-        $('.product-image-slider').slick('setPosition');
-        $('.slider-nav-thumbnails').slick('setPosition');
+    // $('.modal').on('shown.bs.modal', function (e) {
+    //     $('.product-image-slider').slick('setPosition');
+    //     $('.slider-nav-thumbnails').slick('setPosition');
 
-        $('.product-image-slider .slick-active img').elevateZoom({
-            zoomType: "inner",
-            cursor: "crosshair",
-            zoomWindowFadeIn: 500,
-            zoomWindowFadeOut: 750
-        });
-    })
+    //     $('.product-image-slider .slick-active img').elevateZoom({
+    //         zoomType: "inner",
+    //         cursor: "crosshair",
+    //         zoomWindowFadeIn: 500,
+    //         zoomWindowFadeOut: 750
+    //     });
+    // })
 
     /*--- VSticker ----*/
-    $('#news-flash').vTicker({
-        speed: 500,
-        pause: 3000,
-        animation: 'fade',
-        mousePause: false,
-        showItems: 1
-    });
+    // $('#news-flash').vTicker({
+    //     speed: 500,
+    //     pause: 3000,
+    //     animation: 'fade',
+    //     mousePause: false,
+    //     showItems: 1
+    // });
 
 })(jQuery);
 
