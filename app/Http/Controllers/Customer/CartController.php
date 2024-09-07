@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\City;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,11 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $cartItems = \Cart::getContent();
+        $cartTotal = Category::whereIn('id', $cartItems->pluck('id'))->sum('min_price');
+        $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
+        $cities = City::get();
 
-        return view('customer.carts')->with(['cartItems' => $cartItems]);
+        return view('customer.carts')->with(['cartItems' => $cartItems, 'cartTotal' => $cartTotal, 'serviceCharge' => $serviceCharge, 'cities' => $cities]);
     }
 
     public function store(Request $request)

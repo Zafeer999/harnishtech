@@ -88,6 +88,15 @@ function selectCityInDropdown(city) {
     if (matchingOption.length > 0) {
         selectElement.val(city).trigger('change');
     }
+
+    const selectCartElement = $('#address');
+    if(selectCartElement)
+    {
+        const matchingCartOption = selectCartElement.find(`option[value="${city}"]`);
+        if (matchingCartOption.length > 0) {
+            selectElement.val(city).trigger('change');
+        }
+    }
 }
 
 

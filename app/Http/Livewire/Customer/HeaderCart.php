@@ -17,7 +17,7 @@ class HeaderCart extends Component
     public function render()
     {
         $cartItems = \Cart::getContent();
-        $cartTotal = \Cart::getTotal();
+        $cartTotal = Category::whereIn('id', $cartItems->pluck('id'))->sum('min_price');
 
         $this->cartCount = count($cartItems) ?? 0;
 

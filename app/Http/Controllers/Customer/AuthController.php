@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -13,6 +14,9 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
+        if(Auth::check())
+            return redirect()->route('home');
+
         return view('customer.auth.signin');
     }
 
@@ -47,8 +51,7 @@ class AuthController extends Controller
             if(!auth()->attempt(['email' => $username, 'password' => $password], $remember_me))
                 return response()->json(['error2'=> 'Your entered credentials are invalid']);
 
-
-            return response()->json(['success'=> 'login successful', 'user_type'=> $$user->roles()->first()->name ]);
+            return response()->json(['success'=> 'login successful', 'user_type'=> $user->roles()->first()->name, 'previous_url' => $request->previous_url ]);
         }
         catch(\Exception $e)
         {

@@ -25,6 +25,8 @@ Route::get('/', [App\Http\Controllers\Customer\HomeController::class, 'index'])-
 Route::get('/home', [App\Http\Controllers\Customer\HomeController::class, 'index'])->name('home');
 Route::get('about', [App\Http\Controllers\Customer\HomeController::class, 'about'])->name('about');
 Route::get('contact', [App\Http\Controllers\Customer\HomeController::class, 'contact'])->name('contact');
+Route::get('privacy-policy', [App\Http\Controllers\Customer\HomeController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('terms-condition', [App\Http\Controllers\Customer\HomeController::class, 'termsCondition'])->name('terms-condition');
 
 
 
@@ -44,6 +46,7 @@ Route::get('checkouts', [App\Http\Controllers\Customer\CheckoutController::class
 
 
 
+Route::get('orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('orders.index');
 
 
 

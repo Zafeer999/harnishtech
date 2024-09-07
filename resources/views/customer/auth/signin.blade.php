@@ -19,6 +19,7 @@
                                         </div>
                                         <form method="post" id="loginForm">
                                             @csrf
+                                            <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
                                             <div class="form-group">
                                                 <label for="form-label">Email</label>
                                                 <input type="text" class="form-control" name="email" id="email" placeholder="Enter your email">
@@ -69,7 +70,7 @@
                     success: function(data) {
                         if (!data.error && !data.error2) {
                             if(data.user_type == 'User')
-                                window.location.href = '{{ route('home') }}';
+                                window.location.href = data.previous_url;
                             else
                                 window.location.href = '{{ route('dashboard') }}';
                         } else {

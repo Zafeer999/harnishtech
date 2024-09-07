@@ -1,6 +1,6 @@
 /***
- Theme Name: Evara
- Theme URI: http://harnishtechnicalservice.com/html/Evara
+ Theme Name: HarnishTech
+ Theme URI: http://harnishtechnicalservice.com
  Description: eCommerce HTML + Admin Template
  Author: harnishtechnicalservice.com
  Author URI: http://harnishtechnicalservice.com
@@ -1247,13 +1247,12 @@ textarea:focus {
 
 .custom_select .select2-container--default .select2-selection--single {
     border: 3px solid #0776c7;
-    border-radius: 4px 0px 0px 4px;
+    border-radius: 4px;
     height: 48px;
     line-height: 48px;
     padding-left: 20px;
     font-size: 13px;
     color: #1a1a1a;
-    border-right: none;
 }
 
 .custom_select .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -1980,6 +1979,7 @@ label {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     bottom: -15px;
+    opacity: 0;
 }
 
 .dot-style-1.dot-style-1-center ul {
@@ -1990,6 +1990,10 @@ label {
 
 .dot-style-1.dot-style-1-mt1 ul {
     margin-top: 30px;
+}
+
+.home-slider .hero-slider-1 .single-hero-slider{
+    background-color: #ddf1ff;
 }
 
 .slider-arrow {
@@ -5395,7 +5399,7 @@ h6.post-title {
     top: 100%;
     left: 0;
     z-index: 2;
-    min-width: 120px;
+    min-width: 160px;
     background: #fff;
     border-radius: 0 0 4px 4px;
     -webkit-transform: translateY(20px);
@@ -5415,7 +5419,7 @@ h6.post-title {
 .header-info>ul>li>ul li a {
     display: block;
     color: #696969;
-    padding: 5px;
+    padding: 10px 5px;
 }
 
 .header-info>ul>li>ul li a:hover {
@@ -10299,6 +10303,11 @@ span.fi-rs-apps {
     z-index: 9999;
 }
 
+/* .banner-form .custom_select .select2-container--default .select2-selection--single{
+    border-right: none !important;
+    border-radius: 4px 0px 0px 4px !important;
+} */
+
 .banner-form .service{
     margin-left: -5px;
     z-index: 9;
@@ -10319,6 +10328,10 @@ span.fi-rs-apps {
 
 .login-border-20{
     border-radius: 20px;
+}
+
+.cart-card{
+    background-color: #ddf1ff;
 }
 
 @media only screen and (max-width: 600px) {

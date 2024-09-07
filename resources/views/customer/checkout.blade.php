@@ -403,38 +403,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-1.jpg" alt="#"></td>
-                                            <td>
-                                                <h5><a href="shop-product-full.html">Yidarton Women Summer Blue</a></h5> <span class="product-qty">x 2</span>
-                                            </td>
-                                            <td>$180.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="image product-thumbnail"><img src="assets/imgs/shop/product-2-1.jpg" alt="#"></td>
-                                            <td>
-                                                <h5><a href="shop-product-full.html">LDB MOON Women Summe</a></h5> <span class="product-qty">x 1</span>
-                                            </td>
-                                            <td>$65.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="image product-thumbnail"><img src="assets/imgs/shop/product-3-1.jpg" alt="#"></td>
-                                            <td><i class="ti-check-box font-small text-muted mr-10"></i>
-                                                <h5><a href="shop-product-full.html">Women's Short Sleeve Loose</a></h5> <span class="product-qty">x 1</span>
-                                            </td>
-                                            <td>$35.00</td>
-                                        </tr>
+                                        @foreach ($cartItems as $cartItem)
+                                            <tr>
+                                                <td class="image product-thumbnail"><img src="{{ asset($cartItem->image) }}" alt="#"></td>
+                                                <td>
+                                                    <h5><a href="shop-product-full.html">{{ $cartItem->name }}</a></h5>
+                                                </td>
+                                                <td>₹{{ $cartItem->price }}</td>
+                                            </tr>
+                                        @endforeach
                                         <tr>
                                             <th>SubTotal</th>
-                                            <td class="product-subtotal" colspan="2">$280.00</td>
+                                            <td class="product-subtotal" colspan="2">₹{{ $cartTotal }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Shipping</th>
-                                            <td colspan="2"><em>Free Shipping</em></td>
+                                            <th>Service Charge</th>
+                                            @if ($serviceCharge)
+                                                <td colspan="2"><em>Free Visit</em></td>
+                                            @else
+                                                <td colspan="2"><em>₹{{ $serviceCharge }}</em></td>
+                                            @endif
                                         </tr>
                                         <tr>
                                             <th>Total</th>
-                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">$280.00</span></td>
+                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">₹{{ $cartTotal }}cls</span></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -84,7 +85,11 @@ class AuthController extends Controller
 
     public function logout()
     {
+        $authUserRole = Auth::user()->roles()->first();
         auth()->logout();
+
+        if($authUserRole->name == "User")
+            return redirect()->route('customer.login');
 
         return redirect()->route('login');
     }

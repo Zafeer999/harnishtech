@@ -17,10 +17,9 @@
                                         <div class="custom_select">
                                             <select class="form-control select-active" name="location_area" id="location_area">
                                                 <option value="">Change Location</option>
-                                                <option value="bhiwandi">Bhiwandi</option>
-                                                <option value="thane">Thane</option>
-                                                <option value="wada">Wada</option>
-                                                <option value="kalyan">Kalyan</option>
+                                                @foreach ($cities as $city)
+                                                    <option value="{{ strtolower($city->name) }}">{{ ucwords($city->name) }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="custom_select service-select">

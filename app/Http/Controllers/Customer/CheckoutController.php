@@ -17,6 +17,9 @@ class CheckoutController extends Controller
         if($cartItems->isEmpty())
             return redirect()->back();
 
-        return view('customer.checkout')->with(['authUser' => $authUser]);
+        $cartTotal = \Cart::getTotal();
+        $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
+
+        return view('customer.checkout')->with(['authUser' => $authUser, 'cartItems' => $cartItems, 'cartTotal' => $cartTotal, 'serviceCharge' => $serviceCharge]);
     }
 }
