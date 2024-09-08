@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             PermissionTableSeeder::class,
             DefaultLoginUserSeeder::class,
             UserSeeder::class,
+            UserAddressSeeder::class,
             ServiceBoySeeder::class,
             CategorySubcategorySeeder::class,
             BannerSeeder::class,
@@ -28,6 +29,8 @@ class DatabaseSeeder extends Seeder
             QuerySeeder::class,
             VisitorSeeder::class,
             TimeSlotSeeder::class,
+            OrderSeeder::class,
+            OrderImageSeeder::class,
         ]);
     }
 }

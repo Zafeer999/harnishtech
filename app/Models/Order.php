@@ -12,11 +12,11 @@ class Order extends Model
 
     const STATUS_PLACED = 0;
     const STATUS_ASSIGNED = 1;
-    const STATUS_CONFIRMED = 1;
-    const STATUS_PROCESSING = 1;
-    const STATUS_COMPLETED = 1;
-    const STATUS_CANCELLED = 1;
-    const STATUS_REFUNDED = 1;
+    const STATUS_CONFIRMED = 2;
+    const STATUS_PROCESSING = 3;
+    const STATUS_COMPLETED = 4;
+    const STATUS_CANCELLED = 5;
+    const STATUS_REFUNDED = 6;
     const IS_ASSIGNED = 1;
     const IS_UNASSIGNED = 0;
     const PAYMENT_TYPE_PREPAID = 0;
@@ -30,6 +30,13 @@ class Order extends Model
     protected $fillable = ['time_slot_id', 'user_id', 'category_id', 'sub_category_id', 'user_address_id', 'coupon_id',
     'order_no', 'amount', 'status', 'is_assigned', 'charges', 'gst_charge', 'total', 'scheduled_on', 'serviced_on',
     'order_note', 'payment_type', 'payment_method', 'payment_status', 'invoice_path'];
+
+    // protected $appends = ['order_status_text'];
+
+    public function getOrderStatusTextAttribute()
+    {
+        return [0 => 'placed', 1 => 'assigned', 2 => 'confirmed', 3 => 'processing', 4 => 'completed', 5 => 'cancelled', 6 => 'refunded'][$this->status];
+    }
 
     public function timeSlot()
     {
@@ -54,5 +61,10 @@ class Order extends Model
     public function coupon()
     {
         return $this->belongsTo(Coupon::class);
+    }
+
+    public function orderImage()
+    {
+        return $this->hasMany(OrderImage::class);
     }
 }

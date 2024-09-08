@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(ServiceBoy::class);
     }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

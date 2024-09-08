@@ -109,6 +109,15 @@
                         </li>
                     @endcan
 
+                    @can(['orders.view'])
+                        <li class="dropdown">
+                            <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.index') ? 'active-bg' : '' }}" href="{{ route('orders.index') }}">
+                                <i data-feather="package"></i><span>Orders</span>
+                            </a>
+                        </li>
+                    @endcan
+
+
 
                     @can('employees.view')
                         <li class="dropdown">
