@@ -133,13 +133,13 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <strong> {{ $timeslot->name }} </strong>
+                                                    <p> {{ $timeslot->name }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $timeslot->from_time }} </strong>
+                                                    <p> {{ $timeslot->from_time }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $timeslot->to_time }} </strong>
+                                                    <p> {{ $timeslot->to_time }} </p>
                                                 </td>
                                                 <td>
                                                     @can('timeslots.edit')

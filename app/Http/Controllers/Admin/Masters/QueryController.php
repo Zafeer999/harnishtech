@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\Admin\Masters;
 
-use App\Http\Controllers\Admin\Controller;
-use App\Models\Visitor;
+use App\Http\Controllers\Controller;
+use App\Models\Query;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class VisitorController extends Controller
+class QueryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $visitors = Visitor::latest()->get();
+        $queries = Query::latest()->get();
 
-        return view('admin.masters.visitors')->with(['visitors' => $visitors]);
+        return view('admin.masters.queries')->with(['queries' => $queries]);
     }
 
     /**
@@ -47,9 +47,9 @@ class VisitorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Visitor $visitor)
+    public function edit(string $id)
     {
-       //
+        //
     }
 
     /**
@@ -63,15 +63,15 @@ class VisitorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Visitor $visitor)
+    public function destroy(Query $query)
     {
         try {
             DB::beginTransaction();
-            $visitor->delete();
+            $query->delete();
             DB::commit();
-            return response()->json(['success' => 'Visitor deleted successfully!']);
+            return response()->json(['success' => 'Query deleted successfully!']);
         } catch (\Exception $e) {
-            return $this->respondWithAjax($e, 'deleting', 'Visitor');
+            return $this->respondWithAjax($e, 'deleting', 'Query');
         }
     }
 }

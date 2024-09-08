@@ -22,7 +22,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            @can('visitors.create')
+                            {{-- @can('visitors.create')
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="">
@@ -31,7 +31,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endcan
+                            @endcan --}}
                             <div class="table-responsive">
                                 <table class="table-bordered" id="datatable-tabletools">
                                     <thead>
@@ -53,9 +53,9 @@
                                                     <p><a href="{{ $visitor->url }}" target="_blank">{{ $visitor->url }}</a></p>
                                                 </td>
                                                 <td>
-                                                    @can('visitors.edit')
+                                                    {{-- @can('visitors.edit')
                                                         <button class="edit-element btn btn-primary px-2 py-1" title="Edit visitors" data-id="{{ $visitor->id }}"><i data-feather="edit"></i></button>
-                                                    @endcan
+                                                    @endcan --}}
                                                     @can('visitors.delete')
                                                         <button class="btn btn-dark rem-element px-2 py-1" title="Delete visitors" data-id="{{ $visitor->id }}"><i data-feather="trash-2"></i> </button>
                                                     @endcan

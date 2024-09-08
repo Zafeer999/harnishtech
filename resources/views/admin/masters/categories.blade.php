@@ -153,16 +153,16 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <strong> {{ $category->name }} </strong>
+                                                    <p> {{ $category->name }} </p>
                                                 </td>
                                                 <td>
-                                                    <strong> {{ $category->min_price }} </strong>
+                                                    <p> {{ $category->min_price }} </p>
                                                 </td>
                                                 <td>
                                                     <img src="{{ $category->image }}" style="max-width: 100px; max-height: 100px;" alt="category_img">
                                                 </td>
                                                 <td>
-                                                    <strong> {!! Str::limit(htmlspecialchars_decode($category->description), 80) !!} </strong>
+                                                    <p> {!! Str::limit(htmlspecialchars_decode($category->description), 80) !!} </p>
                                                 </td>
                                                 <td>
                                                     @can('categories.edit')

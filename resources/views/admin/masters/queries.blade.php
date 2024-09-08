@@ -1,98 +1,13 @@
 <x-admin.admin-layout>
-    <x-slot name="title">{{ auth()->user()->tenant_name }} - Cities</x-slot>
+    <x-slot name="title">{{ auth()->user()->tenant_name }} - Queries</x-slot>
 
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-header">
 
-                `
-                <!-- Add Form -->
-                <div class="row" id="addContainer" style="display:none;">
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <form class="theme-form" name="addForm" id="addForm" enctype="multipart/form-data">
-                                @csrf
-
-                                <div class="card-body">
-                                    <div class="mb-3 row">
-                                        <div class="col-md-4">
-                                            <label class="col-form-label" for="name">City Name <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="name" name="name" type="text" placeholder="Enter City Name">
-                                            <span class="text-danger error-text name_err"></span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="col-form-label" for="pincode">Pincode <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="pincode" name="pincode" type="text" pattern="\d{6}" minlength="6" maxlength="6" placeholder="Enter 6 Digit Pincode">
-                                            <span class="text-danger error-text pincode_err"></span>
-                                        </div>
-                                        {{-- <div class="col-md-4">
-                                            <label class="col-form-label" for="pincode">Status <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="pincode" name="pincode" type="text" pattern="\d{6}" minlength="6" maxlength="6" placeholder="Enter 6 Digit Pincode">
-                                            <span class="text-danger error-text pincode_err"></span>
-                                        </div> --}}
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary" id="addSubmit">Submit</button>
-                                    <button type="reset" class="btn btn-warning">Reset</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                {{-- Edit Form --}}
-                <div class="row" id="editContainer" style="display:none;">
-                    <div class="col">
-                        <form class="form-horizontal form-bordered" method="post" id="editForm">
-                            @csrf
-                            <section class="card">
-                                <header class="card-header">
-                                    <h4 class="card-title">Edit Cities</h4>
-                                </header>
-
-                                <div class="card-body py-2">
-
-                                    <input type="hidden" id="edit_model_id" name="edit_model_id" value="">
-
-                                    <div class="mb-3 row">
-                                        <div class="mb-3 row">
-                                            <div class="col-md-4">
-                                                <label class="col-form-label" for="name">City Name <span class="text-danger">*</span></label>
-                                                <input class="form-control" id="name" name="name" type="text" placeholder="Enter City Name">
-                                                <span class="text-danger error-text name_err"></span>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="col-form-label" for="pincode">Pincode <span class="text-danger">*</span></label>
-                                                <input class="form-control" id="pincode" name="pincode" type="text" pattern="\d{6}" minlength="6" maxlength="6" placeholder="Enter 6 Digit Pincode">
-                                                <span class="text-danger error-text pincode_err"></span>
-                                            </div>
-                                            {{-- <div class="col-md-4">
-                                                <label class="col-form-label" for="to_time">From Time <span class="text-danger"></span></label>
-                                                <input class="form-control" id="to_time" name="to_time" type="time" placeholder="Select To Time">
-                                                <span class="text-danger error-text to_time_err"></span>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary" id="editSubmit">Submit</button>
-                                    <button type="reset" class="btn btn-warning">Reset</button>
-                                </div>
-                            </section>
-                        </form>
-                    </div>
-                </div>
-
-
                 <div class="row">
                     <div class="col-sm-12">
-
-                        <h3>Cities</h3>
-
+                        <h3>Queries</h3>
                     </div>
                     <div class="col-sm-6">
                     </div>
@@ -107,7 +22,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            @can('cities.create')
+                            {{-- @can('queries.create')
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="">
@@ -116,33 +31,41 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endcan
+                            @endcan --}}
                             <div class="table-responsive">
                                 <table class="table-bordered" id="datatable-tabletools">
                                     <thead>
                                         <tr>
                                             <th>Sr No</th>
-                                            <th>City Name</th>
-                                            <th>Pincode</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile No.</th>
+                                            <th>Message</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($cities as $city)
+                                        @foreach ($queries as $query)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <p> {{ $city->name }} </p>
+                                                    <p> {{ $query->name }} </p>
                                                 </td>
                                                 <td>
-                                                    <p> {{ $city->pincode }} </p>
+                                                    <p> {{ $query->email }} </p>
                                                 </td>
                                                 <td>
-                                                    @can('cities.edit')
-                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit city" data-id="{{ $city->id }}"><i data-feather="edit"></i></button>
-                                                    @endcan
-                                                    @can('cities.delete')
-                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete city" data-id="{{ $city->id }}"><i data-feather="trash-2"></i> </button>
+                                                    <p> {{ $query->mobile }} </p>
+                                                </td>
+                                                <td>
+                                                    <p> {{ Str::limit($query->message, 80) }} </p>
+                                                </td>
+                                                <td>
+                                                    {{-- @can('queries.edit')
+                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit queries" data-id="{{ $query->id }}"><i data-feather="edit"></i></button>
+                                                    @endcan --}}
+                                                    @can('queries.delete')
+                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete queries" data-id="{{ $query->id }}"><i data-feather="trash-2"></i> </button>
                                                     @endcan
                                                 </td>
                                             </tr>
@@ -171,7 +94,7 @@
 
         var formdata = new FormData(this);
         $.ajax({
-            url: '{{ route('cities.store') }}',
+            url: '{{ route('queries.store') }}',
             type: 'POST',
             data: formdata,
             contentType: false,
@@ -181,7 +104,7 @@
                 if (!data.error2)
                     swal("Successful!", data.success, "success")
                     .then((action) => {
-                        window.location.href = '{{ route('cities.index') }}';
+                        window.location.href = '{{ route('queries.index') }}';
                     });
                 else
                     swal("Error!", data.error2, "error");
@@ -217,7 +140,7 @@
             .then((justTransfer) => {
                 if (justTransfer) {
                     var model_id = $(this).attr("data-id");
-                    var url = "{{ route('cities.destroy', ':model_id') }}";
+                    var url = "{{ route('queries.destroy', ':model_id') }}";
 
                     $.ajax({
                         url: url.replace(':model_id', model_id),
@@ -256,7 +179,7 @@
         e.preventDefault();
         $(".edit-element").show();
         var model_id = $(this).attr("data-id");
-        var url = "{{ route('cities.edit', ':model_id') }}";
+        var url = "{{ route('queries.edit', ':model_id') }}";
 
         $.ajax({
             url: url.replace(':model_id', model_id),
@@ -268,10 +191,15 @@
                 editFormBehaviour();
 
                 if (!data.error) {
-                    $("#editForm input[name='edit_model_id']").val(model_id);
-                    $("#editForm input[name='city_id']").val(data.city.id);
-                    $("#editForm input[name='name']").val(data.city.name);
-                    $("#editForm input[name='pincode']").val(data.city.pincode);
+                    $("#editForm [name='edit_model_id']").val(model_id);
+                    $("#editForm [name='ctasection_id']").val(data.query.id);
+                    $("#editForm #edit_image_section").html(data.crtImgHtml);
+                    $("#editForm [name='small_text']").val(data.query.small_text);
+                    $("#editForm [name='main_text']").val(data.query.main_text);
+                    $("#editForm [name='button_text']").val(data.query.button_text);
+                    $("#editForm [name='button_color']").val(data.query.button_color);
+                    $("#editForm [name='button_link']").val(data.query.button_link);
+                    $("#editForm [name='status']").val(data.query.status);
                 } else {
                     alert(data.error);
                 }
@@ -293,7 +221,7 @@
             var formdata = new FormData(this);
             formdata.append('_method', 'PUT');
             var model_id = $('#edit_model_id').val();
-            var url = "{{ route('cities.update', ':model_id') }}";
+            var url = "{{ route('queries.update', ':model_id') }}";
             //
             $.ajax({
                 url: url.replace(':model_id', model_id),
@@ -306,7 +234,7 @@
                     if (!data.error2)
                         swal("Successful!", data.success, "success")
                         .then((action) => {
-                            window.location.href = '{{ route('cities.index') }}';
+                            window.location.href = '{{ route('queries.index') }}';
                         });
                     else
                         swal("Error!", data.error2, "error");

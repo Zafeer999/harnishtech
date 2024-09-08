@@ -89,6 +89,7 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
     Route::resource('cta_sections', App\Http\Controllers\Admin\Masters\CtaSectionController::class);
     Route::resource('service_boys', App\Http\Controllers\Admin\Masters\ServiceBoyController::class);
     Route::resource('visitors', App\Http\Controllers\Admin\Masters\VisitorController::class);
+    Route::resource('queries', App\Http\Controllers\Admin\Masters\QueryController::class);
 
 
     Route::any('upload-ck-image', [App\Http\Controllers\Admin\MiscController::class, 'upload-ck-image'])->name('upload-ck-image');

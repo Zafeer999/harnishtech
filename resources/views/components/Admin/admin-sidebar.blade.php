@@ -101,6 +101,14 @@
                         </li>
                     @endcan
 
+                    @can(['queries.view'])
+                        <li class="dropdown">
+                            <a class="nav-link menu-title link-nav {{ request()->routeIs('queries.index') ? 'active-bg' : '' }}" href="{{ route('queries.index') }}">
+                                <i data-feather="message-square"></i><span>Queries</span>
+                            </a>
+                        </li>
+                    @endcan
+
 
                     @can('employees.view')
                         <li class="dropdown">

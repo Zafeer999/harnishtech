@@ -10,6 +10,7 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class RoleController extends Controller
 {
@@ -18,7 +19,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::orderBy('id', 'DESC')->where('tenant_id', Auth::user()->tenant_id)->get();
+        $roles = ModelsRole::orderBy('id', 'DESC')->get();
+        // $roles = ModelsRole::orderBy('id', 'DESC')->where('tenant_id', Auth::user()->tenant_id)->get();
         $permissions = Permission::get();
 
         return view('admin.roles', compact('roles', 'permissions'));
