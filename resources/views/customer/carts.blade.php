@@ -86,7 +86,7 @@
                                             <div class="form-row row">
                                                 <div class="form-group col-lg-6">
                                                     <div class="custom_select">
-                                                        <select class="form-control select-active">
+                                                        <select class="form-control select-active" name="cart_location" id="cart_location">
                                                             <option value="">Change Location</option>
                                                             @foreach ($cities as $city)
                                                                 <option value="{{ strtolower($city->name) }}">{{ ucwords($city->name) }}</option>
@@ -95,7 +95,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-6">
-                                                    <input required="required" placeholder="PostCode / ZIP" name="name" type="text">
+                                                    <input required="required" placeholder="Pincode" name="pincode" type="number">
                                                 </div>
                                             </div>
                                             <div class="form-row">

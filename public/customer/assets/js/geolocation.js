@@ -42,7 +42,7 @@ function showPosition(position) {
 
                 document.getElementById("geo_location").innerText = `${city}, ${state}, ${country}`;
 
-                selectCityInDropdown(city);
+                selectCityInDropdown(city, postalCode);
             } else {
                 console.warn("No results found");
             }
@@ -75,12 +75,12 @@ function fallbackToIP() {
             if (inputField && postalCode.trim() !== '')
                 inputField.value = postalCode;
 
-            selectCityInDropdown(city);
+            selectCityInDropdown(city, postalCode);
         })
         .catch(error => console.error("Error fetching IP info:", error));
 }
 
-function selectCityInDropdown(city) {
+function selectCityInDropdown(city, postalCode) {
     city = city.toLowerCase();
     const selectElement = $('#location_area');
     const matchingOption = selectElement.find(`option[value="${city}"]`);
@@ -89,13 +89,14 @@ function selectCityInDropdown(city) {
         selectElement.val(city).trigger('change');
     }
 
-    const selectCartElement = $('#address');
+    const selectCartElement = $('#cart_location');
     if(selectCartElement)
     {
         const matchingCartOption = selectCartElement.find(`option[value="${city}"]`);
         if (matchingCartOption.length > 0) {
             selectElement.val(city).trigger('change');
         }
+        document.getElementById('pincode').value = postalCode;
     }
 }
 
