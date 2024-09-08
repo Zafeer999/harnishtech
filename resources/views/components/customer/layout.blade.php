@@ -50,6 +50,7 @@
     </main>
 
     <x-customer.footer />
+
 </body>
 @livewireScripts()
 

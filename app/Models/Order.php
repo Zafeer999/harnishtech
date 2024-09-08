@@ -55,4 +55,20 @@ class Order extends Model
     {
         return $this->belongsTo(Coupon::class);
     }
+
+    public static function generateOrderNo()
+    {
+        $randNumbr = '';
+        $i = 1;
+        do{
+            $orderCount = Order::count()+$i;
+            $orderCount = $i > 1 ? ($orderCount+1) : $orderCount;
+            preg_match_all('/[A-Z]/', 'HTS', $matches);
+            $randNumbr = implode('', $matches[0]).sprintf("%04d", Order::count());
+            $i++;
+        }
+        while(self::where('order_no', $randNumbr)->exists());
+
+        return $randNumbr;
+    }
 }

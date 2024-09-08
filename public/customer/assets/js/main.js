@@ -25,12 +25,12 @@
     });
 
     /*------ ScrollUp -------- */
-    $.scrollUp({
-        scrollText: '<i class="fi-rs-arrow-up"></i>',
-        easingType: 'linear',
-        scrollSpeed: 900,
-        animation: 'fade'
-    });
+    // $.scrollUp({
+    //     scrollText: '<i class="fi-rs-arrow-up"></i>',
+    //     easingType: 'linear',
+    //     scrollSpeed: 900,
+    //     animation: 'fade'
+    // });
 
     /*------ Wow Active ----*/
     new WOW().init();

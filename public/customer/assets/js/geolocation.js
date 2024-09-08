@@ -94,7 +94,7 @@ function selectCityInDropdown(city, postalCode) {
     {
         const matchingCartOption = selectCartElement.find(`option[value="${city}"]`);
         if (matchingCartOption.length > 0) {
-            selectElement.val(city).trigger('change');
+            selectCartElement.val(city).trigger('change');
         }
         document.getElementById('pincode').value = postalCode;
     }

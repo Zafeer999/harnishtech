@@ -1993,7 +1993,7 @@ label {
 }
 
 .home-slider .hero-slider-1 .single-hero-slider{
-    background-color: #ddf1ff;
+    background-color: #f9f9ff;
 }
 
 .slider-arrow {
@@ -2007,7 +2007,7 @@ label {
 
 .slider-arrow .slider-btn {
     cursor: pointer;
-    background: #ddf1ff;
+    background: #f9f9ff;
     width: 45px;
     height: 45px;
     position: absolute;
@@ -3002,7 +3002,7 @@ table .product-thumbnail img {
     max-height: 70%;
     max-width: 45%;
     min-width: 300px;
-    background-color: #ddf1ff;
+    background-color: #f9f9ff;
     z-index: -1;
     max-height: 1200px;
 }
@@ -3605,7 +3605,7 @@ table .product-thumbnail img {
     height: 40px;
     line-height: 44px;
     border-radius: 50px;
-    background-color: #ddf1ff;
+    background-color: #f9f9ff;
     text-align: center;
     margin-right: 3px;
     position: relative;
@@ -6600,7 +6600,7 @@ h6.post-title {
 .header-style-1 .header-top-ptb-1 {
     padding: 13px 0;
     border-bottom: 3px solid #0776c7;
-    background-color: #ddf1ff;
+    background-color: #f9f9ff;
     background-image: none;
 }
 
@@ -6754,7 +6754,7 @@ h6.post-title {
 }
 
 .header-style-4 .header-top-ptb-1 {
-    background-color: #ddf1ff;
+    background-color: #f9f9ff;
     background-image: none;
     padding: 15px 0;
     border: 0;
@@ -10331,7 +10331,36 @@ span.fi-rs-apps {
 }
 
 .cart-card{
-    background-color: #ddf1ff;
+    background-color: #f9f9ff;
+}
+
+.whatsapp-icon-area{
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    padding: 10px 13px 8px 13px;
+    cursor: pointer;
+}
+.whatsapp-icon-area i{
+    font-size: 40px;
+}
+.whatsapp-icon-area a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.address-card{
+    border-radius: 12px;
+    background-color: #fff2e5;
+    margin: 8px 0px;
+    padding: 10px;
+}
+
+.input-border{
+    border: 3px solid #0776c7 !important;
 }
 
 @media only screen and (max-width: 600px) {

@@ -1,30 +1,5 @@
 <div>
     <footer class="main">
-        <section class="newsletter p-30 text-white wow fadeIn animated">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-7 mb-md-3 mb-lg-0">
-                        <div class="row align-items-center">
-                            <div class="col flex-horizontal-center">
-                                <img class="icon-email" src="{{ asset('customer/assets/imgs/theme/icons/icon-email.svg') }}" alt="">
-                                <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
-                            </div>
-                            {{-- <div class="col my-4 my-md-0 des">
-                                <h5 class="font-size-15 ml-4 mb-0">...and receive <strong>$25 coupon for first shopping.</strong></h5>
-                            </div> --}}
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <!-- Subscribe Form -->
-                        <form class="form-subcriber d-flex wow fadeIn animated">
-                            <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
-                            <button class="btn bg-dark text-white" type="submit">Subscribe</button>
-                        </form>
-                        <!-- End Subscribe Form -->
-                    </div>
-                </div>
-            </div>
-        </section>
         <section class="section-padding footer-mid">
             <div class="container pt-15 pb-20">
                 <div class="row">
@@ -66,7 +41,7 @@
                     </div>
                     <div class="col-lg-4">
                         <h5 class="widget-title wow fadeIn animated">Follow Us</h5>
-                        <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
+                        <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0" style="filter: invert(1)">
                             <a href="#"><img src="{{ asset('customer/assets/imgs/theme/icons/icon-facebook.svg') }}" alt=""></a>
                             <a href="#"><img src="{{ asset('customer/assets/imgs/theme/icons/icon-twitter.svg') }}" alt=""></a>
                             <a href="#"><img src="{{ asset('customer/assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
@@ -96,21 +71,14 @@
             </div>
         </div>
     </footer>
-    <!-- Preloader Start -->
-    {{-- <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="text-center">
-                    <h5 class="mb-10">Now Loading</h5>
-                    <div class="loader">
-                        <div class="bar bar1"></div>
-                        <div class="bar bar2"></div>
-                        <div class="bar bar3"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+
+
+    <div class="whatsapp-icon-area">
+        <a class="whatsapp-icon" href="https://wa.me/+919096969667" target="_blank">
+        <a class="whatsapp-icon" href="https://api.whatsapp.com/send?phone=+919096969667&text=Hey%21%20I%20want%20to%20book%20a%20service%2C%20can%20you%20please%20help%20me" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
 
     <!-- Vendor JS-->
 
@@ -131,7 +99,7 @@
     <script src="{{ asset('customer/assets/js/plugins/jquery.countdown.min.js') }}"></script>
     {{-- <script src="{{ asset('customer/assets/js/plugins/images-loaded.js') }}"></script> --}}
     {{-- <script src="{{ asset('customer/assets/js/plugins/isotope.js') }}"></script> --}}
-    <script src="{{ asset('customer/assets/js/plugins/scrollup.js') }}"></script>
+    {{-- <script src="{{ asset('customer/assets/js/plugins/scrollup.js') }}"></script> --}}
     {{-- <script src="{{ asset('customer/assets/js/plugins/jquery.vticker-min.js') }}"></script> --}}
     <script src="{{ asset('customer/assets/js/plugins/jquery.theia.sticky.js') }}"></script>
     {{-- <script src="{{ asset('customer/assets/js/plugins/jquery.elevatezoom.js') }}"></script> --}}

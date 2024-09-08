@@ -32,7 +32,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-    <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-4.css') }}" media="screen">
+    @if ($userType->name == 'Admin')
+        <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-4.css') }}" media="screen">
+    @else
+        <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-2.css') }}" media="screen">
+    @endif
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweetalert2.css') }}">

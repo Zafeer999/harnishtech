@@ -4,6 +4,7 @@ namespace App\View\Components\Admin;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class AdminLayout extends Component
@@ -21,6 +22,8 @@ class AdminLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.Admin.admin-layout');
+        $userType = Auth::user()->roles()->first();
+
+        return view('components.Admin.admin-layout')->with(['userType' => $userType]);
     }
 }

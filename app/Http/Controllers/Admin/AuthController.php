@@ -39,40 +39,22 @@ class AuthController extends Controller
 
             try
             {
-                if($request->device_type == 'mobile')
-                {
-                    $user = User::where('emp_code', $username)->first();
-                    if(!$user)
-                        return response()->json(['error2'=> 'No employee found with this employee id']);
-
-                    if($user->is_app_registered == '0')
-                        return response()->json(['error2'=> 'You are not registered, please register first']);
-
-                    if(!auth()->guard('employee')->attempt(['emp_code' => $username, 'password' => $password], $remember_me))
-                        return response()->json(['error2'=> 'Your entered credentials are invalid']);
-
-                    return response()->json(['success'=> 'login successful', 'user_type'=> 'employee' ]);
-                }
                 $user = User::where('email', $username)->orWhere('mobile', $username)->first();
 
                 if(!$user)
                     return response()->json(['error2'=> 'No user found with this username']);
 
-                if($user->active_status == '0' && !$user->roles)
-                    return response()->json(['error2'=> 'You are not authorized to login, contact HOD']);
+                $userType = $user->roles()->first()->name;
+                if($userType == 'User')
+                    return response()->json(['error2'=> 'You are not authorized to login']);
 
                 if(!auth()->attempt(['email' => $username, 'password' => $password], $remember_me))
                     return response()->json(['error2'=> 'Your entered credentials are invalid']);
-
-                $userType = '';
-                if( $user->hasRole(['Maker']) )
-                    $userType = 'maker';
 
                 return response()->json(['success'=> 'login successful', 'user_type'=> $userType ]);
             }
             catch(\Exception $e)
             {
-                DB::rollBack();
                 Log::info("login error:". $e);
                 return response()->json(['error2'=> 'Something went wrong while validating your credentials!']);
             }

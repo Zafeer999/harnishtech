@@ -43,6 +43,7 @@ Route::post('carts', [App\Http\Controllers\Customer\CartController::class, 'stor
 
 
 Route::get('checkouts', [App\Http\Controllers\Customer\CheckoutController::class, 'index'])->name('checkouts.index');
+Route::post('place-order', [App\Http\Controllers\Customer\CartController::class, 'placeOrder'])->name('place-order');
 
 
 

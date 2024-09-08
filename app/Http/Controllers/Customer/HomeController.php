@@ -17,7 +17,7 @@ class HomeController extends Controller
         $allServices = $categories;
         $categories = $categories->where('category_id', null);
         $featuredServices = Category::with('category')->where(['is_featured' => 1, 'level' => 2])->get();
-        $cities = City::get();
+        $cities = City::selectRaw('MIN(id) as id, name')->groupBy('name')->get();
 
         return view('customer.home')->with(['categories' => $categories, 'allServices' => $allServices, 'colorsArray' => $colorsArray, 'featuredServices' => $featuredServices, 'cities' => $cities]);
     }

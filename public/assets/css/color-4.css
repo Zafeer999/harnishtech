@@ -30969,7 +30969,21 @@ span.twitter-typeahead .tt-suggestion {
     padding-left: 0;
     padding-right: 0 !important; } }
 
+.page-wrapper.compact-wrapper .page-body-wrapper header.main-nav .main-navbar .nav-menu>li .nav-submenu li a.active::before {
+    position: absolute;
+    color: #665ed5;
+    width: 8px;
+    height: 8px;
+    left: 15px;
+    content: '';
+    display: block;
+    z-index: 9999999999;
+    background-color: #665ed5;
+    border-radius: 15px;
+    top: 15px;
+}
 /**=====================
     60. RTL CSS Ends
 ==========================**/
 /*# sourceMappingURL=color-4.css.map */
+
