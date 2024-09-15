@@ -66,7 +66,7 @@ class DefaultLoginUserSeeder extends Seeder
 
 
         $serviceBoyRole = Role::updateOrCreate(['name' => 'Service Boy']);
-        $permissions = Permission::pluck('id', 'id')->all();
+        $permissions = Permission::whereIn('id', [53, 54])->pluck('id', 'id');
         $serviceBoyRole->syncPermissions($permissions);
 
         $serviceBoy = User::updateOrCreate([

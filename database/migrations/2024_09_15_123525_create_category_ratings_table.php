@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,11 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ratings', function (Blueprint $table) {
+        Schema::create('category_ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_boy_user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unsignedTinyInteger('rating');
+            $table->unsignedTinyInteger('rating')->comment("from 1 to 5");
             $table->string('heading');
             $table->text('review');
             $table->timestamps();
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ratings');
+        Schema::dropIfExists('category_ratings');
     }
 };

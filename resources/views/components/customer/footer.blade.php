@@ -103,9 +103,9 @@
     {{-- <script src="{{ asset('customer/assets/js/plugins/jquery.vticker-min.js') }}"></script> --}}
     <script src="{{ asset('customer/assets/js/plugins/jquery.theia.sticky.js') }}"></script>
     {{-- <script src="{{ asset('customer/assets/js/plugins/jquery.elevatezoom.js') }}"></script> --}}
-    <script src="{{ asset('customer/assets/js/main.js?v=3.4') }}"></script>
-    <script src="{{ asset('customer/assets/js/shop.js?v=3.4') }}"></script>
-    @if (!request()->routeIs('about') && !request()->routeIs('contact') && !request()->routeIs('customer.login') && !request()->routeIs('customer.signup'))
+    <script src="{{ asset('customer/assets/js/main.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/shop.js') }}"></script>
+    @if (!request()->routeIs('about') && !request()->routeIs('contact') && !request()->routeIs('customer.login') && !request()->routeIs('customer.register'))
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsQRPtAFnaxHQqjf6lPbuqkIQPH2daBJc"></script>
         <script src="{{ asset('customer/assets/js/geolocation.js') }}"></script>
     @endif

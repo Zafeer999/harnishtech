@@ -118,7 +118,6 @@
                     @endcan
 
 
-
                     @can('employees.view')
                         <li class="dropdown">
                             <a class="nav-link menu-title" href="javascript:void(0)">
@@ -136,105 +135,18 @@
                     @endcan
 
 
-                    @can('manual-attendance.view')
+                    {{-- Service Boy Navigations --}}
+                    @can('sb-dashboard.view')
                         <li class="dropdown">
-                            <a class="nav-link menu-title link-nav {{ request()->routeIs('punches.index') ? 'active-bg' : '' }}" href="{{ route('punches.index') }}">
-                                <i data-feather="cpu"></i><span>Manual Attendance</span>
-                            </a>
+                            <a class="nav-link menu-title link-nav {{ request()->routeIs('dashboard') ? 'active-bg' : '' }}" href="{{ route('dashboard') }}">
+                                <i data-feather="home"></i><span>Dashboard</span></a>
                         </li>
                     @endcan
-
-
-                    @can('apply-leaves.view')
+                    @can(['sb-orders.view'])
                         <li class="dropdown">
-                            <a class="nav-link menu-title" href="javascript:void(0)">
-                                <i data-feather="file-text"></i><span>Apply Leaves</span>
+                            <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.index') ? 'active-bg' : '' }}" href="{{ route('orders.index') }}">
+                                <i data-feather="package"></i><span>Orders</span>
                             </a>
-                            <ul class="nav-submenu menu-content">
-                                <li><a href="{{ route('leave-requests.index', ['page_type' => 'full_day']) }}">Full Day </a></li>
-                                <li><a href="{{ route('leave-requests.index', ['page_type' => 'half_day']) }}">Half Day </a></li>
-                                <li><a href="{{ route('leave-requests.index', ['page_type' => 'outpost']) }}">Outpost </a></li>
-                            </ul>
-                        </li>
-                    @endcan
-
-
-                    @can('apply-medical-leaves.view')
-                        <li class="dropdown">
-                            <a class="nav-link menu-title" href="javascript:void(0)">
-                                <i data-feather="file-text"></i><span>Apply Medical Leaves</span>
-                            </a>
-                            <ul class="nav-submenu menu-content">
-                                <li><a href="{{ route('leave-requests.active-medical-leave') }}">Unapproved Leaves </a></li>
-                                <li><a href="{{ route('leave-requests.completed-medical-leave') }}">Approved Leaves </a></li>
-                            </ul>
-                        </li>
-                    @endcan
-
-
-                    @can('leave-application.pending')
-                        <li class="dropdown">
-                            <a class="nav-link menu-title" href="javascript:void(0)">
-                                <i data-feather="file-text"></i><span>Leave Applications</span>
-                            </a>
-                            <ul class="nav-submenu menu-content">
-                                @can('leave-application.pending')
-                                    <li><a href="{{ route('leave-requests.application', ['page_type' => 'pending']) }}">Pending </a></li>
-                                @endcan
-                                @can('leave-application.approve')
-                                    <li><a href="{{ route('leave-requests.application', ['page_type' => 'approved']) }}">Approved </a></li>
-                                @endcan
-                                @can('leave-application.reject')
-                                    <li><a href="{{ route('leave-requests.application', ['page_type' => 'rejected']) }}">Rejected </a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcan
-
-
-                    @can('roster.view')
-                        <li class="dropdown">
-                            <a class="nav-link menu-title link-nav {{ request()->routeIs('rosters.index') ? 'active-bg' : '' }}" href="{{ route('rosters.index') }}">
-                                <i data-feather="repeat"></i><span>Employee Roster</span>
-                            </a>
-                        </li>
-                    @endcan
-
-
-                    @can('reports.month-wise')
-                        <li class="dropdown">
-                            <a class="nav-link menu-title" href="javascript:void(0)">
-                                <i data-feather="layout"></i><span>Reports</span>
-                            </a>
-                            <ul class="nav-submenu menu-content">
-                                @can('reports.month-wise')
-                                    <li><a href="{{ route('reports.index') }}">Month wise report </a></li>
-                                @endcan
-                                @can('reports.muster')
-                                    <li><a href="{{ route('reports.muster') }}">Muster report </a></li>
-                                @endcan
-                                @can('reports.muster')
-                                    <li><a href="{{ route('reports.leave-report') }}">Leave report </a></li>
-                                @endcan
-                                @can('reports.month-wise')
-                                    <li><a href="{{ route('dashboard.device-log-report') }}">Daily attendance </a></li>
-                                @endcan
-                                @can('reports.month-wise')
-                                    <li><a href="{{ route('dashboard.todays-present-report') }}">Today's present </a></li>
-                                @endcan
-                                @can('reports.month-wise')
-                                    <li><a href="{{ route('dashboard.todays-absent-report') }}">Today's absent </a></li>
-                                @endcan
-                                @can('reports.month-wise')
-                                    <li><a href="{{ route('dashboard.department-wise-report') }}">Department wise </a></li>
-                                @endcan
-                                @can('reports.month-wise')
-                                    <li><a href="{{ route('dashboard.todays-leave-bifurcation') }}">Leave bifurcation </a></li>
-                                @endcan
-                                @can('reports.month-wise')
-                                    <li><a href="{{ route('dashboard.employee-wise-report') }}">Emp wise report </a></li>
-                                @endcan
-                            </ul>
                         </li>
                     @endcan
 

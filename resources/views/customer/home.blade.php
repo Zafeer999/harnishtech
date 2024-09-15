@@ -130,7 +130,7 @@
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html">
+                                                <a href="{{ route('services.show', $featuredService->id) }}">
                                                     <img class="default-img" src="{{ asset($featuredService->image) }}" alt="">
                                                     <img class="hover-img" src="{{ asset($featuredService->image) }}" alt="">
                                                 </a>
@@ -142,12 +142,12 @@
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href="shop-grid-right.html">{{ $featuredService->category?->name }}</a>
+                                                <a href="{{ route('services.show', $featuredService->id) }}">{{ $featuredService->category?->name }}</a>
                                             </div>
-                                            <h2><a href="shop-product-right.html">{{ $featuredService->name }}</a></h2>
-                                            <div class="rating-result" title="90%">
+                                            <h2><a href="{{ route('services.show', $featuredService->id) }}">{{ $featuredService->name }}</a></h2>
+                                            <div class="rating-result" title="{{ ((number_format($featuredService->avg_rating, 1) / 5) * 100) }}%">
                                                 <span>
-                                                    <span>4.5</span>
+                                                    <span>{{ number_format($featuredService->avg_rating, 1) }}</span>
                                                 </span>
                                             </div>
                                             <div class="product-price">

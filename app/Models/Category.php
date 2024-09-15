@@ -37,4 +37,9 @@ class Category extends BaseModel
     {
         return $this->hasMany(Order::class);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(CategoryRating::class);
+    }
 }

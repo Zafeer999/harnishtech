@@ -30,7 +30,7 @@ class CartController extends Controller
         $cities = City::selectRaw('MIN(id) as id, name')->groupBy('name')->get();
         $slots = TimeSlot::get();
 
-        $userAddresses = $authUser ? UserAddress::where('user_id', $authUser->id)->get() : [];
+        $userAddresses = $authUser ? UserAddress::where('user_id', $authUser->id)->get() : collect([]);
 
         return view('customer.carts')->with(['cartItems' => $cartItems, 'cartTotal' => $cartTotal, 'serviceCharge' => $serviceCharge, 'cities' => $cities, 'slots' => $slots, 'userAddresses' => $userAddresses]);
     }
@@ -56,7 +56,7 @@ class CartController extends Controller
     {
         $authUser = Auth::user();
         if(!$authUser)
-            return response()->json(['error2'=> 'Please login to continue', 'redirect' => route('customer.login')]);
+            return response()->json(['redirect' => route('customer.login')]);
 
         $userRole = $authUser->roles()->first();
         if($userRole->name != 'User')

@@ -10,7 +10,7 @@ class Rating extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['service_boy_user_id', 'user_id', 'rating', 'review'];
+    protected $fillable = ['service_boy_user_id', 'user_id', 'rating', 'heading', 'review'];
 
     public function serviceBoy()
     {

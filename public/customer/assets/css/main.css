@@ -735,7 +735,7 @@ body {
     font-size: 14px;
     line-height: 24px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 h1,
@@ -776,7 +776,7 @@ h6 {
 
 p {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 24px;
     margin-bottom: 5px;
     color: #465b52;
@@ -1329,9 +1329,13 @@ textarea:focus {
     color: unset;
 }
 
-.select2-container {
-    max-width: 135px;
+.header-right .select2.select2-container{
+    width: 160px !important;
 }
+
+/* .select2-container {
+    max-width: 135px;
+} */
 
 /*contact form*/
 .contact-from-area .contact-form-style button {
@@ -4674,7 +4678,7 @@ table .product-thumbnail img {
 .detail-gallery .slick-slider {
     background-color: #000;
     margin-bottom: 30px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .detail-gallery .slick-slider img {
@@ -5381,7 +5385,7 @@ h6.post-title {
 
 .header-info>ul>li a {
     color: #1a1a1a;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .header-info>ul>li a i {
@@ -10361,6 +10365,10 @@ span.fi-rs-apps {
 
 .input-border{
     border: 3px solid #0776c7 !important;
+}
+
+.detail-gallery .product-image-slider .slick-list{
+    border-radius: 20px;
 }
 
 @media only screen and (max-width: 600px) {
