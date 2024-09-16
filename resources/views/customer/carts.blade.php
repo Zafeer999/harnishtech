@@ -62,9 +62,9 @@
                                 </div>
                                 <div class="cart-action text-end">
                                     @if ($cartItems->isNotEmpty())
-                                        <a class="btn mr-10"><i class="fi-rs-cross-small mr-10"></i>Clear Cart</a>
+                                        <a class="btn mr-10 clearAllCart"><i class="fi-rs-cross-small mr-10"></i>Clear Cart</a>
                                     @endif
-                                    <a class="btn "><i class="fi-rs-shopping-bag mr-10"></i>Add Services</a>
+                                    <a class="btn " href="{{ route('services') }}"><i class="fi-rs-shopping-bag mr-10"></i>Add Services</a>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="custome-radio">
-                                                        <input class="form-check-input" required="" type="radio" name="payment_option" value="2" id="exampleRadios5" checked="">
+                                                        <input class="form-check-input" required="" type="radio" name="payment_option" value="2" id="exampleRadios5" >
                                                         <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Online</label>
                                                         <div class="form-group collapse in" id="paypal">
                                                             <p class="text-muted mt-5">Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>

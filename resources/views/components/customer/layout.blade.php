@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{{ env('APP_NAME') }} | {{ $title ?? "On demand services for Plumber, Electrician, technician, AC repair, etc." }}</title>
+    <title>{{ env('APP_NAME') }} | {{ $title ?? 'On demand services for Plumber, Electrician, technician, AC repair, etc.' }}</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="On demand services for Plumber, Electrician, technician, AC repair, etc.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="{{ $title ?? "On demand services for Plumber, Electrician, technician, AC repair, etc." }}">
+    <meta property="og:title" content="{{ $title ?? 'On demand services for Plumber, Electrician, technician, AC repair, etc.' }}">
     <meta property="og:type" content="">
     <meta property="og:url" content="">
     <meta property="og:image" content="{{ asset('customer/assets/imgs/theme/favicon.svg') }}">
@@ -23,19 +23,21 @@
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/66dc7681ea492f34bc0f0a00/1i76itr4a';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
+    var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+    (function() {
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/66dc7681ea492f34bc0f0a00/1i76itr4a';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
     })();
 </script>
 <!--End of Tawk.to Script-->
 <style>
-    .widget-visible iframe{
+    .widget-visible iframe {
         left: 20px !important;
         right: auto !important;
     }
@@ -63,7 +65,6 @@
 
         $(".addToCart").prop('disabled', true);
         let serviceId = $(this).attr('data-cart-id');
-        let url = "{{ route('carts.store') }}";
         Livewire.emitTo('customer.header-cart', 'cartdata', {
             'service_id': serviceId
         });
@@ -81,32 +82,89 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         });
-        // $.ajax({
-        //     url: url,
-        //     type: 'POST',
-        //     data: {
-        //         '_token': "{{ csrf_token() }}",
-        //         'service_id': serviceId,
-        //     },
-        //     success: function(data)
-        //     {
-        //         $(".addToCart").prop('disabled', false);
-        //         if (!data.error2)
-        //             Livewire.emitTo('customer.header-cart', 'cartdata', {'service_id': serviceId});
-        //         else
-        //             swal("Error!", data.error2, "error");
-        //     },
-        //     statusCode: {
-        //         422: function(responseObject, textStatus, jqXHR) {
-        //             $(".addToCart").prop('disabled', false);
-        //         },
-        //         500: function(responseObject, textStatus, errorThrown) {
-        //             $(".addToCart").prop('disabled', false);
-        //             swal("Error occured!", "Something went wrong please try again", "error");
-        //         }
-        //     }
-        // });
     })
+
+
+    // Clear individual cart item
+    $('body').on('click', '.removeFromCart', function(e) {
+        e.preventDefault();
+
+        $(".removeFromCart").prop('disabled', true);
+        let serviceId = $(this).attr('data-cart-remove-id');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to remove this cart item?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.emitTo('customer.header-cart', 'removeCartData', {
+                    'service_id': serviceId
+                });
+                $(".removeFromCart").prop('disabled', false);
+                window.location.reload();
+
+                Swal.fire({
+                    toast: true,
+                    icon: 'success',
+                    title: 'Service removed from your cart',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+            }
+        });
+
+    });
+
+
+    // Clear all cart
+    $('body').on('click', '.clearAllCart', function(e) {
+        e.preventDefault();
+        $(".clearAllCart").prop('disabled', true);
+
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to remove all items from your cart?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.emitTo('customer.header-cart', 'removeCartData');
+                $(".clearAllCart").prop('disabled', false);
+                window.location.reload();
+
+                Swal.fire({
+                    toast: true,
+                    icon: 'success',
+                    title: 'All items from yor cart is removed',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+            }
+        });
+
+    });
+
 </script>
 
 </html>

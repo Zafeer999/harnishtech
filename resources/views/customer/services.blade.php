@@ -59,7 +59,7 @@
                                                 <a href="{{ route('services.show', $service->id) }}">{{ $service->category?->name }}</a>
                                             </div>
                                             <h2><a href="{{ route('services.show', $service->id) }}">{{ $service->name }}</a></h2>
-                                            <div class="rating-result" title="{{ ((number_format($featuredService->avg_rating, 1) / 5) * 100) }}%">
+                                            <div class="rating-result" title="{{ ((number_format($service->avg_rating, 1) / 5) * 100) }}%">
                                                 <span>
                                                     <span>4.5</span>
                                                 </span>

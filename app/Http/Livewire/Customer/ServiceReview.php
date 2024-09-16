@@ -30,24 +30,24 @@ class ServiceReview extends Component
                                 'reviews as two' => fn($q) => $q->where('rating', 2),
                                 'reviews as one' => fn($q) => $q->where('rating', 1),
                             ])
-                            ->withSum('reviews as five_sum', 'rating', fn($q) => $q->where('rating', 5))
-                            ->withSum('reviews as four_sum', 'rating', fn($q) => $q->where('rating', 4))
-                            ->withSum('reviews as three_sum', 'rating', fn($q) => $q->where('rating', 3))
-                            ->withSum('reviews as two_sum', 'rating', fn($q) => $q->where('rating', 2))
-                            ->withSum('reviews as one_sum', 'rating', fn($q) => $q->where('rating', 1))
                             ->first();
 
         $authUser = Auth::user();
         $myReview = $authUser ? CategoryRating::where(['category_id' => $this->category_id, 'user_id' => Auth::user()->id])->first() : null;
+        if($myReview)
+        {
+            $this->heading = $myReview->heading;
+            $this->review = $myReview->review;
+        }
 
         $serviceReviews = $service->reviews;
         $totalReviews = ($service->five+$service->four+$service->three+$service->two+$service->one);
 
-        $fivePercent = $service->five ? round($service->five_sum/$service->five*100) : 0;
-        $fourPercent = $service->four ? round($service->four_sum/$service->four*100) : 0;
-        $threePercent = $service->three ? round($service->three_sum/$service->three*100) : 0;
-        $twoPercent = $service->two ? round($service->two_sum/$service->two*100) : 0;
-        $onePercent = $service->one ? round($service->one_sum/$service->one*100) : 0;
+        $fivePercent = $service->five ? round(($service->five/$totalReviews)*100) : 0;
+        $fourPercent = $service->four ? round(($service->four/$totalReviews)*100) : 0;
+        $threePercent = $service->three ? round(($service->three/$totalReviews)*100) : 0;
+        $twoPercent = $service->two ? round(($service->two/$totalReviews)*100) : 0;
+        $onePercent = $service->one ? round(($service->one/$totalReviews)*100) : 0;
 
         return view('livewire.customer.service-review')->with([
             'serviceReviews' => $serviceReviews,
@@ -67,7 +67,7 @@ class ServiceReview extends Component
     {
         $this->resetErrorBag();
         $this->validate([
-            'rating'=>'required|numeric|max:5',
+            'rating'=>'required',
             'heading'=>'required|string|max:150',
             'review'=>'required|string|max:1000'
         ],
@@ -108,10 +108,10 @@ class ServiceReview extends Component
                     'updated_at' => $timestamp
                 ]);
 
-                session()->flash('review_message', 'Review posted successfully !');
                 $this->rating = '';
                 $this->review = '';
                 $this->heading = '';
+                session()->flash('review_message', 'Review posted successfully !');
             }
             catch(\Exception $e)
             {

@@ -87,31 +87,31 @@
         <div class="feedback">
             <span class="rating">
                 @auth
-                    @if ($myReview->isNotEmpty())
-                        <span class="rating-number">{{ round($service->avg_rating, 1) }}</span>
-                        <input type="radio" name="rating1" id="rating-5" readonly disabled {{ $myReview->rating > 5 ? 'checked' : '' }}> <label for="rating-5"></label>
-                        <input type="radio" name="rating1" id="rating-4" readonly disabled {{ $myReview->rating > 4 ? 'checked' : '' }}> <label for="rating-4"></label>
-                        <input type="radio" name="rating1" id="rating-3" readonly disabled {{ $myReview->rating > 3 ? 'checked' : '' }}> <label for="rating-3"></label>
-                        <input type="radio" name="rating1" id="rating-2" readonly disabled {{ $myReview->rating > 2 ? 'checked' : '' }}> <label for="rating-2"></label>
-                        <input type="radio" name="rating1" id="rating-1" readonly disabled {{ $myReview->rating > 1 ? 'checked' : '' }}> <label for="rating-1"></label>
+                    @if ($myReview)
+                        <span class="rating-number">{{ $myReview->rating }}</span>
+                        <input type="radio" value="5" name="rating1" id="rating-5" readonly disabled {{ $myReview->rating == 5 ? 'checked' : '' }}> <label for="rating-5"></label>
+                        <input type="radio" value="4" name="rating1" id="rating-4" readonly disabled {{ $myReview->rating == 4 ? 'checked' : '' }}> <label for="rating-4"></label>
+                        <input type="radio" value="3" name="rating1" id="rating-3" readonly disabled {{ $myReview->rating == 3 ? 'checked' : '' }}> <label for="rating-3"></label>
+                        <input type="radio" value="2" name="rating1" id="rating-2" readonly disabled {{ $myReview->rating == 2 ? 'checked' : '' }}> <label for="rating-2"></label>
+                        <input type="radio" value="1" name="rating1" id="rating-1" readonly disabled {{ $myReview->rating == 1 ? 'checked' : '' }}> <label for="rating-1"></label>
                     @else
-                        <input type="radio" name="rating1" id="rating-5" wire:model.defer="rating" checked> <label for="rating-5"></label>
-                        <input type="radio" name="rating1" id="rating-4" wire:model.defer="rating"> <label for="rating-4"></label>
-                        <input type="radio" name="rating1" id="rating-3" wire:model.defer="rating"> <label for="rating-3"></label>
-                        <input type="radio" name="rating1" id="rating-2" wire:model.defer="rating"> <label for="rating-2"></label>
-                        <input type="radio" name="rating1" id="rating-1" wire:model.defer="rating"> <label for="rating-1"></label>
+                        <input type="radio" value="5" id="rating-5" name="rating" wire:model.defer="rating" checked> <label for="rating-5"></label>
+                        <input type="radio" value="4" id="rating-4" name="rating" wire:model.defer="rating"> <label for="rating-4"></label>
+                        <input type="radio" value="3" id="rating-3" name="rating" wire:model.defer="rating"> <label for="rating-3"></label>
+                        <input type="radio" value="2" id="rating-2" name="rating" wire:model.defer="rating"> <label for="rating-2"></label>
+                        <input type="radio" value="1" id="rating-1" name="rating" wire:model.defer="rating"> <label for="rating-1"></label>
                     @endif
                 @endauth
                 @guest
-                    <input type="radio" name="rating1" id="rating-5" wire:model.defer="rating" checked> <label for="rating-5"></label>
-                    <input type="radio" name="rating1" id="rating-4" wire:model.defer="rating"> <label for="rating-4"></label>
-                    <input type="radio" name="rating1" id="rating-3" wire:model.defer="rating"> <label for="rating-3"></label>
-                    <input type="radio" name="rating1" id="rating-2" wire:model.defer="rating"> <label for="rating-2"></label>
-                    <input type="radio" name="rating1" id="rating-1" wire:model.defer="rating"> <label for="rating-1"></label>
+                    <input type="radio" value="5" name="rating1" id="rating-5" wire:model.defer="rating" checked> <label for="rating-5"></label>
+                    <input type="radio" value="4" name="rating1" id="rating-4" wire:model.defer="rating"> <label for="rating-4"></label>
+                    <input type="radio" value="3" name="rating1" id="rating-3" wire:model.defer="rating"> <label for="rating-3"></label>
+                    <input type="radio" value="2" name="rating1" id="rating-2" wire:model.defer="rating"> <label for="rating-2"></label>
+                    <input type="radio" value="1" name="rating1" id="rating-1" wire:model.defer="rating"> <label for="rating-1"></label>
                 @endguest
             </span>
         </div>
-        @error('rating1')
+        @error('rating')
             <span class="invalid-feedback" style="display:block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -122,7 +122,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input class="form-control @error('heading') is-invalid @enderror" name="heading" id="heading" wire:model.defer="heading" type="text" placeholder="Reveiw Heading">
+                            <input class="form-control @error('heading') is-invalid @enderror" name="heading" id="heading" wire:model.defer="heading" {{ $myReview ? 'disabled' : '' }} type="text" placeholder="Reveiw Heading">
                             @error('heading')
                                 <span class="invalid-feedback" style="display:block" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -132,7 +132,7 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <textarea class="form-control w-100 @error('review') is-invalid @enderror" name="review" id="review" wire:model.defer="review" cols="30" rows="9" placeholder="Write Review"></textarea>
+                            <textarea class="form-control w-100 @error('review') is-invalid @enderror" name="review" id="review" wire:model.defer="review" {{ $myReview ? 'disabled' : '' }} cols="30" rows="9" placeholder="Write Review"></textarea>
                             @error('review')
                                 <span class="invalid-feedback" style="display:block" role="alert">
                                     <strong>{{ $message }}</strong>

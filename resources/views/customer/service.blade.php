@@ -1,7 +1,5 @@
 <x-customer.layout>
 
-    @livewireStyles()
-
     <main class="main">
 
 
@@ -91,7 +89,5 @@
 
 
     </main>
-
-    @livewireScripts()
 
 </x-customer.layout>

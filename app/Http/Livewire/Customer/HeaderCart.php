@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class HeaderCart extends Component
 {
-    protected $listeners = ['cartdata'=> 'useCartData'];
+    protected $listeners = ['cartdata'=> 'useCartData', 'removeCartData' => 'useRemoveCartData'];
 
     // PROP VARIABLES
     public $data = [];
@@ -40,5 +40,22 @@ class HeaderCart extends Component
         }
 
         $this->data['service_id'] = $data['service_id'];
+    }
+
+    public function useRemoveCartData($data = null)
+    {
+        if(!$data)
+        {
+            \Cart::clear();
+        }
+        else
+        {
+            $service = Category::find($data['service_id']);
+
+            if($service)
+            {
+                \Cart::remove($data['service_id']);
+            }
+        }
     }
 }

@@ -78,6 +78,9 @@ class CartController extends Controller
             if($request->full_address && (!$request->city || !$request->pincode))
                 return response()->json(['error2'=> 'City name and Pincode is required.']);
 
+            if(!$request->slot)
+                return response()->json(['error2'=> 'Please select any time slot for the service.']);
+
 
             $cartItems = \Cart::getContent();
             $cartServices = Category::whereIn('id', $cartItems->pluck('id'))->get();
@@ -95,7 +98,8 @@ class CartController extends Controller
                     'order_no' => Order::generateOrderNo(),
                     'amount' => $cartService->min_price,
                     'status' => 1,
-                    'is_assigned' => 1,
+                    // 'is_assigned' => 1,
+                    'service_charge' => $serviceCharge,
                     'total' => $cartService->min_price,
                     'scheduled_on' => Carbon::tomorrow()->toDateString(),
                     'payment_type' => 1,
@@ -103,11 +107,7 @@ class CartController extends Controller
                     'payment_status' => 0,
                 ]);
 
-                AssignedOrder::create([
-                    'service_boy_user_id' => 3,
-                    'order_id' => $order->id,
-                    'time_slot_id' => $request->slot,
-                ]);
+                $this->assignOrder($order, $request);
             }
 
             \Cart::clear();
@@ -121,5 +121,17 @@ class CartController extends Controller
             Log::info($e);
             return response()->json(['error2'=> 'Please type full address or select any previous address to place order']);
         }
+    }
+
+
+    protected function assignOrder($order, $request)
+    {
+        // $checkServiceBoy = AssignedOrder::where('')->
+        AssignedOrder::create([
+            'service_boy_user_id' => 3,
+            'order_id' => $order->id,
+            'time_slot_id' => $request->slot,
+            'pincode' => $request->geo_pincode,
+        ]);
     }
 }
