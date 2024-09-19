@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Http\Controllers\Controller;
+// use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
+use App\Http\Requests\Admin\Masters\StoreContactRequest;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Query;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -20,5 +26,25 @@ class HomeController extends Controller
         $cities = City::selectRaw('MIN(id) as id, name')->groupBy('name')->get();
 
         return view('customer.home')->with(['categories' => $categories, 'allServices' => $allServices, 'colorsArray' => $colorsArray, 'featuredServices' => $featuredServices, 'cities' => $cities]);
+    }
+
+    public function contact()
+    {
+        return view('customer.contact');
+    }
+
+    public function contactStore(StoreContactRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            $input = $request->validated();
+            Log::info('Input Data', [$input]);
+            Query::create(Arr::only($input, Query::getFillables()));
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Message sent successfully!');
+        } catch (\Exception $e) {
+            return $this->respondWithAjax($e, 'storing', 'contact');
+        }
     }
 }
