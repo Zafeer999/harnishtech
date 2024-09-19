@@ -38,7 +38,6 @@ class HomeController extends Controller
         try {
             DB::beginTransaction();
             $input = $request->validated();
-            Log::info('Input Data', [$input]);
             Query::create(Arr::only($input, Query::getFillables()));
             DB::commit();
 
