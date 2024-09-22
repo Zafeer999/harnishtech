@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Customer;
 
 use App\Models\Category;
 use Livewire\Component;
+use Darryldecode\Cart\CartCollection;
 
 class HeaderCart extends Component
 {

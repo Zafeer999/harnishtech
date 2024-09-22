@@ -40,6 +40,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Mobile No.</th>
+                                            <th>Subject</th>
                                             <th>Message</th>
                                             <th>Action</th>
                                         </tr>
@@ -56,6 +57,9 @@
                                                 </td>
                                                 <td>
                                                     <p> {{ $query->mobile }} </p>
+                                                </td>
+                                                <td>
+                                                    <p> {{ Str::limit($query->subject, 70) }} </p>
                                                 </td>
                                                 <td>
                                                     <p> {{ Str::limit($query->message, 80) }} </p>

@@ -25,6 +25,7 @@ Route::get('/', [App\Http\Controllers\Customer\HomeController::class, 'index'])-
 Route::get('/home', [App\Http\Controllers\Customer\HomeController::class, 'index'])->name('home');
 Route::get('about', [App\Http\Controllers\Customer\HomeController::class, 'about'])->name('about');
 Route::get('contact', [App\Http\Controllers\Customer\HomeController::class, 'contact'])->name('contact');
+Route::post('contact', [App\Http\Controllers\Customer\HomeController::class, 'contactStore'])->name('contact.store');
 Route::get('privacy-policy', [App\Http\Controllers\Customer\HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('terms-condition', [App\Http\Controllers\Customer\HomeController::class, 'termsCondition'])->name('terms-condition');
 

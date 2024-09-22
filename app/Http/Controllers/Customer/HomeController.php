@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Http\Controllers\Controller;
+// use App\Http\Controllers\Controller;
 use App\Models\BannerSlider;
+use App\Http\Controllers\Admin\Controller;
+use App\Http\Requests\Admin\Masters\StoreContactRequest;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Query;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -23,5 +29,24 @@ class HomeController extends Controller
         $bannerSliders = BannerSlider::where('status', 1)->get();
 
         return view('customer.home')->with(['categories' => $categories, 'allServices' => $allServices, 'colorsArray' => $colorsArray, 'featuredServices' => $featuredServices, 'cities' => $cities, 'bannerSliders' => $bannerSliders]);
+    }
+
+    public function contact()
+    {
+        return view('customer.contact');
+    }
+
+    public function contactStore(StoreContactRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            $input = $request->validated();
+            Query::create(Arr::only($input, Query::getFillables()));
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Message sent successfully!');
+        } catch (\Exception $e) {
+            return $this->respondWithAjax($e, 'storing', 'contact');
+        }
     }
 }
