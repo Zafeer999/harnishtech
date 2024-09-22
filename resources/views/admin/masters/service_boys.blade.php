@@ -207,6 +207,8 @@
                                             <th>Rating</th>
                                             <th>Address</th>
                                             <th>Status</th>
+                                            <th>Assign Category</th>
+                                            <th>Assign Pincodes</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -246,6 +248,12 @@
 
                                                     {{-- <strong>{{ $serviceBoy->serviceBoy->status == 1 ? 'Active' : 'Inactive' ?? null }}</strong> --}}
                                                 </td>
+                                                <td style="min-width:130px">
+                                                    <button class="assign-services btn btn-warning px-2 py-1" title="Assign Services" data-id="{{ $serviceBoy->id }}"><i data-feather="award"></i>Add Service</button>
+                                                </td>
+                                                <td style="min-width:130px">
+                                                    <button class="assign-pincodes btn btn-success px-2 py-1" title="Assign Pincodes" data-id="{{ $serviceBoy->id }}"><i data-feather="check-circle"></i>Add Pincode</button>
+                                                </td>
                                                 <td>
                                                     @can('service_boys.edit')
                                                         <button class="edit-element btn btn-primary px-2 py-1" title="Edit service_boys" data-id="{{ $serviceBoy->id }}"><i data-feather="edit"></i></button>
@@ -269,8 +277,279 @@
         <!-- Container-fluid Ends -->
     </div>
 
+    {{-- Assign Services Modal --}}
+    <div class="modal fade" id="assign-services-modal" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <form action="" id="assignServicesForm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Assign Services</h5>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <input type="hidden" id="service_user_id" name="service_user_id" value="">
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label" for="name">Service Boy Name : </label>
+                            <div class="col-sm-9">
+                                <h6 id="role_user_name" class="pt-2"></h6>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label" for="name">Services : </label>
+                            <div class="col-sm-9">
+                                <select class="js-example-basic-single" id="services" multiple name="services[]">
+                                    <option value="">--Select Services--</option>
+                                </select>
+                                <span class="text-danger error-text services_err"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" id="assignServicesSubmit" type="submit">Change</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    {{-- Assign Pincodes Modal --}}
+    <div class="modal fade" id="assign-pincodes-modal" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <form action="" id="assignPincodesForm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Assign Pincodes</h5>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <input type="hidden" id="pincode_user_id" name="pincode_user_id" value="">
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label" for="name">Pincode Boy Name : </label>
+                            <div class="col-sm-9">
+                                <h6 id="pincode_user_name" class="pt-2"></h6>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label" for="name">Pincodes : </label>
+                            <div class="col-sm-9">
+                                <select class="js-example-basic-single" id="pincodes" multiple name="pincodes[]">
+                                    <option value="">--Select Pincodes--</option>
+                                </select>
+                                <span class="text-danger error-text pincodes_err"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" id="assignPincodesSubmit" type="submit">Change</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 </x-admin.admin-layout>
+
+<!-- Open Assign Services Modal-->
+<script>
+    $("#datatable-tabletools").on("click", ".assign-services", function(e) {
+        e.preventDefault();
+        var model_id = $(this).attr("data-id");
+        var url = "{{ route('service_boys.show', ':model_id') }}";
+        $('#services_user_id').val(model_id);
+
+        $.ajax({
+            url: url.replace(':model_id', model_id),
+            type: 'GET',
+            data: {
+                '_token': "{{ csrf_token() }}"
+            },
+            success: function(data, textStatus, jqXHR) {
+                if (!data.error) {
+                    $("#assignServicesForm input[name='service_user_id']").val(model_id);
+                    $("#assignServicesForm #services").html(data.servicesHtml);
+                    $("#assignServicesForm #role_user_name").text(data.user.name);
+                    $('#assign-services-modal').modal('show');
+                } else {
+                    swal("Error!", data.error, "error");
+                }
+            },
+            error: function(error, jqXHR, textStatus, errorThrown) {
+                swal("Error!", "Some thing went wrong", "error");
+            },
+        });
+    });
+</script>
+
+
+<!-- Update Service Boy Services -->
+<script>
+    $("#assignServicesForm").submit(function(e) {
+        e.preventDefault();
+        $("#assignServicesSubmit").prop('disabled', true);
+
+        var formdata = new FormData(this);
+        formdata.append('_method', 'PUT');
+        var model_id = $('#service_user_id').val();
+        var url = "{{ route('service_boys.update', ':model_id') }}";
+
+        $.ajax({
+            url: url.replace(':model_id', model_id),
+            type: 'POST',
+            data: formdata,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $("#assignServicesSubmit").prop('disabled', false);
+                if (!data.error2)
+                    swal("Successful!", data.success, "success")
+                    .then((action) => {
+                        $("#assign-services-modal").modal('hide');
+                    });
+                else
+                    swal("Error!", data.error2, "error");
+            },
+            statusCode: {
+                422: function(responseObject, textStatus, jqXHR) {
+                    $("#assignServicesSubmit").prop('disabled', false);
+                    resetErrors();
+                    printErrMsg(responseObject.responseJSON.errors);
+                },
+                500: function(responseObject, textStatus, errorThrown) {
+                    $("#assignServicesSubmit").prop('disabled', false);
+                    swal("Error occured!", "Something went wrong please try again", "error");
+                }
+            }
+        });
+
+        function resetErrors() {
+            var form = document.getElementById('assignServicesForm');
+            var data = new FormData(form);
+            for (var [key, value] of data) {
+                $('.' + key + '_err').text('');
+                $('#' + key).removeClass('is-invalid');
+                $('#' + key).addClass('is-valid');
+            }
+        }
+
+        function printErrMsg(msg) {
+            $.each(msg, function(key, value) {
+                $('.' + key + '_err').text(value);
+                $('#' + key).addClass('is-invalid');
+                $('#' + key).removeClass('is-valid');
+            });
+        }
+
+    });
+</script>
+
+
+<!-- Open Assign Pincodes Modal-->
+<script>
+    $("#datatable-tabletools").on("click", ".assign-pincodes", function(e) {
+        e.preventDefault();
+        var model_id = $(this).attr("data-id");
+        var url = "{{ route('service_boys.edit', ':model_id') }}";
+        $('#pincodes_user_id').val(model_id);
+
+        $.ajax({
+            url: url.replace(':model_id', model_id),
+            type: 'GET',
+            data: {
+                '_token': "{{ csrf_token() }}"
+            },
+            success: function(data, textStatus, jqXHR) {
+                if (!data.error) {
+                    $("#assignPincodesForm input[name='pincode_user_id']").val(model_id);
+                    $("#assignPincodesForm #pincodes").html(data.pincodesHtml);
+                    $("#assignPincodesForm #pincode_user_name").text(data.user.name);
+                    $('#assign-pincodes-modal').modal('show');
+                } else {
+                    swal("Error!", data.error, "error");
+                }
+            },
+            error: function(error, jqXHR, textStatus, errorThrown) {
+                swal("Error!", "Some thing went wrong", "error");
+            },
+        });
+    });
+</script>
+
+
+<!-- Update Service Boy Pincodes -->
+<script>
+    $("#assignPincodesForm").submit(function(e) {
+        e.preventDefault();
+        $("#assignPincodesSubmit").prop('disabled', true);
+
+        var formdata = new FormData(this);
+        formdata.append('_method', 'PUT');
+        var model_id = $('#pincode_user_id').val();
+        var url = "{{ route('service_boys.update-pincode', ':model_id') }}";
+
+        $.ajax({
+            url: url.replace(':model_id', model_id),
+            type: 'POST',
+            data: formdata,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $("#assignPincodesSubmit").prop('disabled', false);
+                if (!data.error2)
+                    swal("Successful!", data.success, "success")
+                    .then((action) => {
+                        $("#assign-pincodes-modal").modal('hide');
+                    });
+                else
+                    swal("Error!", data.error2, "error");
+            },
+            statusCode: {
+                422: function(responseObject, textStatus, jqXHR) {
+                    $("#assignPincodesSubmit").prop('disabled', false);
+                    resetErrors();
+                    printErrMsg(responseObject.responseJSON.errors);
+                },
+                500: function(responseObject, textStatus, errorThrown) {
+                    $("#assignPincodesSubmit").prop('disabled', false);
+                    swal("Error occured!", "Something went wrong please try again", "error");
+                }
+            }
+        });
+
+        function resetErrors() {
+            var form = document.getElementById('assignPincodesForm');
+            var data = new FormData(form);
+            for (var [key, value] of data) {
+                $('.' + key + '_err').text('');
+                $('#' + key).removeClass('is-invalid');
+                $('#' + key).addClass('is-valid');
+            }
+        }
+
+        function printErrMsg(msg) {
+            $.each(msg, function(key, value) {
+                $('.' + key + '_err').text(value);
+                $('#' + key).addClass('is-invalid');
+                $('#' + key).removeClass('is-valid');
+            });
+        }
+
+    });
+</script>
+
 
 {{-- Add --}}
 <script>

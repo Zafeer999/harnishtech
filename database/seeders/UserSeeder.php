@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -185,23 +186,28 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        foreach ($users as $user) {
-            User::updateOrCreate(
-                ['email' => $user['email']], // Unique attribute for update or create
-                [
-                    'name' => $user['name'],
-                    'mobile' => $user['mobile'],
-                    'email_verified_at' => $user['email_verified_at'],
-                    'password' => $user['password'],
-                    'is_service_boy' => $user['is_service_boy'],
-                    'otp' => $user['otp'],
-                    'active_status' => $user['active_status'],
-                    'remember_token' => $user['remember_token'],
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                    'deleted_at' => null,
-                ]
-            );
+
+        foreach ($users as $user)
+        {
+            $createdUser = User::updateOrCreate(['email' => $user['email']], // Unique attribute for update or create
+                                [
+                                    'name' => $user['name'],
+                                    'mobile' => $user['mobile'],
+                                    'email_verified_at' => $user['email_verified_at'],
+                                    'password' => $user['password'],
+                                    'is_service_boy' => $user['is_service_boy'],
+                                    'otp' => $user['otp'],
+                                    'active_status' => $user['active_status'],
+                                    'remember_token' => $user['remember_token'],
+                                    'created_at' => Carbon::now(),
+                                    'updated_at' => Carbon::now(),
+                                    'deleted_at' => null,
+                                ]);
+
+            if($user['is_service_boy'] == 1)
+                $createdUser->syncRoles('Service Boy');
+            else
+                $createdUser->syncRoles('User');
         }
     }
 }

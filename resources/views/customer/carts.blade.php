@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="cart-action text-end">
                                     @if ($cartItems->isNotEmpty())
-                                        <a class="btn mr-10 clearAllCart"><i class="fi-rs-cross-small mr-10"></i>Clear Cart</a>
+                                        <a class="btn mr-10 btn-warning clearAllCart"><i class="fi-rs-cross-small mr-10"></i>Clear Cart</a>
                                     @endif
                                     <a class="btn " href="{{ route('services') }}"><i class="fi-rs-shopping-bag mr-10"></i>Add Services</a>
                                 </div>
@@ -159,8 +159,8 @@
                                                                     <span class="text-danger coupon_err"></span>
                                                                 </div>
                                                                 <div class="form-group col-lg-6">
-                                                                    <button class="btn btn-md d-none" id="resetCoupon" type="reset"><i class="fi-rs-label mr-10"></i>Clear</button>
-                                                                    <button class="btn btn-md" id="couponSubmit" {{ $cartItems->isNotEmpty() ? '' : 'disabled' }} type="submit"><i class="fi-rs-label mr-10"></i>Apply</button>
+                                                                    <button class="btn btn-md d-none btn-warning" id="resetCoupon" type="reset"><i class="fi-rs-label mr-10"></i>Clear</button>
+                                                                    <button class="btn btn-md btn-success" id="couponSubmit" {{ $cartItems->isNotEmpty() ? '' : 'disabled' }} type="submit"><i class="fi-rs-label mr-10"></i>Apply</button>
                                                                 </div>
                                                             </div>
                                                         </form>

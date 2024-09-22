@@ -285,6 +285,26 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'sb-dashboard.view',
                 'group' => 'sb_dashboard',
             ],
+            [
+                'id' => 55,
+                'name' => 'sb-order-status.change',
+                'group' => 'sb_orders',
+            ],
+            [
+                'id' => 56,
+                'name' => 'sb-order-image.upload',
+                'group' => 'sb_orders',
+            ],
+            [
+                'id' => 57,
+                'name' => 'sb-orders.unassigned',
+                'group' => 'sb_orders',
+            ],
+            [
+                'id' => 58,
+                'name' => 'sb-orders.claim',
+                'group' => 'sb_orders',
+            ],
         ];
 
         foreach ($permissions as $permission) {
