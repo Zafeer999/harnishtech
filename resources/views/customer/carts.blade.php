@@ -146,13 +146,16 @@
                                             <div class="total-amount">
                                                 <div class="left">
                                                     <div class="coupon">
-                                                        <form action="#" target="_blank">
+                                                        <form action="#" id="couponForm" target="_blank">
+                                                            @csrf
                                                             <div class="form-row row justify-content-center">
                                                                 <div class="form-group col-lg-6">
                                                                     <input class="font-medium" name="coupon" id="coupon" placeholder="Enter Your Coupon">
+                                                                    <span class="text-danger coupon_err"></span>
                                                                 </div>
                                                                 <div class="form-group col-lg-6">
-                                                                    <button class="btn  btn-sm"><i class="fi-rs-label mr-10"></i>Apply</button>
+                                                                    <button class="btn btn-md d-none" id="resetCoupon" type="reset"><i class="fi-rs-label mr-10"></i>Clear</button>
+                                                                    <button class="btn btn-md" id="couponSubmit" {{ $cartItems->isNotEmpty() ? '' : 'disabled' }} type="submit"><i class="fi-rs-label mr-10"></i>Apply</button>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -180,14 +183,26 @@
                                                         <tr>
                                                             <td class="cart_total_label">Visiting Charge</td>
                                                             @if ($serviceCharge)
-                                                                <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> {{ number_format($serviceCharge) }}</td>
+                                                                <td class="cart_total_amount text-danger"> <i class="ti-gift mr-5"></i> {{ number_format($serviceCharge) }}</td>
                                                             @else
-                                                                <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Free</td>
+                                                                <td class="cart_total_amount text-success"> <i class="ti-gift mr-5"></i> Free</td>
                                                             @endif
                                                         </tr>
                                                         <tr>
+                                                            <td class="cart_total_label">GST Charge</td>
+                                                            @if ($gstCharge)
+                                                                <td class="cart_total_amount text-danger"> <i class="ti-gift mr-5"></i> -₹{{ number_format($gstCharge) }}</td>
+                                                            @else
+                                                                <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> N/A</td>
+                                                            @endif
+                                                        </tr>
+                                                        <tr class="d-none" id="couponTr">
+                                                            <td class="cart_total_label">Coupon Discount</td>
+                                                            <td class="cart_total_amount text-success"> <i class="ti-gift mr-5"></i> -₹<span id="couponDiscount">200</span> </td>
+                                                        </tr>
+                                                        <tr>
                                                             <td class="cart_total_label">Total</td>
-                                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">₹{{ number_format($cartTotal) }}</span></strong></td>
+                                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">₹<span id="cartTotal">{{ number_format(($cartTotal+$serviceCharge+$gstCharge)) }}</span></span></strong></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -201,21 +216,15 @@
                                                     <div class="custome-radio">
                                                         <input class="form-check-input" required="" type="radio" name="payment_option" value="1" id="exampleRadios4" checked="">
                                                         <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#checkPayment" aria-controls="checkPayment">Cash Payment</label>
-                                                        <div class="form-group collapse in" id="checkPayment">
-                                                            <p class="text-muted mt-5">Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode. </p>
-                                                        </div>
                                                     </div>
                                                     <div class="custome-radio">
                                                         <input class="form-check-input" required="" type="radio" name="payment_option" value="2" id="exampleRadios5" >
                                                         <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Online</label>
-                                                        <div class="form-group collapse in" id="paypal">
-                                                            <p class="text-muted mt-5">Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             {{-- Payment option ends --}}
-                                            <a href="#" class="btn book-now" id="book-now"> <i class="fi-rs-box-alt mr-10"></i> Book Now</a>
+                                            <button class="btn book-now" id="book-now" {{ $cartItems->isNotEmpty() ? '' : 'disabled' }}> <i class="fi-rs-box-alt mr-10"></i> Book Now</button>
                                         </div>
                                     </div>
                                 </div>
@@ -273,12 +282,51 @@
                         Swal.fire({ title: "Error occured!", text: "Something went wrong please try again", icon: 'error', confirmButtonText: 'OK'});
                     },
                 });
+            });
+
+
+            $("#couponForm").submit(function(e) {
+                e.preventDefault();
+                $("#couponSubmit").prop('disabled', true);
+
+                var formdata = new FormData(this);
+                $.ajax({
+                    url: '{{ route('check-coupon') }}',
+                    type: 'POST',
+                    data: formdata,
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        $("#couponSubmit").prop('disabled', false);
+                        resetErrors();
+                        if (!data.error2){
+                            $('#resetCoupon').removeClass('d-none');
+                            $('#coupon').prop('disabled', true);
+                            $('#couponSubmit').prop('disabled', true);
+                            $('#couponTr').removeClass('d-none');
+                            $('#couponDiscount').text(data.couponDiscount);
+                            $('#cartTotal').text(data.cartTotal);
+                        }
+                        else
+                            Swal.fire({ title: "Error!", text: data.error2, icon: 'error', confirmButtonText: 'OK'});
+                    },
+                    statusCode: {
+                        422: function(responseObject, textStatus, jqXHR) {
+                            $("#couponSubmit").prop('disabled', false);
+                            resetErrors();
+                            printErrMsg(responseObject.responseJSON.error);
+                        },
+                        500: function(responseObject, textStatus, errorThrown) {
+                            $("#couponSubmit").prop('disabled', false);
+                            Swal.fire({ title: "Error occured!", text: "Something went wrong please try again", icon: 'error', confirmButtonText: 'OK'});
+                        }
+                    }
+                });
 
                 function resetErrors() {
-                    var form = document.getElementById('loginForm');
+                    var form = document.getElementById('couponForm');
                     var data = new FormData(form);
                     for (var [key, value] of data) {
-                        console.log(key, value)
                         $('.' + key + '_err').text('');
                         $('#' + key).removeClass('is-invalid');
                         $('#' + key).addClass('is-valid');
@@ -287,12 +335,38 @@
 
                 function printErrMsg(msg) {
                     $.each(msg, function(key, value) {
-                        console.log(key);
                         $('.' + key + '_err').text(value);
                         $('#' + key).addClass('is-invalid');
                     });
                 }
+            });
 
+            $("#resetCoupon").click(function(e){
+                e.preventDefault();
+
+                $.ajax({
+                    url: '{{ route('reset-coupon') }}',
+                    type: 'GET',
+                    data: {
+                        '_token': "{{ csrf_token() }}",
+                    },
+                    success: function(datas, textStatus, jqXHR) {
+                        if (!datas.error && !datas.error2) {
+                            $("#resetCoupon").addClass('d-none');
+                            $("#couponSubmit").prop('disabled', false);
+                            $("#coupon").prop('disabled', false);
+                            $("#coupon").val('');
+                            $('#couponTr').addClass('d-none');
+                            $('#cartTotal').text(datas.cartTotal);
+                        } else {
+                            Swal.fire({ title: "Error!", text: datas.error2, icon: 'error', confirmButtonText: 'OK'});
+                        }
+                    },
+                    error: function(error, jqXHR, textStatus, errorThrown) {
+                        $("#book-now").prop('disabled', false);
+                        Swal.fire({ title: "Error occured!", text: "Something went wrong please try again", icon: 'error', confirmButtonText: 'OK'});
+                    },
+                });
             });
         </script>
     @endpush

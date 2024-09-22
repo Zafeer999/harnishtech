@@ -25,8 +25,7 @@ class StoreCouponRequest extends FormRequest
             'name' => 'required|string',
             'discount_type' => 'required|string|in:flat,percent',
             'discount_value' => 'required|string',
-            'min_value' => 'required|numeric|lte:max_value',
-            'max_value' => 'required|numeric|gte:min_value',
+            'min_value' => 'required|numeric',
             'expiry_date' => 'required',
             'expiry_count' => 'required',
         ];

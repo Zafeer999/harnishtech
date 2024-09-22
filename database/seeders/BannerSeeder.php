@@ -17,35 +17,23 @@ class BannerSeeder extends Seeder
         $banners = [
             [
                 'image' => 'customer\assets\imgs\slider\service-slider-1.png',
-                'small_text' => 'Limited Offer',
-                'main_black_text' => 'Summer Sale',
-                'main_color_text' => 'Up to 50% Off',
-                'text_color' => '#cdebbc',
-                'offer_text' => 'Use code SUMMER50',
-                'button_text' => 'Shop Now',
-                'button_color' => '#f6dbf6',
+                'small_text' => 'Offer Available',
+                'main_black_text' => 'For First Booking',
+                'main_color_text' => 'On Every Services',
+                'text_color' => '#0776c7',
+                'offer_text' => 'Save more with coupons & up to 20% off',
+                'button_text' => 'Book Now',
+                'button_color' => '#0776c7',
                 'button_link' => 'https://example.com/summer-sale',
                 'status' => 1,
             ],
-            [
-                'image' => 'customer\assets\imgs\slider\service-slider-2.webp',
-                'small_text' => 'New Arrivals',
-                'main_black_text' => 'Winter Collection',
-                'main_color_text' => 'Just Arrived',
-                'text_color' => '#cdd4f8',
-                'offer_text' => 'Check out our latest winter collection',
-                'button_text' => 'Explore',
-                'button_color' => '#fff2e5',
-                'button_link' => 'https://example.com/winter-collection',
-                'status' => 1,
-            ]
         ];
         foreach ($banners as $banner) {
             BannerSlider::updateOrCreate(
                 [
                     'image' => $banner['image'],
                     'offer_text' => $banner['offer_text'],
-                ], // Unique attribute for update or create
+                ],
                 [
                     'small_text' => $banner['small_text'],
                     'main_black_text' => $banner['main_black_text'],

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('discount_type', 20)->default('flat')->comment('flat, percent');
             $table->string('discount_value', 20);
             $table->unsignedInteger('min_value');
-            $table->unsignedInteger('max_value');
             $table->date('expiry_date');
             $table->unsignedInteger('expiry_count');
             $table->timestamps();

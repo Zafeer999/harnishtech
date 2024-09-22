@@ -5,46 +5,48 @@
         {{-- SLIDER SECTION --}}
         <section class="home-slider position-relative">
             <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
-                <div class="single-hero-slider single-animation-wrap">
-                    <div class="container">
-                        <div class="row align-items-center slider-animated-1">
-                            <div class="col-lg-5 col-md-6">
-                                <div class="hero-slider-content-2">
-                                    <h4 class="animated">Offer Available </h4>
-                                    <h2 class="animated fw-900">For First Booking</h2>
-                                    <h2 class="animated fw-900 text-brand">On Every Services</h2>
-                                    <form class="form-subcriber banner-form d-md-flex wow fadeIn animated my-4">
-                                        <div class="custom_select">
-                                            <select class="form-control select-active" name="location_area" id="location_area">
-                                                <option value="">Change Location</option>
-                                                @foreach ($cities as $city)
-                                                    <option value="{{ strtolower($city->name) }}">{{ ucwords($city->name) }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="custom_select service-select">
-                                            <select class="form-control select-active service" name="service" id="service">
-                                                <option value="">Choose Service</option>
-                                                @foreach ($allServices as $allService)
-                                                    <option value="{{ strtolower($allService->name) }}">{{ $allService->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        {{-- <input type="text" class="service form-control bg-white font-small" placeholder="Type service name"> --}}
-                                        <button class="btn bg-dark text-white search-btn" type="submit">Book Now</button>
-                                    </form>
-                                    <p class="animated">Save more with coupons & up to 70% off</p>
-                                    <a class="animated btn btn-brush btn-brush-3" href="shop-product-right.html"> Book Now </a>
+                @foreach ($bannerSliders as $bannerSlider)
+                    <div class="single-hero-slider single-animation-wrap">
+                        <div class="container">
+                            <div class="row align-items-center slider-animated-1">
+                                <div class="col-lg-5 col-md-6">
+                                    <div class="hero-slider-content-2">
+                                        <h4 class="animated">{{ $bannerSlider->small_text }} </h4>
+                                        <h2 class="animated fw-900">{{ $bannerSlider->main_black_text }}</h2>
+                                        <h2 class="animated fw-900" style="color: {{ $bannerSlider->text_color }}">{{ $bannerSlider->main_color_text }}</h2>
+                                        <form class="form-subcriber banner-form d-md-flex wow fadeIn animated my-4">
+                                            <div class="custom_select">
+                                                <select class="form-control select-active" name="location_area" id="location_area">
+                                                    <option value="">Change Location</option>
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ strtolower($city->name) }}">{{ ucwords($city->name) }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="custom_select service-select">
+                                                <select class="form-control select-active service" name="service" id="service">
+                                                    <option value="">Choose Service</option>
+                                                    @foreach ($allServices as $allService)
+                                                        <option value="{{ strtolower($allService->name) }}">{{ $allService->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <button class="btn bg-dark text-white search-btn"  type="submit">{{ $bannerSlider->button_text }}</button>
+                                        </form>
+                                        <p class="animated">{{ $bannerSlider->offer_text }}</p>
+                                        <a class="animated btn btn-brush btn-brush-3" style="color: {{ $bannerSlider->text_color }}" href="{{ $bannerSlider->button_link }}"> {{ $bannerSlider->button_text }} </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-7 col-md-6">
-                                <div class="single-slider-img single-slider-img-1">
-                                    <img class="animated slider-1-1" src="{{ asset('customer/assets/imgs/slider/service-slider-1.png') }}" alt="">
+                                <div class="col-lg-7 col-md-6">
+                                    <div class="single-slider-img single-slider-img-1">
+                                        <img class="animated slider-1-1" src="{{ asset($bannerSlider->image) }}" alt="">
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
                 {{-- <div class="single-hero-slider single-animation-wrap">
                     <div class="container">
                         <div class="row align-items-center slider-animated-1">
@@ -134,10 +136,6 @@
                                                     <img class="default-img" src="{{ asset($featuredService->image) }}" alt="">
                                                     <img class="hover-img" src="{{ asset($featuredService->image) }}" alt="">
                                                 </a>
-                                            </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                {{-- <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a> --}}
                                             </div>
                                         </div>
                                         <div class="product-content-wrap">

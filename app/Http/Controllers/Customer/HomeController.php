@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\BannerSlider;
 use App\Models\Category;
 use App\Models\City;
 use Illuminate\Http\Request;
@@ -19,6 +20,8 @@ class HomeController extends Controller
         $featuredServices = Category::with('category')->where(['is_featured' => 1, 'level' => 2])->get();
         $cities = City::selectRaw('MIN(id) as id, name')->groupBy('name')->get();
 
-        return view('customer.home')->with(['categories' => $categories, 'allServices' => $allServices, 'colorsArray' => $colorsArray, 'featuredServices' => $featuredServices, 'cities' => $cities]);
+        $bannerSliders = BannerSlider::where('status', 1)->get();
+
+        return view('customer.home')->with(['categories' => $categories, 'allServices' => $allServices, 'colorsArray' => $colorsArray, 'featuredServices' => $featuredServices, 'cities' => $cities, 'bannerSliders' => $bannerSliders]);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Order;
-use App\Models\TimeSlot;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assigned_orders', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_boy_user_id')->constrained('users');
             $table->foreignIdFor(Order::class)->constrained();
-            $table->foreignIdFor(TimeSlot::class)->constrained();
-            $table->unsignedBigInteger('category_id');
-            $table->date('service_date');
+            $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('sub_category_id')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedInteger('amount');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assigned_orders');
+        Schema::dropIfExists('order_items');
     }
 };

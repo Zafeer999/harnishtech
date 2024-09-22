@@ -9,7 +9,7 @@ class ServiceBoyPincode extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'city_name', 'pincode'];
+    protected $fillable = ['user_id', 'city_name', 'pincode', 'is_working'];
 
 
     public function user()
