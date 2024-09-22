@@ -27,8 +27,8 @@ class Order extends Model
     const PAYMENT_STATUS_PAID = 1;
     const PAYMENT_STATUS_FAILED = 2;
 
-    protected $fillable = ['time_slot_id', 'user_id', 'category_id', 'sub_category_id', 'user_address_id', 'coupon_id',
-    'order_no', 'amount', 'status', 'is_assigned', 'charges', 'gst_charge', 'total', 'scheduled_on', 'serviced_on',
+    protected $fillable = ['time_slot_id', 'user_id', 'user_address_id', 'coupon_id',
+    'order_no', 'status', 'is_assigned', 'charges', 'gst_charge', 'total', 'scheduled_on', 'serviced_on',
     'order_note', 'payment_type', 'payment_method', 'payment_status', 'invoice_path'];
 
     // protected $appends = ['order_status_text'];
@@ -61,6 +61,10 @@ class Order extends Model
     public function coupon()
     {
         return $this->belongsTo(Coupon::class);
+    }
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 
     public static function generateOrderNo()

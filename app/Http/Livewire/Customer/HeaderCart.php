@@ -28,19 +28,29 @@ class HeaderCart extends Component
 
     public function useCartData($data)
     {
+        $cartItems = \Cart::getContent();
+        $existingCartItem = Category::whereIn('id', $cartItems->pluck('id'))->first();
         $service = Category::find($data['service_id']);
-        if($service)
-        {
-            \Cart::add(array(
-                'id' => $data['service_id'],
-                'name' => $service->name,
-                'price' => $service->min_price,
-                'quantity' => isset($data['quantity']) ? $data['quantity'] : 1,
-                'attributes' => ['image' => $service->image, 'description' => $service->description],
-            ));
-        }
 
-        $this->data['service_id'] = $data['service_id'];
+        if($existingCartItem->category_id != $service->category_id)
+        {
+            $this->dispatchBrowserEvent('swal:modal', ['type' => 'error', 'text' => 'Please add service of similar category in your cart']);
+        }
+        else
+        {
+            if($service)
+            {
+                \Cart::add(array(
+                    'id' => $data['service_id'],
+                    'name' => $service->name,
+                    'price' => $service->min_price,
+                    'quantity' => isset($data['quantity']) ? $data['quantity'] : 1,
+                    'attributes' => ['image' => $service->image, 'description' => $service->description],
+                ));
+            }
+            $this->data['service_id'] = $data['service_id'];
+            $this->dispatchBrowserEvent('swal:modal', ['type' => 'success', 'text' => 'Service added in cart']);
+        }
     }
 
     public function useRemoveCartData($data = null)

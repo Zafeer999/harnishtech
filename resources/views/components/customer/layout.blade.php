@@ -60,19 +60,12 @@
 @stack('scripts')
 {{-- Handle Add To Cart Click --}}
 <script>
-    $('body').on('click', '.addToCart', function(e) {
-        e.preventDefault();
-
-        $(".addToCart").prop('disabled', true);
-        let serviceId = $(this).attr('data-cart-id');
-        Livewire.emitTo('customer.header-cart', 'cartdata', {
-            'service_id': serviceId
-        });
-        $(".addToCart").prop('disabled', false);
+    // Livewire Sweetalert browserevent
+    window.addEventListener('swal:modal', event => {
         Swal.fire({
             toast: true,
-            icon: 'success',
-            title: 'Service added in cart',
+            icon: event.detail.type,
+            title: event.detail.text,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
@@ -82,6 +75,17 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         });
+    });
+
+    $('body').on('click', '.addToCart', function(e) {
+        e.preventDefault();
+
+        $(".addToCart").prop('disabled', true);
+        let serviceId = $(this).attr('data-cart-id');
+        Livewire.emitTo('customer.header-cart', 'cartdata', {
+            'service_id': serviceId
+        });
+        $(".addToCart").prop('disabled', false);
     })
 
 
@@ -106,7 +110,6 @@
                     'service_id': serviceId
                 });
                 $(".removeFromCart").prop('disabled', false);
-                window.location.reload();
 
                 Swal.fire({
                     toast: true,
@@ -121,6 +124,10 @@
                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                 });
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
             }
         });
 
@@ -145,7 +152,6 @@
             if (result.isConfirmed) {
                 Livewire.emitTo('customer.header-cart', 'removeCartData');
                 $(".clearAllCart").prop('disabled', false);
-                window.location.reload();
 
                 Swal.fire({
                     toast: true,
@@ -160,6 +166,10 @@
                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                 });
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
             }
         });
 

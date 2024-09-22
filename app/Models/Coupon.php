@@ -15,7 +15,6 @@ class Coupon extends BaseModel
         'discount_type',
         'discount_value',
         'min_value',
-        'max_value',
         'expiry_date',
         'expiry_count'
     ];

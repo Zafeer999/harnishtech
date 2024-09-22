@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('city_name', 100);
             $table->string('pincode', 20);
+            $table->unsignedTinyInteger('is_working')->comment('0 = not working today, 1 = working today');
             $table->timestamps();
         });
     }

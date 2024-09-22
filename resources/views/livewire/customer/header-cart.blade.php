@@ -33,7 +33,7 @@
                     </div>
                     <div class="shopping-cart-button">
                         <button class="btn btn-md" onclick="window.location.href='{{ route('carts') }}';">View cart</button>
-                        <button class="btn btn-md" onclick="window.location.href='{{ route('checkouts.index') }}';" {{ $cartItems->isEmpty() ? 'disabled' : '' }}>Checkout</button>
+                        {{-- <button class="btn btn-md" onclick="window.location.href='{{ route('checkouts.index') }}';" {{ $cartItems->isEmpty() ? 'disabled' : '' }}>Checkout</button> --}}
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="shopping-cart-button">
                         <button class="btn btn-md" onclick="window.location.href='{{ route('carts') }}';" class="outline">View cart</button>
-                        <button class="btn btn-md" onclick="window.location.href='{{ route('checkouts.index') }}';" {{ $cartItems->isEmpty() ? 'disabled' : '' }} >Checkout</button>
+                        {{-- <button class="btn btn-md" onclick="window.location.href='{{ route('checkouts.index') }}';" {{ $cartItems->isEmpty() ? 'disabled' : '' }} >Checkout</button> --}}
                     </div>
                 </div>
             </div>

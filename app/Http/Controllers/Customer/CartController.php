@@ -8,14 +8,17 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\ServiceBoyPincode;
 use App\Models\TimeSlot;
 use App\Models\UserAddress;
 use Carbon\Carbon;
-use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CartController extends Controller
 {
@@ -30,9 +33,11 @@ class CartController extends Controller
         $cities = City::selectRaw('MIN(id) as id, name')->groupBy('name')->get();
         $slots = TimeSlot::get();
 
+        $gstCharge = env('IS_GST_ENABLE') ? (($serviceCharge+$cartTotal) * env('GST_PERCENTAGE')) / 100 : 0;
+
         $userAddresses = $authUser ? UserAddress::where('user_id', $authUser->id)->get() : collect([]);
 
-        return view('customer.carts')->with(['cartItems' => $cartItems, 'cartTotal' => $cartTotal, 'serviceCharge' => $serviceCharge, 'cities' => $cities, 'slots' => $slots, 'userAddresses' => $userAddresses]);
+        return view('customer.carts')->with(['cartItems' => $cartItems, 'cartTotal' => $cartTotal, 'serviceCharge' => $serviceCharge, 'gstCharge' => $gstCharge, 'cities' => $cities, 'slots' => $slots, 'userAddresses' => $userAddresses]);
     }
 
     public function store(Request $request)
@@ -50,6 +55,73 @@ class CartController extends Controller
         ));
 
         return response()->json(['success' => "Product added in cart successfully"], 200);
+    }
+
+    public function checkCoupon(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'coupon' => ['required', Rule::exists('coupons', 'name')->where(fn ($q) => $q->whereDate('expiry_date', '>=', Carbon::today()->toDateString() ) )],
+        ],
+        [
+            'coupon.required' => 'Please enter username',
+        ]);
+
+        if ($validator->fails())
+            return response()->json(['error'=>$validator->errors()], 422);
+
+
+        try{
+            $checkCoupon = Coupon::where('name', $request->coupon)
+                                ->whereDate('expiry_date', '>=', Carbon::today()->toDateString())
+                                ->first();
+
+            $cartItems = \Cart::getContent();
+            $cartServices = Category::whereIn('id', $cartItems->pluck('id'))->sum('min_price');
+            $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
+            $couponDiscount = 0;
+
+            if($cartServices <= $checkCoupon->min_value)
+                return response()->json(['error2' => 'Coupon minimum limit is less, add more services to continue with this offer'], 200);
+
+            $couponDiscount = number_format($checkCoupon->discount_value);
+            if($checkCoupon->discount_type == 'percent')
+                $couponDiscount = ($checkCoupon->discount_value/100) * $cartServices;
+
+            if((($cartServices+$serviceCharge) - $couponDiscount) < ((($cartServices+$serviceCharge)*env('MAX_DISCOUNT_PERCENT'))/100 ))
+                return response()->json(['error2' => 'Can not apply coupon with hge discount, add more services to continue with this offer'], 200);
+
+            $cartTotal = ($cartServices+$serviceCharge)-$couponDiscount;
+            $gstCharge = env('IS_GST_ENABLE') ? (($serviceCharge+$cartTotal) * env('GST_PERCENTAGE')) / 100 : 0;
+            $cartTotal = $cartTotal+$gstCharge;
+
+            return response()->json(['success' => 'Coupon applied successfully', 'couponDiscount' => $couponDiscount, 'cartTotal' => $cartTotal], 200);
+        }
+        catch(\Exception $e)
+        {
+            Log::info($e);
+            return response()->json(['error2' => 'Something went wrong'], 500);
+        }
+
+    }
+
+    public function resetCoupon(Request $request)
+    {
+        try{
+
+            $cartItems = \Cart::getContent();
+            $cartServices = Category::whereIn('id', $cartItems->pluck('id'))->sum('min_price');
+            $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
+            $gstCharge = env('IS_GST_ENABLE') ? (($serviceCharge+$cartServices) * env('GST_PERCENTAGE')) / 100 : 0;
+            $cartTotal = number_format($cartServices+$serviceCharge+$gstCharge);
+
+            return response()->json(['success' => 'Coupon reset successfully', 'cartTotal' => $cartTotal], 200);
+        }
+        catch(\Exception $e)
+        {
+            Log::info($e);
+            return response()->json(['error2' => 'Something went wrong'], 500);
+        }
+
     }
 
     public function placeOrder(Request $request)
@@ -85,30 +157,47 @@ class CartController extends Controller
             $cartItems = \Cart::getContent();
             $cartServices = Category::whereIn('id', $cartItems->pluck('id'))->get();
             $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
+            $scheduleDate = Carbon::now()->format('H') < env('SCHEDLE_TODAY_IF_TIME_BEFORE') ? Carbon::now()->toDateString() : Carbon::tomorrow()->toDateString();
+
+            $coupon = $couponDiscount = null;
+            if($request->coupon)
+                $coupon = Coupon::where('name', $request->coupon)->whereDate('expiry_date', '>=', Carbon::today()->toDateString())->first();
+
+            $couponDiscount = $coupon ? $coupon->discount_value : 0;
+            if($coupon && $coupon->discount_type == 'percent')
+            {
+                $couponDiscount = ($coupon->discount_value/100) * $cartServices->sum('min_price');
+            }
+            $gstCharge = env('IS_GST_ENABLE') ? (($serviceCharge+$cartServices->sum('min_price')) * env('GST_PERCENTAGE')) / 100 : 0;
+
+            $order = Order::create([
+                'time_slot_id' => $request->slot,
+                'user_id' => $authUser->id,
+                // 'category_id' => $cartService->category_id,
+                // 'sub_category_id' => $cartService->id,
+                'user_address_id' => $request->previous_address ? $request->previous_address : $userAddress->id,
+                'coupon_id' => $coupon ? $coupon->id : $coupon,
+                'order_no' => Order::generateOrderNo(),
+                // 'amount' => $cartService->min_price,
+                'status' => Order::STATUS_PLACED,
+                'service_charge' => $serviceCharge,
+                'gst_charge' => $gstCharge,
+                'total' => ($cartServices->sum('min_price')+$serviceCharge+$gstCharge)-$couponDiscount,
+                'scheduled_on' => $scheduleDate,
+                'payment_type' => Order::PAYMENT_TYPE_POSTPAID,
+                'payment_method' => Order::PAYMENT_METHOD_CASH,
+                'payment_status' => Order::PAYMENT_STATUS_UNPAID,
+            ]);
 
             foreach($cartServices as $cartService)
             {
-                $order = Order::create([
-                    'time_slot_id' => $request->slot,
-                    'user_id' => $authUser->id,
+                OrderItem::create([
+                    'order_id' => $order->id,
                     'category_id' => $cartService->category_id,
                     'sub_category_id' => $cartService->id,
-                    'user_address_id' => $request->previous_address ? $request->previous_address : $userAddress->id,
-                    'coupon_id' => Coupon::where('name', $request->coupon)->first()?->id ?? null,
-                    'order_no' => Order::generateOrderNo(),
-                    'amount' => $cartService->min_price,
-                    'status' => 1,
-                    // 'is_assigned' => 1,
-                    'service_charge' => $serviceCharge,
-                    'total' => $cartService->min_price,
-                    'scheduled_on' => Carbon::tomorrow()->toDateString(),
-                    'payment_type' => 1,
-                    'payment_method' => 0,
-                    'payment_status' => 0,
                 ]);
-
-                $this->assignOrder($order, $request);
             }
+            $this->assignOrder($order, $request->merge(['schedule_date'=> $scheduleDate]), $cartService->id);
 
             \Cart::clear();
 
@@ -124,14 +213,50 @@ class CartController extends Controller
     }
 
 
-    protected function assignOrder($order, $request)
+    protected function assignOrder($order, $request, $serviceId)
     {
-        // $checkServiceBoy = AssignedOrder::where('')->
+        $availableServiceboysOnPincode = ServiceBoyPincode::where('pincode', $request->pincode)->get();
+
+        $scheduledServiceData = AssignedOrder::query()
+                            // ->whereIn('service_boy_user_id', $availableServiceboysOnPincode->pluck('user_id'))
+                            ->where('pincode', $request->pincode)
+                            ->where('category_id', $serviceId)
+                            ->whereDate('scheduled_on', $request->schedule_date)
+                            ->where('is_working', 1)
+                            ->get();
+
+        $assigneableServiceBoyId = 0;
+        if($scheduledServiceData->isEmpty())
+        {
+            $assigneableServiceBoyId = $availableServiceboysOnPincode->user_id;
+        }
+        elseif( $availableServiceboysOnPincode->pluck('user_id')->diff($scheduledServiceData->pluck('service_boy_user_id'))->isNotEmpty() )
+        {
+            $vacantServiceBoyIds = $availableServiceboysOnPincode->pluck('user_id')->diff($scheduledServiceData->pluck('service_boy_user_id'))->values();
+            $assigneableServiceBoyId = $vacantServiceBoyIds[0];
+        }
+        else{
+            $filtered = $scheduledServiceData->pluck('service_boy_user_id')->filter(function ($user_id) use ($availableServiceboysOnPincode) {
+                return collect($availableServiceboysOnPincode->user_id)->contains($user_id);
+            });
+
+            $counts = $filtered->countBy();
+            $firstLowestRepeated = $counts->sort()->keys()->first();
+
+            $assigneableServiceBoyId = $firstLowestRepeated;
+        }
+
         AssignedOrder::create([
-            'service_boy_user_id' => 3,
+            'service_boy_user_id' => $assigneableServiceBoyId,
             'order_id' => $order->id,
             'time_slot_id' => $request->slot,
             'pincode' => $request->geo_pincode,
+            'category_id' => $serviceId,
+            'service_date' => $request->schedule_date,
         ]);
+
+        $order->status = Order::STATUS_ASSIGNED;
+        $order->save();
+
     }
 }
