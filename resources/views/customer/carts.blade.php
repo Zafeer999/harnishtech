@@ -82,10 +82,15 @@
                                         <form class="field_form shipping_calculator">
                                             <div class="row">
                                                 <div class="col-12">
+                                                    @php
+                                                        $isAnyDefaultAddress = false;
+                                                        if($userAddresses->isNotEmpty())
+                                                            $isAnyDefaultAddress = $userAddresses->value('is_default') ? true : false;
+                                                    @endphp
                                                     @foreach($userAddresses as $address)
                                                         <div class="card address-card">
                                                             <div class="card-body form-check p-0 ps-3">
-                                                                <input type="radio" name="previous_address" id="add_{{ $address->id }}" checked="false" value="{{ $address->id }}" class="form-check-input">
+                                                                <input type="radio" name="previous_address" id="add_{{ $address->id }}" {{ $isAnyDefaultAddress ? ($address->is_default == 1 ? 'checked' : '') : ($loop->iteration == 1 ? 'checked' : '') }} value="{{ $address->id }}" class="form-check-input">
                                                                 <label for="add_{{$address->id}}" class="form-check-label w-100 ps-2">
                                                                     {{ $address->full_address }}.<br>
                                                                     <strong>City : {{ $address->city }}</strong> <br>
@@ -183,7 +188,7 @@
                                                         <tr>
                                                             <td class="cart_total_label">Visiting Charge</td>
                                                             @if ($serviceCharge)
-                                                                <td class="cart_total_amount text-danger"> <i class="ti-gift mr-5"></i> {{ number_format($serviceCharge) }}</td>
+                                                                <td class="cart_total_amount text-danger"> <i class="ti-gift mr-5"></i> +₹{{ number_format($serviceCharge) }}</td>
                                                             @else
                                                                 <td class="cart_total_amount text-success"> <i class="ti-gift mr-5"></i> Free</td>
                                                             @endif
@@ -191,7 +196,7 @@
                                                         <tr>
                                                             <td class="cart_total_label">GST Charge</td>
                                                             @if ($gstCharge)
-                                                                <td class="cart_total_amount text-danger"> <i class="ti-gift mr-5"></i> -₹{{ number_format($gstCharge) }}</td>
+                                                                <td class="cart_total_amount text-danger"> <i class="ti-gift mr-5"></i> +₹{{ number_format($gstCharge) }}</td>
                                                             @else
                                                                 <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> N/A</td>
                                                             @endif

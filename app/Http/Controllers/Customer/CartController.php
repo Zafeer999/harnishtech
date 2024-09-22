@@ -150,9 +150,6 @@ class CartController extends Controller
             if($request->full_address && (!$request->city || !$request->pincode))
                 return response()->json(['error2'=> 'City name and Pincode is required.']);
 
-            if(!$request->slot)
-                return response()->json(['error2'=> 'Please select any time slot for the service.']);
-
 
             $cartItems = \Cart::getContent();
             $cartServices = Category::whereIn('id', $cartItems->pluck('id'))->get();
@@ -195,40 +192,44 @@ class CartController extends Controller
                     'order_id' => $order->id,
                     'category_id' => $cartService->category_id,
                     'sub_category_id' => $cartService->id,
+                    'amount' => $cartService->min_price
                 ]);
             }
-            $this->assignOrder($order, $request->merge(['schedule_date'=> $scheduleDate]), $cartService->id);
+
+            $isAssigned = $this->assignOrder($order, $request->merge(['schedule_date'=> $scheduleDate]), $cartService->category_id);
 
             \Cart::clear();
 
             DB::commit();
 
-            return response()->json(['success'=> 'Order placed successfully']);
+            if($isAssigned)
+                return response()->json(['success'=> 'Order placed successfully']);
+            else
+                return response()->json(['success'=> 'Order placed successfully, a Service boy will be assigned soon for the service']);
         }
         catch(\Exception $e)
         {
             Log::info($e);
-            return response()->json(['error2'=> 'Please type full address or select any previous address to place order']);
+            return response()->json(['error2'=> 'Something went wrong while placing order']);
         }
     }
 
 
-    protected function assignOrder($order, $request, $serviceId)
+    protected function assignOrder($order, $request, $categoryId)
     {
-        $availableServiceboysOnPincode = ServiceBoyPincode::where('pincode', $request->pincode)->get();
+        $availableServiceboysOnPincode = ServiceBoyPincode::where('pincode', $request->pincode)->where('is_working', 1)->get();
 
         $scheduledServiceData = AssignedOrder::query()
                             // ->whereIn('service_boy_user_id', $availableServiceboysOnPincode->pluck('user_id'))
                             ->where('pincode', $request->pincode)
-                            ->where('category_id', $serviceId)
+                            ->where('category_id', $categoryId)
                             ->whereDate('scheduled_on', $request->schedule_date)
-                            ->where('is_working', 1)
                             ->get();
 
         $assigneableServiceBoyId = 0;
         if($scheduledServiceData->isEmpty())
         {
-            $assigneableServiceBoyId = $availableServiceboysOnPincode->user_id;
+            $assigneableServiceBoyId = $availableServiceboysOnPincode->value('user_id');
         }
         elseif( $availableServiceboysOnPincode->pluck('user_id')->diff($scheduledServiceData->pluck('service_boy_user_id'))->isNotEmpty() )
         {
@@ -246,17 +247,21 @@ class CartController extends Controller
             $assigneableServiceBoyId = $firstLowestRepeated;
         }
 
+        if(!$assigneableServiceBoyId)
+            return false;
+
         AssignedOrder::create([
             'service_boy_user_id' => $assigneableServiceBoyId,
             'order_id' => $order->id,
             'time_slot_id' => $request->slot,
             'pincode' => $request->geo_pincode,
-            'category_id' => $serviceId,
+            'category_id' => $categoryId,
             'service_date' => $request->schedule_date,
         ]);
 
         $order->status = Order::STATUS_ASSIGNED;
         $order->save();
 
+        return true;
     }
 }

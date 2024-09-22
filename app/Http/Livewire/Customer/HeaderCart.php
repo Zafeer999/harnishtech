@@ -31,7 +31,7 @@ class HeaderCart extends Component
         $existingCartItem = Category::whereIn('id', $cartItems->pluck('id'))->first();
         $service = Category::find($data['service_id']);
 
-        if($existingCartItem->category_id != $service->category_id)
+        if($existingCartItem && $existingCartItem->category_id != $service->category_id)
         {
             $this->dispatchBrowserEvent('swal:modal', ['type' => 'error', 'text' => 'Please add service of similar category in your cart']);
         }

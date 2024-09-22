@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Order::class)->constrained();
             $table->foreignIdFor(TimeSlot::class)->constrained();
             $table->unsignedBigInteger('category_id');
-            $table->date('service_date');
+            $table->date('scheduled_on');
             $table->timestamps();
         });
     }

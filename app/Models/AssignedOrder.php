@@ -9,7 +9,7 @@ class AssignedOrder extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['service_boy_user_id', 'order_id', 'time_slot_id', 'pincode', 'category_id', 'service_date'];
+    protected $fillable = ['service_boy_user_id', 'order_id', 'time_slot_id', 'pincode', 'category_id', 'scheduled_on'];
 
     public function serviceBoy()
     {
