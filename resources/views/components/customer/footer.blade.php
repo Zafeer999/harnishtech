@@ -35,8 +35,8 @@
                         <ul class="footer-list wow fadeIn animated">
                             <li><a href="{{ route('login') }}">Sign In</a></li>
                             <li><a href="{{ route('carts') }}">View Cart</a></li>
-                            <li><a href="{{ route('customer.register', ['user_type'=> 'service_boy']) }}">Service Boy Signup</a></li>
-                            <li><a href="{{ route('orders.index') }}">Orders</a></li>
+                            <li><a href="{{ route('customer.register', ['user_type'=> 'service_boy']) }}">Signup</a></li>
+                            <li><a href="{{ route('my-orders') }}">Orders</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4">

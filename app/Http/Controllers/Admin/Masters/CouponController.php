@@ -86,6 +86,7 @@ class CouponController extends Controller
         try {
             DB::beginTransaction();
             $input = $request->validated();
+            $input['expiry_count'] = 100;
             $coupon->update(Arr::only($input, Coupon::getFillables()));
             DB::commit();
 

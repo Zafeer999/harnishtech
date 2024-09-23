@@ -43,6 +43,15 @@
                                             <input class="form-control" id="min_price" name="min_price" type="number" placeholder="Enter Minimum Price">
                                             <span class="text-danger error-text min_price_err"></span>
                                         </div>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="is_featured">Is Featured <span class="text-danger">*</span></label>
+                                            <select class="form-select" name="is_featured">
+                                                <option value="">Is Featured ?</option>
+                                                <option class="dropdown-item" value="1">Yes</option>
+                                                <option class="dropdown-item" value="0">No</option>
+                                            </select>
+                                            <span class="text-danger error-text is_featured_err"></span>
+                                        </div>
                                     </div>
 
                                     <div class="mb-3 row">
@@ -61,7 +70,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
                 {{-- Edit Form --}}
@@ -105,6 +113,14 @@
                                             <label class="col-form-label" for="min_price">Min Price <span class="text-danger">*</span></label>
                                             <input class="form-control" id="min_price" name="min_price" type="number" placeholder="Enter Minimum Price">
                                             <span class="text-danger error-text min_price_err"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="is_featured">Is Featured <span class="text-danger">*</span></label>
+                                            <select class="form-select" name="is_featured">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            </select>
+                                            <span class="text-danger error-text is_featured_err"></span>
                                         </div>
                                     </div>
 
@@ -165,6 +181,7 @@
                                             <th>SubCategory Name</th>
                                             <th>Price</th>
                                             <th>Image</th>
+                                            <th>Is Featured</th>
                                             <th>Description</th>
                                             <th>Action</th>
                                         </tr>
@@ -184,6 +201,9 @@
                                                 </td>
                                                 <td>
                                                     <img src="{{ $subcategory->image }}" style="max-width: 100px; max-height: 100px;" alt="subcategory_img">
+                                                </td>
+                                                <td>
+                                                    <p> {{ $subcategory->is_featured ? 'Yes' : 'No' }} </p>
                                                 </td>
                                                 <td>
                                                     <p> {{ Str::limit(htmlspecialchars_decode($subcategory->description), 80) }} </p>
@@ -326,6 +346,7 @@
                     $("#editForm input[name='subcategory_id']").val(data.subcategory.id);
                     $("#editForm input[name='name']").val(data.subcategory.name);
                     $("#editForm #edit_image_section").html(data.subcategoryImgHtml);
+                    $("#editForm select[name='is_featured']").val(data.subcategory.is_featured);
                     CKEDITOR.instances['edit_description'].setData(data.subcategory.description);
                     $("#editForm input[name='min_price']").val(data.subcategory.min_price);
 

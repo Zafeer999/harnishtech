@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\User;
 // use App\Http\Controllers\Admin\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +20,9 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $orders = Order::with(['orderItems.category', 'orderItems.subCategory', 'user.userAddress', 'coupon', 'timeSlot'])->where('user_id', $user->id)->get();
-        foreach ($orders as $order) {
-            Log::info('Order Log /// ', [$order->user]);
-        }
-        return view('customer.my-orders')->with(['orders' => $orders]);
+        $user = User::with('userAddress')->findOrFail($user->id);
+
+        return view('customer.my-orders')->with(['orders' => $orders, 'user' => $user]);
     }
 
     /**

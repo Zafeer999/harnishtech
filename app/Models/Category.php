@@ -15,6 +15,7 @@ class Category extends BaseModel
         'description',
         'min_price',
         'level',
+        'is_featured',
         'category_id',
     ];
 

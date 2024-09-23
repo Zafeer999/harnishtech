@@ -50,7 +50,7 @@ Route::post('check-coupon', [App\Http\Controllers\Customer\CartController::class
 Route::get('reset-coupon', [App\Http\Controllers\Customer\CartController::class, 'resetCoupon'])->name('reset-coupon');
 
 
-Route::get('my-orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('my-orders');
+Route::get('my-orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('my-orders')->middleware('auth');
 
 
 

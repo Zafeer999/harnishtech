@@ -198,8 +198,12 @@
                                                 <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="page-login-register.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                                <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                                {{-- <a class="nav-link" href="page-login-register.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a> --}}
                                             </li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
                                         </ul>
                                     </div>
                                 </div>
@@ -322,7 +326,7 @@
                                                                     <p>{{ $address->city }}</p>
 
                                                                     <!-- Trigger the delete button -->
-                                                                    <button type="submit" class="btn btn-secondary btn-sm rem-element" data-id="{{ $address->id }}"> <i data-feather="trash-2"></i>Delete</button>
+                                                                    <button type="submit" class="btn btn-danger py-1 px-2 rem-element" data-id="{{ $address->id }}"> <i data-feather="trash-2"></i>Delete</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -339,24 +343,20 @@
 
                                                 </div>
                                                 <div class="card-body">
-                                                    <p>Already have an account? <a href="page-login-register.html">Log in instead!</a></p>
+                                                    {{-- <p>Already have an account? <a href="page-login-register.html">Log in instead!</a></p> --}}
                                                     <form method="post" name="enq">
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
-                                                                <label>First Name <span class="required">*</span></label>
-                                                                <input required="" class="form-control square" name="name" type="text">
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label>Last Name <span class="required">*</span></label>
-                                                                <input required="" class="form-control square" name="phone">
-                                                            </div>
-                                                            <div class="form-group col-md-12">
-                                                                <label>Display Name <span class="required">*</span></label>
-                                                                <input required="" class="form-control square" name="dname" type="text">
+                                                                <label>Full Name <span class="required">*</span></label>
+                                                                <input required="" class="form-control square" name="name" type="text" value="{{ $user->name }}">
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Email Address <span class="required">*</span></label>
-                                                                <input required="" class="form-control square" name="email" type="email">
+                                                                <input required="" class="form-control square" name="email" type="email" value="{{ $user->email }}">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Mobile No. <span class="required">*</span></label>
+                                                                <input required="" class="form-control square" name="mobile" type="mobile" value="{{ $user->mobile }}">
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Current Password <span class="required">*</span></label>
@@ -391,6 +391,7 @@
 
 </x-customer.layout>
 
+{{-- Delete Address --}}
 
 <script>
     $(document).ready(function() {
@@ -404,10 +405,12 @@
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
                 icon: "warning",
-                buttons: ["Cancel", "Confirm"],
-                dangerMode: true,
-            }).then(function(willDelete) { // Changed to ES5 function
-                if (willDelete) {
+                showCancelButton: true, // Show the Cancel button
+                confirmButtonText: 'Confirm', // Text for the Confirm button
+                cancelButtonText: 'Cancel', // Text for the Cancel button
+                reverseButtons: true, // Show the Cancel button on the left side
+            }).then(function(result) {
+                if (result.isConfirmed) { // Check if Confirm button was clicked
                     console.log("Confirmed delete");
 
                     var url = "{{ route('user.address.delete', ':id') }}".replace(':id', addressId);
@@ -433,6 +436,8 @@
                             swal.fire("Error!", "Something went wrong. Please try again.", "error");
                         }
                     });
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    swal.fire("Cancelled", "Your address is safe", "info");
                 }
             });
         });

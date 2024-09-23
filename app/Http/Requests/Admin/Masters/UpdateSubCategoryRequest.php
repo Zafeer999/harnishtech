@@ -25,6 +25,7 @@ class UpdateSubCategoryRequest extends FormRequest
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:200',
             'image' => 'nullable|mimes:png,jpg,jpeg',
+            'is_featured' => 'sometimes|in:1,0',
             'edit_description' => 'required',
             'min_price' => 'required|max_digits:4'
         ];

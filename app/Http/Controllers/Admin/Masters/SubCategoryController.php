@@ -48,9 +48,9 @@ class SubCategoryController extends Controller
             Category::create(Arr::only($input, Category::getFillables()));
             DB::commit();
 
-            return response()->json(['success' => 'SubCategory created successfully!']);
+            return response()->json(['success' => 'Subcategory created successfully!']);
         } catch (\Exception $e) {
-            return $this->respondWithAjax($e, 'creating', 'SubCategory');
+            return $this->respondWithAjax($e, 'creating', 'Subcategory');
         }
     }
 
@@ -83,12 +83,18 @@ class SubCategoryController extends Controller
             </div>
         </div>';
 
+        $isFeaturedHtml = '<select class="form-select" name="is_featured" id="is_featured">
+            <option value="0"' . ($subcategory->is_featured == 0 ? ' selected' : '') . '>No</option>
+            <option value="1"' . ($subcategory->is_featured == 1 ? ' selected' : '') . '>Yes</option>
+        </select>';
+
         $subcategory->description = htmlspecialchars_decode($subcategory->description);
         return [
             'result' => 1,
             'categoryHtml' => $categoryHtml,
             'subcategory' => $subcategory,
             'subcategoryImgHtml' => $subcategoryImgHtml,
+            'isFeaturedHtml' => $isFeaturedHtml,
         ];
     }
 
@@ -131,9 +137,9 @@ class SubCategoryController extends Controller
             }
             $subcategory->delete();
             DB::commit();
-            return response()->json(['success' => 'Category deleted successfully!']);
+            return response()->json(['success' => 'Subcategory deleted successfully!']);
         } catch (\Exception $e) {
-            return $this->respondWithAjax($e, 'deleting', 'Category');
+            return $this->respondWithAjax($e, 'deleting', 'Subcategory');
         }
     }
 
