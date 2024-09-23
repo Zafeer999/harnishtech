@@ -17,38 +17,38 @@ class OrderItemSeeder extends Seeder
             [
                 'id' => 1,
                 'order_id' => 1,
-                'category_id' => 1,
+                'category_id' => 2,
                 'sub_category_id' => 7,
                 'amount' => 1000.00,
             ],
             [
                 'id' => 2,
                 'order_id' => 1,
-                'category_id' => 2,
-                'sub_category_id' => 8,
+                'category_id' => 4,
+                'sub_category_id' => 9,
                 'amount' => 1000.00,
             ],
             [
                 'id' => 3,
                 'order_id' => 2,
-                'category_id' => 2,
-                'sub_category_id' => 8,
+                'category_id' => 4,
+                'sub_category_id' => 10,
                 'amount' => 1000.00,
             ],
             [
                 'id' => 4,
                 'order_id' => 2,
-                'category_id' => 1,
+                'category_id' => 2,
                 'sub_category_id' => 7,
                 'amount' => 1000.00,
             ],
         ];
-        foreach($orderItems as $item)
-        {
-            OrderItem::updateOrCreate([
-                ['id' => $item['id']], // Unique identifier
-                $item // Order data to be inserted or updated
-            ]);
+
+        foreach ($orderItems as $item) {
+            OrderItem::updateOrCreate(
+                ['id' => $item['id']], // Matching criteria
+                $item // Data to insert or update
+            );
         }
     }
 }

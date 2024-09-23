@@ -28,6 +28,7 @@ Route::get('contact', [App\Http\Controllers\Customer\HomeController::class, 'con
 Route::post('contact', [App\Http\Controllers\Customer\HomeController::class, 'contactStore'])->name('contact.store');
 Route::get('privacy-policy', [App\Http\Controllers\Customer\HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('terms-condition', [App\Http\Controllers\Customer\HomeController::class, 'termsCondition'])->name('terms-condition');
+Route::delete('/user/address/{id}', [App\Http\Controllers\Customer\HomeController::class, 'deleteAddress'])->name('user.address.delete');
 
 
 
@@ -49,8 +50,7 @@ Route::post('check-coupon', [App\Http\Controllers\Customer\CartController::class
 Route::get('reset-coupon', [App\Http\Controllers\Customer\CartController::class, 'resetCoupon'])->name('reset-coupon');
 
 
-
-Route::get('orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('orders.index');
+Route::get('my-orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('my-orders');
 
 
 

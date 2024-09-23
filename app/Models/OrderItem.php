@@ -15,4 +15,13 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function subCategory()
+    {
+        return $this->belongsTo(Category::class, 'sub_category_id', 'id');
+    }
 }

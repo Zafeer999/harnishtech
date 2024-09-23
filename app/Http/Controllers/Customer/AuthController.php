@@ -43,6 +43,7 @@ class AuthController extends Controller
         try
         {
             $user = User::where('email', $username)->orWhere('mobile', $username)->first();
+            Log::info('User',[$user]);
 
             if(!$user)
                 return response()->json(['error2'=> 'No user found with this detail']);
@@ -59,7 +60,6 @@ class AuthController extends Controller
         {
             DB::rollBack();
             Log::info("login error:". $e);
-
             return response()->json(['error2'=> 'Something went wrong while validating your credentials!']);
         }
     }

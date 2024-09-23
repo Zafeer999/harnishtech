@@ -350,7 +350,7 @@
     $("#datatable-tabletools").on("click", ".rem-element", function(e) {
         e.preventDefault();
         swal({
-                title: "Are you sure to delete this category?",
+                title: "Are you sure to delete this address?",
                 // text: "Make sure if you have filled Vendor details before proceeding further",
                 icon: "info",
                 buttons: ["Cancel", "Confirm"]
