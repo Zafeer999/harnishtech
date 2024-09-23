@@ -10372,6 +10372,31 @@ span.fi-rs-apps {
     border-radius: 20px;
 }
 
+.btn-danger{
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+.btn-danger:hover{
+    background-color: #cf1526 !important;
+    border-color: #cf1526 !important;
+}
+.btn-warning{
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+}
+.btn-warning:hover{
+    background-color: #dba400 !important;
+    border-color: #dba400 !important;
+}
+.btn-success{
+    background-color: #157347 !important;
+    border-color: #157347 !important;
+}
+.btn-success:hover{
+    background-color: #0c7243 !important;
+    border-color: #0c7243 !important;
+}
+
 @media only screen and (max-width: 600px) {
     .banner-form .custom_select .select2-container{
         width: 100% !important;

@@ -19,10 +19,10 @@ class DefaultLoginUserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Maker Seeder ##
+        // User Seeder ##
         $userRole = Role::updateOrCreate(['name' => 'User']);
-        $permissions = Permission::pluck('id', 'id')->all();
-        $userRole->syncPermissions($permissions);
+        // $permissions = Permission::pluck('id', 'id');
+        // $userRole->syncPermissions($permissions);
 
         $user = User::updateOrCreate([
             'email' => 'user1@gmail.com'
@@ -44,7 +44,7 @@ class DefaultLoginUserSeeder extends Seeder
 
 
         $adminRole = Role::updateOrCreate(['name' => 'Admin']);
-        $permissions = Permission::pluck('id', 'id')->all();
+        $permissions = Permission::whereNotIn('id', [53,54,55,56,57,58])->pluck('id', 'id');
         $adminRole->syncPermissions($permissions);
 
         $admin = User::updateOrCreate([
@@ -66,7 +66,7 @@ class DefaultLoginUserSeeder extends Seeder
 
 
         $serviceBoyRole = Role::updateOrCreate(['name' => 'Service Boy']);
-        $permissions = Permission::whereIn('id', [53, 54])->pluck('id', 'id');
+        $permissions = Permission::whereIn('id', [53, 54, 55, 56, 57, 58])->pluck('id', 'id');
         $serviceBoyRole->syncPermissions($permissions);
 
         $serviceBoy = User::updateOrCreate([

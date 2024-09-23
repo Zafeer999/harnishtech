@@ -65,10 +65,13 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function userAddress()
+    public function services()
     {
-        return $this->hasMany(UserAddress::class);
+        return $this->hasMany(ServiceBoyCategory::class);
     }
 
-
+    public function pincodes()
+    {
+        return $this->hasMany(ServiceBoyPincode::class);
+    }
 }

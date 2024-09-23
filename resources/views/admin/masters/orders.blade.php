@@ -61,7 +61,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $order->user->name }} <br> {{ $order->user->mobile }}</td>
                                                 <td>{{ $order->userAddress->full_address }}</td>
-                                                <td>{{ $order->category->name }}, {{ $order->subCategory->name }}</td>
+                                                <td>{{ $order->category?->name }}, {{ $order->subCategory?->name }}</td>
                                                 <td>{{ $order->order_no }}</td>
                                                 <td>{{ $order->amount }}</td>
                                                 <td>
