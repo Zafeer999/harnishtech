@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Masters\StoreContactRequest;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Query;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -47,6 +48,24 @@ class HomeController extends Controller
             return redirect()->back()->with('success', 'Message sent successfully!');
         } catch (\Exception $e) {
             return $this->respondWithAjax($e, 'storing', 'contact');
+        }
+    }
+
+    public function deleteAddress($id)
+    {
+        try {
+            $address = UserAddress::find($id);
+
+            // Check if the address exists and belongs to the authenticated user
+            if ($address && $address->user_id == auth()->id()) {
+                $address->delete();
+
+                return response()->json(['success' => 'Address deleted successfully.']);
+            }
+
+            return response()->json(['error' => 'Address not found or you are not authorized to delete it.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong. Please try again.']);
         }
     }
 }

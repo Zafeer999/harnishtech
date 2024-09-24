@@ -43,24 +43,17 @@
                                             <span class="text-danger error-text min_value_err"></span>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="col-form-label" for="max_value">Max Value <span class="text-danger">*</span></label>
-                                            <input class="form-control" id="max_value" name="max_value" type="number" placeholder="Enter Maximum Price">
-                                            <span class="text-danger error-text max_value_err"></span>
-                                        </div>
-                                        <div class="col-md-4">
                                             <label class="col-form-label" for="expiry_date">Expiry Date <span class="text-danger">*</span></label>
                                             <input class="form-control" id="expiry_date" name="expiry_date" type="date" placeholder="Enter Expiry Date">
                                             <span class="text-danger error-text expiry_date_err"></span>
                                         </div>
-                                    </div>
-
-                                    <div class="mb-3 row">
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <label class="col-form-label" for="expiry_count">Expiry Count <span class="text-danger">*</span></label>
                                             <input class="form-control" id="expiry_count" name="expiry_count" type="number" placeholder="Enter Expiry Count">
                                             <span class="text-danger error-text expiry_count_err"></span>
-                                        </div>
+                                        </div> --}}
                                     </div>
+
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary" id="addSubmit">Submit</button>
@@ -115,24 +108,17 @@
                                             <span class="text-danger error-text min_value_err"></span>
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="col-form-label" for="max_value">Max Value <span class="text-danger"></span></label>
-                                            <input class="form-control" id="max_value" name="max_value" type="number" placeholder="Enter Maximum Price">
-                                            <span class="text-danger error-text max_value_err"></span>
-                                        </div>
-                                        <div class="col-md-4">
                                             <label class="col-form-label" for="expiry_date">Expiry Date <span class="text-danger"></span></label>
                                             <input class="form-control" id="expiry_date" name="expiry_date" type="date" placeholder="Enter Expiry Date">
                                             <span class="text-danger error-text expiry_date_err"></span>
                                         </div>
-                                    </div>
-
-                                    <div class="mb-3 row">
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <label class="col-form-label" for="expiry_count">Expiry Count <span class="text-danger"></span></label>
                                             <input class="form-control" id="expiry_count" name="expiry_count" type="number" placeholder="Enter Expiry Count">
                                             <span class="text-danger error-text expiry_count_err"></span>
-                                        </div>
+                                        </div> --}}
                                     </div>
+
 
                                 </div>
                                 <div class="card-footer">
@@ -183,9 +169,8 @@
                                             <th>Discount Type</th>
                                             <th>Discount Value</th>
                                             <th>Min Value</th>
-                                            <th>Max Value</th>
                                             <th>Expiry Date</th>
-                                            <th>Expiry Count</th>
+                                            {{-- <th>Expiry Count</th> --}}
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -206,14 +191,11 @@
                                                     <p> {{ $coupon->min_value }} </p>
                                                 </td>
                                                 <td>
-                                                    <p> {{ $coupon->max_value }} </p>
-                                                </td>
-                                                <td>
                                                     <p> {{ $coupon->expiry_date }} </p>
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     <p> {{ $coupon->expiry_count }} </p>
-                                                </td>
+                                                </td> --}}
                                                 <td>
                                                     @can('coupons.edit')
                                                         <button class="edit-element btn btn-primary px-2 py-1" title="Edit coupon" data-id="{{ $coupon->id }}"><i data-feather="edit"></i></button>

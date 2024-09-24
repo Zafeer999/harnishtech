@@ -52,7 +52,7 @@
                                     <li>
                                         <a class="language-dropdown-active" href="#"> <i class="fa-regular fa-user"></i> {{ ucwords($authUser->name) }} <i class="fi-rs-angle-small-down"></i></a>
                                         <ul class="language-dropdown">
-                                            <li><a href="#"><i class="fa-solid fa-chart-bar"></i> My Orders</a></li>
+                                            <li><a href="{{route('my-orders')}}"> <i class="fa-solid fa-chart-bar"></i> My Orders</a></li>
                                             <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
                                         </ul>
                                     </li>

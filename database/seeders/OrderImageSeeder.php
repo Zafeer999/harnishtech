@@ -29,13 +29,6 @@ class OrderImageSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
-            [
-                'id' => 3,
-                'order_id' => 3,
-                'image' => 'https://via.placeholder.com/150/00FF00/000000?Text=Order3', // Online image URL
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
         ];
 
         foreach ($orderImages as $orderImage) {

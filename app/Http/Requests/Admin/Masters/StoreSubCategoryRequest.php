@@ -29,6 +29,7 @@ class StoreSubCategoryRequest extends FormRequest
             'name' => 'required|string|max:200',
             'image' => 'required|mimes:png,jpg,jpeg',
             'description' => 'required',
+            'is_featured' => 'required|in:1,0',
             'min_price' => 'required|max_digits:4'
         ];
     }

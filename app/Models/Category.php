@@ -15,6 +15,7 @@ class Category extends BaseModel
         'description',
         'min_price',
         'level',
+        'is_featured',
         'category_id',
     ];
 
@@ -34,6 +35,11 @@ class Category extends BaseModel
     }
 
     public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function orderItems()
     {
         return $this->hasMany(Order::class);
     }

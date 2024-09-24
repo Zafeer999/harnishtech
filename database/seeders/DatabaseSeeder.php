@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\OrderItem;
 use App\Models\ServiceBoy;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             VisitorSeeder::class,
             TimeSlotSeeder::class,
             OrderSeeder::class,
+            OrderItemSeeder::class,
             OrderImageSeeder::class,
         ]);
     }

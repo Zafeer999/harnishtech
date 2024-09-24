@@ -27,7 +27,7 @@ class UpdateCouponRequest extends FormRequest
             'discount_value' => 'required|string',
             'min_value' => 'required|numeric',
             'expiry_date' => 'required',
-            'expiry_count' => 'required',
+            'expiry_count' => 'nullable',
         ];
     }
 }
