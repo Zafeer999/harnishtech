@@ -9,14 +9,16 @@ dark blue footer => #10324a
 
 ## TODO POINTS
 1. Add option for gst and service charge on admin side and contact deatils on footer.
+- Done
 2. Add option to change logo.
+- Done
 3. Check menu for service boy.
 - Done
 4. Add multiple language feature.
 5. Id card for service boy similar to any document on dashboard.
 6. Customer demo video for booking explanation.
 7. Check is featured option for services.
-- Husain => Done
+- Done
 8. Login page redirect issue.
 9. Domain and hosting.
 10. Email setup.
@@ -29,10 +31,13 @@ dark blue footer => #10324a
 17. Admin should be able to assign pincodes and categories to service boys.
 - Done.
 18. Footer changes and social media links
+- Done.
 19. Coupon remove Expiry Count field comment the code.
-- Husain => Done
+- Done.
 20. Show reviews properly on dashboard also for both service and service boy.
 21. Provacy policy, terms n conditions, about us page.
 22. Share tawk.to credentials with client.
+- Done.
 23. Invoice on orders tab for customer and admin.
 24. Service Boy Documents.
+- NA
