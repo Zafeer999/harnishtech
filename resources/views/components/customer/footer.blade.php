@@ -10,13 +10,13 @@
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Address: </strong>Near TDCC bank At,post - kudus, tal - wada, dist - Palghar
+                                <strong>Address: </strong> {{ config('setting_data.FOOTER_ADDRESS') }}
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Phone: </strong>(+91) 9096969667 /(+91) 7875000141
+                                <strong>Phone: </strong>{{ config('setting_data.FOOTER_PHONE') }}
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
+                                <strong>Hours: </strong>{{ config('setting_data.FOOTER_HOURS') }}
                             </p>
                         </div>
                     </div>

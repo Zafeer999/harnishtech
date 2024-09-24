@@ -91,6 +91,7 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
     Route::resource('documents', App\Http\Controllers\Admin\Masters\DocumentController::class);
     Route::resource('banner_sliders', App\Http\Controllers\Admin\Masters\BannerSliderController::class);
     Route::resource('cta_sections', App\Http\Controllers\Admin\Masters\CtaSectionController::class);
+    Route::resource('variables', App\Http\Controllers\Admin\Masters\VariableController::class);
     Route::resource('service_boys', App\Http\Controllers\Admin\Masters\ServiceBoyController::class);
     Route::put('service_boys/{service_boy}/pincode', [App\Http\Controllers\Admin\Masters\ServiceBoyController::class, 'updatePincodes'])->name('service_boys.update-pincode');
     Route::resource('visitors', App\Http\Controllers\Admin\Masters\VisitorController::class);

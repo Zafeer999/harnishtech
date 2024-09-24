@@ -305,6 +305,26 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'sb-orders.claim',
                 'group' => 'sb_orders',
             ],
+            [
+                'id' => 59,
+                'name' => 'variables.create',
+                'group' => 'variables',
+            ],
+            [
+                'id' => 60,
+                'name' => 'variables.view',
+                'group' => 'variables',
+            ],
+            [
+                'id' => 61,
+                'name' => 'variables.edit',
+                'group' => 'variables',
+            ],
+            [
+                'id' => 62,
+                'name' => 'variables.delete',
+                'group' => 'variables',
+            ],
         ];
 
         foreach ($permissions as $permission) {
