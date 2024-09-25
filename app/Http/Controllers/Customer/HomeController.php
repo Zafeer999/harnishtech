@@ -68,4 +68,19 @@ class HomeController extends Controller
             return response()->json(['error' => 'Something went wrong. Please try again.']);
         }
     }
+
+    public function about()
+    {
+        return view('customer.about');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('customer.privacy-policy');
+    }
+
+    public function termsCondition()
+    {
+        return view('customer.terms-condition');
+    }
 }
