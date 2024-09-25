@@ -29,11 +29,11 @@ class CartController extends Controller
 
         $cartItems = \Cart::getContent();
         $cartTotal = Category::whereIn('id', $cartItems->pluck('id'))->sum('min_price');
-        $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
+        $serviceCharge = config('setting_data.IS_SERVICE_CHARGE_ENABLE') ? config('setting_data.SERVICE_CHARGE') : 0;
         $cities = City::selectRaw('MIN(id) as id, name')->groupBy('name')->get();
         $slots = TimeSlot::get();
 
-        $gstCharge = env('IS_GST_ENABLE') ? (($serviceCharge+$cartTotal) * env('GST_PERCENTAGE')) / 100 : 0;
+        $gstCharge = config('setting_data.IS_GST_ENABLE') ? (($serviceCharge+$cartTotal) * config('setting_data.GST_PERCENTAGE')) / 100 : 0;
 
         $userAddresses = $authUser ? UserAddress::where('user_id', $authUser->id)->get() : collect([]);
 
@@ -77,7 +77,7 @@ class CartController extends Controller
 
             $cartItems = \Cart::getContent();
             $cartServices = Category::whereIn('id', $cartItems->pluck('id'))->sum('min_price');
-            $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
+            $serviceCharge = config('setting_data.IS_SERVICE_CHARGE_ENABLE') ? config('setting_data.SERVICE_CHARGE') : 0;
             $couponDiscount = 0;
 
             if($cartServices <= $checkCoupon->min_value)
@@ -87,11 +87,11 @@ class CartController extends Controller
             if($checkCoupon->discount_type == 'percent')
                 $couponDiscount = ($checkCoupon->discount_value/100) * $cartServices;
 
-            if((($cartServices+$serviceCharge) - $couponDiscount) < ((($cartServices+$serviceCharge)*env('MAX_DISCOUNT_PERCENT'))/100 ))
+            if((($cartServices+$serviceCharge) - $couponDiscount) < ((($cartServices+$serviceCharge)*config('setting_data.MAX_DISCOUNT_PERCENT'))/100 ))
                 return response()->json(['error2' => 'Can not apply coupon with hge discount, add more services to continue with this offer'], 200);
 
             $cartTotal = ($cartServices+$serviceCharge)-$couponDiscount;
-            $gstCharge = env('IS_GST_ENABLE') ? (($serviceCharge+$cartTotal) * env('GST_PERCENTAGE')) / 100 : 0;
+            $gstCharge = config('setting_data.IS_GST_ENABLE') ? (($serviceCharge+$cartTotal) * config('setting_data.GST_PERCENTAGE')) / 100 : 0;
             $cartTotal = $cartTotal+$gstCharge;
 
             return response()->json(['success' => 'Coupon applied successfully', 'couponDiscount' => $couponDiscount, 'cartTotal' => $cartTotal], 200);
@@ -110,8 +110,8 @@ class CartController extends Controller
 
             $cartItems = \Cart::getContent();
             $cartServices = Category::whereIn('id', $cartItems->pluck('id'))->sum('min_price');
-            $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
-            $gstCharge = env('IS_GST_ENABLE') ? (($serviceCharge+$cartServices) * env('GST_PERCENTAGE')) / 100 : 0;
+            $serviceCharge = config('setting_data.IS_SERVICE_CHARGE_ENABLE') ? config('setting_data.SERVICE_CHARGE') : 0;
+            $gstCharge = config('setting_data.IS_GST_ENABLE') ? (($serviceCharge+$cartServices) * config('setting_data.GST_PERCENTAGE')) / 100 : 0;
             $cartTotal = number_format($cartServices+$serviceCharge+$gstCharge);
 
             return response()->json(['success' => 'Coupon reset successfully', 'cartTotal' => $cartTotal], 200);
@@ -153,8 +153,8 @@ class CartController extends Controller
 
             $cartItems = \Cart::getContent();
             $cartServices = Category::whereIn('id', $cartItems->pluck('id'))->get();
-            $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
-            $scheduleDate = Carbon::now()->format('H') < env('SCHEDLE_TODAY_IF_TIME_BEFORE') ? Carbon::now()->toDateString() : Carbon::tomorrow()->toDateString();
+            $serviceCharge = config('setting_data.IS_SERVICE_CHARGE_ENABLE') ? config('setting_data.SERVICE_CHARGE') : 0;
+            $scheduleDate = Carbon::now()->format('H') < config('setting_data.SCHEDLE_TODAY_IF_TIME_BEFORE') ? Carbon::now()->toDateString() : Carbon::tomorrow()->toDateString();
 
             $coupon = $couponDiscount = null;
             if($request->coupon)
@@ -165,7 +165,7 @@ class CartController extends Controller
             {
                 $couponDiscount = ($coupon->discount_value/100) * $cartServices->sum('min_price');
             }
-            $gstCharge = env('IS_GST_ENABLE') ? (($serviceCharge+$cartServices->sum('min_price')) * env('GST_PERCENTAGE')) / 100 : 0;
+            $gstCharge = config('setting_data.IS_GST_ENABLE') ? (($serviceCharge+$cartServices->sum('min_price')) * config('setting_data.GST_PERCENTAGE')) / 100 : 0;
 
             $order = Order::create([
                 'time_slot_id' => $request->slot,

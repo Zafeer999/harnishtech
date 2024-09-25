@@ -76,6 +76,9 @@
                                 @can('cta_sections.view')
                                     <li><a href="{{ route('cta_sections.index') }}">CTA Section </a></li>
                                 @endcan
+                                @can('variables.view')
+                                    <li><a href="{{ route('variables.index') }}">Variables </a></li>
+                                @endcan
                             </ul>
                         </li>
                     @endcanany

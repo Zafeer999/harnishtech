@@ -21,7 +21,7 @@ class ServiceController extends Controller
     public function show(Request $request, Category $service)
     {
         $service->load('category')->loadCount('reviews');
-        $serviceCharge = env('IS_SERVICE_CHARGE_ENABLE') ? env('SERVICE_CHARGE') : 0;
+        $serviceCharge = config('setting_data.IS_SERVICE_CHARGE_ENABLE') ? config('setting_data.SERVICE_CHARGE') : 0;
 
         return view('customer.service')->with(['service' => $service, 'serviceCharge' => $serviceCharge]);
     }
