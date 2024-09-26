@@ -6,7 +6,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index.html"><img src="{{ asset('customer/assets/imgs/theme/logo.png') }}" style="filter: invert(1);" alt="logo"></a>
+                                <a href="{{ route('home') }}"><img src="{{ asset(config('setting_data.HEADER_LOGO')) }}" style="filter: invert(1);" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">
@@ -35,7 +35,7 @@
                         <ul class="footer-list wow fadeIn animated">
                             <li><a href="{{ route('login') }}">Sign In</a></li>
                             <li><a href="{{ route('carts') }}">View Cart</a></li>
-                            <li><a href="{{ route('customer.register', ['user_type'=> 'service_boy']) }}">Signup</a></li>
+                            <li><a href="{{ route('customer.register', ['user_type' => 'service_boy']) }}">Signup</a></li>
                             <li><a href="{{ route('my-orders') }}">Orders</a></li>
                         </ul>
                     </div>
@@ -75,9 +75,9 @@
 
     <div class="whatsapp-icon-area">
         <a class="whatsapp-icon" href="https://wa.me/+919096969667" target="_blank">
-        <a class="whatsapp-icon" href="https://api.whatsapp.com/send?phone=+919096969667&text=Hey%21%20I%20want%20to%20book%20a%20service%2C%20can%20you%20please%20help%20me" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
+            <a class="whatsapp-icon" href="https://api.whatsapp.com/send?phone=+919096969667&text=Hey%21%20I%20want%20to%20book%20a%20service%2C%20can%20you%20please%20help%20me" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
     </div>
 
     <!-- Vendor JS-->
@@ -109,4 +109,15 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsQRPtAFnaxHQqjf6lPbuqkIQPH2daBJc"></script>
         <script src="{{ asset('customer/assets/js/geolocation.js') }}"></script>
     @endif
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi,mr',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </div>
