@@ -36,7 +36,7 @@ dark blue footer => #10324a
 19. Coupon remove Expiry Count field comment the code.
 - Done.
 20. Show reviews properly on dashboard also for both service and service boy.
-21. Provacy policy, terms n conditions, about us page.
+21. Privacy policy, terms n conditions, about us page.
 22. Share tawk.to credentials with client.
 - Done.
 23. Invoice on orders tab for customer and admin.

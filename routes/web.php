@@ -97,6 +97,7 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
     Route::resource('visitors', App\Http\Controllers\Admin\Masters\VisitorController::class);
     Route::resource('queries', App\Http\Controllers\Admin\Masters\QueryController::class);
     Route::resource('orders', App\Http\Controllers\Admin\Masters\OrderController::class);
+    Route::get('orders/unassigned', [App\Http\Controllers\Admin\Masters\OrderController::class, 'unassigned']);
 
 
     Route::any('upload-ck-image', [App\Http\Controllers\Admin\MiscController::class, 'upload-ck-image'])->name('upload-ck-image');
