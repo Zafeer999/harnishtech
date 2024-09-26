@@ -54,6 +54,13 @@ Route::get('my-orders', [App\Http\Controllers\Customer\OrderController::class, '
 
 
 
+// Serveice Boy Order Routes
+Route::get('orders/pending', [App\Http\Controllers\ServiceBoy\OrderController::class, 'pending'])->name('orders.pending')->middleware('auth');
+Route::get('orders/working', [App\Http\Controllers\ServiceBoy\OrderController::class, 'working'])->name('orders.working')->middleware('auth');
+Route::get('orders/completed', [App\Http\Controllers\ServiceBoy\OrderController::class, 'completed'])->name('orders.completed')->middleware('auth');
+
+
+
 
 
 // ####  ADMIN ROUTES ####

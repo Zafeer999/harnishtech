@@ -66,6 +66,10 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+    public function assignedOrders()
+    {
+        return $this->hasMany(AssignedOrder::class);
+    }
 
     public static function generateOrderNo()
     {

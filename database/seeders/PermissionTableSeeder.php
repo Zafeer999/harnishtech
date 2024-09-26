@@ -325,6 +325,21 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'variables.delete',
                 'group' => 'variables',
             ],
+            [
+                'id' => 63,
+                'name' => 'sb-orders.pending',
+                'group' => 'sb_orders',
+            ],
+            [
+                'id' => 64,
+                'name' => 'sb-orders.working',
+                'group' => 'sb_orders',
+            ],
+            [
+                'id' => 65,
+                'name' => 'sb-orders.completed',
+                'group' => 'sb_orders',
+            ],
         ];
 
         foreach ($permissions as $permission) {
