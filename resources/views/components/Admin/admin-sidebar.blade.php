@@ -145,6 +145,27 @@
                                 <i data-feather="home"></i><span>Dashboard</span></a>
                         </li>
                     @endcan
+
+
+                    @can(['sb-orders.pending', 'sb-orders.working', 'sb-orders.completed'])
+                        <li class="dropdown">
+                            <a class="nav-link menu-title" href="javascript:void(0)">
+                                <i data-feather="list"></i><span>Orders</span>
+                            </a>
+                            <ul class="nav-submenu menu-content">
+                                @can('sb-orders.pending')
+                                    <li><a href="{{ route('orders.pending') }}">Pending Orders</a></li>
+                                @endcan
+                                @can('sb-orders.working')
+                                    <li><a href="{{ route('orders.working') }}">Ongoing Orders</a></li>
+                                @endcan
+                                @can('sb-orders.completed')
+                                    <li><a href="{{ route('orders.completed') }}">Completed Orders</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+
                     @can(['sb-orders.view'])
                         <li class="dropdown">
                             <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.index') ? 'active-bg' : '' }}" href="{{ route('orders.index') }}">
@@ -152,6 +173,7 @@
                             </a>
                         </li>
                     @endcan
+
 
 
                     <li class="dropdown">

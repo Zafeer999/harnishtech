@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             TimeSlotSeeder::class,
             OrderSeeder::class,
             OrderItemSeeder::class,
+            AssignedOrderSeeder::class,
             OrderImageSeeder::class,
         ]);
     }
