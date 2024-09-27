@@ -28,7 +28,7 @@ Route::get('contact', [App\Http\Controllers\Customer\HomeController::class, 'con
 Route::post('contact', [App\Http\Controllers\Customer\HomeController::class, 'contactStore'])->name('contact.store');
 Route::get('privacy-policy', [App\Http\Controllers\Customer\HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('terms-condition', [App\Http\Controllers\Customer\HomeController::class, 'termsCondition'])->name('terms-condition');
-Route::delete('/user/address/{id}', [App\Http\Controllers\Customer\HomeController::class, 'deleteAddress'])->name('user.address.delete');
+Route::delete('/user/address/{id}', [App\Http\Controllers\Customer\HomeController::class, 'deleteAddress'])->name('user.address.delete')->middleware('auth');
 
 
 
@@ -43,27 +43,6 @@ Route::get('carts', [App\Http\Controllers\Customer\CartController::class, 'index
 Route::post('carts', [App\Http\Controllers\Customer\CartController::class, 'store'])->name('carts.store');
 
 
-
-Route::get('checkouts', [App\Http\Controllers\Customer\CartController::class, 'index'])->name('checkouts.index');
-Route::post('place-order', [App\Http\Controllers\Customer\CartController::class, 'placeOrder'])->name('place-order');
-Route::post('check-coupon', [App\Http\Controllers\Customer\CartController::class, 'checkCoupon'])->name('check-coupon');
-Route::get('reset-coupon', [App\Http\Controllers\Customer\CartController::class, 'resetCoupon'])->name('reset-coupon');
-
-
-Route::get('my-orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('my-orders')->middleware('auth');
-
-
-
-// Serveice Boy Order Routes
-Route::get('orders/pending', [App\Http\Controllers\ServiceBoy\OrderController::class, 'pending'])->name('orders.pending')->middleware('auth');
-Route::get('orders/working', [App\Http\Controllers\ServiceBoy\OrderController::class, 'working'])->name('orders.working')->middleware('auth');
-Route::get('orders/completed', [App\Http\Controllers\ServiceBoy\OrderController::class, 'completed'])->name('orders.completed')->middleware('auth');
-
-
-
-
-
-// ####  ADMIN ROUTES ####
 
 // Guest Users
 Route::middleware(['guest', 'PreventBackHistory'])->group(function () {
@@ -104,7 +83,24 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
     Route::resource('visitors', App\Http\Controllers\Admin\Masters\VisitorController::class);
     Route::resource('queries', App\Http\Controllers\Admin\Masters\QueryController::class);
     Route::resource('orders', App\Http\Controllers\Admin\Masters\OrderController::class);
-    Route::get('orders/unassigned', [App\Http\Controllers\Admin\Masters\OrderController::class, 'unassigned']);
+
+
+
+    // Customer Routes
+    Route::get('checkouts', [App\Http\Controllers\Customer\CartController::class, 'index'])->name('checkouts.index');
+    Route::post('place-order', [App\Http\Controllers\Customer\CartController::class, 'placeOrder'])->name('place-order');
+    Route::post('check-coupon', [App\Http\Controllers\Customer\CartController::class, 'checkCoupon'])->name('check-coupon');
+    Route::get('reset-coupon', [App\Http\Controllers\Customer\CartController::class, 'resetCoupon'])->name('reset-coupon');
+    Route::get('my-orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('my-orders')->middleware('auth');
+
+
+
+    // Serveice Boy Order Routes
+    Route::get('orders/pending', [App\Http\Controllers\ServiceBoy\OrderController::class, 'pending'])->name('orders.pending');
+    Route::get('orders/working', [App\Http\Controllers\ServiceBoy\OrderController::class, 'working'])->name('orders.working');
+    Route::get('orders/completed', [App\Http\Controllers\ServiceBoy\OrderController::class, 'completed'])->name('orders.completed');
+    Route::get('orders/unassigned', [App\Http\Controllers\ServiceBoy\OrderController::class, 'unassigned'])->name('orders.unassigned');
+
 
 
     Route::any('upload-ck-image', [App\Http\Controllers\Admin\MiscController::class, 'upload-ck-image'])->name('upload-ck-image');

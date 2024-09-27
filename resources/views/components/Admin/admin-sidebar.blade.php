@@ -173,7 +173,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can(['sb-orders.unassigned'])
+                    @can('sb-orders.unassigned')
                         <li class="dropdown">
                             <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.unassigned') ? 'active-bg' : '' }}" href="{{ route('orders.unassigned') }}">
                                 <i data-feather="alert-octagon"></i><span>Unassigned Orders</span>

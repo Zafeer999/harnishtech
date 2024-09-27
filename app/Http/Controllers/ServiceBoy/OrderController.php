@@ -12,15 +12,26 @@ use Illuminate\Support\Facades\Log;
 class OrderController extends Controller
 {
 
+    public function unassigned()
+    {
+        $user = Auth::user();
+        $unassignedOrders = Order::query()
+                                ->with(['user', 'timeSlot', 'orderItems.category', 'orderItems.subCategory'])
+                                ->where('status', Order::STATUS_PLACED)
+                                ->get();
+
+        return view('serviceboy.order-unassigned')->with(['unassignedOrders' => $unassignedOrders]);
+    }
+
     public function pending(Request $request)
     {
-        // Fetch pending orders for the s
         $serviceBoy = Auth::user();
         $pendingOrders = Order::with(['user','timeSlot','orderItems.category', 'orderItems.subCategory'])->whereIn('status', [Order::STATUS_ASSIGNED, Order::STATUS_CONFIRMED])
             ->whereHas('assignedOrders', function ($q) use ($serviceBoy) {
                 $q->where('service_boy_user_id', $serviceBoy->id);
             })
             ->get();
+
         Log::info('$pendingOrders', [$pendingOrders]);
         return view('serviceboy.order-pending')->with(['pendingOrders' => $pendingOrders]);
     }
