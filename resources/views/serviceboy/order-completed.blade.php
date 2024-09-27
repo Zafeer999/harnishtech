@@ -181,21 +181,63 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No</th>
-                                            <th>Banner Image</th>
-                                            <th>Small Text</th>
-                                            <th>Main Black Text</th>
-                                            <th>Main Color Text</th>
-                                            <th>Text Color</th>
-                                            <th>Offer Text</th>
-                                            <th>Button Text</th>
-                                            <th>Button Color</th>
-                                            <th>Button Link</th>
+                                            <th>Order No</th>
+                                            <th>Customer Details</th>
+                                            <th>Service</th>
+                                            <th>Is Assigned</th>
+                                            <th>Timeslot</th>
                                             <th>Status</th>
+                                            <th>Charges</th>
+                                            <th>Scheduled_on</th>
+                                            <th>Serviced_on</th>
+                                            <th>Payment Details</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($completedOrders as $completedOrder)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <p>#{{ $completedOrder->order_no }} </p>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $completedOrder->user->name }}<br> {{ $completedOrder->user->mobile }}<br> {{ $completedOrder->user->email }}</p>
+                                                </td>
+                                                <td style="min-width: 150px">
+                                                    @foreach ($completedOrder->orderItems as $item)
+                                                        <p>{{ $item->category->name }} :- {{ $item->subCategory->name }}</p>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    <p>{{ $completedOrder->timeSlot->name }}</p>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-{{ $completedOrder->order_status_color }}"> {{ ucfirst($completedOrder->order_status_text) }}</span>
+                                                </td>
+                                                <td style="min-width: 150px">
+                                                    <p> Charges: ₹{{ $completedOrder->charges }} <br> Service Chargebr: ₹{{ $completedOrder->service_charge }} <br> GST Charge: ₹{{ $completedOrder->gst_charge }}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $completedOrder->scheduled_no }}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $completedOrder->serviced_no }}</p>
+                                                </td>
+                                                <td style="min-width: 150px">
+                                                    <p>Payment Type: {{ $completedOrder->payment_type }} <br> Payment Method: {{ $completedOrder->payment_method }} <br> Payment Status:{{ $pendingOrder->payment_status }} </p>
+                                                </td>
 
+                                                {{-- <td>
+                                                    @can('banner_sliders.edit')
+                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit bannerslider" data-id="{{ $bannerSlider->id }}"><i data-feather="edit"></i></button>
+                                                    @endcan
+                                                    @can('banner_sliders.delete')
+                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete bannerslider" data-id="{{ $bannerSlider->id }}"><i data-feather="trash-2"></i> </button>
+                                                    @endcan
+                                                </td> --}}
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

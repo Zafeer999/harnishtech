@@ -182,14 +182,15 @@
                                         <tr>
                                             <th>Sr No</th>
                                             <th>Order No</th>
-                                            <th>Customer</th>
+                                            <th>Customer Details</th>
                                             <th>Service</th>
                                             <th>Is Assigned</th>
                                             <th>Timeslot</th>
                                             <th>Status</th>
                                             <th>Charges</th>
-                                            <th>Scheduled_on</th>
-                                            <th>Serviced_on</th>
+                                            <th>Scheduled On</th>
+                                            <th>Serviced On</th>
+                                            <th>Payment Details</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -201,32 +202,34 @@
                                                     <p>#{{ $pendingOrder->order_no }} </p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $pendingOrder->user->name }}<br> {{ $pendingOrder->user->mobile }}<br> {{ $pendingOrder->user->email }}</p>
+                                                    <p>{{ $pendingOrder->user->name }}<br> +91{{ $pendingOrder->user->mobile }}<br> {{ $pendingOrder->user->email }}</p>
                                                 </td>
                                                 <td style="min-width: 150px">
                                                     @foreach ($pendingOrder->orderItems as $item)
-                                                    <p>{{ $item->category->name }} :- {{$item->subCategory->name}}</p>
+                                                        <p>{{ $item->category->name }} :- {{ $item->subCategory->name }}</p>
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    <p>{{ $pendingOrder->is_assigned }}</p>
+                                                    <p>{{ $pendingOrder->is_assigned == 1 ? "Assigned" : "Unassigned"}}</p>
                                                 </td>
                                                 <td>
                                                     <p>{{ $pendingOrder->timeSlot->name }}</p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $pendingOrder->status }}</p>
+                                                    <span class="badge bg-{{$pendingOrder->order_status_color}}"> {{ ucfirst($pendingOrder->order_status_text) }}</span>
                                                 </td>
                                                 <td style="min-width: 150px">
-                                                    <p> Charges: ₹{{ $pendingOrder->charges }} <br> Service Chargebr: ₹{{$pendingOrder->service_charge}} <br> GST Charge: ₹{{$pendingOrder->gst_charge}}</p>
+                                                    <p> Charges: ₹{{ $pendingOrder->charges }} <br> Service Chargebr: ₹{{ $pendingOrder->service_charge }} <br> GST Charge: ₹{{ $pendingOrder->gst_charge }}</p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $pendingOrder->scheduled_no }}</p>
+                                                    <p>{{ $pendingOrder->scheduled_no ?? "-" }}</p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $pendingOrder->serviced_no }}</p>
+                                                    <p>{{ $pendingOrder->serviced_no ?? "-"}}</p>
                                                 </td>
-
+                                                <td style="min-width: 150px">
+                                                    <p>Payment Type: {{ $pendingOrder->payment_type == 1 ? "Postpaid" : "Prepaid" }} <br> Payment Method: {{ $pendingOrder->payment_method == 1 ? "Online" : "Cash"}} <br> Payment Status:{{ $pendingOrder->payment_text}} </p>
+                                                </td>
                                                 <td>
                                                     @can('banner_sliders.edit')
                                                         <button class="edit-element btn btn-primary px-2 py-1" title="Edit bannerslider" data-id="{{ $bannerSlider->id }}"><i data-feather="edit"></i></button>

@@ -31,11 +31,20 @@ class Order extends Model
     'order_no', 'status', 'is_assigned', 'charges', 'gst_charge', 'total', 'scheduled_on', 'serviced_on',
     'order_note', 'payment_type', 'payment_method', 'payment_status', 'invoice_path'];
 
-    // protected $appends = ['order_status_text'];
+    protected $appends = ['order_status_text', 'payment_text', 'order_status_color'];
 
     public function getOrderStatusTextAttribute()
     {
         return [0 => 'placed', 1 => 'assigned', 2 => 'confirmed', 3 => 'processing', 4 => 'completed', 5 => 'cancelled', 6 => 'refunded'][$this->status];
+    }
+    public function getOrderStatusColorAttribute()
+    {
+        return [0 => 'info', 1 => 'light text-dark', 2 => 'primary', 3 => 'warning', 4 => 'success', 5 => 'danger', 6 => 'dark'][$this->status];
+    }
+
+    public function getPaymentTextAttribute()
+    {
+        return [0 => 'Unpaid', 1 => 'Paid', 2 => 'Failed'][$this->payment_status];
     }
 
     public function timeSlot()
