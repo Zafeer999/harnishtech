@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ServiceBoy;
 use App\Http\Controllers\Admin\Controller;
 use App\Models\AssignedOrder;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -97,5 +98,26 @@ class OrderController extends Controller
                                 ->get();
 
         return view('serviceboy.order-completed')->with(['completedOrders' => $completedOrders]);
+    }
+
+    public function orderGetServiceBoys(Order $order, Request $request)
+    {
+        $serviceBoys = User::where('is_service_boy', 1)->get();
+
+        $serviceBoysHtml = '<span>
+            <option value="">--Select Pincode--</option>';
+        foreach ($serviceBoys as $serviceBoy):
+            $is_select = in_array($serviceBoy->id, ) ? "selected" : "";
+            $serviceBoysHtml .= '<option value="' . $serviceBoy->id . '" ' . $is_select . '>' . ($serviceBoy->name.' - '.$serviceBoy->pincode) . '</option>';
+        endforeach;
+        $serviceBoysHtml .= '</span>';
+
+        $response = [
+            'result' => 1,
+            'order' => $order,
+            'serviceBoysHtml' => $serviceBoysHtml,
+        ];
+
+        return $response;
     }
 }
