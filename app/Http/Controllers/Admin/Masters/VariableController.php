@@ -24,8 +24,11 @@ class VariableController extends Controller
         $scheduleSameDayIfBookedBefore = Carbon::createFromTime($scheduleSameDayIfBookedBefore, '00');
         $maxDiscountPercent = config('setting_data.MAX_DISCOUNT_PERCENT');
         $headerLogo = config('setting_data.HEADER_LOGO');
+        $footerAddress = config('setting_data.FOOTER_ADDRESS');
+        $footerPhone = config('setting_data.FOOTER_PHONE');
+        $footerHours = config('setting_data.FOOTER_HOURS');
 
-        return view('admin.masters.variables', compact('isServiceChargeEnable', 'serviceCharge', 'isGstEnable', 'gstPercentage', 'scheduleSameDayIfBookedBefore', 'maxDiscountPercent', 'headerLogo'));
+        return view('admin.masters.variables', compact('isServiceChargeEnable', 'serviceCharge', 'isGstEnable', 'gstPercentage', 'scheduleSameDayIfBookedBefore', 'maxDiscountPercent', 'headerLogo', 'footerAddress', 'footerPhone', 'footerHours'));
     }
 
     /**

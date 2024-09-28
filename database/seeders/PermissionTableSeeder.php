@@ -340,6 +340,11 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'sb-orders.completed',
                 'group' => 'sb_orders',
             ],
+            [
+                'id' => 66,
+                'name' => 'orders.transfer',
+                'group' => 'orders',
+            ],
         ];
 
         foreach ($permissions as $permission) {

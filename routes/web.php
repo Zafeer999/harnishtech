@@ -93,6 +93,8 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
         Route::get('completed-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'completed'])->name('orders.completed');
         Route::get('unassigned-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'unassigned'])->name('orders.unassigned');
         Route::put('orders/{order}/claim', [App\Http\Controllers\ServiceBoy\OrderController::class, 'claimUnassigned'])->name('orders.claim');
+        Route::get('orders/{order}/service-boys', [App\Http\Controllers\ServiceBoy\OrderController::class, 'orderGetServiceBoys'])->name('orders.service-boys');
+        Route::put('assign-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'assignOrder'])->name('orders.assign');
 
 
 

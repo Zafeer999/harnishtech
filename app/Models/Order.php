@@ -35,7 +35,7 @@ class Order extends Model
 
     public function getOrderStatusTextAttribute()
     {
-        return [0 => 'placed', 1 => 'assigned', 2 => 'confirmed', 3 => 'processing', 4 => 'completed', 5 => 'cancelled', 6 => 'refunded'][$this->status];
+        return [0 => 'Order Placed', 1 => 'Order Assigned', 2 => 'Order Confirmed', 3 => 'Order Processing', 4 => 'Order Completed', 5 => 'Order Cancelled', 6 => 'Order Refunded'][$this->status];
     }
     public function getOrderStatusColorAttribute()
     {
