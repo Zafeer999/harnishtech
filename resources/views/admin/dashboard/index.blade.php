@@ -1,6 +1,132 @@
 <x-admin.admin-layout>
     <x-slot name="title">Core Bio - Dashboard</x-slot>
 
+    <style>
+        .id-card {
+            padding: 0px;
+            width: 600px;
+            height: 390px;
+            border: 2px solid #B2001F;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            /* Smooth transition effect */
+        }
+
+        /* Hover effect for the entire card */
+        .id-card:hover {
+            transform: scale(1.02);
+            /* Slightly scale up the card */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            /* Add more shadow on hover */
+            cursor: pointer;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #B2001F;
+            color: white;
+            height: 80px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .school-info {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .card-body {
+            display: flex;
+            padding: 20px;
+        }
+
+        .photo img {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            /* Smooth transition effect */
+        }
+
+        /* Hover effect for the student photo */
+        .photo img:hover {
+            transform: scale(1.0.5);
+            /* Slightly scale up the photo */
+            border-color: #B2001F;
+        }
+
+        .info {
+            flex: 1;
+            margin-left: 20px;
+            color: #333;
+        }
+
+        .info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+            /* Smooth transition effect */
+        }
+
+        /* Hover effect for the student name text */
+        .info h3:hover {
+            color: #B2001F;
+            /* Change color on hover */
+        }
+
+        .designation {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            font-size: 14px;
+        }
+
+        table td {
+            padding: 4px 0;
+        }
+
+        table strong {
+            color: #B2001F;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            align-items: center;
+            border-top: 1px solid #ddd;
+            height: 50px;
+        }
+
+        .signature {
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .barcode img {
+            width: 150px;
+        }
+
+        /* Add hover effect for signature */
+        .signature:hover {
+            color: #B2001F;
+            font-weight: bold;
+        }
+    </style>
+
     <div class="page-body">
         <!-- Container-fluid starts-->
         <div class="container-fluid dashboard-default-sec">
@@ -254,6 +380,57 @@
                 </div>
 
 
+                {{-- ID Card --}}
+
+                <div class="id-card">
+                    <div class="card-header">
+                        <div class="logo">
+                            <img src="{{ asset(config('setting_data.HEADER_LOGO')) }}" alt="Logo">
+                        </div>
+                        <div class="school-info">
+                            <h2>{{ ucfirst(env('APP_NAME')) }}</h2>
+                            <p>{{ config('FOOTER_ADDRESS') }}</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="photo">
+                            <img src="student-photo.jpg" alt="Student Photo">
+                        </div>
+                        <div class="info">
+                            <h3>PHILIP ANDERSON III</h3>
+                            <p class="designation">STUDENT</p>
+                            <table>
+                                <tr>
+                                    <td><strong>STUDENT NO.:</strong></td>
+                                    <td>2025-01334CE</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ISSUED ON:</strong></td>
+                                    <td>JULY 05, 2025</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>EXPIRY DATE:</strong></td>
+                                    <td>JULY 05, 2030</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>COURSE:</strong></td>
+                                    <td>BS IN CIVIL ENGINEERING</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="signature">
+                            <p>_____________________</p>
+                            <p>Signature</p>
+                        </div>
+                        <div class="barcode">
+                            <img src="barcode.png" alt="Barcode">
+                        </div>
+                    </div>
+                </div>
+
+
 
 
                 {{-- Shift wise details --}}
@@ -338,7 +515,7 @@
 
                 {{-- Office/Ward wise details --}}
                 {{-- <div class="col-12 px-0">
-                    @if ( $is_admin && !request()->ward )
+                    @if ($is_admin && !request()->ward)
                         <div class="row">
                             <div class="card rounded">
                                 <div class="card-header px-2 py-3">
@@ -392,7 +569,7 @@
 
     @push('scripts')
         <script>
-            setInterval(function(){
+            setInterval(function() {
                 window.location.reload(1);
                 // alert("Refreshed");
             }, 60000);
@@ -400,4 +577,3 @@
     @endpush
 
 </x-admin.admin-layout>
-
