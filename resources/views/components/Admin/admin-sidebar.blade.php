@@ -115,7 +115,7 @@
                     @can(['orders.view'])
                         <li class="dropdown">
                             <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.index') ? 'active-bg' : '' }}" href="{{ route('orders.index') }}">
-                                <i data-feather="package"></i><span>Orders</span>
+                                <i data-feather="package"></i><span>All Orders</span>
                             </a>
                         </li>
                     @endcan
@@ -166,17 +166,18 @@
                         </li>
                     @endcan
 
-                    @can(['sb-orders.view'])
+                    {{-- @can(['sb-orders.view'])
                         <li class="dropdown">
                             <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.index') ? 'active-bg' : '' }}" href="{{ route('orders.index') }}">
                                 <i data-feather="package"></i><span>Orders</span>
                             </a>
                         </li>
-                    @endcan
+                    @endcan --}}
                     @can('sb-orders.unassigned')
                         <li class="dropdown">
                             <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.unassigned') ? 'active-bg' : '' }}" href="{{ route('orders.unassigned') }}">
                                 <i data-feather="alert-octagon"></i><span>Unassigned Orders</span>
+                                <span class="badge rounded-pill bg-dark float-end mt-1">{{ $unassignedCount }}</span>
                             </a>
                         </li>
                     @endcan

@@ -10433,11 +10433,11 @@ body{
 
     .banner-form .service, .banner-form .service-select{
         display: inline-block;
-        width: 70%;
+        width: 66vw;
     }
     .banner-form .search-btn{
         display: inline-block;
-        width: 29%;
+        width: 28vw;
         padding: 12px;
         margin-top: -40px;
     }

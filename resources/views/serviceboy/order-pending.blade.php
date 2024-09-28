@@ -222,10 +222,10 @@
                                                     <p> Charges: ₹{{ $pendingOrder->charges }} <br> Service Chargebr: ₹{{ $pendingOrder->service_charge }} <br> GST Charge: ₹{{ $pendingOrder->gst_charge }}</p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $pendingOrder->scheduled_no ?? "-" }}</p>
+                                                    <p>{{ $pendingOrder->scheduled_on ?? "-" }}</p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $pendingOrder->serviced_no ?? "-"}}</p>
+                                                    <p>{{ $pendingOrder->serviced_on ?? "-"}}</p>
                                                 </td>
                                                 <td style="min-width: 150px">
                                                     <p>Payment Type: {{ $pendingOrder->payment_type == 1 ? "Postpaid" : "Prepaid" }} <br> Payment Method: {{ $pendingOrder->payment_method == 1 ? "Online" : "Cash"}} <br> Payment Status:{{ $pendingOrder->payment_text}} </p>

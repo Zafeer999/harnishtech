@@ -42,3 +42,4 @@ dark blue footer => #10324a
 23. Invoice on orders tab for customer and admin.
 24. Service Boy Documents.
 - NA
+25. Dashboard show counts.
