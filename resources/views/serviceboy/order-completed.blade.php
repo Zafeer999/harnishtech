@@ -219,10 +219,10 @@
                                                     <p> Charges: ₹{{ $completedOrder->charges }} <br> Service Chargebr: ₹{{ $completedOrder->service_charge }} <br> GST Charge: ₹{{ $completedOrder->gst_charge }}</p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $completedOrder->scheduled_no }}</p>
+                                                    <p>{{ $completedOrder->scheduled_on }}</p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $completedOrder->serviced_no }}</p>
+                                                    <p>{{ $completedOrder->serviced_on }}</p>
                                                 </td>
                                                 <td style="min-width: 150px">
                                                     <p>Payment Type: {{ $completedOrder->payment_type }} <br> Payment Method: {{ $completedOrder->payment_method }} <br> Payment Status:{{ $pendingOrder->payment_status }} </p>

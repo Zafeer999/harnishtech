@@ -54,108 +54,64 @@ class CategorySubcategoryCopySeeder extends Seeder
             ]
         ];
 
-        $categoryIndex = 1; // To track category image naming
-        $subcategoryIndex = 1; // To track subcategory image naming
+        $categoryIndex = 1;
+        $subcategoryIndex = 1;
 
         foreach ($categories as $categoryName => $subcategories) {
-            // Set the image path for the category with the specified format
             $categoryImagePath = 'storage/category/cat' . str_pad($categoryIndex, 3, '0', STR_PAD_LEFT) . '.png';
 
-            // Use updateOrCreate for category
             $category = Category::updateOrCreate(
-                ['name' => $categoryName], // Condition to check if the category exists
+                ['name' => $categoryName],
                 [
                     'description' => $categoryName . ' services',
-                    'min_price' => rand(100, 1000), // Example random price
-                    'level' => 1, // Level for main categories
-                    'image' => $categoryImagePath // Image path for category
+                    'min_price' => rand(100, 1000),
+                    'level' => 1,
+                    'image' => $categoryImagePath
                 ]
             );
 
-            $categoryIndex++; // Increment category index for the next category
+            $categoryIndex++;
 
-            // Insert or update subcategories
-            foreach ($subcategories as $subcategoryName) {
-                // Set the image path for the subcategory with the specified format
+            foreach ($subcategories as $subcategoryName)
+            {
                 $subcategoryImagePath = 'storage/subcategory/sub' . str_pad($subcategoryIndex, 3, '0', STR_PAD_LEFT) . '.png';
 
-                // Correctly associate subcategory with the current category using $category->id
                 Category::updateOrCreate(
                     [
                         'name' => $subcategoryName,
-                        'category_id' => $category->id // Ensure the category ID is correctly set
+                        'category_id' => $category->id
                     ],
                     [
                         'description' => $subcategoryName . ' description',
-                        'min_price' => rand(100, 1000), // Example random price
-                        'level' => 2, // Level for subcategories
-                        'image' => $subcategoryImagePath // Image path for subcategory
+                        'min_price' => rand(100, 1000),
+                        'level' => 2,
+                        'image' => $subcategoryImagePath
                     ]
                 );
 
-                $subcategoryIndex++; // Increment subcategory index for the next subcategory
+                $subcategoryIndex++;
             }
         }
-        // Insert or update subcategories
-        foreach ($subcategories as $subcategoryName) {
-            // Set the image path for the subcategory with the specified format
+
+        foreach ($subcategories as $subcategoryName)
+        {
             $subcategoryImagePath = 'storage/subcategory/sub' . str_pad($subcategoryIndex, 3, '0', STR_PAD_LEFT) . '.png';
 
-            // Correctly associate subcategory with the current category using $category->id
             Category::updateOrCreate(
                 [
                     'name' => $subcategoryName,
-                    'category_id' => $category->id // Ensure the category ID is correctly set
+                    'category_id' => $category->id
                 ],
                 [
                     'description' => $subcategoryName . ' description',
-                    'min_price' => rand(100, 1000), // Example random price
-                    'level' => 2, // Level for subcategories
-                    'image' => $subcategoryImagePath // Image path for subcategory
+                    'min_price' => rand(100, 1000),
+                    'level' => 2,
+                    'image' => $subcategoryImagePath
                 ]
             );
 
-            $subcategoryIndex++; // Increment subcategory index for the next subcategory
+            $subcategoryIndex++;
         }
 
-
-
-        // foreach ($categories as $categoryName => $subcategories) {
-        //     // Set the image path for the category with the specified format
-        //     $categoryImagePath = 'storage/category/cat' . str_pad($categoryIndex, 3, '0', STR_PAD_LEFT) . '.png';
-
-        //     // Insert category
-        //     $categoryId = DB::table('categories')->updateOrInsert(
-        //         ['name' => $categoryName], // Condition to check if the category exists
-        //         [
-        //             'description' => $categoryName . ' services',
-        //             'min_price' => rand(100, 1000), // Example random price
-        //             'level' => 1, // Level for main categories
-        //             'image' => $categoryImagePath // Image path for category
-        //         ]
-        //     );
-
-        //     $categoryIndex++; // Increment category index for the next category
-
-        //     foreach ($subcategories as $subcategoryName) {
-        //         // Set the image path for the subcategory with the specified format
-        //         $subcategoryImagePath = 'storage/subcategory/sub' . str_pad($subcategoryIndex, 3, '0', STR_PAD_LEFT) . '.png';
-
-        //         DB::table('categories')->updateOrInsert(
-        //             [
-        //                 'name' => $subcategoryName,
-        //                 'category_id' => $categoryId,
-        //             ], // Condition to check if the subcategory exists
-        //             [
-        //                 'description' => $subcategoryName . ' description',
-        //                 'min_price' => rand(100, 1000), // Example random price
-        //                 'level' => 2, // Level for subcategories
-        //                 'image' => $subcategoryImagePath // Image path for subcategory
-        //             ]
-        //         );
-
-        //         $subcategoryIndex++; // Increment subcategory index for the next subcategory
-        //     }
-        // }
     }
 }

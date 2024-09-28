@@ -10396,6 +10396,26 @@ span.fi-rs-apps {
     background-color: #0c7243 !important;
     border-color: #0c7243 !important;
 }
+.goog-te-gadget-icon{
+    display: none;
+}
+.goog-te-gadget-simple{
+    border-radius: 10px;
+    padding: 5px 15px;
+}
+.skiptranslate{
+    border-radius: 10px;
+}
+.skiptranslate iframe{
+    visibility: hidden;
+    display: none;
+}
+span.indicator{
+    display: none !important;
+}
+body{
+    top: 0 !important;
+}
 
 @media only screen and (max-width: 600px) {
     .banner-form .custom_select .select2-container{
@@ -10413,11 +10433,11 @@ span.fi-rs-apps {
 
     .banner-form .service, .banner-form .service-select{
         display: inline-block;
-        width: 70%;
+        width: 66vw;
     }
     .banner-form .search-btn{
         display: inline-block;
-        width: 29%;
+        width: 28vw;
         padding: 12px;
         margin-top: -40px;
     }

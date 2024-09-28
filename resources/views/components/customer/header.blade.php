@@ -69,7 +69,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="{{ route('home') }}"><img src="{{ asset('customer/assets/imgs/theme/logo.png') }}" alt="logo"></a>
+                        <a href="{{ route('home') }}"><img src="{{ asset(config('setting_data.HEADER_LOGO')) }}" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
@@ -96,7 +96,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="{{ route('home') }}"><img src="{{ asset('customer/assets/imgs/theme/logo.png') }}" alt="logo"></a>
+                        <a href="{{ route('home') }}"><img src="{{ asset(config('setting_data.HEADER_LOGO')) }}" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
@@ -128,7 +128,16 @@
                     <div class="hotline d-none d-lg-block">
                         <p><i class="fi-rs-headset"></i><span>Helpline</span> <a href="tel:+919096969667">(+91) 9096969667</a> </p>
                     </div>
-                    <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
+                    {{-- <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p> --}}
+                    <div class="header-action-right d-block">
+                        <div class="header-action-2">
+                            <div class="burger-icon-top" id="google_translate_element"></div>
+                            {{-- <div class="header-action-icon-2 d-block d-lg-none">
+                                <div class="burger-icon burger-icon-white">
+                                </div>
+                            </div> --}}
+                        </div>
+                    </div>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <livewire:customer.header-cart deviceType="mobile" />
@@ -151,7 +160,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}"><img src="{{ asset('customer/assets/imgs/theme/logo.png') }}" alt="logo"></a>
+                    <a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}"><img src="{{ asset(config('setting_data.HEADER_LOGO')) }}" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">

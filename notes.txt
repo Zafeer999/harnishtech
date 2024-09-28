@@ -15,6 +15,7 @@ dark blue footer => #10324a
 3. Check menu for service boy.
 - Done
 4. Add multiple language feature.
+- Done
 5. Id card for service boy similar to any document on dashboard.
 6. Customer demo video for booking explanation.
 7. Check is featured option for services.
@@ -35,9 +36,10 @@ dark blue footer => #10324a
 19. Coupon remove Expiry Count field comment the code.
 - Done.
 20. Show reviews properly on dashboard also for both service and service boy.
-21. Provacy policy, terms n conditions, about us page.
+21. Privacy policy, terms n conditions, about us page.
 22. Share tawk.to credentials with client.
 - Done.
 23. Invoice on orders tab for customer and admin.
 24. Service Boy Documents.
 - NA
+25. Dashboard show counts.
