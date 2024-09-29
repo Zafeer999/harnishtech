@@ -10,11 +10,16 @@ class Order extends Model
 {
     use HasFactory, SoftDeletes;
 
+    // UNASSIGNED ORDER
     const STATUS_PLACED = 0;
+    // PENDING ORDER
     const STATUS_ASSIGNED = 1;
     const STATUS_CONFIRMED = 2;
+    // WORKING ORDER
     const STATUS_PROCESSING = 3;
+    // COMPLETED ORDER
     const STATUS_COMPLETED = 4;
+    // CANCELLED ORDER
     const STATUS_CANCELLED = 5;
     const STATUS_REFUNDED = 6;
     const IS_ASSIGNED = 1;

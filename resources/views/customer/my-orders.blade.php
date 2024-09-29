@@ -249,7 +249,7 @@
                                                                             <td>{{ $order->timeSlot->name }}</td>
                                                                             <td>{{ $item->category['name'] }} : {{ $item->subCategory->name }}</td>
                                                                             <td>₹{{ number_format($order->total, 2) }}</td>
-                                                                            <td><a href="#" class="btn-small d-block">View</a></td>
+                                                                            <td><a href="{{ route('order-invoice', ['id' => $order->id])}}" class="btn-small d-block">View</a></td>
                                                                         </tr>
                                                                     @endforeach
                                                                 @endforeach
