@@ -5509,6 +5509,7 @@ h6.post-title {
 .logo.logo-width-1 a img {
     width: 120px;
     min-width: 120px;
+    max-height: 35px;
 }
 
 .search-style-1 form {
