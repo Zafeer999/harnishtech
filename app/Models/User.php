@@ -29,6 +29,7 @@ class User extends Authenticatable
         'password',
         'is_service_boy',
         'otp',
+        'avatar'
     ];
 
     /**

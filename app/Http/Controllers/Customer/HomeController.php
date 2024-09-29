@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\Masters\StoreContactRequest;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Order;
 use App\Models\Query;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
@@ -82,5 +83,17 @@ class HomeController extends Controller
     public function termsCondition()
     {
         return view('customer.terms-condition');
+    }
+
+    public function orderInvoice($id)
+    {
+        $orderDetail = Order::with(['user.userAddress' => function ($query) {
+            $query->where('is_default', 1);
+        }, 'orderItems.category', 'orderItems.subCategory'])
+            ->whereRelation('user.userAddress', 'is_default', '=', '1')
+            ->find($id);
+        Log::info('Order Detial', [$orderDetail]);
+
+        return view('customer.order-invoice')->with('orderDetail', $orderDetail);
     }
 }

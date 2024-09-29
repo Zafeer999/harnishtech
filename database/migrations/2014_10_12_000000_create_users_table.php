@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('is_service_boy')->default(0);
             $table->string('otp', 10)->nullable();
             $table->unsignedTinyInteger('active_status')->default(1)->comment('1 = active, 0 = inactive');
+            $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

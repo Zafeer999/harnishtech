@@ -1,6 +1,111 @@
 <x-admin.admin-layout>
     <x-slot name="title">Core Bio - Dashboard</x-slot>
 
+    <style>
+        .id-card {
+            margin: 20px 0px;
+            padding: 0px;
+            width: 600px;
+            height: 460px;
+            border: 2px solid rgba(217, 127, 61, 0.815);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.849);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            /* Smooth transition effect */
+        }
+
+        /* Hover effect for the entire card */
+        .id-card:hover {
+            transform: scale(1.01);
+            /* Slightly scale up the card */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            /* Add more shadow on hover */
+            cursor: pointer;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #d97f3d;
+            color: rgb(255, 255, 255);
+            height: 80px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .school-info {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .card-body {
+            display: flex;
+            padding: 20px;
+        }
+
+        .photo img {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .photo img:hover {
+            transform: scale(1.03);
+            border-color: #ce3b0fe5;
+        }
+
+        .info {
+            flex: 1;
+            margin-left: 20px;
+            color: #333;
+        }
+
+        .info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+            /* Smooth transition effect */
+        }
+
+        /* Hover effect for the student name text */
+        .info h3:hover {
+            color: #B2001F;
+            /* Change color on hover */
+        }
+
+        .designation {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            font-size: 14px;
+        }
+
+        table td {
+            padding: 3px;
+        }
+
+        table strong {
+            /* color: #B2001F; */
+            color: #ce3b0fe5;
+        }
+
+        table tr {
+            vertical-align: baseline;
+        }
+    </style>
+
 
     <div class="page-body">
         <!-- Container-fluid starts-->
@@ -13,19 +118,8 @@
                             <div class="card o-hidden border-0">
                                 <div class="bg-blue b-r-4 card-body">
                                     <div class="media static-top-widget">
-                                        <div class="media-body"><span class="m-0">Total Employees</span>
-                                            <h4 class="mb-0 counter"> {{ $totalEmployees }} </h4><i class="icon-bg" data-feather="user"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-3 col-lg-6">
-                            <div class="card o-hidden border-0">
-                                <div class="bg-blue b-r-4 card-body">
-                                    <div class="media static-top-widget">
-                                        <div class="media-body"><span class="m-0">All Order</span>
-                                            <h4 class="mb-0 counter"> {{ $totalCount }} </h4><i class="icon-bg" data-feather="package"></i>
+                                        <div class="media-body"><span class="m-0">Total Count</span>
+                                            <h4 class="mb-0 counter"> {{ $totalAllCount }} </h4><i class="icon-bg" data-feather="package"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -35,7 +129,7 @@
                             <div class="card o-hidden border-0">
                                 <div class="bg-info b-r-4 card-body">
                                     <div class="media static-top-widget">
-                                        <div class="media-body"><span class="m-0">Total Unassigned Order</span>
+                                        <div class="media-body"><span class="m-0">Total Unassigned</span>
                                             <h4 class="mb-0 counter"> {{ $totalUnassignedCount }} </h4><i class="icon-bg" data-feather="user-x"></i>
                                         </div>
                                     </div>
@@ -46,7 +140,7 @@
                             <div class="card o-hidden border-0">
                                 <div class="bg-warning b-r-4 card-body">
                                     <div class="media static-top-widget">
-                                        <div class="media-body"><span class="m-0">Total Pending Order</span>
+                                        <div class="media-body"><span class="m-0">Total Pending</span>
                                             <h4 class="mb-0 counter"> {{ $totalPendingCount }} </h4><i class="icon-bg" data-feather="clock"></i>
                                         </div>
                                     </div>
@@ -57,7 +151,7 @@
                             <div class="card o-hidden border-0">
                                 <div class="bg-danger b-r-4 card-body">
                                     <div class="media static-top-widget">
-                                        <div class="media-body"><span class="m-0">Total Working Order</span>
+                                        <div class="media-body"><span class="m-0">Total Working</span>
                                             <h4 class="mb-0 counter"> {{ $totalWorkingCount }} </h4><i class="icon-bg" data-feather="briefcase"></i>
                                         </div>
                                     </div>
@@ -68,7 +162,7 @@
                             <div class="card o-hidden border-0">
                                 <div class="bg-success b-r-4 card-body">
                                     <div class="media static-top-widget">
-                                        <div class="media-body"><span class="m-0">Total Completed Order</span>
+                                        <div class="media-body"><span class="m-0">Total Completed</span>
                                             <h4 class="mb-0 counter"> {{ $totalCompletedCount }} </h4><i class="icon-bg" data-feather="check-square"></i>
                                         </div>
                                     </div>
@@ -79,13 +173,14 @@
                             <div class="card o-hidden border-0">
                                 <div class="bg-dark text-white b-r-4 card-body">
                                     <div class="media static-top-widget">
-                                        <div class="media-body"><span class="m-0">Total Cancelled Order</span>
+                                        <div class="media-body"><span class="m-0">Total Cancelled</span>
                                             <h4 class="mb-0 counter"> {{ $totalCancelledCount }} </h4><i class="icon-bg" data-feather="x-square"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
                         {{-- <div class="col-sm-6 col-xl-3 col-lg-6">
                             <div class="card o-hidden border-0">
@@ -98,30 +193,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-sm-6 col-xl-3 col-lg-6">
-                            <div class="card o-hidden border-0">
-                                <div class="bg-warning b-r-4 card-body">
-                                    <div class="media static-top-widget">
-                                        <div class="media-body"><span class="m-0">Total Holidays</span>
-                                            <h4 class="mb-0 counter"> {{ $totalHolidays }} </h4><i class="icon-bg" data-feather="home"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-xl-3 col-lg-6">
-                            <div class="card o-hidden border-0">
-                                <div class="bg-danger b-r-4 card-body">
-                                    <div class="media static-top-widget">
-                                        <div class="media-body"><span class="m-0">Total Office</span>
-                                            <h4 class="mb-0 counter"> {{ $totalWards->count() }} </h4><i class="icon-bg" data-feather="briefcase"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
 
@@ -131,7 +202,7 @@
                         <div class="col-9">
                             <div class="row">
                                 {{-- Todays present --}}
-                                {{-- <div class="col-md-6 col-lg-6 col-xl-6 box-col-6">
+                        {{-- <div class="col-md-6 col-lg-6 col-xl-6 box-col-6">
                                     <div class="card custom-card rounded">
                                         <h6 class="card-header rounded bg-primary py-2 px-3 text-center">Today's Present</h6>
                                         <div class="card-body px-3">
@@ -170,129 +241,12 @@
                                         </div>
                                     </div>
                                 </div> --}}
-
-                                {{-- Todays absent --}}
-                                {{-- <div class="col-md-6 col-lg-6 col-xl-6 box-col-6">
-                                    <div class="card custom-card rounded">
-                                        <h6 class="card-header rounded bg-primary py-2 px-3 text-center">Today's Absent</h6>
-                                        <div class="card-body px-3">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label for=""> <a href="{{ route('dashboard.todays-absent-report') }}">{{ $totalEmployees ? round(($todaysAbsentCount/$totalEmployees)*100) : '0' }}%</a> </label>
-                                                    <div class="progress">
-                                                        <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ $totalEmployees ? round(($todaysAbsentCount/$totalEmployees)*100) : '0' }}%" aria-valuenow="{{ $totalEmployees ? round(($todaysAbsentCount/$totalEmployees)*100) : '0' }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <a href="{{ route('dashboard.todays-absent-report') }}"> <strong style="font-size:22px">{{ max($todaysAbsentCount, 0) }} </strong>({{ $totalEmployees ? round(($todaysAbsentCount/$totalEmployees)*100) : '0' }}%)</a> <br>
-                                                    <strong>Absent Count</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer row">
-                                            @php
-                                                $permittedLeaveCount = $todayPunchData->where('check_in', '0000-00-00 00:00:00')->where('punch_by', '2')->count();
-                                            @endphp
-                                            <div class="col-6 col-sm-6">
-                                                <h6>Permitted Leave</h6>
-                                                <h3><span class="counter" style="font-size:22px">{{ $permittedLeaveCount }}</span><span style="font-size:14px">({{ $totalEmployees ? round( ($permittedLeaveCount/$totalEmployees)*100) : '0' }}%)</span></h3>
-                                            </div>
-                                            <div class="col-6 col-sm-6">
-                                                <h6>Non Permitted Leave</h6>
-                                                <h3><span class="counter" style="font-size:22px">{{ max($todaysAbsentCount-$permittedLeaveCount, 0) }}</span><span style="font-size:14px">({{ $totalEmployees ? round((($todaysAbsentCount-$permittedLeaveCount)/$totalEmployees)*100) : '0' }}%)</span></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-
-                                {{-- Leave bifurcation --}}
-                                {{-- <div class="col-md-12 col-lg-12 col-xl-12 box-col-12">
-                                    <div class="card custom-card rounded">
-                                        <h6 class="card-header rounded bg-primary py-2 px-3 text-center">Leave Bifurcation</h6>
-                                        <div class="card-footer row">
-                                            <div class="col-2 col-sm-2">
-                                                <h6>CL</h6>
-                                                <h3 class="counter"> <a href="{{ route('dashboard.todays-leave-bifurcation', ['leave_type_id'=> '6' ]) }}"> {{ $todayPunchData->where('leave_type_id', '6')->count() }}</a></h3>
-                                            </div>
-                                            <div class="col-2 col-sm-2">
-                                                <h6>EL</h6>
-                                                <h3><span class="counter"> <a href="{{ route('dashboard.todays-leave-bifurcation', ['leave_type_id'=> '5' ]) }}"> {{ $todayPunchData->where('leave_type_id', '5')->count() }}</a></span></h3>
-                                            </div>
-                                            <div class="col-2 col-sm-2">
-                                                <h6>ML</h6>
-                                                <h3><span class="counter"> <a href="{{ route('dashboard.todays-leave-bifurcation', ['leave_type_id'=> '7' ]) }}"> {{ $todayPunchData->where('leave_type_id', '7')->count() }}</a></span></h3>
-                                            </div>
-                                            <div class="col-3 col-sm-3">
-                                                <h6>Other Leave</h6>
-                                                <h3><span class="counter"><a href="{{ route('dashboard.todays-leave-bifurcation', ['leave_type_id'=> '4' ]) }}">{{ $todayPunchData->where('leave_type_id', '4')->count() }}</a></span></h3>
-                                            </div>
-                                            <div class="col-3 col-sm-3">
-                                                <h6>Half Day</h6>
-                                                <h3><span class="counter"><a href="{{ route('dashboard.todays-leave-bifurcation', ['leave_type_id'=> '0' ]) }}">{{ $todayPunchData->where('leave_type_id', '0')->count() }}</a></span></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                            </div>
-
-                            {{-- Repeatedly latemark / absent --}}
-                            {{-- <div class="row">
-                                @php
-                                    $repeatedlyLateMark = $punchData->groupBy('emp_code')->countBy( fn($item) => $item->where('is_latemark', '>', '0')->count() > 1 );
-                                    $repeatedlyLateMark = array_key_exists('1', $repeatedlyLateMark->toArray()) ? $repeatedlyLateMark['1'] : 0;
-                                @endphp
-
-                                <div class="col-md-6 col-lg-6 col-xl-6 box-col-6">
-                                    <div class="card custom-card rounded">
-                                        <h6 class="card-header rounded bg-primary py-2 px-3 text-center">Repeatedly Late Mark</h6>
-                                        <div class="card-body px-3">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label for="">{{ $totalEmployees ? round(($repeatedlyLateMark/$totalEmployees)*100) : '0' }}%</label>
-                                                    <div class="progress">
-                                                        <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ $totalEmployees ? round(($repeatedlyLateMark/$totalEmployees)*100) : '0' }}%" aria-valuenow="{{ $totalEmployees ? round(($repeatedlyLateMark/$totalEmployees)*100) : '0' }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <strong style="font-size:22px">{{ $repeatedlyLateMark }} </strong>({{ $totalEmployees ? round(($repeatedlyLateMark/$totalEmployees)*100) : '0' }}%) <br>
-                                                    <strong>Repeatedly Late Mark</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                @php
-                                    $regularEmployeeCount = $punchData->groupBy('emp_code')->count();
-                                    $repeatedlyAbsent = $totalEmployees-$regularEmployeeCount;
-                                @endphp
-
-                                <div class="col-md-6 col-lg-6 col-xl-6 box-col-6">
-                                    <div class="card custom-card rounded">
-                                        <h6 class="card-header rounded bg-primary py-2 px-3  text-center">Repeatedly Absent</h6>
-                                        <div class="card-body px-3">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label for="">{{ $totalEmployees ? round(($repeatedlyAbsent/$totalEmployees)*100) : '0' }}%</label>
-                                                    <div class="progress">
-                                                        <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: {{ $totalEmployees ? round(($repeatedlyAbsent/$totalEmployees)*100) : '0' }}%" aria-valuenow="{{ $totalEmployees ? round(($repeatedlyAbsent/$totalEmployees)*100) : '0' }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <strong style="font-size:22px">{{ max($repeatedlyAbsent, 0) }} </strong>({{ $totalEmployees ? round(($repeatedlyAbsent/$totalEmployees)*100) : '0' }}%) <br>
-                                                    <strong>Repeatedly Absent</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                        </div>
+                    </div>
+                </div>
 
 
-                        {{-- Side recent 6 attendance list --}}
-                        {{-- <div class="col-3">
+                {{-- Side recent 6 attendance list --}}
+                {{-- <div class="col-3">
 
                             <h6 class="mb-4">Today's Latest 6 Records</h6>
                             @php
@@ -317,12 +271,74 @@
                             </div>
 
                         </div> --}}
-                    </div>
+            </div>
+        </div>
+
+
+        {{-- ID Card --}}
+
+        <div class="id-card">
+            <div class="card-header">
+                <div class="logo">
+                    <img src="{{ asset(config('setting_data.HEADER_LOGO')) }}" style="width: 160px; height:55px" alt="Logo">
                 </div>
+                <div class="school-info">
+                    <h2 class="text-start" style="text-align: center">{{ ucfirst(env('APP_NAME')) }}</h2>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="photo">
+                    <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('customer/assets/imgs/profile-img.png') }}" class="img-fluid" alt="profile photo">
+                    {{-- <img src=" {{asset(Auth::user()->avatar) ?? asset('customer/assets/imgs/profile-img.png') }}" class="img-fluid" alt="profile photo"> --}}
+                </div>
+                <div class="info">
+                    <h3><span>{{ Auth::user()->name }}</span></h3>
+                    <table>
+                        <tr>
+                            <td><strong>EMP ID: </strong></td>
+                            <td><span>{{ Auth::user()->serviceBoy->first()->emp_code }}</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mobile: </strong></td>
+                            <td><span>{{ Auth::user()->mobile }}</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email: </strong></td>
+                            <td><span>{{ Auth::user()->email }}</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>DOJ: </strong></td>
+                            <td><span>{{ Auth::user()->serviceBoy->first()->doj }}</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>DOB: </strong></td>
+                            <td><span>{{ Auth::user()->serviceBoy->first()->dob }}</span></td>
+                        </tr>
+                        {{-- <tr>
+                                    <td><strong>Gender:</strong></td>
+                                    <td>{{ Auth::user()->serviceBoy->first()->gender }}</td>
+                                </tr> --}}
+                        <tr>
+                            <td><strong>Address: </strong></td>
+                            <td><span> {{ Auth::user()->serviceBoy->first()->address }} </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Services: </strong></td>
+                            <td><span>
+                                    @foreach (Auth::user()->services as $service)
+                                        {{ $service->category->name }},
+                                    @endforeach
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
 
 
-                {{-- Shift wise details --}}
-                {{-- <div class="col-12 px-0 mt-4">
+        {{-- Shift wise details --}}
+        {{-- <div class="col-12 px-0 mt-4">
                     <div class="row">
                         <div class="card rounded">
                             <div class="card-header px-2 py-3">
@@ -401,8 +417,8 @@
 
 
 
-                {{-- Office/Ward wise details --}}
-                {{-- <div class="col-12 px-0">
+        {{-- Office/Ward wise details --}}
+        {{-- <div class="col-12 px-0">
                     @if ($is_admin && !request()->ward)
                         <div class="row">
                             <div class="card rounded">
@@ -449,10 +465,10 @@
 
 
 
-            </div>
+    </div>
 
-        </div>
-        <!-- Container-fluid Ends-->
+    </div>
+    <!-- Container-fluid Ends-->
     </div>
 
     @push('scripts')

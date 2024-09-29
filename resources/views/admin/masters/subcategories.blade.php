@@ -182,6 +182,7 @@
                                             <th>Price</th>
                                             <th>Image</th>
                                             <th>Is Featured</th>
+                                            <th>Rating</th>
                                             <th>Description</th>
                                             <th>Action</th>
                                         </tr>
@@ -197,13 +198,16 @@
                                                     <p> {{ $subcategory->name }} </p>
                                                 </td>
                                                 <td>
-                                                    <p> {{ $subcategory->min_price }} </p>
+                                                    <p> ₹{{ $subcategory->min_price }} </p>
                                                 </td>
                                                 <td>
                                                     <img src="{{ $subcategory->image }}" style="max-width: 100px; max-height: 100px;" alt="subcategory_img">
                                                 </td>
                                                 <td>
                                                     <p> {{ $subcategory->is_featured ? 'Yes' : 'No' }} </p>
+                                                </td>
+                                                <td>
+                                                    <p> {{ number_format($subcategory->avg_rating, 2) }} </p>
                                                 </td>
                                                 <td>
                                                     <p> {{ Str::limit(htmlspecialchars_decode($subcategory->description), 80) }} </p>

@@ -43,6 +43,7 @@ Route::get('/services/category/{category}', [App\Http\Controllers\Customer\Servi
 Route::get('carts', [App\Http\Controllers\Customer\CartController::class, 'index'])->name('carts');
 Route::post('carts', [App\Http\Controllers\Customer\CartController::class, 'store'])->name('carts.store');
 
+Route::get('order-invoice/{id}', [App\Http\Controllers\Customer\HomeController::class, 'orderInvoice'])->name('order-invoice');
 
 
 // Guest Users
@@ -88,6 +89,8 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
 
 
         // Serveice Boy Order Routes
+        // Route::get('dashboard', [App\Http\Controllers\ServiceBoy\DashboardController::class, 'index'])->name('dashboard');
+
         Route::get('pending-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'pending'])->name('orders.pending');
         Route::get('working-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'working'])->name('orders.working');
         Route::get('completed-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'completed'])->name('orders.completed');
