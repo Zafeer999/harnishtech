@@ -223,7 +223,7 @@
                                                     <p>{{ $completedOrder->serviced_on }}</p>
                                                 </td>
                                                 <td style="min-width: 150px">
-                                                    <p>Payment Type: <strong>{{ $order->payment_type_text }}</strong> <br> Payment Method: <strong>{{ $order->payment_method == 1 ? "Online" : "Cash"}}</strong> <br> Payment Status: <strong>{{ $order->payment_text}}</strong> </p>
+                                                    <p>Payment Type: <strong>{{ $completedOrder->payment_type_text }}</strong> <br> Payment Method: <strong>{{ $completedOrder->payment_method == 1 ? "Online" : "Cash"}}</strong> <br> Payment Status: <strong>{{ $completedOrder->payment_text}}</strong> </p>
                                                 </td>
                                             </tr>
                                         @endforeach

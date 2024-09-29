@@ -76,7 +76,7 @@
 
                                         <div class="col-md-4">
                                             <label class="col-form-label" for="support_email">Footer Email <span class="text-danger">*</span></label>
-                                            <input class="form-control" name="support_email" value="{{ $footerEmail }}" type="text" placeholder="Enter Support Email">
+                                            <input class="form-control" name="support_email" value="{{ $supportEmail }}" type="text" placeholder="Enter Support Email">
                                             <span class="text-danger error-text support_email_err"></span>
                                         </div>
 
