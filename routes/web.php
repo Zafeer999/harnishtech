@@ -94,7 +94,9 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
         Route::get('unassigned-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'unassigned'])->name('orders.unassigned');
         Route::put('orders/{order}/claim', [App\Http\Controllers\ServiceBoy\OrderController::class, 'claimUnassigned'])->name('orders.claim');
         Route::get('orders/{order}/service-boys', [App\Http\Controllers\ServiceBoy\OrderController::class, 'orderGetServiceBoys'])->name('orders.service-boys');
-        Route::put('assign-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'assignOrder'])->name('orders.assign');
+        Route::put('assign-orders/{order}', [App\Http\Controllers\ServiceBoy\OrderController::class, 'assignOrder'])->name('orders.assign');
+        Route::put('orders-change-status/{order}', [App\Http\Controllers\ServiceBoy\OrderController::class, 'markConfirmProcessing'])->name('orders.change-status');
+        Route::post('orders-upload-photo/{order}', [App\Http\Controllers\ServiceBoy\OrderController::class, 'orderUploadPhoto'])->name('orders.upload-photo');
 
 
 

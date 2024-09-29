@@ -75,7 +75,7 @@
                                                 </td>
                                                 <td>
                                                     @can('orders.transfer')
-                                                        <button class="btn btn-dark assign-order px-2 py-1" title="Assign orders" data-id="{{ $order->id }}"><i data-feather="check-circle"></i> Assign Order</button>
+                                                        <button class="btn btn-dark assign-order px-2 py-1" title="Assign orders" data-id="{{ $order->id }}"><i data-feather="check-circle"></i> {{ $order->is_assigned ? 'Transfer Order' : 'Assign Order' }}</button>
                                                     @endcan
                                                 </td>
                                             </tr>
@@ -156,7 +156,7 @@
             success: function(data, textStatus, jqXHR) {
                 if (!data.error) {
                     $("#assignOrderForm input[name='assign_order_id']").val(model_id);
-                    $("#assignOrderForm #service_boy").html(data.serviceBoyHtml);
+                    $("#assignOrderForm #service_boy").html(data.serviceBoysHtml);
                     $("#assignOrderForm #assign_order_no").text(data.order.order_no);
                     $('#assign-order-modal').modal('show');
                 } else {
@@ -171,7 +171,7 @@
 </script>
 
 
-<!-- Update Service Boy Services -->
+<!-- Assign Order to Service Boy -->
 <script>
     $("#assignOrderForm").submit(function(e) {
         e.preventDefault();

@@ -184,14 +184,12 @@
                                             <th>Order No</th>
                                             <th>Customer Details</th>
                                             <th>Service</th>
-                                            <th>Is Assigned</th>
                                             <th>Timeslot</th>
                                             <th>Status</th>
                                             <th>Charges</th>
                                             <th>Scheduled_on</th>
                                             <th>Serviced_on</th>
                                             <th>Payment Details</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -225,17 +223,8 @@
                                                     <p>{{ $completedOrder->serviced_on }}</p>
                                                 </td>
                                                 <td style="min-width: 150px">
-                                                    <p>Payment Type: {{ $completedOrder->payment_type }} <br> Payment Method: {{ $completedOrder->payment_method }} <br> Payment Status:{{ $pendingOrder->payment_status }} </p>
+                                                    <p>Payment Type: <strong>{{ $order->payment_type_text }}</strong> <br> Payment Method: <strong>{{ $order->payment_method == 1 ? "Online" : "Cash"}}</strong> <br> Payment Status: <strong>{{ $order->payment_text}}</strong> </p>
                                                 </td>
-
-                                                {{-- <td>
-                                                    @can('banner_sliders.edit')
-                                                        <button class="edit-element btn btn-primary px-2 py-1" title="Edit bannerslider" data-id="{{ $bannerSlider->id }}"><i data-feather="edit"></i></button>
-                                                    @endcan
-                                                    @can('banner_sliders.delete')
-                                                        <button class="btn btn-dark rem-element px-2 py-1" title="Delete bannerslider" data-id="{{ $bannerSlider->id }}"><i data-feather="trash-2"></i> </button>
-                                                    @endcan
-                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>

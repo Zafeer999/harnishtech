@@ -9,4 +9,5 @@
   'FOOTER_ADDRESS' => 'Near TDCC bank At,post - kudus, tal - wada, dist - Palghar',
   'FOOTER_PHONE' => '(+91) 9096969667 /(+91) 7875000141',
   'FOOTER_HOURS' => '10:00 - 18:00, Mon - Sat',
+  'SUPPORT_EMAIL' => 'contactus@maxg.in',
 );

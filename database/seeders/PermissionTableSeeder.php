@@ -345,6 +345,16 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'orders.transfer',
                 'group' => 'orders',
             ],
+            [
+                'id' => 67,
+                'name' => 'sb-orders.upload-photo',
+                'group' => 'sb_orders',
+            ],
+            [
+                'id' => 68,
+                'name' => 'sb-orders.mark-cp',
+                'group' => 'sb_orders',
+            ],
         ];
 
         foreach ($permissions as $permission) {

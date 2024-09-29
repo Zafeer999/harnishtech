@@ -96,22 +96,6 @@
                         </li>
                     @endcanany
 
-                    @can(['visitors.view'])
-                        <li class="dropdown">
-                            <a class="nav-link menu-title link-nav {{ request()->routeIs('visitors.index') ? 'active-bg' : '' }}" href="{{ route('visitors.index') }}">
-                                <i data-feather="user-plus"></i><span>Visitors</span>
-                            </a>
-                        </li>
-                    @endcan
-
-                    @can(['queries.view'])
-                        <li class="dropdown">
-                            <a class="nav-link menu-title link-nav {{ request()->routeIs('queries.index') ? 'active-bg' : '' }}" href="{{ route('queries.index') }}">
-                                <i data-feather="message-square"></i><span>Queries</span>
-                            </a>
-                        </li>
-                    @endcan
-
                     @can(['orders.view'])
                         <li class="dropdown">
                             <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.index') ? 'active-bg' : '' }}" href="{{ route('orders.index') }}">
@@ -121,24 +105,7 @@
                     @endcan
 
 
-                    @can('employees.view')
-                        <li class="dropdown">
-                            <a class="nav-link menu-title" href="javascript:void(0)">
-                                <i data-feather="users"></i><span>Employees</span>
-                            </a>
-                            <ul class="nav-submenu menu-content">
-                                @can('employees.create')
-                                    <li><a href="{{ route('employees.create') }}">Add </a></li>
-                                @endcan
-                                @can('employees.view')
-                                    <li><a href="{{ route('employees.index') }}">Employees List </a></li>
-                                @endcan
-                            </ul>
-                        </li>
-                    @endcan
-
-
-                    {{-- Service Boy Navigations --}}
+                    {{-- Service boy Dashboard --}}
                     @can('sb-dashboard.view')
                         <li class="dropdown">
                             <a class="nav-link menu-title link-nav {{ request()->routeIs('dashboard') ? 'active-bg' : '' }}" href="{{ route('dashboard') }}">
@@ -146,6 +113,14 @@
                         </li>
                     @endcan
 
+                    @can('sb-orders.unassigned')
+                        <li class="dropdown">
+                            <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.unassigned') ? 'active-bg' : '' }}" href="{{ route('orders.unassigned') }}">
+                                <i data-feather="alert-octagon"></i><span>Unassigned Orders</span>
+                                <span class="badge rounded-pill bg-dark float-end mt-1">{{ $unassignedCount }}</span>
+                            </a>
+                        </li>
+                    @endcan
 
                     @can(['sb-orders.pending', 'sb-orders.working', 'sb-orders.completed'])
                         <li class="dropdown">
@@ -166,6 +141,42 @@
                         </li>
                     @endcan
 
+                    @can(['visitors.view'])
+                        <li class="dropdown">
+                            <a class="nav-link menu-title link-nav {{ request()->routeIs('visitors.index') ? 'active-bg' : '' }}" href="{{ route('visitors.index') }}">
+                                <i data-feather="user-plus"></i><span>Visitors</span>
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can(['queries.view'])
+                        <li class="dropdown">
+                            <a class="nav-link menu-title link-nav {{ request()->routeIs('queries.index') ? 'active-bg' : '' }}" href="{{ route('queries.index') }}">
+                                <i data-feather="message-square"></i><span>Queries</span>
+                            </a>
+                        </li>
+                    @endcan
+
+
+
+
+                    @can('employees.view')
+                        <li class="dropdown">
+                            <a class="nav-link menu-title" href="javascript:void(0)">
+                                <i data-feather="users"></i><span>Employees</span>
+                            </a>
+                            <ul class="nav-submenu menu-content">
+                                @can('employees.create')
+                                    <li><a href="{{ route('employees.create') }}">Add </a></li>
+                                @endcan
+                                @can('employees.view')
+                                    <li><a href="{{ route('employees.index') }}">Employees List </a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+
+
                     {{-- @can(['sb-orders.view'])
                         <li class="dropdown">
                             <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.index') ? 'active-bg' : '' }}" href="{{ route('orders.index') }}">
@@ -173,14 +184,6 @@
                             </a>
                         </li>
                     @endcan --}}
-                    @can('sb-orders.unassigned')
-                        <li class="dropdown">
-                            <a class="nav-link menu-title link-nav {{ request()->routeIs('orders.unassigned') ? 'active-bg' : '' }}" href="{{ route('orders.unassigned') }}">
-                                <i data-feather="alert-octagon"></i><span>Unassigned Orders</span>
-                                <span class="badge rounded-pill bg-dark float-end mt-1">{{ $unassignedCount }}</span>
-                            </a>
-                        </li>
-                    @endcan
 
 
 

@@ -89,7 +89,7 @@
                                                         <button class="claim-order btn btn-danger px-2 py-1" title="Claim Order" data-id="{{ $order->id }}"><i data-feather="anchor"></i> Claim Order</button>
                                                         @endcan
                                                     @can('orders.transfer')
-                                                        <button class="assign-order btn btn-danger px-2 py-1" title="Assign Order" data-id="{{ $order->id }}"><i data-feather="anchor"></i> Assign Order</button>
+                                                        <button class="btn btn-dark assign-order px-2 py-1" title="Assign orders" data-id="{{ $order->id }}"><i data-feather="check-circle"></i> {{ $order->is_assigned ? 'Transfer Order' : 'Assign Order' }}</button>
                                                     @endcan
                                                 </td>
                                             </tr>
@@ -105,6 +105,47 @@
             </div>
         </div>
         <!-- Container-fluid Ends -->
+    </div>
+
+    {{-- Assign Order Modal --}}
+    <div class="modal fade" id="assign-order-modal" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <form action="" id="assignOrderForm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Assign Order</h5>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <input type="hidden" id="assign_order_id" name="assign_order_id" value="">
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label" for="name">Order No : </label>
+                            <div class="col-sm-9">
+                                <h6 class="pt-2">#<span id="assign_order_no"></span></h6>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label" for="name">Service Boy : </label>
+                            <div class="col-sm-9">
+                                <select class="js-example-basic-single" id="service_boy" name="service_boy">
+                                    <option value="">--Select Service Boy--</option>
+                                </select>
+                                <span class="text-danger error-text service_boy_err"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" id="assignOrderSubmit" type="submit">Change</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
 
@@ -157,3 +198,96 @@
 </script>
 
 
+
+<!-- Open Assign Services Modal-->
+<script>
+    $("#datatable-tabletools").on("click", ".assign-order", function(e) {
+        e.preventDefault();
+        var model_id = $(this).attr("data-id");
+        var url = "{{ route('orders.service-boys', ':model_id') }}";
+        $('#assign_order_id').val(model_id);
+
+        $.ajax({
+            url: url.replace(':model_id', model_id),
+            type: 'GET',
+            data: {
+                '_token': "{{ csrf_token() }}"
+            },
+            success: function(data, textStatus, jqXHR) {
+                if (!data.error) {
+                    $("#assignOrderForm input[name='assign_order_id']").val(model_id);
+                    $("#assignOrderForm #service_boy").html(data.serviceBoysHtml);
+                    $("#assignOrderForm #assign_order_no").text(data.order.order_no);
+                    $('#assign-order-modal').modal('show');
+                } else {
+                    swal("Error!", data.error, "error");
+                }
+            },
+            error: function(error, jqXHR, textStatus, errorThrown) {
+                swal("Error!", "Some thing went wrong", "error");
+            },
+        });
+    });
+</script>
+
+
+<!-- Assign Order to Service Boy -->
+<script>
+    $("#assignOrderForm").submit(function(e) {
+        e.preventDefault();
+        $("#assignOrderSubmit").prop('disabled', true);
+
+        var formdata = new FormData(this);
+        formdata.append('_method', 'PUT');
+        var model_id = $('#assign_order_id').val();
+        var url = "{{ route('orders.assign', ':model_id') }}";
+
+        $.ajax({
+            url: url.replace(':model_id', model_id),
+            type: 'POST',
+            data: formdata,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $("#assignOrderSubmit").prop('disabled', false);
+                if (!data.error2)
+                    swal("Successful!", data.success, "success")
+                    .then((action) => {
+                        $("#assign-order-modal").modal('hide');
+                    });
+                else
+                    swal("Error!", data.error2, "error");
+            },
+            statusCode: {
+                422: function(responseObject, textStatus, jqXHR) {
+                    $("#assignOrderSubmit").prop('disabled', false);
+                    resetErrors();
+                    printErrMsg(responseObject.responseJSON.errors);
+                },
+                500: function(responseObject, textStatus, errorThrown) {
+                    $("#assignOrderSubmit").prop('disabled', false);
+                    swal("Error occured!", "Something went wrong please try again", "error");
+                }
+            }
+        });
+
+        function resetErrors() {
+            var form = document.getElementById('assignOrderForm');
+            var data = new FormData(form);
+            for (var [key, value] of data) {
+                $('.' + key + '_err').text('');
+                $('#' + key).removeClass('is-invalid');
+                $('#' + key).addClass('is-valid');
+            }
+        }
+
+        function printErrMsg(msg) {
+            $.each(msg, function(key, value) {
+                $('.' + key + '_err').text(value);
+                $('#' + key).addClass('is-invalid');
+                $('#' + key).removeClass('is-valid');
+            });
+        }
+
+    });
+</script>

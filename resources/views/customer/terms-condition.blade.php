@@ -57,7 +57,7 @@
                                         <p><strong>Country</strong> refers to: Maharashtra, India</p>
                                     </li>
                                     <li>
-                                        <p><strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Interwebs.</p>
+                                        <p><strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Harnish Technical Service.</p>
                                     </li>
                                     <li>
                                         <p><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</p>
@@ -73,7 +73,7 @@
                                         <p><strong>Third-party Social Media Service</strong> means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.</p>
                                     </li>
                                     <li>
-                                        <p><strong>Website</strong> refers to Interwebs, accessible from <a href="https://www.interwebs.co.in" rel="external nofollow noopener" target="_blank">https://www.interwebs.co.in</a></p>
+                                        <p><strong>Website</strong> refers to Harnish Technical Service, accessible from <a href="{{ env('APP_URL') }}" rel="external nofollow noopener" target="_blank">{{ env('APP_URL') }}</a></p>
                                     </li>
                                     <li>
                                         <p><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
@@ -153,13 +153,13 @@
                                 <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
                                 <ul>
                                     <li>
-                                        <p>By email: contactus@interwebs.co.in</p>
+                                        <p>By email: {{ config('site_data.SUPPORT_EMAIL') }}</p>
                                     </li>
                                     <li>
-                                        <p>By visiting this page on our website: <a href="https://www.interwebs.co.in" rel="external nofollow noopener" target="_blank">https://www.interwebs.co.in</a></p>
+                                        <p>By visiting this page on our website: <a href="{{ env('APP_URL') }}" rel="external nofollow noopener" target="_blank">{{ env('APP_URL') }}</a></p>
                                     </li>
                                     <li>
-                                        <p>By phone number: 8287959364</p>
+                                        <p>By phone number: {{ config('setting_data.FOOTER_PHONE') }}</p>
                                     </li>
                                 </ul>
 
