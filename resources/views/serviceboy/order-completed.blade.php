@@ -191,7 +191,7 @@
                                             <th>Scheduled_on</th>
                                             <th>Serviced_on</th>
                                             <th>Payment Details</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
