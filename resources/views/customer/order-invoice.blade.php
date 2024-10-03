@@ -32,7 +32,8 @@
                         <header class="as-header header-layout1">
                             <div class="row align-items-center justify-content-between">
                                 <div class="col-auto">
-                                    <div class="header-logo"><a href="index.html"><img src="assets/img/logo.svg" alt="Invce"></a></div>
+                                    {{-- <div class="header-logo"><a href="index.html"><img src="{{ asset('assets/invoice-assets/img/logo.svg') }}" alt="Invce"></a></div> --}}
+                                    <div class="header-logo"><a href="index.html"><img src="{{ asset(config('setting_data.HEADER_LOGO')) }}" style="width: 200px" alt="Invce"></a></div>
                                 </div>
                                 <div class="col-auto">
                                     <h1 class="big-title">Invoice</h1>
@@ -41,7 +42,7 @@
                             <div class="header-bottom">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <div class="border-line"><img src="assets/img/bg/line_pattern.svg" alt="line"></div>
+                                        <div class="border-line"><img src="{{ asset('assets/invoice-assets/img/bg/line_pattern.svg') }}" alt="line"></div>
                                     </div>
                                     <div class="col-auto">
                                         <p class="invoice-number me-4"><b>Order No: </b>{{ $orderDetail->order_no }}</p>
@@ -78,29 +79,39 @@
                                 <tr>
                                     <th>Service</th>
                                     <th>Service Description</th>
-                                    <th>GST(%)</th>
+                                    <th>Tax Amount</th>
                                     <th>Charges</th>
                                     <th>Service Charge</th>
-                                    <th>Total</th>
+                                    <th>Amount</th>
+                                    <th>Sub Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        @foreach ($orderDetail->orderItems as $item)
+                                @foreach ($orderDetail->orderItems as $item)
+                                    <tr>
+                                        <td>
                                             <span>{{ $item->subCategory['name'] }}</span>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($orderDetail->orderItems as $item)
+                                        </td>
+                                        <td>
                                             <span>{{ $item->category['name'] }}</span>
-                                        @endforeach
-                                    </td>
-                                    <td>{{ $orderDetail->gst_charge }}%</td>
-                                    <td>₹{{ $orderDetail->charges }}</td>
-                                    <td>₹{{ $orderDetail->service_charge }}</td>
-                                    <td>₹{{ $orderDetail->total }}</td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <span>₹{{ $orderDetail->gst_charge }}</span>
+                                        </td>
+                                        <td>
+                                            <span>₹{{ $orderDetail->charges }}</span>
+                                        </td>
+                                        <td>
+                                            <span>₹{{ $orderDetail->service_charge }}</span>
+                                        </td>
+                                        <td>
+                                            <span>₹{{ $item->amount }}</span>
+                                        </td>
+                                        <td>
+                                            <span>₹{{ $subTotal = $orderDetail->gst_charge + $orderDetail->charge + $orderDetail->service_charge + $item->amount }}</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                                 <tr>
                                     <td colspan="5">&nbsp;</td>
@@ -108,21 +119,36 @@
                             </tbody>
                         </table>
                         <div class="row justify-content-between">
-                            <div class="col-auto">
+                            {{-- <div class="col-auto">
                                 <div class="invoice-left"><b>Terms & Conditions</b>
                                     <p class="mb-0">Authoritatively envisioneer business<br>action items through parallel sources.</p>
+                                </div>
+                            </div> --}}
+                            <div class="col-auto">
+                                <div class="invoice-left">
+                                    <p><strong>Customer Name: </strong> <span>{{$orderDetail->user->name}}</span></p>
+                                    <p><strong>Mobile No.:</strong> <span>+91{{$orderDetail->user->mobile}}</span></p>
                                 </div>
                             </div>
                             <div class="col-auto">
                                 <table class="total-table">
-                                    <tr>
+                                    {{-- <tr>
                                         <th>Tax:</th>
                                         <td>₹{{ $taxAmount = ($orderDetail->total * $orderDetail->gst_charge) / 100 }}</td>
-                                    </tr>
+                                    </tr> --}}
+                                    @php
+                                        $grandTotal = 0;
+                                    @endphp
                                     <tr>
-                                        <th>Total:</th>
-                                        <td>₹{{ $orderDetail->total }}</td>
+                                        <td>Grand Total: </td>
+                                        {{-- @foreach ($orderDetail as $item) --}}
+                                        <td> <span>{{ $grandTotal = +$orderDetail->total }}</span> </td>
+                                        {{-- @endforeach --}}
                                     </tr>
+                                    {{-- <tr>
+                                        <th>Grand Total:</th>
+                                        <td>₹{{ $orderDetail->total }}</td>
+                                    </tr> --}}
                                 </table>
                             </div>
                         </div>
@@ -137,11 +163,14 @@
                                 <path
                                     d="M11.9688 8.46875C12.1146 8.32292 12.2917 8.25 12.5 8.25C12.7083 8.25 12.8854 8.32292 13.0312 8.46875C13.1771 8.61458 13.25 8.79167 13.25 9C13.25 9.20833 13.1771 9.38542 13.0312 9.53125C12.8854 9.67708 12.7083 9.75 12.5 9.75C12.2917 9.75 12.1146 9.67708 11.9688 9.53125C11.8229 9.38542 11.75 9.20833 11.75 9C11.75 8.79167 11.8229 8.61458 11.9688 8.46875ZM13.5 5.5C14.1875 5.5 14.7708 5.75 15.25 6.25C15.75 6.72917 16 7.3125 16 8V12C16 12.1458 15.9479 12.2708 15.8438 12.375C15.7604 12.4583 15.6458 12.5 15.5 12.5H13.5V15.5C13.5 15.6458 13.4479 15.7604 13.3438 15.8438C13.2604 15.9479 13.1458 16 13 16H3C2.85417 16 2.72917 15.9479 2.625 15.8438C2.54167 15.7604 2.5 15.6458 2.5 15.5V12.5H0.5C0.354167 12.5 0.229167 12.4583 0.125 12.375C0.0416667 12.2708 0 12.1458 0 12V8C0 7.3125 0.239583 6.72917 0.71875 6.25C1.21875 5.75 1.8125 5.5 2.5 5.5V1C2.5 0.729167 2.59375 0.5 2.78125 0.3125C2.96875 0.104167 3.1875 0 3.4375 0H10.375C10.7917 0 11.1458 0.145833 11.4375 0.4375L13.0625 2.0625C13.3542 2.35417 13.5 2.70833 13.5 3.125V5.5ZM4 1.5V5.5H12V3.5H10.5C10.3542 3.5 10.2292 3.45833 10.125 3.375C10.0417 3.27083 10 3.14583 10 3V1.5H4ZM12 14.5V12.5H4V14.5H12ZM14.5 11V8C14.5 7.72917 14.3958 7.5 14.1875 7.3125C14 7.10417 13.7708 7 13.5 7H2.5C2.22917 7 1.98958 7.10417 1.78125 7.3125C1.59375 7.5 1.5 7.72917 1.5 8V11H14.5Z"
                                     fill="white" />
-                            </svg> <span>Print</span></button> <button id="download_btn" class="download_btn"><svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            </svg> <span>Print</span></button>
+                        {{-- <button id="download_btn" class="download_btn"><svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M16.5 9C16.9167 9 17.2708 9.14583 17.5625 9.4375C17.8542 9.72917 18 10.0833 18 10.5V14.5C18 14.9167 17.8542 15.2708 17.5625 15.5625C17.2708 15.8542 16.9167 16 16.5 16H1.5C1.08333 16 0.729167 15.8542 0.4375 15.5625C0.145833 15.2708 0 14.9167 0 14.5V10.5C0 10.0833 0.145833 9.72917 0.4375 9.4375C0.729167 9.14583 1.08333 9 1.5 9H4.375L2.9375 7.5625C2.47917 7.08333 2.375 6.54167 2.625 5.9375C2.875 5.3125 3.33333 5 4 5H6V1.5C6 1.08333 6.14583 0.729167 6.4375 0.4375C6.72917 0.145833 7.08333 0 7.5 0H10.5C10.9167 0 11.2708 0.145833 11.5625 0.4375C11.8542 0.729167 12 1.08333 12 1.5V5H14C14.6667 5 15.125 5.3125 15.375 5.9375C15.6458 6.54167 15.5417 7.08333 15.0625 7.5625L13.625 9H16.5ZM4 6.5L9 11.5L14 6.5H10.5V1.5H7.5V6.5H4ZM16.5 14.5V10.5H12.125L10.0625 12.5625C9.77083 12.8542 9.41667 13 9 13C8.58333 13 8.22917 12.8542 7.9375 12.5625L5.875 10.5H1.5V14.5H16.5ZM13.9688 13.0312C13.8229 12.8854 13.75 12.7083 13.75 12.5C13.75 12.2917 13.8229 12.1146 13.9688 11.9688C14.1146 11.8229 14.2917 11.75 14.5 11.75C14.7083 11.75 14.8854 11.8229 15.0312 11.9688C15.1771 12.1146 15.25 12.2917 15.25 12.5C15.25 12.7083 15.1771 12.8854 15.0312 13.0312C14.8854 13.1771 14.7083 13.25 14.5 13.25C14.2917 13.25 14.1146 13.1771 13.9688 13.0312Z"
                                     fill="white" />
-                            </svg> <span>Download</span></button></div>
+                            </svg> <span>Download</span>
+                        </button> --}}
+                    </div>
                 </div>
             </main>
         </div>
