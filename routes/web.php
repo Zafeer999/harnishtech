@@ -37,7 +37,7 @@ Route::delete('/user/address/{id}', [App\Http\Controllers\Customer\HomeControlle
 // Services
 Route::get('/services', [App\Http\Controllers\Customer\ServiceController::class, 'index'])->name('services');
 Route::get('/services/{service}', [App\Http\Controllers\Customer\ServiceController::class, 'show'])->name('services.show');
-Route::get('/services/category/{category}', [App\Http\Controllers\Customer\ServiceController::class, 'serviceByCategory'])->name('services-by-category');
+Route::get('/services-category/{category?}', [App\Http\Controllers\Customer\ServiceController::class, 'serviceByCategory'])->name('services-by-category');
 
 
 

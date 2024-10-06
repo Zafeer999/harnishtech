@@ -1,5 +1,5 @@
 <x-admin.admin-layout>
-    <x-slot name="title">{{ auth()->user()->tenant_name }} - Banner Slider</x-slot>
+    <x-slot name="title">{{ auth()->user()->tenant_name }} - Site Settings</x-slot>
 
     <div class="page-body">
         <div class="container-fluid">

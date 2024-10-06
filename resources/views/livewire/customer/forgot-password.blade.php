@@ -1,8 +1,8 @@
 <div>
     @if ($step == 1)
         <div class="form-group">
-            <label for="form-label">Email</label>
-            <input type="text" class="form-control @error('email') is-invalid @enderror"  name="email" wire:model.defer="email" placeholder="Enter your email">
+            <label for="form-label">Email/Mobile</label>
+            <input type="text" class="form-control @error('email') is-invalid @enderror"  name="email" wire:model.defer="email" placeholder="Enter your email/mobile">
             @error('email')
                 <span class="text-danger">{{ $message }}</span>
             @enderror

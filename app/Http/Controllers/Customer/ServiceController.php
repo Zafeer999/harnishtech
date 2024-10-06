@@ -26,12 +26,32 @@ class ServiceController extends Controller
         return view('customer.service')->with(['service' => $service, 'serviceCharge' => $serviceCharge]);
     }
 
-    public function serviceByCategory(Category $category)
+    public function serviceByCategory(Category $category = null, Request $request)
     {
-        $selectedCategory = $category;
-        $categories = Category::where('category_id', null)->get();
-        $services = $category->services()->get();
-        $colorsArray = config('default_data.colors_array');
+        if($request->keyword)
+        {
+            $services = Category::where('name', 'LIKE', '%'.$request->keyword.'%')->orWhere('id', $request->category)->get();
+
+            if($services->isNotEmpty())
+            {
+                $selectedCategory = $services->first()->category()->first();
+                $categories = Category::where('category_id', null)->get();
+                $colorsArray = config('default_data.colors_array');
+            }
+            else
+            {
+                goto ifNoKeyword;
+            }
+        }
+        else
+        {
+            ifNoKeyword:
+            $category = $category->exists ? $category : Category::where('id', $request->service)->first();
+            $selectedCategory = $category;
+            $categories = Category::where('category_id', null)->get();
+            $services = $category->services()->get();
+            $colorsArray = config('default_data.colors_array');
+        }
 
 
         return view('customer.services')->with(['services' => $services, 'categories' => $categories, 'selectedCategory' => $selectedCategory, 'colorsArray' => $colorsArray]);

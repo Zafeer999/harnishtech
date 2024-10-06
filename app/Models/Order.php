@@ -54,7 +54,7 @@ class Order extends Model
     {
         return [0 => 'Prepaid', 1 => 'Postpaid'][$this->payment_type];
     }
-    public function getPaymentMethodAttribute()
+    public function getPaymentMethodTextAttribute()
     {
         return [0 => 'Cash', 1 => 'Online'][$this->payment_method];
     }
@@ -113,4 +113,20 @@ class Order extends Model
     {
         return $this->hasMany(OrderImage::class);
     }
+
+
+    // public static function booted()
+    // {
+    //     static::created(function (Order $order)
+    //     {
+
+    //     });
+
+    //     static::updated(function (Order $order)
+    //     {
+    //         self::where('id', $order->id)->update([
+    //             'initial'=> preg_filter('/[^A-Z]/', '', ucwords($order->name)),
+    //         ]);
+    //     });
+    // }
 }

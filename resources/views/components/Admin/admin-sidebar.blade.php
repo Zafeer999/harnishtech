@@ -56,9 +56,9 @@
                                 @can('users.view')
                                     <li><a href="{{ route('users.index') }}">Users </a></li>
                                 @endcan
-                                @can('roles.view')
+                                {{-- @can('roles.view')
                                     <li><a href="{{ route('roles.index') }}">Roles </a></li>
-                                @endcan
+                                @endcan --}}
                             </ul>
                         </li>
                     @endcan

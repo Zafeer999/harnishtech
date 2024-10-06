@@ -28,21 +28,15 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No</th>
-                                            <th>User Name/Mobile</th>
-                                            <th>Address</th>
-                                            <th>Category</th>
-                                            <th>Order No.</th>
-                                            <th>Amount</th>
+                                            <th>Order No</th>
+                                            <th>Customer</th>
+                                            <th>Services</th>
                                             <th>Is Assigned</th>
+                                            <th>Timeslot</th>
                                             <th>Status</th>
                                             <th>Charges</th>
-                                            <th>GST%</th>
-                                            <th>Total</th>
                                             <th>Scheduled On</th>
-                                            <th>Serviced On</th>
-                                            <th>Payment Type</th>
-                                            <th>Payment Method</th>
-                                            <th>Payment Status</th>
+                                            <th>Payment</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -50,28 +44,34 @@
                                         @foreach ($orders as $order)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $order->user->name }} <br> {{ $order->user->mobile }}</td>
-                                                <td>{{ $order->userAddress->full_address }}</td>
-                                                <td>{{ $order->category?->name }}, {{ $order->subCategory?->name }}</td>
-                                                <td>{{ $order->order_no }}</td>
-                                                <td>{{ $order->amount }}</td>
                                                 <td>
-                                                    <span class="badge rounded-pill {{ $order->is_assigned == 1 ? 'bg-success' : 'bg-danger' }}">
-                                                        {{ $order->is_assigned == 1 ? 'Assigned' : 'Unassigned' }}
-                                                    </span>
+                                                    <p>#{{ $order->order_no }} </p>
                                                 </td>
                                                 <td>
-                                                    <span class="badge rounded-pill bg-info">{{ $order->order_status_text }}</span>
+                                                    <p>{{ $order->user->name }}<br> +91{{ $order->user->mobile }}<br> {{ $order->user->email }}</p>
                                                 </td>
-                                                {{-- <td><span class="badge rounded-pill bg-primary">{{$order->category}}</span></td> --}}
-                                                <td> {{ $order->charges }}₹</td>
-                                                <td> {{ $order->gst_charge }}%</td>
-                                                <td> {{ $order->total }}₹</td>
-                                                <td> {{ $order->scheduled_on }}</td>
-                                                <td> {{ $order->serviced_on ?? 'N/A'}}</td>
-                                                <td> {{ $order->payment_type == 0 ? 'Cash' : 'Online'}}</td>
-                                                <td> {{ $order->payment_method == 1 ? 'Prepaid' : 'Postpaid' }}</td>
-                                                <td> {{ $order->payment_status == 0 ? 'Unpaid' : ($order->payment_status == 1 ? 'Paid' : ($order->payment_status == 2 ? 'Failed' : 'N/A')) }}
+                                                <td style="min-width: 150px">
+                                                    @foreach ($order->orderItems as $item)
+                                                        <p>{{ $item->category->name }} :- {{ $item->subCategory->name }}</p>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    <p>{{ $order->is_assigned == 1 ? "Assigned" : "Unassigned"}}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $order->timeSlot->name }}</p>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-{{$order->order_status_color}}"> {{ ucfirst($order->order_status_text) }}</span>
+                                                </td>
+                                                <td style="min-width: 150px">
+                                                    <p> Charges: <strong>₹{{ $order->charges }}</strong> <br> Service Chargebr: <strong>₹{{ $order->service_charge }}</strong> <br> GST Charge: <strong>₹{{ $order->gst_charge }}</strong></p>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $order->scheduled_on ?? "-" }}</p>
+                                                </td>
+                                                <td style="min-width: 150px">
+                                                    <p>Payment Type: <strong>{{ $order->payment_type == 1 ? "Postpaid" : "Prepaid" }}</strong> <br> Payment Method: <strong>{{ $order->payment_method == 1 ? "Online" : "Cash"}}</strong> <br> Payment Status: <strong>{{ $order->payment_text}}</strong> </p>
                                                 </td>
                                                 <td>
                                                     @can('orders.transfer')

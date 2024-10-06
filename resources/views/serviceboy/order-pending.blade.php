@@ -1,5 +1,5 @@
 <x-admin.admin-layout>
-    <x-slot name="title">{{ auth()->user()->tenant_name }} - Banner Slider</x-slot>
+    <x-slot name="title">{{ auth()->user()->tenant_name }} - Pending Order</x-slot>
 
     <div class="page-body">
         <div class="container-fluid">
@@ -76,7 +76,7 @@
                             @csrf
                             <section class="card">
                                 <header class="card-header">
-                                    <h4 class="card-title">Edit Banner Slider</h4>
+                                    <h4 class="card-title">Edit Pending Order</h4>
                                 </header>
 
                                 <div class="card-body py-2">
@@ -151,7 +151,7 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3>Banner Slider</h3>
+                        <h3>Pending Order</h3>
                     </div>
                     <div class="col-sm-6">
                     </div>
@@ -191,7 +191,7 @@
                                             <th>Scheduled On</th>
                                             <th>Serviced On</th>
                                             <th>Payment Details</th>
-                                            {{-- <th>Action</th> --}}
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -6038,7 +6038,7 @@ h6.post-title {
 
 .search-style-2 form button {
     position: absolute;
-    right: 0px;
+    right: 8%;
     top: 50%;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);

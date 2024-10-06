@@ -23,7 +23,7 @@ class HomeController extends Controller
     {
         $categories = Category::get();
         $colorsArray = config('default_data.colors_array');
-        $allServices = $categories;
+        $allServices = $categories->where('category_id', '!=', NULL);
         $categories = $categories->where('category_id', null);
         $featuredServices = Category::with('category')->where(['is_featured' => 1, 'level' => 2])->get();
         $cities = City::selectRaw('MIN(id) as id, name')->groupBy('name')->get();
