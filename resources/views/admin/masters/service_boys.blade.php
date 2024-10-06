@@ -130,21 +130,63 @@
                                 <div class="card-body py-2">
                                     <input type="hidden" id="edit_model_id" name="edit_model_id" value="">
 
+
                                     <div class="mb-3 row">
+                                        <!-- Name -->
                                         <div class="col-md-4">
-                                            <label class="col-form-label" for="button_text">Button Text <span class="text-danger">*</span></label>
-                                            <input class="form-control" name="button_text" type="text" placeholder="Enter Button Text">
-                                            <span class="text-danger error-text button_text_err"></span>
+                                            <label class="col-form-label" for="name">Name</label>
+                                            <input class="form-control" name="name" type="text">
+                                            <span class="text-danger error-text name_err"></span>
                                         </div>
 
+                                        <!-- Email -->
                                         <div class="col-md-4">
-                                            <label class="col-form-label" for="button_link">Button Link</label>
-                                            <input class="form-control" name="button_link" type="url" placeholder="Enter Button Link">
-                                            <span class="text-danger error-text button_link_err"></span>
+                                            <label class="col-form-label" for="email">Email</label>
+                                            <input class="form-control" name="email" type="email">
+                                            <span class="text-danger error-text email_err"></span>
+                                        </div>
+
+                                        <!-- Mobile -->
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="mobile">Mobile</label>
+                                            <input class="form-control" name="mobile" type="tel" pattern="[0-9]{10}" minlength="10" maxlength="10">
+                                            <span class="text-danger error-text mobile_err"></span>
                                         </div>
                                     </div>
 
                                     <div class="mb-3 row">
+                                        <!-- Employee Code -->
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="emp_code">Employee Code</label>
+                                            <input class="form-control" name="emp_code" type="text">
+                                            <span class="text-danger error-text emp_code_err"></span>
+                                        </div>
+                                        <!-- Gender -->
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="gender">Gender</label>
+                                            <select class="form-control" name="gender">
+                                                <option value="">Select Gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                            <span class="text-danger error-text gender_err"></span>
+                                        </div>
+                                        <!-- Date of Birth -->
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="dob">Date of Birth</label>
+                                            <input class="form-control" name="dob" type="date">
+                                            <span class="text-danger error-text dob_err"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <!-- Date of Joining -->
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="doj">Date of Joining</label>
+                                            <input class="form-control" name="doj" type="date">
+                                            <span class="text-danger error-text doj_err"></span>
+                                        </div>
                                         <div class="col-md-4">
                                             <label class="col-form-label" for="status">Status</label>
                                             <select class="form-control" name="status">
@@ -154,6 +196,16 @@
                                             <span class="text-danger error-text status_err"></span>
                                         </div>
                                     </div>
+
+                                    <div class="mb-3 row">
+                                        <!-- Address -->
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="address">Address</label>
+                                            <textarea class="form-control" name="address" rows="3" style="resize: none"> </textarea>
+                                            <span class="text-danger error-text address_err"></span>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="card-footer">
                                     <button class="btn btn-primary" id="editSubmit">Submit</button>
@@ -245,8 +297,6 @@
                                                 </td>
                                                 <td>
                                                     <p>{{ $serviceBoy->serviceBoy ? ($serviceBoy->serviceBoy->status == 1 ? 'Active' : 'Inactive') : 'Null' }}</p>
-
-                                                    {{-- <strong>{{ $serviceBoy->serviceBoy->status == 1 ? 'Active' : 'Inactive' ?? null }}</strong> --}}
                                                 </td>
                                                 <td style="min-width:130px">
                                                     <button class="assign-services btn btn-warning px-2 py-1" title="Assign Services" data-id="{{ $serviceBoy->id }}"><i data-feather="award"></i>Add Service</button>
@@ -278,7 +328,7 @@
     </div>
 
     {{-- Assign Services Modal --}}
-    <div class="modal fade" id="assign-services-modal" role="dialog" >
+    <div class="modal fade" id="assign-services-modal" role="dialog">
         <div class="modal-dialog" role="document">
             <form action="" id="assignServicesForm">
                 @csrf
@@ -320,7 +370,7 @@
 
 
     {{-- Assign Pincodes Modal --}}
-    <div class="modal fade" id="assign-pincodes-modal" role="dialog" >
+    <div class="modal fade" id="assign-pincodes-modal" role="dialog">
         <div class="modal-dialog" role="document">
             <form action="" id="assignPincodesForm">
                 @csrf
@@ -639,7 +689,7 @@
 
 
 <!-- Edit -->
-<script>
+{{-- <script>
     $("#datatable-tabletools").on("click", ".edit-element", function(e) {
         e.preventDefault();
         $(".edit-element").show();
@@ -674,7 +724,48 @@
             },
         });
     });
+</script> --}}
+
+<script>
+    $("#datatable-tabletools").on("click", ".edit-element", function(e) {
+        e.preventDefault();
+        $(".edit-element").show();
+        var model_id = $(this).attr("data-id");
+        var url = "{{ route('service_boys.edit', ':model_id') }}";
+
+        $.ajax({
+            url: url.replace(':model_id', model_id),
+            type: 'GET',
+            data: {
+                '_token': "{{ csrf_token() }}"
+            },
+            success: function(data, textStatus, jqXHR) {
+                editFormBehaviour();
+
+                if (!data.error) {
+                    // Populate form with the returned data
+                    $("#editForm [name='edit_model_id']").val(data.serviceBoy.id); // Hidden field
+                    $("#editForm [name='name']").val(data.serviceBoy.name);
+                    $("#editForm [name='email']").val(data.serviceBoy.email);
+                    $("#editForm [name='mobile']").val(data.serviceBoy.mobile);
+                    $("#editForm [name='emp_code']").val(data.serviceBoy.service_boy.emp_code);
+                    $("#editForm [name='dob']").val(data.serviceBoy.service_boy.dob);
+                    $("#editForm [name='doj']").val(data.serviceBoy.service_boy.doj);
+                    $("#editForm [name='status']").val(data.serviceBoy.service_boy.status);
+                    $("#editForm [name='address']").val(data.serviceBoy.service_boy.address);
+                    $("#editForm [name='gender']").replaceWith(data.genderHtml);
+                } else {
+                    alert(data.error);
+                }
+            },
+            error: function(error, jqXHR, textStatus, errorThrown) {
+                alert("Something went wrong");
+            },
+        });
+    });
 </script>
+
+
 
 
 <!-- Update -->
