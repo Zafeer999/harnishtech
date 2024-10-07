@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Customer;
 
+use App\Factories\SmsProviderFactory;
 use App\Mail\SendOTP;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
-use PHPUnit\Metadata\Uses;
 
 class ForgotPassword extends Component
 {
@@ -22,16 +23,39 @@ class ForgotPassword extends Component
     public function sendOtp()
     {
         $this->resetErrorBag();
-        $this->validate([
-            'email' => 'required|email|exists:users,email',
-        ]);
-        $this->generateOtp = rand(1111, 9999);;
 
-        $user = User::where('email', $this->email)->first();
+        $emailRule = ['email' => 'email'];
+        $mobileRule = ['mobile' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10'];
+        $fieldType = '';
+        $emailValidator = Validator::make(['email' => $this->email], $emailRule);
+        if (!$emailValidator->fails()) {
+            $fieldType = 'email';
+        }
+        $mobileValidator = Validator::make(['mobile' => $this->email], $mobileRule);
+        if (!$mobileValidator->fails()) {
+            $fieldType = 'mobile';
+        }
+
+        $this->validate([
+            'email' => 'required|exists:users,'.$fieldType,
+        ]);
+
+        $this->generateOtp = rand(1111, 9999);
+
+        if($fieldType == 'mobile')
+        {
+            $smsProvider = SmsProviderFactory::get('aditya');
+            $smsProvider->sendVerificationSms($this->email, $this->generateOtp);
+        }
+        else
+        {
+            Mail::to($this->email)->send(new SendOTP($this->generateOtp));
+        }
+
+        $user = User::where($fieldType, $this->email)->first();
         $user->otp = $this->generateOtp;
         $user->save();
 
-        Mail::to($this->email)->send(new SendOTP($this->generateOtp));
         $this->step = 2;
     }
 

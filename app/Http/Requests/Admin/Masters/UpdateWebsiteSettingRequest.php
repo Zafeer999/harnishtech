@@ -32,6 +32,7 @@ class UpdateWebsiteSettingRequest extends FormRequest
             'footer_address' => 'required|max:225',
             'footer_phone' => 'required|max:100',
             'footer_hours' => 'required|max:100',
+            'support_email' => 'required|max:100',
         ];
     }
 }

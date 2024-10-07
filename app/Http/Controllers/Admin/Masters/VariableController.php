@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Masters;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\Masters\UpdateWebsiteSettingRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,8 +27,9 @@ class VariableController extends Controller
         $footerAddress = config('setting_data.FOOTER_ADDRESS');
         $footerPhone = config('setting_data.FOOTER_PHONE');
         $footerHours = config('setting_data.FOOTER_HOURS');
+        $supportEmail = config('setting_data.SUPPORT_EMAIL');
 
-        return view('admin.masters.variables', compact('isServiceChargeEnable', 'serviceCharge', 'isGstEnable', 'gstPercentage', 'scheduleSameDayIfBookedBefore', 'maxDiscountPercent', 'headerLogo', 'footerAddress', 'footerPhone', 'footerHours'));
+        return view('admin.masters.variables', compact('isServiceChargeEnable', 'serviceCharge', 'isGstEnable', 'gstPercentage', 'scheduleSameDayIfBookedBefore', 'maxDiscountPercent', 'headerLogo', 'footerAddress', 'footerPhone', 'footerHours', 'supportEmail'));
     }
 
     /**
@@ -55,6 +56,7 @@ class VariableController extends Controller
             $this->updateConfigValue("FOOTER_ADDRESS", $request->footer_address);
             $this->updateConfigValue("FOOTER_PHONE", $request->footer_phone);
             $this->updateConfigValue("FOOTER_HOURS", $request->footer_hours);
+            $this->updateConfigValue("SUPPORT_EMAIL", $request->support_email);
             if($request->header_logo)
             {
                 if (File::exists(public_path('\\') . config('setting_data.HEADER_LOGO'))) {

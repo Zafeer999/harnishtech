@@ -14,7 +14,8 @@
                                         <h4 class="animated">{{ $bannerSlider->small_text }} </h4>
                                         <h2 class="animated fw-900">{{ $bannerSlider->main_black_text }}</h2>
                                         <h2 class="animated fw-900" style="color: {{ $bannerSlider->text_color }}">{{ $bannerSlider->main_color_text }}</h2>
-                                        <form class="form-subcriber banner-form d-md-flex wow fadeIn animated my-4">
+                                        <form class="form-subcriber banner-form d-md-flex wow fadeIn animated my-4" action="{{ route('services-by-category') }}" method="get">
+                                            @csrf
                                             <div class="custom_select">
                                                 <select class="form-control select-active" name="location_area" id="location_area">
                                                     <option value="">Change Location</option>
@@ -27,7 +28,7 @@
                                                 <select class="form-control select-active service" name="service" id="service">
                                                     <option value="">Choose Service</option>
                                                     @foreach ($allServices as $allService)
-                                                        <option value="{{ strtolower($allService->name) }}">{{ $allService->name }}</option>
+                                                        <option value="{{ $allService->category_id }}">{{ $allService->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

@@ -5509,6 +5509,7 @@ h6.post-title {
 .logo.logo-width-1 a img {
     width: 120px;
     min-width: 120px;
+    max-height: 35px;
 }
 
 .search-style-1 form {
@@ -6037,7 +6038,7 @@ h6.post-title {
 
 .search-style-2 form button {
     position: absolute;
-    right: 0px;
+    right: 8%;
     top: 50%;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);

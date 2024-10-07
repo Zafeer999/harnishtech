@@ -73,14 +73,16 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
-                            <form action="#">
-                                <select class="select-active">
+                            <form action="{{ route('services-by-category') }}" method="GET">
+                                @csrf
+                                <select class="select-active" name="category">
                                     <option>Select Category</option>
                                     @foreach ($categories as $category)
                                         <option>{{ ucwords($category->name) }}</option>
                                     @endforeach
                                 </select>
-                                <input type="text" placeholder="Search for items...">
+                                <input type="text" name="keyword" placeholder="Search for items...">
+                                <button class="btn btn-primary btn-sm py-1 bg-light" type="submit">Search</button>
                             </form>
                         </div>
                         <div class="header-action-right">
@@ -171,8 +173,9 @@
             </div>
             <div class="mobile-header-content-area">
                 <div class="mobile-search search-style-3 mobile-header-border">
-                    <form action="#">
-                        <input type="text" placeholder="Search for items…">
+                    <form action="{{ route('services-by-category') }}" method="GET">
+                        @csrf
+                        <input type="text" name="keyword" placeholder="Search for items…">
                         <button type="submit"><i class="fi-rs-search"></i></button>
                     </form>
                 </div>

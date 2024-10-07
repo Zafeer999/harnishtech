@@ -1,5 +1,5 @@
 <x-admin.admin-layout>
-    <x-slot name="title">{{ auth()->user()->tenant_name }} - Banner Slider</x-slot>
+    <x-slot name="title">{{ auth()->user()->tenant_name }} - Site Settings</x-slot>
 
     <div class="page-body">
         <div class="container-fluid">
@@ -72,6 +72,12 @@
                                             <label class="col-form-label" for="footer_hours">Footer Hours <span class="text-danger">*</span></label>
                                             <input class="form-control" name="footer_hours" value="{{ $footerHours }}" type="text" placeholder="Enter Working Hours">
                                             <span class="text-danger error-text footer_hours_err"></span>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="col-form-label" for="support_email">Footer Email <span class="text-danger">*</span></label>
+                                            <input class="form-control" name="support_email" value="{{ $supportEmail }}" type="text" placeholder="Enter Support Email">
+                                            <span class="text-danger error-text support_email_err"></span>
                                         </div>
 
                                         <div class="col-md-4">

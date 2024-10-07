@@ -31,4 +31,17 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'sms' => [
+        'username' => env('SMS_USERNAME', ''),
+        'password' => env('SMS_PASSWORD', ''),
+        'enabled' => env('SMS_ENABLED', true),
+        'test_numbers' => ['9999999991', '9999999992', '9999999993', '9999999994', '9999999995', '9999999996', '9999999997', '9999999998'],
+
+        'aditya_sms' => [
+            'key' => env('ADITYA_SMS_KEY', 'kbf8IN83hIxNTVgs'),
+            'senderid' => env('ADITYA_SMS_SENDERID', 'CoreOC'),
+            'route' => env('ADITYA_SMS_ROUTE', '1'),
+        ]
+    ],
+
 ];

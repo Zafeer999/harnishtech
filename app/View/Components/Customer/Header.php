@@ -3,6 +3,7 @@
 namespace App\View\Components\Customer;
 
 use App\Models\Category;
+use App\Models\Visitor;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,14 @@ class Header extends Component
         $categories = Category::where('category_id', null)->get();
         $authUser = Auth::user();
         $userRole = $authUser?->roles()->first();
+
+        if( env('APP_ENV') == 'prod' )
+        {
+            Visitor::create([
+                'ip_address' => request()->ip(),
+                'url' => request()->url()
+            ]);
+        }
 
 
         return view('components.customer.header')->with(['categories'=> $categories, 'authUser' => $authUser, 'userRole' => $userRole]);

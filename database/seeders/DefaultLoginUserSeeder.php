@@ -44,7 +44,7 @@ class DefaultLoginUserSeeder extends Seeder
 
 
         $adminRole = Role::updateOrCreate(['name' => 'Admin']);
-        $permissions = Permission::whereNotIn('id', [53,54,55,56,57,58])->pluck('id', 'id');
+        $permissions = Permission::whereNotIn('id', [53,54,55,56,58,67,68])->pluck('id', 'id');
         $adminRole->syncPermissions($permissions);
 
         $admin = User::updateOrCreate([
@@ -66,7 +66,7 @@ class DefaultLoginUserSeeder extends Seeder
 
 
         $serviceBoyRole = Role::updateOrCreate(['name' => 'Service Boy']);
-        $permissions = Permission::whereIn('id', [53, 54, 55, 56, 57, 58, 63, 64, 65])->pluck('id', 'id');
+        $permissions = Permission::whereIn('id', [53, 54, 55, 56, 57, 58, 63, 64, 65, 67, 68])->pluck('id', 'id');
         $serviceBoyRole->syncPermissions($permissions);
 
         $serviceBoy = User::updateOrCreate([

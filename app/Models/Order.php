@@ -36,7 +36,7 @@ class Order extends Model
     'order_no', 'status', 'is_assigned', 'charges', 'gst_charge', 'total', 'scheduled_on', 'serviced_on',
     'order_note', 'payment_type', 'payment_method', 'payment_status', 'invoice_path'];
 
-    protected $appends = ['order_status_text', 'payment_text', 'order_status_color'];
+    protected $appends = ['order_status_text', 'payment_text', 'payment_type_text', 'payment_method_text', 'order_status_color'];
 
     public function getOrderStatusTextAttribute()
     {
@@ -46,11 +46,19 @@ class Order extends Model
     {
         return [0 => 'info', 1 => 'light text-dark', 2 => 'primary', 3 => 'warning', 4 => 'success', 5 => 'danger', 6 => 'dark'][$this->status];
     }
-
     public function getPaymentTextAttribute()
     {
         return [0 => 'Unpaid', 1 => 'Paid', 2 => 'Failed'][$this->payment_status];
     }
+    public function getPaymentTypeTextAttribute()
+    {
+        return [0 => 'Prepaid', 1 => 'Postpaid'][$this->payment_type];
+    }
+    public function getPaymentMethodTextAttribute()
+    {
+        return [0 => 'Cash', 1 => 'Online'][$this->payment_method];
+    }
+
 
     public function timeSlot()
     {
@@ -105,4 +113,20 @@ class Order extends Model
     {
         return $this->hasMany(OrderImage::class);
     }
+
+
+    // public static function booted()
+    // {
+    //     static::created(function (Order $order)
+    //     {
+
+    //     });
+
+    //     static::updated(function (Order $order)
+    //     {
+    //         self::where('id', $order->id)->update([
+    //             'initial'=> preg_filter('/[^A-Z]/', '', ucwords($order->name)),
+    //         ]);
+    //     });
+    // }
 }
