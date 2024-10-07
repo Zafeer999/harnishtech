@@ -6,6 +6,7 @@ use App\Factories\SmsProviderFactory;
 use App\Mail\SendOTP;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
@@ -44,8 +45,15 @@ class ForgotPassword extends Component
 
         if($fieldType == 'mobile')
         {
-            $smsProvider = SmsProviderFactory::get('aditya');
-            $smsProvider->sendVerificationSms($this->email, $this->generateOtp);
+            try
+            {
+                $smsProvider = SmsProviderFactory::get('aditya');
+                $smsProvider->sendVerificationSms($this->email, $this->generateOtp);
+            }
+            catch(\Exception $e)
+            {
+                Log::info($e);
+            }
         }
         else
         {

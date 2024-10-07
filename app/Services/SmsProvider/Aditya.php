@@ -49,8 +49,9 @@ class Aditya extends Base
         return $this->sendSms($number, $content);
     }
 
-    public function sendCustomerOrderSms($number, $otp, $orderNo, $statusText)
+    public function sendCustomerOrderSms($number, $orderNo, $statusText)
     {
+        $otp = "Generated For This Service";
         $organisationName = 'HTS';
         $orderString = ', your order #'.$orderNo.' is '.$statusText.' successfully';
         $content = 'Welcome to '.$organisationName.' '.$orderString.'. Your Current OTP Is '.$otp.' CORE OCEAN.';
@@ -58,8 +59,9 @@ class Aditya extends Base
         return $this->sendSms($number, $content);
     }
 
-    public function sendServiceBoyOrderSms($number, $otp = 'sent to customer', $orderNo, $statusText)
+    public function sendServiceBoyOrderSms($number, $orderNo, $statusText)
     {
+        $otp = "Generated For This Service";
         $organisationName = 'HTS';
         $orderString = ', order #'.$orderNo.' is '.$statusText;
         $content = 'Welcome to '.$organisationName.' '.$orderString.'. Your Current OTP Is '.$otp.' CORE OCEAN.';

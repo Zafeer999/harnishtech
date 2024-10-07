@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\ServiceBoy;
 
+use App\Factories\SmsProviderFactory;
 use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\StoreOrderPhotoRequest;
+use App\Mail\OrderAssignMail;
 use App\Models\AssignedOrder;
 use App\Models\Order;
 use App\Models\OrderImage;
@@ -13,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -47,6 +50,22 @@ class OrderController extends Controller
             $order->status = Order::STATUS_ASSIGNED;
             $order->is_assigned = Order::IS_ASSIGNED;
             $order->save();
+
+
+
+            $user = $order->user()->first();
+            try {
+                $smsProvider = SmsProviderFactory::get('aditya');
+                $smsProvider->sendServiceBoyOrderSms($user->mobile, $order->order_no, "assigned to you");
+            } catch(\Exception $e) {
+                Log::info($e);
+            }
+            try {
+                $mailText = "Order #".$order->order_no." is successfully assigned to you, login to website to get more details.";
+                Mail::to($user->email)->send(new OrderAssignMail($mailText));
+            } catch(\Exception $e) {
+                Log::info($e);
+            }
 
             DB::commit();
 
@@ -140,6 +159,20 @@ class OrderController extends Controller
             $order->status = Order::STATUS_ASSIGNED;
             $order->is_assigned = Order::IS_ASSIGNED;
             $order->save();
+
+            $user = User::where('id', $request->service_boy)->first();
+            try {
+                $smsProvider = SmsProviderFactory::get('aditya');
+                $smsProvider->sendServiceBoyOrderSms($user->mobile, $order->order_no, "assigned to you");
+            } catch(\Exception $e) {
+                Log::info($e);
+            }
+            try {
+                $mailText = "Order #".$order->order_no." is successfully assigned to you, login to website to get more details.";
+                Mail::to($user->email)->send(new OrderAssignMail($mailText));
+            } catch(\Exception $e) {
+                Log::info($e);
+            }
 
             DB::commit();
 

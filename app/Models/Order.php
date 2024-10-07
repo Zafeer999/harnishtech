@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use App\Factories\SmsProviderFactory;
+use App\Mail\OrderStatusMail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class Order extends Model
 {
@@ -115,18 +119,23 @@ class Order extends Model
     }
 
 
-    // public static function booted()
-    // {
-    //     static::created(function (Order $order)
-    //     {
-
-    //     });
-
-    //     static::updated(function (Order $order)
-    //     {
-    //         self::where('id', $order->id)->update([
-    //             'initial'=> preg_filter('/[^A-Z]/', '', ucwords($order->name)),
-    //         ]);
-    //     });
-    // }
+    public static function booted()
+    {
+        static::updated(function (Order $order)
+        {
+            $user = $order->user()->first();
+            try {
+                $smsProvider = SmsProviderFactory::get('aditya');
+                $smsProvider->sendCustomerOrderSms($user->mobile, $order->order_no, str_replace('Order ', '', $order->order_status_text));
+            } catch(\Exception $e) {
+                Log::info($e);
+            }
+            try {
+                $mailText = "Your order #".$order->order_no." is ".$order->order_status_text." successfully, login to website to get more details.";
+                Mail::to($user->email)->send(new OrderStatusMail($mailText));
+            } catch(\Exception $e) {
+                Log::info($e);
+            }
+        });
+    }
 }

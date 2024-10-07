@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Factories\SmsProviderFactory;
 use App\Http\Controllers\Controller;
 use App\Models\AssignedOrder;
 use App\Models\Category;
@@ -202,8 +203,23 @@ class CartController extends Controller
 
             DB::commit();
 
+            try {
+                $smsProvider = SmsProviderFactory::get('aditya');
+                $smsProvider->sendCustomerOrderSms($authUser->mobile, $order->order_no, str_replace('Order ', '', $order->order_status_text));
+            } catch(\Exception $e) {
+                Log::info($e);
+            }
+
             if($isAssigned)
+            {
+                try {
+                    $smsProvider = SmsProviderFactory::get('aditya');
+                    $smsProvider->sendServiceBoyOrderSms($authUser->mobile, $order->order_no, 'assigned to you');
+                } catch(\Exception $e) {
+                    Log::info($e);
+                }
                 return response()->json(['success'=> 'Order placed successfully']);
+            }
             else
                 return response()->json(['success'=> 'Order placed successfully, a Service boy will be assigned soon for the service']);
         }
