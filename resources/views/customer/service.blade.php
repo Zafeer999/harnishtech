@@ -3,7 +3,7 @@
     <main class="main">
 
 
-        <section class="mt-50 mb-50">
+        <section class="mt-50 mb-50 px-3">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">

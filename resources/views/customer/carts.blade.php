@@ -26,7 +26,7 @@
                                                 <tr>
                                                     <td class="image product-thumbnail"><img src="{{ asset($cart->attributes->image) }}" alt="#"></td>
                                                     <td class="product-des product-name">
-                                                        <h5 class="product-name"><a href="shop-product-right.html">{{ $cart->name }}</a></h5>
+                                                        <h5 class="product-name"><a href="{{ route('services.show', $cart->id) }}">{{ $cart->name }}</a></h5>
                                                         <p class="font-xs">{!! Str::limit(strip_tags($cart->attributes->description), 60) !!}</p>
                                                     </td>
                                                     {{-- <td class="price" data-title="Price"><span>₹{{ number_format($cart->price) }} </span></td> --}}

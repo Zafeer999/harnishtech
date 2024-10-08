@@ -203,7 +203,7 @@
                             @if ($authUser)
                                 <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">{{ ucwords($authUser->name) }}</a>
                                     <ul class="dropdown">
-                                        <li><a href="#">My Orders</a></li>
+                                        <li><a href="{{route('my-orders')}}">My Orders</a></li>
                                         <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                     </ul>
                                 </li>
