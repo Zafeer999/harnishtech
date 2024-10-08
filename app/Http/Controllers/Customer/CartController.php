@@ -269,7 +269,7 @@ class CartController extends Controller
             'service_boy_user_id' => $assigneableServiceBoyId,
             'order_id' => $order->id,
             'time_slot_id' => $request->slot,
-            'pincode' => $request->geo_pincode,
+            'pincode' => $request->pincode,
             'category_id' => $categoryId,
             'scheduled_on' => $request->schedule_date
         ]);
