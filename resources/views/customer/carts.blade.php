@@ -251,42 +251,49 @@
                 e.preventDefault();
                 $("#book-now").prop('disabled', true);
 
-                $.ajax({
-                    url: '{{ route('place-order') }}',
-                    type: 'POST',
-                    data: {
-                        '_token': "{{ csrf_token() }}",
-                        'previous_address': $('input[name="previous_address"]').val(),
-                        'full_address': $('input[name="full_address"]').val(),
-                        'city': $('select[name="cart_location"]').val(),
-                        'pincode': $('input[name="pincode"]').val(),
-                        'coupon': $('input[name="coupon"]').val(),
-                        'slot': $('select[name="slot"]').val(),
-                        'payment_type': $('input[name="payment_option"]').val()
-                    },
-                    success: function(datas, textStatus, jqXHR) {
+                if("{{ auth()->check() }}")
+                {
+                    $.ajax({
+                        url: '{{ route('place-order') }}',
+                        type: 'POST',
+                        data: {
+                            '_token': "{{ csrf_token() }}",
+                            'previous_address': $('input[name="previous_address"]').val(),
+                            'full_address': $('input[name="full_address"]').val(),
+                            'city': $('select[name="cart_location"]').val(),
+                            'pincode': $('input[name="pincode"]').val(),
+                            'coupon': $('input[name="coupon"]').val(),
+                            'slot': $('select[name="slot"]').val(),
+                            'payment_type': $('input[name="payment_option"]').val()
+                        },
+                        success: function(datas, textStatus, jqXHR) {
 
-                        if (!datas.error && !datas.error2) {
-                            if(datas.redirect)
-                                window.location.href = datas.redirect;
-                            else
-                            {
-                                Swal.fire({ title: "Success!", text: datas.success, icon: 'success', confirmButtonText: 'OK'})
-                                    .then((result) => {
-                                        window.location.href = "{{ route('home') }}";
-                                    });
+                            if (!datas.error && !datas.error2) {
+                                if(datas.redirect)
+                                    window.location.href = datas.redirect;
+                                else
+                                {
+                                    Swal.fire({ title: "Success!", text: datas.success, icon: 'success', confirmButtonText: 'OK'})
+                                        .then((result) => {
+                                            window.location.href = "{{ route('home') }}";
+                                        });
 
+                                }
+                            } else {
+                                $("#book-now").prop('disabled', false);
+                                Swal.fire({ title: "Error!", text: datas.error2, icon: 'error', confirmButtonText: 'OK'});
                             }
-                        } else {
+                        },
+                        error: function(error, jqXHR, textStatus, errorThrown) {
                             $("#book-now").prop('disabled', false);
-                            Swal.fire({ title: "Error!", text: datas.error2, icon: 'error', confirmButtonText: 'OK'});
-                        }
-                    },
-                    error: function(error, jqXHR, textStatus, errorThrown) {
-                        $("#book-now").prop('disabled', false);
-                        Swal.fire({ title: "Error occured!", text: "Something went wrong please try again", icon: 'error', confirmButtonText: 'OK'});
-                    },
-                });
+                            Swal.fire({ title: "Error occured!", text: "Something went wrong please try again", icon: 'error', confirmButtonText: 'OK'});
+                        },
+                    });
+                }
+                else
+                {
+                    window.location.href = "{{ route('customer.login') }}";
+                }
             });
 
 
