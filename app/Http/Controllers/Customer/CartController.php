@@ -271,7 +271,7 @@ class CartController extends Controller
             'time_slot_id' => $request->slot,
             'pincode' => $request->geo_pincode,
             'category_id' => $categoryId,
-            'service_date' => $request->schedule_date,
+            'scheduled_on' => $request->schedule_date
         ]);
 
         $order->status = Order::STATUS_ASSIGNED;
