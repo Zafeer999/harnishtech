@@ -10102,7 +10102,7 @@ span.fi-rs-apps {
     }
 
     .table td {
-        display: block;
+        /* display: block; */
         width: 100%;
         text-align: center;
     }
@@ -10115,9 +10115,9 @@ span.fi-rs-apps {
         font-weight: bold;
     }
 
-    .table thead {
+    /* .table thead {
         display: none;
-    }
+    } */
 
     .loop-grid.pr-30 {
         padding-right: 0 !important;
