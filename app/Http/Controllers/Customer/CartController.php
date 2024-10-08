@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Customer;
 use App\Factories\SmsProviderFactory;
 use App\Http\Controllers\Controller;
 use App\Mail\OrderAssignMail;
+use App\Mail\OrderStatusMail;
 use App\Models\AssignedOrder;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\SendNotificationCronjob;
 use App\Models\ServiceBoyPincode;
 use App\Models\TimeSlot;
 use App\Models\User;
@@ -208,7 +210,17 @@ class CartController extends Controller
 
             try {
                 $smsProvider = SmsProviderFactory::get('aditya');
-                $smsProvider->sendCustomerOrderSms($authUser->mobile, $order->order_no, str_replace('Order ', '', $order->order_status_text));
+                $smsProvider->sendCustomerOrderSms($authUser->mobile, $order->order_no, str_replace('Order ', '', $order->order_status_text), true);
+
+                $mailText = "Your order #".$order->order_no." is ".$order->order_status_text." successfully, login to website to get more details.";
+
+                SendNotificationCronjob::create([
+                    'type' => 2,
+                    'target' => $authUser->email,
+                    'content' => $mailText,
+                    'method' => 'place_order',
+                    'is_send' => 0,
+                ]);
             } catch(\Exception $e) {
                 Log::info($e);
             }
@@ -279,10 +291,17 @@ class CartController extends Controller
 
         try {
             $smsProvider = SmsProviderFactory::get('aditya');
-            $smsProvider->sendServiceBoyOrderSms($serviceBoy->mobile, $order->order_no, 'assigned to you');
+            $smsProvider->sendServiceBoyOrderSms($serviceBoy->mobile, $order->order_no, 'assigned to you', true);
 
             $mailText = "Order #".$order->order_no." is successfully assigned to you, login to website to get more details.";
-            Mail::to($serviceBoy->email)->send(new OrderAssignMail($mailText));
+            SendNotificationCronjob::create([
+                'type' => 2,
+                'target' => $serviceBoy->email,
+                'content' => $mailText,
+                'method' => 'assign_order',
+                'is_send' => 0,
+            ]);
+
         } catch(\Exception $e) {
             Log::info($e);
         }

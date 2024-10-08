@@ -2,6 +2,7 @@
 
 namespace App\Services\SmsProvider;
 
+use App\Models\SendNotificationCronjob;
 use App\Models\SmsCounter;
 use App\Services\SmsProvider\Base;
 use Exception;
@@ -17,6 +18,7 @@ class Aditya extends Base
     public $senderId;
     public $route;
     public $baseUrl;
+    public $smsModule;
 
     public function __construct()
     {
@@ -49,24 +51,30 @@ class Aditya extends Base
         return $this->sendSms($number, $content);
     }
 
-    public function sendCustomerOrderSms($number, $orderNo, $statusText)
+    public function sendCustomerOrderSms($number, $orderNo, $statusText, $schedule = false)
     {
         $otp = "Generated For This Service";
         $organisationName = 'HTS';
-        $orderString = ', your order #'.$orderNo.' is '.$statusText.' successfully';
-        $content = 'Welcome to '.$organisationName.' '.$orderString.'. Your Current OTP Is '.$otp.' CORE OCEAN.';
+        $orderString = 'your order #'.$orderNo.' is '.$statusText.' successfully';
+        $content = 'Welcome to '.$organisationName.', '.$orderString.'. Your Current OTP Is '.$otp.' CORE OCEAN.';
 
-        return $this->sendSms($number, $content);
+        if($schedule)
+            $this->smsModule = 'place_order';
+
+        return $this->sendSms($number, $content, $schedule);
     }
 
-    public function sendServiceBoyOrderSms($number, $orderNo, $statusText)
+    public function sendServiceBoyOrderSms($number, $orderNo, $statusText, $schedule = false)
     {
         $otp = "Generated For This Service";
         $organisationName = 'HTS';
         $orderString = ', order #'.$orderNo.' is '.$statusText;
         $content = 'Welcome to '.$organisationName.' '.$orderString.'. Your Current OTP Is '.$otp.' CORE OCEAN.';
 
-        return $this->sendSms($number, $content);
+        if($schedule)
+            $this->smsModule = 'assign_order';
+
+        return $this->sendSms($number, $content, $schedule);
     }
 
 
@@ -74,22 +82,35 @@ class Aditya extends Base
 
 
 
-    private function sendSms($number, $content)
+    public function sendSms($number, $content, $schedule = false)
     {
         // if( in_array($number, config('services.sms.test_numbers')) || env('APP_ENV') == 'local' )
         //     return true;
 
         try
         {
-            $response = Http::get($this->baseUrl,[
-                'apikey' => $this->key,
-                'senderid' => $this->senderId,
-                'number' => $number,
-                'message' => $content,
-            ]);
+            if($schedule)
+            {
+                SendNotificationCronjob::create([
+                    'type' => 1,
+                    'target' => $number,
+                    'content' => $content,
+                    'method' => $this->smsModule,
+                    'is_send' => 0,
+                ]);
+            }
+            else
+            {
+                $response = Http::get($this->baseUrl,[
+                    'apikey' => $this->key,
+                    'senderid' => $this->senderId,
+                    'number' => $number,
+                    'message' => $content,
+                ]);
 
-            SmsCounter::create(['mobile' => $number, 'text' => $content]);
-            return $response;
+                SmsCounter::create(['mobile' => $number, 'text' => $content]);
+                return $response;
+            }
         }
         catch(Exception $e)
         {

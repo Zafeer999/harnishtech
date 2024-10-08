@@ -455,13 +455,4 @@
         <!-- Container-fluid Ends-->
     </div>
 
-    @push('scripts')
-        <script>
-            setInterval(function() {
-                window.location.reload(1);
-                // alert("Refreshed");
-            }, 60000);
-        </script>
-    @endpush
-
 </x-admin.admin-layout>
