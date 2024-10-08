@@ -263,7 +263,7 @@ class CartController extends Controller
         }
         else{
             $filtered = $scheduledServiceData->pluck('service_boy_user_id')->filter(function ($user_id) use ($availableServiceboysOnPincode) {
-                return collect($availableServiceboysOnPincode->user_id)->contains($user_id);
+                return collect($availableServiceboysOnPincode->pluck('user_id'))->contains($user_id);
             });
 
             $counts = $filtered->countBy();
