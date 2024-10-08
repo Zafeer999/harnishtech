@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Factories\SmsProviderFactory;
 use App\Http\Controllers\Controller;
+use App\Mail\OrderAssignMail;
 use App\Models\AssignedOrder;
 use App\Models\Category;
 use App\Models\City;
@@ -12,12 +13,14 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ServiceBoyPincode;
 use App\Models\TimeSlot;
+use App\Models\User;
 use App\Models\UserAddress;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -212,12 +215,6 @@ class CartController extends Controller
 
             if($isAssigned)
             {
-                try {
-                    $smsProvider = SmsProviderFactory::get('aditya');
-                    $smsProvider->sendServiceBoyOrderSms($authUser->mobile, $order->order_no, 'assigned to you');
-                } catch(\Exception $e) {
-                    Log::info($e);
-                }
                 return response()->json(['success'=> 'Order placed successfully']);
             }
             else
@@ -266,6 +263,8 @@ class CartController extends Controller
         if(!$assigneableServiceBoyId)
             return false;
 
+        $serviceBoy = User::find($assigneableServiceBoyId);
+
         AssignedOrder::create([
             'service_boy_user_id' => $assigneableServiceBoyId,
             'order_id' => $order->id,
@@ -277,6 +276,16 @@ class CartController extends Controller
 
         $order->status = Order::STATUS_ASSIGNED;
         $order->save();
+
+        try {
+            $smsProvider = SmsProviderFactory::get('aditya');
+            $smsProvider->sendServiceBoyOrderSms($serviceBoy->mobile, $order->order_no, 'assigned to you');
+
+            $mailText = "Order #".$order->order_no." is successfully assigned to you, login to website to get more details.";
+            Mail::to($serviceBoy->email)->send(new OrderAssignMail($mailText));
+        } catch(\Exception $e) {
+            Log::info($e);
+        }
 
         return true;
     }

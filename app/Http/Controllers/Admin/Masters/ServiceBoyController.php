@@ -248,7 +248,7 @@ class ServiceBoyController extends Controller
                         'city_name' => $pincode->name,
                         'pincode' => $pincode->pincode,
                         'city_id' => $pincode->id,
-                        'is_working' => 0,
+                        'is_working' => 1,
                     ]);
             }
             DB::commit();
