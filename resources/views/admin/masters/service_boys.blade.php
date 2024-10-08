@@ -525,7 +525,7 @@
                 if (!data.error) {
                     $("#assignPincodesForm input[name='pincode_user_id']").val(model_id);
                     $("#assignPincodesForm #pincodes").html(data.pincodesHtml);
-                    $("#assignPincodesForm #pincode_user_name").text(data.user.name);
+                    $("#assignPincodesForm #pincode_user_name").text(data.serviceBoy.name);
                     $('#assign-pincodes-modal').modal('show');
                 } else {
                     swal("Error!", data.error, "error");

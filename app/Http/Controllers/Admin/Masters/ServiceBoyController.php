@@ -103,12 +103,12 @@ class ServiceBoyController extends Controller
     public function edit(User $service_boy)
     {
         $service_boy->load('pincodes');
-
         $pincodes = City::get();
+
         $pincodesHtml = '<span>
             <option value="">--Select Pincode--</option>';
         foreach ($pincodes as $pincode):
-            $is_select = in_array($pincode->id, $service_boy->pincodes->pluck('id')->toArray()) ? "selected" : "";
+            $is_select = in_array($pincode->id, $service_boy->pincodes->pluck('city_id')->toArray()) ? "selected" : "";
             $pincodesHtml .= '<option value="' . $pincode->id . '" ' . $is_select . '>' . ($pincode->name . ' - ' . $pincode->pincode) . '</option>';
         endforeach;
         $pincodesHtml .= '</span>';
@@ -247,6 +247,7 @@ class ServiceBoyController extends Controller
                         'user_id' => $service_boy->id,
                         'city_name' => $pincode->name,
                         'pincode' => $pincode->pincode,
+                        'city_id' => $pincode->id,
                         'is_working' => 0,
                     ]);
             }
