@@ -144,3 +144,12 @@ Route::get('/php', function(Request $request){
     Artisan::call($request->artisan);
     return dd(Artisan::output());
 });
+
+
+Route::get('/test-mail', function(Request $request){
+    // if( !auth()->check() )
+    //     return 'Unauthorized request';
+
+    \Illuminate\Support\Facades\Mail::to("zafeer.ad999@gmail.com")->send(new App\Mail\OrderAssignMail("This is a test mail"));
+    return dd("done");
+});
