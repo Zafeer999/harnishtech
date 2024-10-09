@@ -30,37 +30,34 @@ class ProcessNotification extends Command
      */
     public function handle()
     {
-        SendNotificationCronjob::where('is_send', 0)
-                                ->orderByDesc('id')
-                                ->chunk(12, function($notifications){
+        $notifications = SendNotificationCronjob::where('is_send', 0)
+                                ->limit(16)
+                                ->get();
 
-                                    foreach($notifications as $notification)
-                                    {
-                                        if($notification->type == 2)
-                                        {
-                                            if($notification->method == 'place_order')
-                                            {
-                                                Mail::to($notification->target)->send(new OrderStatusMail($notification->content));
-                                            }
-                                            if($notification->method == 'assign_order')
-                                            {
-                                                Mail::to($notification->target)->send(new OrderAssignMail($notification->content));
-                                            }
-                                        }
-                                        else
-                                        {
-                                            // if($notification->method == 'place_order')
-                                            // {
-                                                $smsProvider = SmsProviderFactory::get('aditya');
-                                                $smsProvider->sendSms($notification->target, $notification->content);
-                                            // }
-                                        }
-                                        $notification->is_send = 1;
-                                        $notification->save();
-                                    }
-                                });
-
-
+        foreach($notifications as $notification)
+        {
+            if($notification->type == 2)
+            {
+                if($notification->method == 'place_order')
+                {
+                    Mail::to($notification->target)->send(new OrderStatusMail($notification->content));
+                }
+                if($notification->method == 'assign_order')
+                {
+                    Mail::to($notification->target)->send(new OrderAssignMail($notification->content));
+                }
+            }
+            else
+            {
+                // if($notification->method == 'place_order')
+                // {
+                    $smsProvider = SmsProviderFactory::get('aditya');
+                    $smsProvider->sendSms($notification->target, $notification->content);
+                // }
+            }
+            $notification->is_send = 1;
+            $notification->save();
+        }
 
         $this->info("Command executed successully");
     }
