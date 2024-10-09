@@ -210,7 +210,7 @@ class CartController extends Controller
 
             try {
                 $smsProvider = SmsProviderFactory::get('aditya');
-                $smsProvider->sendCustomerOrderSms($authUser->mobile, $order->order_no, str_replace('Order ', '', $order->order_status_text), true);
+                $smsProvider->sendCustomerOrderSms($authUser->mobile, $order->order_no, str_replace('Order ', '', $order->order_status_text));
 
                 $mailText = "Your order #".$order->order_no." is ".$order->order_status_text." successfully, login to website to get more details.";
 
@@ -291,7 +291,7 @@ class CartController extends Controller
 
         try {
             $smsProvider = SmsProviderFactory::get('aditya');
-            $smsProvider->sendServiceBoyOrderSms($serviceBoy->mobile, $order->order_no, 'assigned to you', true);
+            $smsProvider->sendServiceBoyOrderSms($serviceBoy->mobile, $order->order_no, 'assigned to you');
 
             $mailText = "Order #".$order->order_no." is successfully assigned to you, login to website to get more details.";
             SendNotificationCronjob::create([
