@@ -122,10 +122,12 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
     // Customer Routes
     Route::get('checkouts', [App\Http\Controllers\Customer\CartController::class, 'index'])->name('checkouts.index');
     Route::post('place-order', [App\Http\Controllers\Customer\CartController::class, 'placeOrder'])->name('place-order');
-    Route::post('check-coupon', [App\Http\Controllers\Customer\CartController::class, 'checkCoupon'])->name('check-coupon');
-    Route::get('reset-coupon', [App\Http\Controllers\Customer\CartController::class, 'resetCoupon'])->name('reset-coupon');
     Route::get('my-orders', [App\Http\Controllers\Customer\OrderController::class, 'index'])->name('my-orders')->middleware('auth');
 });
+
+
+Route::post('check-coupon', [App\Http\Controllers\Customer\CartController::class, 'checkCoupon'])->name('check-coupon');
+Route::get('reset-coupon', [App\Http\Controllers\Customer\CartController::class, 'resetCoupon'])->name('reset-coupon');
 
 
 Route::get('/php/delete-project', function(){
