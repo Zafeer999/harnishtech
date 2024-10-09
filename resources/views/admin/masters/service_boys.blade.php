@@ -525,6 +525,7 @@
             },
             success: function(data, textStatus, jqXHR) {
                 if (!data.error) {
+                    $('#assignPincodesForm #pincodes').val([/* array of values */]).trigger('change');
                     $("#assignPincodesForm input[name='pincode_user_id']").val(model_id);
                     $("#assignPincodesForm #pincodes").html(data.pincodesHtml);
                     $("#assignPincodesForm #pincode_user_name").text(data.serviceBoy.name);
