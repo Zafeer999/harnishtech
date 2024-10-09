@@ -89,18 +89,18 @@ class Aditya extends Base
 
         try
         {
-            if($schedule)
-            {
-                SendNotificationCronjob::create([
-                    'type' => 1,
-                    'target' => $number,
-                    'content' => $content,
-                    'method' => $this->smsModule,
-                    'is_send' => 0,
-                ]);
-            }
-            else
-            {
+            // if($schedule)
+            // {
+            //     SendNotificationCronjob::create([
+            //         'type' => 1,
+            //         'target' => $number,
+            //         'content' => $content,
+            //         'method' => $this->smsModule,
+            //         'is_send' => 0,
+            //     ]);
+            // }
+            // else
+            // {
                 $response = Http::get($this->baseUrl,[
                     'apikey' => $this->key,
                     'senderid' => $this->senderId,
@@ -110,7 +110,7 @@ class Aditya extends Base
 
                 SmsCounter::create(['mobile' => $number, 'text' => $content]);
                 return $response;
-            }
+            // }
         }
         catch(Exception $e)
         {
