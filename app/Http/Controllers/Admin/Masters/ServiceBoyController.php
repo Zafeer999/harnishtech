@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Masters\StoreServiceBoyRequest;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\ServiceBoy;
+use App\Models\ServiceBoyCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -256,6 +257,61 @@ class ServiceBoyController extends Controller
             return response()->json(['success' => 'Pincodes assigned successfully']);
         } catch (\Exception $e) {
             return $this->respondWithAjax($e, 'assigning', 'pincodes to service boy');
+        }
+    }
+
+
+    public function showServices(User $service_boy)
+    {
+        $service_boy;
+        $services = Category::whereNotNull('category_id')->get();
+        $userServices = ServiceBoyCategory::where('user_id', $service_boy->id)->get();
+
+        $servicesHtml = '
+            <option value="">--Select Service--</option>';
+        foreach ($services as $service):
+            $is_select = $userServices->pluck('sub_category_id')->contains($service->id) ? "selected" : "";
+
+            $servicesHtml .= '<option value="' . $service->id . '" ' . $is_select . '>' . $service->name . '</option>';
+        endforeach;
+
+        $response = [
+            'result' => 1,
+            'user' => $service_boy,
+            'servicesHtml' => $servicesHtml,
+        ];
+
+        return $response;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+
+    public function updateServices(Request $request, User $service_boy)
+    {
+        try {
+            DB::beginTransaction();
+
+            $service_boy->load('serviceBoy');
+
+            DB::table('service_boy_categories')->where('user_id', $service_boy->id)->delete();
+            $services = Category::whereIn('id', $request->services)->get();
+
+            foreach ($services as $service) {
+                DB::table('service_boy_categories')
+                    ->insert([
+                        'user_id' => $service_boy->id,
+                        'service_boy_id' => $service_boy?->serviceBoy?->id,
+                        'category_id' => $service->id,
+                        'sub_category_id' => $service->id
+                    ]);
+            }
+            DB::commit();
+
+            return response()->json(['success' => 'Service assigned successfully']);
+        } catch (\Exception $e) {
+            return $this->respondWithAjax($e, 'assigning', 'services to service boy');
         }
     }
 }

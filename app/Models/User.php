@@ -69,7 +69,7 @@ class User extends Authenticatable
 
     public function services()
     {
-        return $this->hasMany(ServiceBoyCategory::class);
+        return $this->hasMany(ServiceBoyCategory::class, 'user_id', 'id');
     }
 
     public function pincodes()

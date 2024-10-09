@@ -83,6 +83,8 @@ Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
         Route::resource('variables', App\Http\Controllers\Admin\Masters\VariableController::class);
         Route::resource('service_boys', App\Http\Controllers\Admin\Masters\ServiceBoyController::class);
         Route::put('service_boys/{service_boy}/pincode', [App\Http\Controllers\Admin\Masters\ServiceBoyController::class, 'updatePincodes'])->name('service_boys.update-pincode');
+        Route::get('service_boys_edit/{service_boy}/service', [App\Http\Controllers\Admin\Masters\ServiceBoyController::class, 'showServices'])->name('service_boys.show-services');
+        Route::put('service_boys_update/{service_boy}/service', [App\Http\Controllers\Admin\Masters\ServiceBoyController::class, 'updateServices'])->name('service_boys.update-services');
         Route::resource('visitors', App\Http\Controllers\Admin\Masters\VisitorController::class);
         Route::resource('queries', App\Http\Controllers\Admin\Masters\QueryController::class);
         Route::resource('orders', App\Http\Controllers\Admin\Masters\OrderController::class);

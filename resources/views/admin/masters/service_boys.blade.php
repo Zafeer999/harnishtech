@@ -418,7 +418,7 @@
     $("#datatable-tabletools").on("click", ".assign-services", function(e) {
         e.preventDefault();
         var model_id = $(this).attr("data-id");
-        var url = "{{ route('service_boys.show', ':model_id') }}";
+        var url = "{{ route('service_boys.show-services', ':model_id') }}";
         $('#services_user_id').val(model_id);
 
         $.ajax({
@@ -430,6 +430,8 @@
             success: function(data, textStatus, jqXHR) {
                 if (!data.error) {
                     $("#assignServicesForm input[name='service_user_id']").val(model_id);
+                    $('#assignServicesForm #services').val([/* array of values */]).trigger('change');
+
                     $("#assignServicesForm #services").html(data.servicesHtml);
                     $("#assignServicesForm #role_user_name").text(data.user.name);
                     $('#assign-services-modal').modal('show');
@@ -454,7 +456,7 @@
         var formdata = new FormData(this);
         formdata.append('_method', 'PUT');
         var model_id = $('#service_user_id').val();
-        var url = "{{ route('service_boys.update', ':model_id') }}";
+        var url = "{{ route('service_boys.update-services', ':model_id') }}";
 
         $.ajax({
             url: url.replace(':model_id', model_id),
