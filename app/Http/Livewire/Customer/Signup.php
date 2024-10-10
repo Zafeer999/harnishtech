@@ -85,7 +85,7 @@ class Signup extends Component
             $user->active_status = 1;
 
             $user->save();
-
+            $user->assignRole('User');
             // Move to the next step (success)
             $this->step = 3;
             session()->flash('success', 'OTP verified and you are registered successfully.');

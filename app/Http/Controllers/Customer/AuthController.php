@@ -67,6 +67,9 @@ class AuthController extends Controller
 
     public function showRegister()
     {
+        if(auth()->check())
+            return redirect()->route('home');
+
         return view('customer.auth.signup');
     }
 
