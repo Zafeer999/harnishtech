@@ -229,9 +229,22 @@ class ServiceBoyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $service_boy)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $serviceBoy = ServiceBoy::where('user_id', $service_boy->id)->first();
+            if (!$serviceBoy) {
+                return response()->json(['error' => 'Service Boy not found.'], 404);
+            }
+            $serviceBoy->delete();
+            $service_boy->delete();
+
+            DB::commit();
+            return response()->json(['success' => 'Service Boy deleted successfully!']);
+        } catch (\Exception $e) {
+            return $this->respondWithAjax($e, 'deleting', 'Service Boy');
+        }
     }
 
     public function updatePincodes(Request $request, User $service_boy)

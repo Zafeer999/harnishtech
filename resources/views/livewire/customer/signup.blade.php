@@ -117,10 +117,10 @@
                     <span class="text-danger error">{{ $message }}</span>
                 @enderror
             </div>
+            <button class="mb-3" type="submit" wire:click="resendOtp">Resend OTP</button>
 
             <button class="mb-3" type="submit">Verify OTP</button>
 
-            <button class="mb-3" type="submit" wire:click="resendOtp">Resend OTP</button>
         </form>
     @elseif ($step === 3)
         <div>
