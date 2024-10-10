@@ -231,7 +231,16 @@ class ServiceBoyController extends Controller
     public function destroy(User $service_boy)
     {
         try {
+            DB::beginTransaction();
+            Log::info('Deleting User', [$service_boy]);
+            $serviceBoy = ServiceBoy::where('user_id', $service_boy->id)->first();
+            if (!$serviceBoy) {
+                return response()->json(['error' => 'Service Boy not found.'], 404);
+            }
+            Log::info('Deleting Service Boy', [$serviceBoy]);
+            $serviceBoy->delete();
             $service_boy->delete();
+
             DB::commit();
             return response()->json(['success' => 'Service Boy deleted successfully!']);
         } catch (\Exception $e) {
