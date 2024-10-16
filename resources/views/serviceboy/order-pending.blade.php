@@ -202,7 +202,7 @@
                                                     <p>#{{ $pendingOrder->order_no }} </p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $pendingOrder->user->name }}<br> +91{{ $pendingOrder->user->mobile }}<br> {{ $pendingOrder->user->email }}</p>
+                                                    <p>{{ $pendingOrder->user?->name }}<br> +91{{ $pendingOrder->user?->mobile }}<br> {{ $pendingOrder->user?->email }}</p>
                                                 </td>
                                                 <td style="min-width: 150px">
                                                     @foreach ($pendingOrder->orderItems as $item)

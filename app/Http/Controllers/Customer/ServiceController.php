@@ -46,7 +46,7 @@ class ServiceController extends Controller
         else
         {
             ifNoKeyword:
-            $category = $category->exists ? $category : Category::where('id', $request->service)->first();
+            $category = $category ? $category : Category::where('id', $request->service ?? $request->category)->first();
             $selectedCategory = $category;
             $categories = Category::where('category_id', null)->get();
             $services = $category->services()->get();

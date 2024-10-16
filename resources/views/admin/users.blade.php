@@ -275,7 +275,7 @@
                                             <th>Mobile</th>
                                             <th style="min-width: 100px;">Status</th>
                                             <th>Registered On</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -295,11 +295,11 @@
                                                 <td>
                                                     {{ \Carbon\Carbon::parse($user->created_at)->format('d M, y h:i:s') }}
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     <button class="edit-element btn btn-primary px-2 py-1" title="Edit User" data-id="{{ $user->id }}"><i data-feather="edit"></i></button>
                                                     <button class="btn btn-primary change-password px-2 py-1" title="Change Password" data-id="{{ $user->id }}"><i data-feather="lock"></i></button>
                                                     <button class="btn btn-warning assign-role px-2 py-1" title="Assign Role" data-id="{{ $user->id }}"><i data-feather="user-check"></i></button>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>

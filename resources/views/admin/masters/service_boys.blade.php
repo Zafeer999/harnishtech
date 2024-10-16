@@ -261,7 +261,7 @@
                                             <th>Status</th>
                                             <th>Assign Category</th>
                                             <th>Assign Pincodes</th>
-                                            <th>Action</th>
+                                            <th style="min-width: 120px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -305,6 +305,7 @@
                                                     <button class="assign-pincodes btn btn-success px-2 py-1" title="Assign Pincodes" data-id="{{ $serviceBoy->id }}"><i data-feather="check-circle"></i>Add Pincode</button>
                                                 </td>
                                                 <td>
+                                                    <button class="btn btn-primary change-password px-2 py-1" title="Change Password" data-id="{{ $serviceBoy->id }}"><i data-feather="lock"></i></button>
                                                     @can('service_boys.edit')
                                                         <button class="edit-element btn btn-primary px-2 py-1" title="Edit service_boys" data-id="{{ $serviceBoy->id }}"><i data-feather="edit"></i></button>
                                                     @endcan
@@ -411,7 +412,128 @@
     </div>
 
 
+
+    {{-- Change Password Form --}}
+    <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="" id="changePasswordForm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Change Password</h5>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <input type="hidden" id="user_id" name="user_id" value="">
+
+                        <div class="col-8 mx-auto my-2">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
+                                    <input class="form-control" type="password" id="new_password" name="new_password">
+                                    {{-- <div class="show-hide"><span class="show"></span></div> --}}
+                                </div>
+                                <span class="text-danger error-text new_password_err"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-8 mx-auto my-2">
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
+                                    <input class="form-control" type="password" id="confirmed_password" name="confirmed_password">
+                                    {{-- <div class="show-hide"><span class="show"></span></div> --}}
+                                </div>
+                                <span class="text-danger error-text confirmed_password_err"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" id="changePasswordSubmit" type="submit">Change</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 </x-admin.admin-layout>
+
+
+<!-- Open Change Password Modal-->
+<script>
+    $("#datatable-tabletools").on("click", ".change-password", function(e) {
+        e.preventDefault();
+        var user_id = $(this).attr("data-id");
+        $('#user_id').val(user_id);
+        $('#change-password-modal').modal('show');
+    });
+</script>
+
+<!-- Update User Password -->
+<script>
+    $("#changePasswordForm").submit(function(e) {
+        e.preventDefault();
+        $("#changePasswordSubmit").prop('disabled', true);
+
+        var formdata = new FormData(this);
+        formdata.append('_method', 'PUT');
+        var model_id = $('#user_id').val();
+        var url = "{{ route('users.change-password', ':model_id') }}";
+
+        $.ajax({
+            url: url.replace(':model_id', model_id),
+            type: 'POST',
+            data: formdata,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $("#changePasswordSubmit").prop('disabled', false);
+                if (!data.error2)
+                    swal("Successful!", data.success, "success")
+                    .then((action) => {
+                        $("#change-password-modal").modal('hide');
+                        $("#changePasswordSubmit").prop('disabled', false);
+                    });
+                else
+                    swal("Error!", data.error2, "error");
+            },
+            statusCode: {
+                422: function(responseObject, textStatus, jqXHR) {
+                    $("#changePasswordSubmit").prop('disabled', false);
+                    resetErrors();
+                    printErrMsg(responseObject.responseJSON.errors);
+                },
+                500: function(responseObject, textStatus, errorThrown) {
+                    $("#changePasswordSubmit").prop('disabled', false);
+                    swal("Error occured!", "Something went wrong please try again", "error");
+                }
+            }
+        });
+
+        function resetErrors() {
+            var form = document.getElementById('changePasswordForm');
+            var data = new FormData(form);
+            for (var [key, value] of data) {
+                $('.' + key + '_err').text('');
+                $('#' + key).removeClass('is-invalid');
+                $('#' + key).addClass('is-valid');
+            }
+        }
+
+        function printErrMsg(msg) {
+            $.each(msg, function(key, value) {
+                $('.' + key + '_err').text(value);
+                $('#' + key).addClass('is-invalid');
+                $('#' + key).removeClass('is-valid');
+            });
+        }
+
+    });
+</script>
 
 <!-- Open Assign Services Modal-->
 <script>
