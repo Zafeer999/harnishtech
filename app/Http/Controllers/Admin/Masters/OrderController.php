@@ -16,11 +16,11 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with([
-            'orderImage',           // Corrected to match the relationship name in the model
+            'orderImage',
             'user:id,name,mobile',
             'userAddress:id,full_address',
-            'category',              // Assuming you have a relationship named 'category'
-            'subCategory'           // Assuming you have a relationship named 'subCategory'
+            'category',
+            'subCategory'
         ])->latest()->get()->append('order_status_text');
 
         return view('admin.masters.orders')->with(['orders' => $orders]);

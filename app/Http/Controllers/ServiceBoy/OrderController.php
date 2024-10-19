@@ -131,7 +131,7 @@ class OrderController extends Controller
         $serviceBoysHtml = '<span>
             <option value="">--Select Service Boy--</option>';
         foreach ($serviceBoys as $serviceBoy):
-            $is_select = $serviceBoy->id == $assignedServiceBoy->service_boy_user_id ? "selected" : "";
+            $is_select = $serviceBoy->id == $assignedServiceBoy?->service_boy_user_id ? "selected" : "";
             $serviceBoysHtml .= '<option value="' . $serviceBoy->id . '" ' . $is_select . '>'.$serviceBoy->name.'</option>';
         endforeach;
         $serviceBoysHtml .= '</span>';

@@ -48,7 +48,7 @@
                                                     <p>#{{ $order->order_no }} </p>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $order->user->name }}<br> +91{{ $order->user->mobile }}<br> {{ $order->user->email }}</p>
+                                                    <p>{{ $order->user?->name }}<br> +91{{ $order->user?->mobile }}<br> {{ $order->user?->email }}</p>
                                                 </td>
                                                 <td style="min-width: 150px">
                                                     @foreach ($order->orderItems as $item)
